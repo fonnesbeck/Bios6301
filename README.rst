@@ -29,9 +29,9 @@ Textbook and reading materials
 Recommended Text:
 
 
-`Introduction to Scientific Programming and Simulation Using R <http://ecx.images-amazon.com/images/I/51F2T2xfvJL._SS500_.jpg>`_: Jones, Maillardet and Robinson
+`Introduction to Scientific Programming and Simulation Using R <www.crcpress.com/product/isbn/9781420068726>`_: Jones, Maillardet and Robinson
 
-.. image:: http://www.crcpress.com/coverimage/;jsessionid=aEmINoZmn+OiGeK8FqgcdA__?isbn=9781420068726&size=medium&flat=false
+.. image:: http://ecx.images-amazon.com/images/I/51F2T2xfvJL._SS500_.jpg
 	:scale: 100 %
 	:alt: Jones et al.
 	:align: center
