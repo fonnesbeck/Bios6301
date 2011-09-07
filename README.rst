@@ -9,6 +9,7 @@ Chris Fonnesbeck, PhD, Instructor of Biostatistics
 
 chris.fonnesbeck@vanderbilt.edu; T-2303 Medical Center North
 
+
 Schedule
 ~~~~~~~~
 
@@ -23,6 +24,7 @@ This course is designed to provide students the fundamental skills for effective
 
 Prerequisites: None
 
+
 Textbook and reading materials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -31,10 +33,6 @@ Recommended Text:
 
 `Introduction to Scientific Programming and Simulation Using R <www.crcpress.com/product/isbn/9781420068726>`_: Jones, Maillardet and Robinson
 
-.. image:: http://ecx.images-amazon.com/images/I/51F2T2xfvJL._SS500_.jpg
-	:scale: 25 %
-	:alt: Jones et al.
-	:align: center
 
 Software
 ~~~~~~~~
@@ -46,12 +44,14 @@ Software
 * `SQLite <http://sqlite.org>`_
 * `LaTeX <http://www.latex-project.org/>`_
 
+
 Resources
 ~~~~~~~~~
 
 `Bios301 on GitHub <https://github.com/fonnesbeck/Bios301>`_
 
 Course announcements can be found on Twitter, by following `@vandy_biostat <https://twitter.com/#!/vandy_biostat>`_
+
 
 Grading
 ~~~~~~~
