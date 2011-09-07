@@ -32,7 +32,7 @@ Recommended Text:
 `Introduction to Scientific Programming and Simulation Using R <www.crcpress.com/product/isbn/9781420068726>`_: Jones, Maillardet and Robinson
 
 .. image:: http://ecx.images-amazon.com/images/I/51F2T2xfvJL._SS500_.jpg
-	:scale: 100 %
+	:scale: 50 %
 	:alt: Jones et al.
 	:align: center
 
