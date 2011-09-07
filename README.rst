@@ -50,8 +50,6 @@ Software
 Resources
 ~~~~~~~~~
 
-`Bios301 on GitHub <https://github.com/fonnesbeck/Bios301>`_
-
 Course announcements can be found on Twitter, by following `@vandy_biostat <https://twitter.com/#!/vandy_biostat>`_
 
 
