@@ -6,14 +6,14 @@ Instructor
 ~~~~~~~~~~
 
 Chris Fonnesbeck, PhD, Instructor of Biostatistics
-
-chris.fonnesbeck@vanderbilt.edu; T-2303 Medical Center North
+T-2303 Medical Center North
+chris.fonnesbeck@vanderbilt.edu
 
 
 Schedule
 ~~~~~~~~
 
-* Lectures: Mondays, 13:00-15:00; Location Light Hall, Room 202
+* Lectures: Mondays 13:00-15:00, Light Hall, Room 202
 * Office hours: By appointment
 
 
