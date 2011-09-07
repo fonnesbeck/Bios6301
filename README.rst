@@ -29,7 +29,7 @@ Textbook and reading materials
 Recommended Text:
 
 
-`Introduction to Scientific Programming and Simulation Using R <http://www.crcpress.com/product/isbn/9781420068726>`_ Jones, Maillardet and Robinson
+`Introduction to Scientific Programming and Simulation Using R <http://ecx.images-amazon.com/images/I/51F2T2xfvJL._SS500_.jpg>`_: Jones, Maillardet and Robinson
 
 .. image:: http://www.crcpress.com/coverimage/;jsessionid=aEmINoZmn+OiGeK8FqgcdA__?isbn=9781420068726&size=medium&flat=false
 	:scale: 100 %
@@ -43,7 +43,7 @@ Software
 * `Stata <http://www.stata.com>`_
 * `Git <http://git-scm.com/>`_
 * `Python <http://python.org>`_
-* `SQLite http://sqlite.org>`_
+* `SQLite <http://sqlite.org>`_
 * `LaTeX <http://www.latex-project.org/>`_
 
 Resources
