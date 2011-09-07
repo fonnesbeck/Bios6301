@@ -6,7 +6,9 @@ Instructor
 ~~~~~~~~~~
 
 Chris Fonnesbeck, PhD, Instructor of Biostatistics
+
 T-2303 Medical Center North
+
 chris.fonnesbeck@vanderbilt.edu
 
 
