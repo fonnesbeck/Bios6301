@@ -1,0 +1,8 @@
+Location	Exterior	Quality	Available	Rent	Number of Rooms	ZIP code
+3	brick	poor	6/9/2011	$720 	1	02474
+4	siding	Poor	5/23/2011	"$1,400 "	2	01002
+1	clapboard	perfect	6/18/2011	"$1,225 "	3	02139
+1	brick	Good	7/9/2011	"$1,500 "	4	10001
+4	shingle	perfect	6/16/2011	$695 	4	03593
+2	brick	good		"$1,100 "	2	02173
+1	clapboard	poor	6/11/2011	$800 	2	02126
