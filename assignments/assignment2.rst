@@ -20,9 +20,9 @@ This assignment is due in electronic format on Monday, October 10, 2011 at Noon.
 
 2. Repeat Question 1 using Stata (10 points).
 
-3. Logistic regression in Stata: Load the Hosmer and Lemeshow coronary heart disease dataset (``chdage.dta``). You are presented with 2 variables (plus an ID code), age (``age``) and evidence of coronary heart disease (``chd``). Do the following, reporting all code and output (10 points):
+3. Logistic regression in Stata: Load the Hosmer and Lemeshow coronary heart disease dataset (``chdage.dat``). You are presented with 2 variables (plus an ID code), age (``age``) and evidence of coronary heart disease (``chd``). Do the following, reporting all code and output (10 points):
 
- a) Create an age group variable, with the following categories: <30, 20-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60+
+ a) Create an age group variable, with the following categories: <30, 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60+
  b) Generate a scatterplot of the data.
  c) Create a table that shows the data summarized by age group, along with a variable for the proportion of individuals with evidence of coronary heart disease. Plot this proportion as a function of age group.
  d) Run a logistic regression of chd as a function of age. In addition to output, report the covariance matrix of the coefficients. What is your interpretation of the influence of age on the response variable?
