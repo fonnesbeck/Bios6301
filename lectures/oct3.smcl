@@ -1,0 +1,1764 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/fonnescj/Bios301/datasets/oct3.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 3 Oct 2011, 13:09:51
+
+{com}. drop whichfile
+
+. save all_patient_info
+{txt}file all_patient_info.dta saved
+
+{com}. ls
+
+{res}total 5656
+-rw-r--r--   1 fonnescj  staff     1548 Oct  3 13:10 all_patient_info.dta
+-rw-r--r--   1 fonnescj  staff     5374 Sep 30 16:39 annual_income.dta
+-rw-r--r--@  1 fonnescj  staff  2720031 Sep 24 15:33 cancer.csv
+-rw-rw-rw-@  1 fonnescj  staff     3300 May 31  2000 chdage.dat
+-rw-r--r--   1 fonnescj  staff     1432 Sep 29 16:25 effort.dta
+-rw-r--r--@  1 fonnescj  staff    61935 Sep 24 17:41 haart1.csv
+-rw-r--r--@  1 fonnescj  staff      342 Sep 24 17:27 haart2.csv
+-rw-r--r--   1 fonnescj  staff    55543 Sep 30 16:43 income.dta
+drwxr-xr-x  22 fonnescj  staff      748 Sep 23 11:48 logistic/
+-rw-r--r--   1 fonnescj  staff     2113 Aug  5 08:36 longone.dta
+-rw-r--r--   1 fonnescj  staff     2983 Sep 30 16:39 monthly_income.dta
+-rw-r--r--   1 fonnescj  staff     1243 Aug  5 07:43 new_visit_info.dta
+-rw-r--r--   1 fonnescj  staff      297 Oct  3 13:11 oct3.smcl
+-rw-r--r--   1 fonnescj  staff     1265 Aug  5 07:43 old_visit_info.dta
+-rw-r--r--   1 fonnescj  staff     2277 Aug  5 08:36 wideone.dta
+
+{com}. merge m:1 patid using "all_patient_info"
+{res}{err}{p 0 4 2}
+variable{err} patid
+does not uniquely identify observations in the
+using data
+{p_end}
+{txt}{search r(459):r(459);}
+
+{com}. ls
+
+{res}total 5664
+-rw-r--r--   1 fonnescj  staff     1548 Oct  3 13:10 all_patient_info.dta
+-rw-r--r--   1 fonnescj  staff     5374 Sep 30 16:39 annual_income.dta
+-rw-r--r--@  1 fonnescj  staff  2720031 Sep 24 15:33 cancer.csv
+-rw-rw-rw-@  1 fonnescj  staff     3300 May 31  2000 chdage.dat
+-rw-r--r--   1 fonnescj  staff     1432 Sep 29 16:25 effort.dta
+-rw-r--r--@  1 fonnescj  staff    61935 Sep 24 17:41 haart1.csv
+-rw-r--r--@  1 fonnescj  staff      342 Sep 24 17:27 haart2.csv
+-rw-r--r--   1 fonnescj  staff    55543 Sep 30 16:43 income.dta
+drwxr-xr-x  22 fonnescj  staff      748 Sep 23 11:48 logistic/
+-rw-r--r--   1 fonnescj  staff     2113 Aug  5 08:36 longone.dta
+-rw-r--r--   1 fonnescj  staff     2983 Sep 30 16:39 monthly_income.dta
+-rw-r--r--   1 fonnescj  staff     1243 Aug  5 07:43 new_visit_info.dta
+-rw-r--r--   1 fonnescj  staff     1510 Oct  3 13:15 oct3.smcl
+-rw-r--r--   1 fonnescj  staff     1265 Aug  5 07:43 old_visit_info.dta
+-rw-r--r--   1 fonnescj  staff     1042 Oct  3 13:14 patient_info.dta
+-rw-r--r--   1 fonnescj  staff     2277 Aug  5 08:36 wideone.dta
+
+{com}. list
+{txt}
+     {c TLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c TRC}
+     {c |} {res}patid     visitdt       illness   insurance   doctor {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c RT}
+  1. {c |} {res}    1   20oct2009          Pneu           .          {txt}{c |}
+  2. {c |} {res}    4   15nov2009   Sore Throat           .          {txt}{c |}
+  3. {c |} {res}    4   19oct2009   Sore Throat         HMO          {txt}{c |}
+  4. {c |} {res}    9   05oct2009          Cold   Major Med          {txt}{c |}
+  5. {c |} {res}    9   23feb2010   Sore Throat         HMO    Smith {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c RT}
+  6. {c |} {res}    9   29dec2009           Flu           .          {txt}{c |}
+  7. {c |} {res}   25   30nov2009          Cold         PPO          {txt}{c |}
+  8. {c |} {res}   25   12nov2009          Cold         PPO          {txt}{c |}
+  9. {c |} {res}  616   18jan2010          Pneu         HMO    Jones {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 8}{c BRC}
+
+{com}. merge m:1 patid using "patient_info"
+{res}{txt}(label instype already defined)
+
+{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               4
+{txt}{col 9}from master{col 30}{res}               3{txt}  (_merge==1)
+{col 9}from using{col 30}{res}               1{txt}  (_merge==2)
+
+{col 5}matched{col 30}{res}               6{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. browse
+
+. list merge
+{err}variable merge not found
+{txt}{search r(111):r(111);}
+
+{com}. browse
+
+. ls
+
+{res}total 5672
+-rw-r--r--   1 fonnescj  staff     1548 Oct  3 13:10 all_patient_info.dta
+-rw-r--r--   1 fonnescj  staff     5374 Sep 30 16:39 annual_income.dta
+-rw-r--r--@  1 fonnescj  staff  2720031 Sep 24 15:33 cancer.csv
+-rw-rw-rw-@  1 fonnescj  staff     3300 May 31  2000 chdage.dat
+-rw-r--r--   1 fonnescj  staff     1432 Sep 29 16:25 effort.dta
+-rw-r--r--@  1 fonnescj  staff    61935 Sep 24 17:41 haart1.csv
+-rw-r--r--@  1 fonnescj  staff      342 Sep 24 17:27 haart2.csv
+-rw-r--r--   1 fonnescj  staff    55543 Sep 30 16:43 income.dta
+drwxr-xr-x  22 fonnescj  staff      748 Sep 23 11:48 logistic/
+-rw-r--r--   1 fonnescj  staff     2113 Aug  5 08:36 longone.dta
+-rw-r--r--   1 fonnescj  staff     2983 Sep 30 16:39 monthly_income.dta
+-rw-r--r--   1 fonnescj  staff     1243 Aug  5 07:43 new_visit_info.dta
+-rw-r--r--   1 fonnescj  staff     4276 Oct  3 13:21 oct3.smcl
+-rw-r--r--   1 fonnescj  staff     1265 Aug  5 07:43 old_visit_info.dta
+-rw-r--r--   1 fonnescj  staff     1042 Oct  3 13:14 patient_info.dta
+-rw-r--r--   1 fonnescj  staff     2277 Aug  5 08:36 wideone.dta
+
+{com}. use wideone
+{err}no; data in memory would be lost
+{txt}{search r(4):r(4);}
+
+{com}. use wideone, clear
+
+. browse
+
+. use longone, clear
+
+. browse
+
+. list, sepby(id)
+{txt}
+     {c TLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c TRC}
+     {c |} {res} id      sex     birthdt   birthwt   visitnum     visitdt     wt {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  1. {c |} {res}101     Male   08jan2009      1766          1   11jan2009   1823 {txt}{c |}
+  2. {c |} {res}101     Male   08jan2009      1766          2   21jan2009   2011 {txt}{c |}
+  3. {c |} {res}101     Male   08jan2009      1766          3   05feb2009   2293 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  4. {c |} {res}102   Female   20dec2008      3301          1   22dec2008   3338 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  5. {c |} {res}103   Female   30dec2008      1454          1   04jan2009   1549 {txt}{c |}
+  6. {c |} {res}103   Female   30dec2008      1454          2   22jan2009   1892 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+  7. {c |} {res}104   Female   21dec2008      3139          1   29dec2008   3298 {txt}{c |}
+  8. {c |} {res}104   Female   21dec2008      3139          2   31dec2008   3338 {txt}{c |}
+  9. {c |} {res}104   Female   21dec2008      3139          3   02jan2009   3377 {txt}{c |}
+     {c LT}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c RT}
+ 10. {c |} {res}105   Female   11jan2009      4133          1   20jan2009   4306 {txt}{c |}
+ 11. {c |} {res}105   Female   11jan2009      4133          2   03feb2009   4575 {txt}{c |}
+ 12. {c |} {res}105   Female   11jan2009      4133          3   15feb2009   4805 {txt}{c |}
+     {c BLC}{hline 5}{c -}{hline 8}{c -}{hline 11}{c -}{hline 9}{c -}{hline 10}{c -}{hline 11}{c -}{hline 6}{c BRC}
+
+{com}. use wideone, clear
+
+. browse
+
+. browse
+
+. reshape long wt visitdt, i(id) j(visitnum)
+{txt}(note: j = 1 2 3)
+
+Data{col 36}wide{col 43}->{col 48}long
+{hline 77}
+Number of obs.                 {res}       5   {txt}->{res}      15
+{txt}Number of variables            {res}      10   {txt}->{res}       7
+{txt}j variable (3 values)                     ->   {res}visitnum
+{txt}xij variables:
+                            {res}wt1 wt2 wt3   {txt}->   {res}wt
+             visitdt1 visitdt2 visitdt3   {txt}->   {res}visitdt
+{txt}{hline 77}
+
+{com}. browse
+
+. reshape wide
+{txt}(note: j = 1 2 3)
+
+Data{col 36}long{col 43}->{col 48}wide
+{hline 77}
+Number of obs.                 {res}      15   {txt}->{res}       5
+{txt}Number of variables            {res}       7   {txt}->{res}      10
+{txt}j variable (3 values)          {res}visitnum   {txt}->   (dropped)
+xij variables:
+                                     {res}wt   {txt}->   {res}wt1 wt2 wt3
+                                visitdt   {txt}->   {res}visitdt1 visitdt2 visitdt3
+{txt}{hline 77}
+
+{com}. pwd
+{res}/Users/fonnescj/Bios301/datasets
+
+{com}. do "/Users/fonnescj/Bios301/datasets/simple.do"
+{txt}
+{com}. sysuse auto
+{err}no; data in memory would be lost
+{txt}{search r(4):r(4);}
+
+end of do-file
+
+{search r(4):r(4);}
+
+{com}. do "/Users/fonnescj/Bios301/datasets/simple.do"
+{txt}
+{com}. sysuse auto, clear
+{txt}(1978 Automobile Data)
+
+{com}. regress mpg weight
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}  134.62
+    {txt}   Model {char |} {res}  1591.9902     1   1591.9902           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 851.469256    72  11.8259619           {txt}R-squared     = {res} 0.6515
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6467
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 3.4389
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}weight {c |}{col 14}{res}{space 2}-.0060087{col 26}{space 2} .0005179{col 37}{space 1}  -11.60{col 46}{space 3}0.000{col 54}{space 4}-.0070411{col 67}{space 3}-.0049763
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 39.44028{col 26}{space 2} 1.614003{col 37}{space 1}   24.44{col 46}{space 3}0.000{col 54}{space 4} 36.22283{col 67}{space 3} 42.65774
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. display "Regression finished!"
+{res}Regression finished!
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do simple
+{txt}
+{com}. sysuse auto, clear
+{txt}(1978 Automobile Data)
+
+{com}. regress mpg weight
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}  134.62
+    {txt}   Model {char |} {res}  1591.9902     1   1591.9902           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 851.469256    72  11.8259619           {txt}R-squared     = {res} 0.6515
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6467
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 3.4389
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}weight {c |}{col 14}{res}{space 2}-.0060087{col 26}{space 2} .0005179{col 37}{space 1}  -11.60{col 46}{space 3}0.000{col 54}{space 4}-.0070411{col 67}{space 3}-.0049763
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 39.44028{col 26}{space 2} 1.614003{col 37}{space 1}   24.44{col 46}{space 3}0.000{col 54}{space 4} 36.22283{col 67}{space 3} 42.65774
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. display "Regression finished!"
+{res}Regression finished!
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. run "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+. clear
+
+. run "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+. help do
+
+. sysuse auto
+{txt}(1978 Automobile Data)
+
+{com}. do "/Users/fonnescj/Bios301/datasets/simple.do"
+{txt}
+{com}. foreach xvar in price headroom weight {c -(}
+{txt}  2{com}.         regress mpg `xvar'
+{txt}  3{com}. {c )-}
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   20.26
+    {txt}   Model {char |} {res} 536.541807     1  536.541807           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1906.91765    72  26.4849674           {txt}R-squared     = {res} 0.2196
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2087
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 5.1464
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}price {c |}{col 14}{res}{space 2}-.0009192{col 26}{space 2} .0002042{col 37}{space 1}   -4.50{col 46}{space 3}0.000{col 54}{space 4}-.0013263{col 67}{space 3}-.0005121
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 26.96417{col 26}{space 2} 1.393952{col 37}{space 1}   19.34{col 46}{space 3}0.000{col 54}{space 4} 24.18538{col 67}{space 3} 29.74297
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   14.88
+    {txt}   Model {char |} {res} 418.400682     1  418.400682           {txt}Prob > F      = {res} 0.0002
+    {txt}Residual {char |} {res} 2025.05878    72  28.1258164           {txt}R-squared     = {res} 0.1712
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1597
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 5.3034
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}headroom {c |}{col 14}{res}{space 2}-2.829874{col 26}{space 2} .7337084{col 37}{space 1}   -3.86{col 46}{space 3}0.000{col 54}{space 4}-4.292495{col 67}{space 3}-1.367253
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  29.7678{col 26}{space 2} 2.281059{col 37}{space 1}   13.05{col 46}{space 3}0.000{col 54}{space 4} 25.22059{col 67}{space 3} 34.31501
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}  134.62
+    {txt}   Model {char |} {res}  1591.9902     1   1591.9902           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 851.469256    72  11.8259619           {txt}R-squared     = {res} 0.6515
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6467
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 3.4389
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}weight {c |}{col 14}{res}{space 2}-.0060087{col 26}{space 2} .0005179{col 37}{space 1}  -11.60{col 46}{space 3}0.000{col 54}{space 4}-.0070411{col 67}{space 3}-.0049763
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 39.44028{col 26}{space 2} 1.614003{col 37}{space 1}   24.44{col 46}{space 3}0.000{col 54}{space 4} 36.22283{col 67}{space 3} 42.65774
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/Users/fonnescj/Bios301/datasets/simple.do"
+{txt}
+{com}. foreach xvar in price rep78-foreign {c -(}
+{txt}  2{com}.         display "Regressing mpg on `xvar' É"
+{txt}  3{com}.         regress mpg `xvar'
+{txt}  4{com}.         display 
+{txt}  5{com}. {c )-}
+Regressing mpg on price É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   20.26
+    {txt}   Model {char |} {res} 536.541807     1  536.541807           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1906.91765    72  26.4849674           {txt}R-squared     = {res} 0.2196
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2087
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 5.1464
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}price {c |}{col 14}{res}{space 2}-.0009192{col 26}{space 2} .0002042{col 37}{space 1}   -4.50{col 46}{space 3}0.000{col 54}{space 4}-.0013263{col 67}{space 3}-.0005121
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 26.96417{col 26}{space 2} 1.393952{col 37}{space 1}   19.34{col 46}{space 3}0.000{col 54}{space 4} 24.18538{col 67}{space 3} 29.74297
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on rep78-foreign É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      69
+{txt}{hline 13}{char +}{hline 30}           F(  9,    59) ={res}   16.46
+    {txt}   Model {char |} {res} 1673.59955     9  185.955506           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 666.603344    59  11.2983618           {txt}R-squared     = {res} 0.7152
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6717
+    {txt}   Total {char |} {res}  2340.2029    68  34.4147485           {txt}Root MSE      = {res} 3.3613
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}rep78 {c |}{col 14}{res}{space 2}  1.18262{col 26}{space 2} .5367262{col 37}{space 1}    2.20{col 46}{space 3}0.031{col 54}{space 4} .1086337{col 67}{space 3} 2.256607
+{txt}{space 4}headroom {c |}{col 14}{res}{space 2} .0628992{col 26}{space 2} .6445392{col 37}{space 1}    0.10{col 46}{space 3}0.923{col 54}{space 4}-1.226821{col 67}{space 3} 1.352619
+{txt}{space 7}trunk {c |}{col 14}{res}{space 2} -.056715{col 26}{space 2} .1597893{col 37}{space 1}   -0.35{col 46}{space 3}0.724{col 54}{space 4}-.3764526{col 67}{space 3} .2630225
+{txt}{space 6}weight {c |}{col 14}{res}{space 2}-.0030834{col 26}{space 2}  .002342{col 37}{space 1}   -1.32{col 46}{space 3}0.193{col 54}{space 4}-.0077697{col 67}{space 3} .0016029
+{txt}{space 6}length {c |}{col 14}{res}{space 2}-.0959607{col 26}{space 2} .0668367{col 37}{space 1}   -1.44{col 46}{space 3}0.156{col 54}{space 4}-.2297005{col 67}{space 3} .0377792
+{txt}{space 8}turn {c |}{col 14}{res}{space 2}-.1559526{col 26}{space 2} .2069072{col 37}{space 1}   -0.75{col 46}{space 3}0.454{col 54}{space 4}-.5699729{col 67}{space 3} .2580677
+{txt}displacement {c |}{col 14}{res}{space 2} .0108863{col 26}{space 2} .0140284{col 37}{space 1}    0.78{col 46}{space 3}0.441{col 54}{space 4}-.0171846{col 67}{space 3} .0389572
+{txt}{space 2}gear_ratio {c |}{col 14}{res}{space 2} 3.362487{col 26}{space 2} 1.840816{col 37}{space 1}    1.83{col 46}{space 3}0.073{col 54}{space 4}-.3209769{col 67}{space 3} 7.045951
+{txt}{space 5}foreign {c |}{col 14}{res}{space 2}-4.266896{col 26}{space 2} 1.512104{col 37}{space 1}   -2.82{col 46}{space 3}0.006{col 54}{space 4} -7.29261{col 67}{space 3}-1.241182
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  40.5453{col 26}{space 2} 9.982947{col 37}{space 1}    4.06{col 46}{space 3}0.000{col 54}{space 4} 20.56946{col 67}{space 3} 60.52113
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. foreach xvar of varlist price rep78-foreign {c -(}
+{txt}  2{com}.         display "Regressing mpg on `xvar' É"
+{txt}  3{com}.         regress mpg `xvar'
+{txt}  4{com}.         display 
+{txt}  5{com}. {c )-}
+Regressing mpg on price É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   20.26
+    {txt}   Model {char |} {res} 536.541807     1  536.541807           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1906.91765    72  26.4849674           {txt}R-squared     = {res} 0.2196
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2087
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 5.1464
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}price {c |}{col 14}{res}{space 2}-.0009192{col 26}{space 2} .0002042{col 37}{space 1}   -4.50{col 46}{space 3}0.000{col 54}{space 4}-.0013263{col 67}{space 3}-.0005121
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 26.96417{col 26}{space 2} 1.393952{col 37}{space 1}   19.34{col 46}{space 3}0.000{col 54}{space 4} 24.18538{col 67}{space 3} 29.74297
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on rep78 É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      69
+{txt}{hline 13}{char +}{hline 30}           F(  1,    67) ={res}   12.94
+    {txt}   Model {char |} {res} 378.826865     1  378.826865           {txt}Prob > F      = {res} 0.0006
+    {txt}Residual {char |} {res} 1961.37603    67  29.2742692           {txt}R-squared     = {res} 0.1619
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1494
+    {txt}   Total {char |} {res}  2340.2029    68  34.4147485           {txt}Root MSE      = {res} 5.4106
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}rep78 {c |}{col 14}{res}{space 2} 2.384298{col 26}{space 2} .6628009{col 37}{space 1}    3.60{col 46}{space 3}0.001{col 54}{space 4} 1.061341{col 67}{space 3} 3.707254
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 13.16942{col 26}{space 2}  2.34946{col 37}{space 1}    5.61{col 46}{space 3}0.000{col 54}{space 4} 8.479879{col 67}{space 3} 17.85896
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on headroom É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   14.88
+    {txt}   Model {char |} {res} 418.400682     1  418.400682           {txt}Prob > F      = {res} 0.0002
+    {txt}Residual {char |} {res} 2025.05878    72  28.1258164           {txt}R-squared     = {res} 0.1712
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1597
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 5.3034
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}headroom {c |}{col 14}{res}{space 2}-2.829874{col 26}{space 2} .7337084{col 37}{space 1}   -3.86{col 46}{space 3}0.000{col 54}{space 4}-4.292495{col 67}{space 3}-1.367253
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  29.7678{col 26}{space 2} 2.281059{col 37}{space 1}   13.05{col 46}{space 3}0.000{col 54}{space 4} 25.22059{col 67}{space 3} 34.31501
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on trunk É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   36.80
+    {txt}   Model {char |} {res} 826.478521     1  826.478521           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1616.98094    72  22.4580686           {txt}R-squared     = {res} 0.3382
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3291
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res}  4.739
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}trunk {c |}{col 14}{res}{space 2}-.7866364{col 26}{space 2} .1296715{col 37}{space 1}   -6.07{col 46}{space 3}0.000{col 54}{space 4}-1.045132{col 67}{space 3}-.5281411
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 32.11886{col 26}{space 2} 1.866987{col 37}{space 1}   17.20{col 46}{space 3}0.000{col 54}{space 4} 28.39709{col 67}{space 3} 35.84063
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on weight É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}  134.62
+    {txt}   Model {char |} {res}  1591.9902     1   1591.9902           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 851.469256    72  11.8259619           {txt}R-squared     = {res} 0.6515
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6467
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 3.4389
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}weight {c |}{col 14}{res}{space 2}-.0060087{col 26}{space 2} .0005179{col 37}{space 1}  -11.60{col 46}{space 3}0.000{col 54}{space 4}-.0070411{col 67}{space 3}-.0049763
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 39.44028{col 26}{space 2} 1.614003{col 37}{space 1}   24.44{col 46}{space 3}0.000{col 54}{space 4} 36.22283{col 67}{space 3} 42.65774
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on length É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}  124.33
+    {txt}   Model {char |} {res} 1547.35715     1  1547.35715           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 896.102311    72  12.4458654           {txt}R-squared     = {res} 0.6333
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6282
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 3.5279
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}length {c |}{col 14}{res}{space 2}-.2067688{col 26}{space 2}  .018544{col 37}{space 1}  -11.15{col 46}{space 3}0.000{col 54}{space 4}-.2437355{col 67}{space 3}-.1698021
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 60.15586{col 26}{space 2} 3.509057{col 37}{space 1}   17.14{col 46}{space 3}0.000{col 54}{space 4} 53.16068{col 67}{space 3} 67.15104
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on turn É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   77.14
+    {txt}   Model {char |} {res} 1263.82804     1  1263.82804           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1179.63142    72  16.3837697           {txt}R-squared     = {res} 0.5172
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.5105
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 4.0477
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}turn {c |}{col 14}{res}{space 2}-.9457877{col 26}{space 2} .1076853{col 37}{space 1}   -8.78{col 46}{space 3}0.000{col 54}{space 4}-1.160455{col 67}{space 3}-.7311209
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  58.7965{col 26}{space 2} 4.295428{col 37}{space 1}   13.69{col 46}{space 3}0.000{col 54}{space 4} 50.23372{col 67}{space 3} 67.35928
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on displacement É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   71.41
+    {txt}   Model {char |} {res} 1216.67534     1  1216.67534           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1226.78412    72  17.0386683           {txt}R-squared     = {res} 0.4979
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.4910
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 4.1278
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+displacement {c |}{col 14}{res}{space 2}-.0444536{col 26}{space 2} .0052606{col 37}{space 1}   -8.45{col 46}{space 3}0.000{col 54}{space 4}-.0549405{col 67}{space 3}-.0339668
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 30.06788{col 26}{space 2} 1.143462{col 37}{space 1}   26.30{col 46}{space 3}0.000{col 54}{space 4} 27.78843{col 67}{space 3} 32.34733
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on gear_ratio É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   44.07
+    {txt}   Model {char |} {res} 927.719285     1  927.719285           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1515.74017    72  21.0519469           {txt}R-squared     = {res} 0.3797
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.3711
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 4.5882
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}gear_ratio {c |}{col 14}{res}{space 2} 7.812835{col 26}{space 2} 1.176919{col 37}{space 1}    6.64{col 46}{space 3}0.000{col 54}{space 4} 5.466691{col 67}{space 3} 10.15898
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-2.257346{col 26}{space 2} 3.588115{col 37}{space 1}   -0.63{col 46}{space 3}0.531{col 54}{space 4}-9.410123{col 67}{space 3} 4.895432
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on foreign É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   13.18
+    {txt}   Model {char |} {res} 378.153515     1  378.153515           {txt}Prob > F      = {res} 0.0005
+    {txt}Residual {char |} {res} 2065.30594    72  28.6848048           {txt}R-squared     = {res} 0.1548
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1430
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 5.3558
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}foreign {c |}{col 14}{res}{space 2} 4.945804{col 26}{space 2} 1.362162{col 37}{space 1}    3.63{col 46}{space 3}0.001{col 54}{space 4} 2.230384{col 67}{space 3} 7.661225
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 19.82692{col 26}{space 2} .7427186{col 37}{space 1}   26.70{col 46}{space 3}0.000{col 54}{space 4} 18.34634{col 67}{space 3} 21.30751
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. foreach xvar in price rep78-foreign {c -(}
+{txt}  2{com}.         display "Regressing mpg on `xvar' É"
+{txt}  3{com}.         regress mpg `xvar'
+{txt}  4{com}.         display 
+{txt}  5{com}. {c )-}
+Regressing mpg on price É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      74
+{txt}{hline 13}{char +}{hline 30}           F(  1,    72) ={res}   20.26
+    {txt}   Model {char |} {res} 536.541807     1  536.541807           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 1906.91765    72  26.4849674           {txt}R-squared     = {res} 0.2196
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.2087
+    {txt}   Total {char |} {res} 2443.45946    73  33.4720474           {txt}Root MSE      = {res} 5.1464
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}price {c |}{col 14}{res}{space 2}-.0009192{col 26}{space 2} .0002042{col 37}{space 1}   -4.50{col 46}{space 3}0.000{col 54}{space 4}-.0013263{col 67}{space 3}-.0005121
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 26.96417{col 26}{space 2} 1.393952{col 37}{space 1}   19.34{col 46}{space 3}0.000{col 54}{space 4} 24.18538{col 67}{space 3} 29.74297
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+Regressing mpg on rep78-foreign É
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      69
+{txt}{hline 13}{char +}{hline 30}           F(  9,    59) ={res}   16.46
+    {txt}   Model {char |} {res} 1673.59955     9  185.955506           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 666.603344    59  11.2983618           {txt}R-squared     = {res} 0.7152
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.6717
+    {txt}   Total {char |} {res}  2340.2029    68  34.4147485           {txt}Root MSE      = {res} 3.3613
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         mpg{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}rep78 {c |}{col 14}{res}{space 2}  1.18262{col 26}{space 2} .5367262{col 37}{space 1}    2.20{col 46}{space 3}0.031{col 54}{space 4} .1086337{col 67}{space 3} 2.256607
+{txt}{space 4}headroom {c |}{col 14}{res}{space 2} .0628992{col 26}{space 2} .6445392{col 37}{space 1}    0.10{col 46}{space 3}0.923{col 54}{space 4}-1.226821{col 67}{space 3} 1.352619
+{txt}{space 7}trunk {c |}{col 14}{res}{space 2} -.056715{col 26}{space 2} .1597893{col 37}{space 1}   -0.35{col 46}{space 3}0.724{col 54}{space 4}-.3764526{col 67}{space 3} .2630225
+{txt}{space 6}weight {c |}{col 14}{res}{space 2}-.0030834{col 26}{space 2}  .002342{col 37}{space 1}   -1.32{col 46}{space 3}0.193{col 54}{space 4}-.0077697{col 67}{space 3} .0016029
+{txt}{space 6}length {c |}{col 14}{res}{space 2}-.0959607{col 26}{space 2} .0668367{col 37}{space 1}   -1.44{col 46}{space 3}0.156{col 54}{space 4}-.2297005{col 67}{space 3} .0377792
+{txt}{space 8}turn {c |}{col 14}{res}{space 2}-.1559526{col 26}{space 2} .2069072{col 37}{space 1}   -0.75{col 46}{space 3}0.454{col 54}{space 4}-.5699729{col 67}{space 3} .2580677
+{txt}displacement {c |}{col 14}{res}{space 2} .0108863{col 26}{space 2} .0140284{col 37}{space 1}    0.78{col 46}{space 3}0.441{col 54}{space 4}-.0171846{col 67}{space 3} .0389572
+{txt}{space 2}gear_ratio {c |}{col 14}{res}{space 2} 3.362487{col 26}{space 2} 1.840816{col 37}{space 1}    1.83{col 46}{space 3}0.073{col 54}{space 4}-.3209769{col 67}{space 3} 7.045951
+{txt}{space 5}foreign {c |}{col 14}{res}{space 2}-4.266896{col 26}{space 2} 1.512104{col 37}{space 1}   -2.82{col 46}{space 3}0.006{col 54}{space 4} -7.29261{col 67}{space 3}-1.241182
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  40.5453{col 26}{space 2} 9.982947{col 37}{space 1}    4.06{col 46}{space 3}0.000{col 54}{space 4} 20.56946{col 67}{space 3} 60.52113
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. codebook rep78
+
+{txt}{hline}
+{res}rep78{right:Repair Record 1978}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}int{txt})
+
+{col 18}range:  [{res}1{txt},{res}5{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}5{col 51}{txt}missing .:  {res}5{txt}/{res}74
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}      2{col 33}1
+{col 24}      8{col 33}2
+{col 24}     30{col 33}3
+{col 24}     18{col 33}4
+{col 24}     11{col 33}5
+{col 24}      5{col 33}.
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}. {c )-}
+{txt}
+{com}. twoway `mod', legend(off) ytitle(price)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}. {c )-}
+{txt}
+{com}. twoway `mod', legend(off) ytitle(price) scheme(sj)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display `mod'
+{txt}  4{com}. {c )-}
+{err}lfitpricempgifrep78 not found
+{txt}{search r(111):r(111);}
+
+end of do-file
+
+{search r(111):r(111);}
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', legend(off) ytitle(price) scheme(sj)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj)
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. help legend
+
+. help twoway
+
+. help twoway
+
+.  twoway `mod', ytitle(price) scheme(sj)
+{err}ytitle(price) not allowed, yaxis1 does not exist
+{txt}{search r(198):r(198);}
+
+{com}. 
+. 
+. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj) legend(label(1 2 3 4 5))
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj) legend(label(1 1) label(2 2) label(3 3) label(4 4)  label(5)))
+{err}option ) not allowed
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj) legend(label(1 1) label(2 2) label(3 3) label(4 4)  label(5))
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/Users/fonnescj/Bios301/datasets/simple.do"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj) \\\
+{err}option \ not allowed
+{txt}{search r(198):r(198);}
+
+end of do-file
+
+{search r(198):r(198);}
+
+{com}. do "/Users/fonnescj/Bios301/datasets/simple.do"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  display "`mod'"
+{txt}  4{com}. {c )-}
+ (lfit price mpg if rep78==1)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4)
+ (lfit price mpg if rep78==1) (lfit price mpg if rep78==2) (lfit price mpg if rep78==3) (lfit price mpg if rep78==4) (lfit price mpg if rep78==5)
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj) ///
+>  legend(label(1 1) label(2 2) label(3 3) label(4 4)  label(5 5))
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/Users/fonnescj/Bios301/datasets/simple.do"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  local dl "`dl' label(`cat' `cat')"
+{txt}  4{com}. {c )-}
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj) legend(`dl')
+{res}{txt}
+{com}.  //legend(label(1 1) label(2 2) label(3 3) label(4 4)  label(5 5))
+. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. forvalues cat=1/5 {c -(}
+{txt}  2{com}.  local mod "`mod' (lfit price mpg if rep78==`cat')"
+{txt}  3{com}.  local dl "`dl' label(`cat' `cat')"
+{txt}  4{com}. {c )-}
+{txt}
+{com}. twoway `mod', ytitle(price) scheme(sj) ///
+> legend(`dl')
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "/var/folders/r_/zghvhfp56zz6v48cwmlgrtmw0000gn/T//SD59600.000000"
+{txt}
+{com}. local fact 1
+{txt}
+{com}. local cmt 1
+{txt}
+{com}. local toomuch 100000
+{txt}
+{com}. while `fact' <= `toomuch' {c -(}
+{txt}  2{com}.         local fact = `fact' * `cmt'
+{txt}  3{com}.         display as text "`cmt' factorial is " as result "`fact'"
+{txt}  4{com}.         local cmt = `cmt' + 1
+{txt}  5{com}. {c )-}
+{txt}1 factorial is {res}1
+{txt}2 factorial is {res}2
+{txt}3 factorial is {res}6
+{txt}4 factorial is {res}24
+{txt}5 factorial is {res}120
+{txt}6 factorial is {res}720
+{txt}7 factorial is {res}5040
+{txt}8 factorial is {res}40320
+{txt}9 factorial is {res}362880
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. `fact'
+. macro list
+{txt}{p 0 16}
+T_gm_fix_span:{space 2}{res}{res}0
+{p_end}
+{txt}{p 0 16}
+S_E_depv:{space 7}{res}{res}mpg
+{p_end}
+{txt}{p 0 16}
+S_E_cmd:{space 8}{res}{res}regress
+{p_end}
+{txt}{p 0 16}
+S_FNDATE:{space 7}{res}{res}13 Apr 2011 17:45
+{p_end}
+{txt}{p 0 16}
+S_FN:{space 11}{res}{res}/Applications/Stata/ado/base/a/auto.dta
+{p_end}
+{txt}{p 0 16}
+ReS_jv2:{space 8}{res}{res}1 2 3
+{p_end}
+{txt}{p 0 16}
+ReS_Call:{space 7}{res}{res}version 12:
+{p_end}
+{txt}{p 0 16}
+S_level:{space 8}{res}{res}95
+{p_end}
+{txt}{p 0 16}
+F1:{space 13}{res}{res}help advice;
+{p_end}
+{txt}{p 0 16}
+F2:{space 13}{res}{res}describe;
+{p_end}
+{txt}{p 0 16}
+F7:{space 13}{res}{res}save 
+{p_end}
+{txt}{p 0 16}
+F8:{space 13}{res}{res}use 
+{p_end}
+{txt}{p 0 16}
+S_ADO:{space 10}{res}{res}UPDATES;BASE;SITE;.;PERSONAL;PLUS;OLDPLACE
+{p_end}
+{txt}{p 0 16}
+S_FLAVOR:{space 7}{res}{res}Intercooled
+{p_end}
+{txt}{p 0 16}
+S_OS:{space 11}{res}{res}MacOSX
+{p_end}
+{txt}{p 0 16}
+S_OSDTL:{space 8}{res}{res}10.7.1
+{p_end}
+{txt}{p 0 16}
+S_MACH:{space 9}{res}{res}Macintosh (Intel 64-bit)
+{p_end}
+
+{com}. local foo 4
+
+. macro list
+{txt}{p 0 16}
+T_gm_fix_span:{space 2}{res}{res}0
+{p_end}
+{txt}{p 0 16}
+S_E_depv:{space 7}{res}{res}mpg
+{p_end}
+{txt}{p 0 16}
+S_E_cmd:{space 8}{res}{res}regress
+{p_end}
+{txt}{p 0 16}
+S_FNDATE:{space 7}{res}{res}13 Apr 2011 17:45
+{p_end}
+{txt}{p 0 16}
+S_FN:{space 11}{res}{res}/Applications/Stata/ado/base/a/auto.dta
+{p_end}
+{txt}{p 0 16}
+ReS_jv2:{space 8}{res}{res}1 2 3
+{p_end}
+{txt}{p 0 16}
+ReS_Call:{space 7}{res}{res}version 12:
+{p_end}
+{txt}{p 0 16}
+S_level:{space 8}{res}{res}95
+{p_end}
+{txt}{p 0 16}
+F1:{space 13}{res}{res}help advice;
+{p_end}
+{txt}{p 0 16}
+F2:{space 13}{res}{res}describe;
+{p_end}
+{txt}{p 0 16}
+F7:{space 13}{res}{res}save 
+{p_end}
+{txt}{p 0 16}
+F8:{space 13}{res}{res}use 
+{p_end}
+{txt}{p 0 16}
+S_ADO:{space 10}{res}{res}UPDATES;BASE;SITE;.;PERSONAL;PLUS;OLDPLACE
+{p_end}
+{txt}{p 0 16}
+S_FLAVOR:{space 7}{res}{res}Intercooled
+{p_end}
+{txt}{p 0 16}
+S_OS:{space 11}{res}{res}MacOSX
+{p_end}
+{txt}{p 0 16}
+S_OSDTL:{space 8}{res}{res}10.7.1
+{p_end}
+{txt}{p 0 16}
+S_MACH:{space 9}{res}{res}Macintosh (Intel 64-bit)
+{p_end}
+{txt}{p 0 16}
+_foo:{space 11}{res}{res}4
+{p_end}
+
+{com}. local foo
+
+. macro list
+{txt}{p 0 16}
+T_gm_fix_span:{space 2}{res}{res}0
+{p_end}
+{txt}{p 0 16}
+S_E_depv:{space 7}{res}{res}mpg
+{p_end}
+{txt}{p 0 16}
+S_E_cmd:{space 8}{res}{res}regress
+{p_end}
+{txt}{p 0 16}
+S_FNDATE:{space 7}{res}{res}13 Apr 2011 17:45
+{p_end}
+{txt}{p 0 16}
+S_FN:{space 11}{res}{res}/Applications/Stata/ado/base/a/auto.dta
+{p_end}
+{txt}{p 0 16}
+ReS_jv2:{space 8}{res}{res}1 2 3
+{p_end}
+{txt}{p 0 16}
+ReS_Call:{space 7}{res}{res}version 12:
+{p_end}
+{txt}{p 0 16}
+S_level:{space 8}{res}{res}95
+{p_end}
+{txt}{p 0 16}
+F1:{space 13}{res}{res}help advice;
+{p_end}
+{txt}{p 0 16}
+F2:{space 13}{res}{res}describe;
+{p_end}
+{txt}{p 0 16}
+F7:{space 13}{res}{res}save 
+{p_end}
+{txt}{p 0 16}
+F8:{space 13}{res}{res}use 
+{p_end}
+{txt}{p 0 16}
+S_ADO:{space 10}{res}{res}UPDATES;BASE;SITE;.;PERSONAL;PLUS;OLDPLACE
+{p_end}
+{txt}{p 0 16}
+S_FLAVOR:{space 7}{res}{res}Intercooled
+{p_end}
+{txt}{p 0 16}
+S_OS:{space 11}{res}{res}MacOSX
+{p_end}
+{txt}{p 0 16}
+S_OSDTL:{space 8}{res}{res}10.7.1
+{p_end}
+{txt}{p 0 16}
+S_MACH:{space 9}{res}{res}Macintosh (Intel 64-bit)
+{p_end}
+
+{com}. `fdgadg'
+. local datafiles: dir . files "*.dta"
+
+. macro list
+{txt}{p 0 16}
+T_gm_fix_span:{space 2}{res}{res}0
+{p_end}
+{txt}{p 0 16}
+S_E_depv:{space 7}{res}{res}mpg
+{p_end}
+{txt}{p 0 16}
+S_E_cmd:{space 8}{res}{res}regress
+{p_end}
+{txt}{p 0 16}
+S_FNDATE:{space 7}{res}{res}13 Apr 2011 17:45
+{p_end}
+{txt}{p 0 16}
+S_FN:{space 11}{res}{res}/Applications/Stata/ado/base/a/auto.dta
+{p_end}
+{txt}{p 0 16}
+ReS_jv2:{space 8}{res}{res}1 2 3
+{p_end}
+{txt}{p 0 16}
+ReS_Call:{space 7}{res}{res}version 12:
+{p_end}
+{txt}{p 0 16}
+S_level:{space 8}{res}{res}95
+{p_end}
+{txt}{p 0 16}
+F1:{space 13}{res}{res}help advice;
+{p_end}
+{txt}{p 0 16}
+F2:{space 13}{res}{res}describe;
+{p_end}
+{txt}{p 0 16}
+F7:{space 13}{res}{res}save 
+{p_end}
+{txt}{p 0 16}
+F8:{space 13}{res}{res}use 
+{p_end}
+{txt}{p 0 16}
+S_ADO:{space 10}{res}{res}UPDATES;BASE;SITE;.;PERSONAL;PLUS;OLDPLACE
+{p_end}
+{txt}{p 0 16}
+S_FLAVOR:{space 7}{res}{res}Intercooled
+{p_end}
+{txt}{p 0 16}
+S_OS:{space 11}{res}{res}MacOSX
+{p_end}
+{txt}{p 0 16}
+S_OSDTL:{space 8}{res}{res}10.7.1
+{p_end}
+{txt}{p 0 16}
+S_MACH:{space 9}{res}{res}Macintosh (Intel 64-bit)
+{p_end}
+{txt}{p 0 16}
+_datafiles:{space 5}{res}{res}"all_patient_info.dta" "annual_income.dta" "effort.dta" "income.dta" "longone.dta" "monthly_income.dta" "new_visit_info.dta" "old_visit_info.dta" "patient_info.dta" "wideone.dta"
+{p_end}
+
+{com}. scalar anumber = 16
+
+. display anumber^2
+{res}256
+
+{com}. display "There are " anumber " variables in the analysis"
+{res}There are 16 variables in the analysis
+
+{com}. clear
+
+. set obs 8
+{txt}obs was 0, now 8
+
+{com}. browse
+
+. edit
+
+. generate var1 = 5 in 1
+{txt}(7 missing values generated)
+
+{com}. replace var1 = 3 in 2
+{txt}(1 real change made)
+
+{com}. replace var1 = -6 in 3
+{txt}(1 real change made)
+
+{com}. replace var1 = 10 in 4
+{txt}(1 real change made)
+
+{com}. replace var1 = 23 in 5
+{txt}(1 real change made)
+
+{com}. replace var1 = 65 in 6
+{txt}(1 real change made)
+
+{com}. replace var1 = -123 in 7
+{txt}(1 real change made)
+
+{com}. replace var1 = 0 in 8
+{txt}(1 real change made)
+
+{com}. gen next_squared var1[_n+1]^2
+{err}var1 already defined
+{txt}{search r(110):r(110);}
+
+{com}. gen next_squared varsquared[_n+1]^2
+{err}weights not allowed
+{txt}{search r(101):r(101);}
+
+{com}. gen next_squared obs[_n+1]^2
+{err}weights not allowed
+{txt}{search r(101):r(101);}
+
+{com}. edit
+
+. gen next_squared = var1[_n+1]^2
+{txt}(1 missing value generated)
+
+{com}. browse
+
+. gen prev_squared = var1[_n-1]^2
+{txt}(1 missing value generated)
+
+{com}. browse
+
+. gen prev_squared = var1[_n]^2
+{err}prev_squared already defined
+{txt}{search r(110):r(110);}
+
+{com}. gen squared = var1[_n]^2
+
+. gen squared = var1[_N]^2
+{err}squared already defined
+{txt}{search r(110):r(110);}
+
+{com}. gen foo = var1[_N]^2
+
+. browse
+
+. _N
+{err}unrecognized command:  _N
+{txt}{search r(199):r(199);}
+
+{com}. display _N
+{res}8
+
+{com}. clear
+
+. set seed 895435
+
+. gen visitdt = 18000 * int(runiform()*150)
+
+. list
+
+. browse
+
+. set obs 8
+{txt}obs was 0, now 8
+
+{com}. gen visitdt = 18000 * int(runiform()*150)
+{err}visitdt already defined
+{txt}{search r(110):r(110);}
+
+{com}. list visitdt
+{txt}
+     {c TLC}{hline 9}{c TRC}
+     {c |} {res}visitdt {txt}{c |}
+     {c LT}{hline 9}{c RT}
+  1. {c |} {res}      . {txt}{c |}
+  2. {c |} {res}      . {txt}{c |}
+  3. {c |} {res}      . {txt}{c |}
+  4. {c |} {res}      . {txt}{c |}
+  5. {c |} {res}      . {txt}{c |}
+     {c LT}{hline 9}{c RT}
+  6. {c |} {res}      . {txt}{c |}
+  7. {c |} {res}      . {txt}{c |}
+  8. {c |} {res}      . {txt}{c |}
+     {c BLC}{hline 9}{c BRC}
+
+{com}. gen visitdt = 18000 * int(runiform()*150)
+{err}visitdt already defined
+{txt}{search r(110):r(110);}
+
+{com}. gen visitdt = 18000 * int(runiform()*150)
+{err}visitdt already defined
+{txt}{search r(110):r(110);}
+
+{com}. drop visitdt
+
+. gen visitdt = 18000 * int(runiform()*150)
+
+. list visitdt
+
+. gen visitdt = 18000 * int(runiform()*150)
+{err}visitdt already defined
+{txt}{search r(110):r(110);}
+
+{com}. replace visitdt = 18000 * int(runiform()*150)
+{txt}(0 real changes made)
+
+{com}. list visitdt
+
+. browse
+
+. clear
+
+. set obs 8
+{txt}obs was 0, now 8
+
+{com}. set seed 543634
+
+. gen visitdt = 18000 + int(runiform()*150)
+
+. list visitdt
+{txt}
+     {c TLC}{hline 9}{c TRC}
+     {c |} {res}visitdt {txt}{c |}
+     {c LT}{hline 9}{c RT}
+  1. {c |} {res}  18072 {txt}{c |}
+  2. {c |} {res}  18101 {txt}{c |}
+  3. {c |} {res}  18043 {txt}{c |}
+  4. {c |} {res}  18081 {txt}{c |}
+  5. {c |} {res}  18034 {txt}{c |}
+     {c LT}{hline 9}{c RT}
+  6. {c |} {res}  18115 {txt}{c |}
+  7. {c |} {res}  18028 {txt}{c |}
+  8. {c |} {res}  18029 {txt}{c |}
+     {c BLC}{hline 9}{c BRC}
+
+{com}. format visitdt %td
+
+. list visitdt
+{txt}
+     {c TLC}{hline 11}{c TRC}
+     {c |} {res}  visitdt {txt}{c |}
+     {c LT}{hline 11}{c RT}
+  1. {c |} {res}24jun2009 {txt}{c |}
+  2. {c |} {res}23jul2009 {txt}{c |}
+  3. {c |} {res}26may2009 {txt}{c |}
+  4. {c |} {res}03jul2009 {txt}{c |}
+  5. {c |} {res}17may2009 {txt}{c |}
+     {c LT}{hline 11}{c RT}
+  6. {c |} {res}06aug2009 {txt}{c |}
+  7. {c |} {res}11may2009 {txt}{c |}
+  8. {c |} {res}12may2009 {txt}{c |}
+     {c BLC}{hline 11}{c BRC}
+
+{com}. sort visitdt
+
+. list visitdt
+{txt}
+     {c TLC}{hline 11}{c TRC}
+     {c |} {res}  visitdt {txt}{c |}
+     {c LT}{hline 11}{c RT}
+  1. {c |} {res}11may2009 {txt}{c |}
+  2. {c |} {res}12may2009 {txt}{c |}
+  3. {c |} {res}17may2009 {txt}{c |}
+  4. {c |} {res}26may2009 {txt}{c |}
+  5. {c |} {res}24jun2009 {txt}{c |}
+     {c LT}{hline 11}{c RT}
+  6. {c |} {res}03jul2009 {txt}{c |}
+  7. {c |} {res}23jul2009 {txt}{c |}
+  8. {c |} {res}06aug2009 {txt}{c |}
+     {c BLC}{hline 11}{c BRC}
+
+{com}. gen datediff = visitdt - visitdt[_n-1]
+{txt}(1 missing value generated)
+
+{com}. list visitdt
+{txt}
+     {c TLC}{hline 11}{c TRC}
+     {c |} {res}  visitdt {txt}{c |}
+     {c LT}{hline 11}{c RT}
+  1. {c |} {res}11may2009 {txt}{c |}
+  2. {c |} {res}12may2009 {txt}{c |}
+  3. {c |} {res}17may2009 {txt}{c |}
+  4. {c |} {res}26may2009 {txt}{c |}
+  5. {c |} {res}24jun2009 {txt}{c |}
+     {c LT}{hline 11}{c RT}
+  6. {c |} {res}03jul2009 {txt}{c |}
+  7. {c |} {res}23jul2009 {txt}{c |}
+  8. {c |} {res}06aug2009 {txt}{c |}
+     {c BLC}{hline 11}{c BRC}
+
+{com}. list 
+{txt}
+     {c TLC}{hline 11}{c -}{hline 10}{c TRC}
+     {c |} {res}  visitdt   datediff {txt}{c |}
+     {c LT}{hline 11}{c -}{hline 10}{c RT}
+  1. {c |} {res}11may2009          . {txt}{c |}
+  2. {c |} {res}12may2009          1 {txt}{c |}
+  3. {c |} {res}17may2009          5 {txt}{c |}
+  4. {c |} {res}26may2009          9 {txt}{c |}
+  5. {c |} {res}24jun2009         29 {txt}{c |}
+     {c LT}{hline 11}{c -}{hline 10}{c RT}
+  6. {c |} {res}03jul2009          9 {txt}{c |}
+  7. {c |} {res}23jul2009         20 {txt}{c |}
+  8. {c |} {res}06aug2009         14 {txt}{c |}
+     {c BLC}{hline 11}{c -}{hline 10}{c BRC}
+
+{com}. use old_visit_info, clear
+
+. list
+{txt}
+     {c TLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c TRC}
+     {c |} {res}patid     visitdt       illness   insurance {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c RT}
+  1. {c |} {res}    9   05oct2009          Cold   Major Med {txt}{c |}
+  2. {c |} {res}    4   19oct2009   Sore Throat         HMO {txt}{c |}
+  3. {c |} {res}    1   20oct2009          Pneu           . {txt}{c |}
+  4. {c |} {res}   25   12nov2009          Cold         PPO {txt}{c |}
+  5. {c |} {res}    4   15nov2009   Sore Throat           . {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c RT}
+  6. {c |} {res}   25   30nov2009          Cold         PPO {txt}{c |}
+  7. {c |} {res}    9   29dec2009           Flu           . {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c BRC}
+
+{com}. sort patid
+
+. list, sepby(patid)
+{txt}
+     {c TLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c TRC}
+     {c |} {res}patid     visitdt       illness   insurance {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c RT}
+  1. {c |} {res}    1   20oct2009          Pneu           . {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c RT}
+  2. {c |} {res}    4   19oct2009   Sore Throat         HMO {txt}{c |}
+  3. {c |} {res}    4   15nov2009   Sore Throat           . {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c RT}
+  4. {c |} {res}    9   05oct2009          Cold   Major Med {txt}{c |}
+  5. {c |} {res}    9   29dec2009           Flu           . {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c RT}
+  6. {c |} {res}   25   30nov2009          Cold         PPO {txt}{c |}
+  7. {c |} {res}   25   12nov2009          Cold         PPO {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c BRC}
+
+{com}. gen datediff = visitdt - visitdt[_n-1]
+{txt}(1 missing value generated)
+
+{com}. list, sepby(patid)
+{txt}
+     {c TLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c TRC}
+     {c |} {res}patid     visitdt       illness   insurance   datediff {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  1. {c |} {res}    1   20oct2009          Pneu           .          . {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  2. {c |} {res}    4   19oct2009   Sore Throat         HMO         -1 {txt}{c |}
+  3. {c |} {res}    4   15nov2009   Sore Throat           .         27 {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  4. {c |} {res}    9   05oct2009          Cold   Major Med        -41 {txt}{c |}
+  5. {c |} {res}    9   29dec2009           Flu           .         85 {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  6. {c |} {res}   25   30nov2009          Cold         PPO        -29 {txt}{c |}
+  7. {c |} {res}   25   12nov2009          Cold         PPO        -18 {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c BRC}
+
+{com}. drop datediff
+
+. by patid (visitdt), sort: gen datediff = visitdt - visitdt[_n-1]
+{txt}(4 missing values generated)
+
+{com}. list, sepby(patid)
+{txt}
+     {c TLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c TRC}
+     {c |} {res}patid     visitdt       illness   insurance   datediff {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  1. {c |} {res}    1   20oct2009          Pneu           .          . {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  2. {c |} {res}    4   19oct2009   Sore Throat         HMO          . {txt}{c |}
+  3. {c |} {res}    4   15nov2009   Sore Throat           .         27 {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  4. {c |} {res}    9   05oct2009          Cold   Major Med          . {txt}{c |}
+  5. {c |} {res}    9   29dec2009           Flu           .         85 {txt}{c |}
+     {c LT}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c RT}
+  6. {c |} {res}   25   12nov2009          Cold         PPO          . {txt}{c |}
+  7. {c |} {res}   25   30nov2009          Cold         PPO         18 {txt}{c |}
+     {c BLC}{hline 7}{c -}{hline 11}{c -}{hline 13}{c -}{hline 11}{c -}{hline 10}{c BRC}
+
+{com}. webuse lbw
+{err}no; data in memory would be lost
+{txt}{search r(4):r(4);}
+
+{com}. webuse lbw, clear
+{txt}(Hosmer & Lemeshow data)
+
+{com}. help estimation commands
+
+. regress bwt lwt ui smoke
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     189
+{txt}{hline 13}{char +}{hline 30}           F(  3,   185) ={res}    9.14
+    {txt}   Model {char |} {res} 12896994.4     3  4298998.13           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 87018304.2   185  470369.212           {txt}R-squared     = {res} 0.1291
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1150
+    {txt}   Total {char |} {res} 99915298.6   188  531464.354           {txt}Root MSE      = {res} 685.83
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2}  3.33615{col 26}{space 2} 1.656444{col 37}{space 1}    2.01{col 46}{space 3}0.045{col 54}{space 4} .0682023{col 67}{space 3} 6.604098
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-514.6085{col 26}{space 2} 142.3235{col 37}{space 1}   -3.62{col 46}{space 3}0.000{col 54}{space 4}-795.3943{col 67}{space 3}-233.8227
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2}-250.1394{col 26}{space 2} 102.4701{col 37}{space 1}   -2.44{col 46}{space 3}0.016{col 54}{space 4}-452.2995{col 67}{space 3}-47.97925
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2685.363{col 26}{space 2} 229.4873{col 37}{space 1}   11.70{col 46}{space 3}0.000{col 54}{space 4} 2232.614{col 67}{space 3} 3138.112
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt ui smoke
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     189
+{txt}{hline 13}{char +}{hline 30}           F(  3,   185) ={res}    9.14
+    {txt}   Model {char |} {res} 12896994.4     3  4298998.13           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 87018304.2   185  470369.212           {txt}R-squared     = {res} 0.1291
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1150
+    {txt}   Total {char |} {res} 99915298.6   188  531464.354           {txt}Root MSE      = {res} 685.83
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2}  3.33615{col 26}{space 2} 1.656444{col 37}{space 1}    2.01{col 46}{space 3}0.045{col 54}{space 4} .0682023{col 67}{space 3} 6.604098
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-514.6085{col 26}{space 2} 142.3235{col 37}{space 1}   -3.62{col 46}{space 3}0.000{col 54}{space 4}-795.3943{col 67}{space 3}-233.8227
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2}-250.1394{col 26}{space 2} 102.4701{col 37}{space 1}   -2.44{col 46}{space 3}0.016{col 54}{space 4}-452.2995{col 67}{space 3}-47.97925
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2685.363{col 26}{space 2} 229.4873{col 37}{space 1}   11.70{col 46}{space 3}0.000{col 54}{space 4} 2232.614{col 67}{space 3} 3138.112
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. logit low lwt ui smoke
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:  -117.336}  
+Iteration 1:{space 3}log likelihood = {res:-110.67957}  
+Iteration 2:{space 3}log likelihood = {res:-110.58821}  
+Iteration 3:{space 3}log likelihood = {res:-110.58811}  
+Iteration 4:{space 3}log likelihood = {res:-110.58811}  
+{res}
+{txt}Logistic regression{col 51}Number of obs{col 67}= {res}       189
+{txt}{col 51}LR chi2({res}3{txt}){col 67}= {res}     13.50
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0037
+{txt}Log likelihood = {res}-110.58811{txt}{col 51}Pseudo R2{col 67}= {res}    0.0575
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         low{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2}-.0115934{col 26}{space 2} .0061002{col 37}{space 1}   -1.90{col 46}{space 3}0.057{col 54}{space 4}-.0235496{col 67}{space 3} .0003629
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}  .780847{col 26}{space 2} .4343454{col 37}{space 1}    1.80{col 46}{space 3}0.072{col 54}{space 4}-.0704543{col 67}{space 3} 1.632148
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2} .6515712{col 26}{space 2} .3283232{col 37}{space 1}    1.98{col 46}{space 3}0.047{col 54}{space 4} .0080696{col 67}{space 3} 1.295073
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .2865285{col 26}{space 2} .8145549{col 37}{space 1}    0.35{col 46}{space 3}0.725{col 54}{space 4} -1.30997{col 67}{space 3} 1.883027
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. logit low lwt ui smoke, or
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:  -117.336}  
+Iteration 1:{space 3}log likelihood = {res:-110.67957}  
+Iteration 2:{space 3}log likelihood = {res:-110.58821}  
+Iteration 3:{space 3}log likelihood = {res:-110.58811}  
+Iteration 4:{space 3}log likelihood = {res:-110.58811}  
+{res}
+{txt}Logistic regression{col 51}Number of obs{col 67}= {res}       189
+{txt}{col 51}LR chi2({res}3{txt}){col 67}= {res}     13.50
+{txt}{col 51}Prob > chi2{col 67}= {res}    0.0037
+{txt}Log likelihood = {res}-110.58811{txt}{col 51}Pseudo R2{col 67}= {res}    0.0575
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         low{col 14}{c |} Odds Ratio{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} .9884736{col 26}{space 2} .0060299{col 37}{space 1}   -1.90{col 46}{space 3}0.057{col 54}{space 4} .9767256{col 67}{space 3} 1.000363
+{txt}{space 10}ui {c |}{col 14}{res}{space 2} 2.183321{col 26}{space 2} .9483154{col 37}{space 1}    1.80{col 46}{space 3}0.072{col 54}{space 4} .9319703{col 67}{space 3} 5.114852
+{txt}{space 7}smoke {c |}{col 14}{res}{space 2} 1.918553{col 26}{space 2} .6299054{col 37}{space 1}    1.98{col 46}{space 3}0.047{col 54}{space 4} 1.008102{col 67}{space 3} 3.651262
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.331796{col 26}{space 2} 1.084821{col 37}{space 1}    0.35{col 46}{space 3}0.725{col 54}{space 4} .2698282{col 67}{space 3} 6.573371
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. display exp(-.0115934)
+{res}.98847354
+
+{com}. code smoke
+{err}code is a class
+{txt}{search r(4002):r(4002);}
+
+{com}. codebook smoke
+
+{txt}{hline}
+{res}smoke{right:smoked during pregnancy}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}    115{col 33}0
+{col 24}     74{col 33}1
+
+{com}. codebook race
+
+{txt}{hline}
+{res}race{right:race}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+{ralign 22:label}:  {res:race}
+
+{col 18}range:  [{res}1{txt},{res}3{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}3{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.   Numeric  Label
+{col 24}{res}     96{col 33}       1{col 43}{txt}white
+{col 24}{res}     26{col 33}       2{col 43}{txt}black
+{col 24}{res}     67{col 33}       3{col 43}{txt}other
+
+{com}. regress bwt lwt ui i.race
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     189
+{txt}{hline 13}{char +}{hline 30}           F(  4,   184) ={res}    8.13
+    {txt}   Model {char |} {res} 14999612.3     4  3749903.07           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 84915686.3   184  461498.295           {txt}R-squared     = {res} 0.1501
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1316
+    {txt}   Total {char |} {res} 99915298.6   188  531464.354           {txt}Root MSE      = {res} 679.34
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.760547{col 26}{space 2}  1.70824{col 37}{space 1}    2.20{col 46}{space 3}0.029{col 54}{space 4} .3902907{col 67}{space 3} 7.130803
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-526.3824{col 26}{space 2} 140.8155{col 37}{space 1}   -3.74{col 46}{space 3}0.000{col 54}{space 4}-804.2031{col 67}{space 3}-248.5618
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-449.3518{col 26}{space 2} 152.2514{col 37}{space 1}   -2.95{col 46}{space 3}0.004{col 54}{space 4}-749.7348{col 67}{space 3}-148.9688
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-230.7888{col 26}{space 2} 110.0879{col 37}{space 1}   -2.10{col 46}{space 3}0.037{col 54}{space 4}-447.9858{col 67}{space 3}-13.59185
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2677.703{col 26}{space 2} 239.3041{col 37}{space 1}   11.19{col 46}{space 3}0.000{col 54}{space 4} 2205.571{col 67}{space 3} 3149.836
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt ui b3.race
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     189
+{txt}{hline 13}{char +}{hline 30}           F(  4,   184) ={res}    8.13
+    {txt}   Model {char |} {res} 14999612.3     4  3749903.07           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 84915686.3   184  461498.295           {txt}R-squared     = {res} 0.1501
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1316
+    {txt}   Total {char |} {res} 99915298.6   188  531464.354           {txt}Root MSE      = {res} 679.34
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.760547{col 26}{space 2}  1.70824{col 37}{space 1}    2.20{col 46}{space 3}0.029{col 54}{space 4} .3902907{col 67}{space 3} 7.130803
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-526.3824{col 26}{space 2} 140.8155{col 37}{space 1}   -3.74{col 46}{space 3}0.000{col 54}{space 4}-804.2031{col 67}{space 3}-248.5618
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} 230.7888{col 26}{space 2} 110.0879{col 37}{space 1}    2.10{col 46}{space 3}0.037{col 54}{space 4} 13.59185{col 67}{space 3} 447.9858
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} -218.563{col 26}{space 2} 163.3872{col 37}{space 1}   -1.34{col 46}{space 3}0.183{col 54}{space 4}-540.9162{col 67}{space 3} 103.7902
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2446.914{col 26}{space 2} 225.8782{col 37}{space 1}   10.83{col 46}{space 3}0.000{col 54}{space 4}  2001.27{col 67}{space 3} 2892.559
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. codebook
+
+{txt}{hline}
+{res}id{right:identification code}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}int{txt})
+
+{col 18}range:  [{res}4{txt},{res}226{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}189{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 19}mean:{res}{col 26} 121.079
+{txt}{col 15}std. dev:{res}{col 26} 63.3036
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}      30{col 37}      68{col 47}     123{col 57}     176{col 67}     208
+
+{txt}{hline}
+{res}low{right:birthweight<2500g}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}    130{col 33}0
+{col 24}     59{col 33}1
+
+{txt}{hline}
+{res}age{right:age of mother}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}14{txt},{res}45{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}24{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 19}mean:{res}{col 26} 23.2381
+{txt}{col 15}std. dev:{res}{col 26} 5.29868
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}      17{col 37}      19{col 47}      23{col 57}      26{col 67}      31
+
+{txt}{hline}
+{res}lwt{right:weight at last menstrual period}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}int{txt})
+
+{col 18}range:  [{res}80{txt},{res}250{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}76{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 19}mean:{res}{col 26}  129.82
+{txt}{col 15}std. dev:{res}{col 26} 30.5752
+
+{txt}{col 12}percentiles:{col 32}10%{col 42}25%{col 52}50%{col 62}75%{col 72}90%
+{res}{col 27}      98{col 37}     110{col 47}     121{col 57}     140{col 67}     170
+
+{txt}{hline}
+{res}race{right:race}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+{ralign 22:label}:  {res:race}
+
+{col 18}range:  [{res}1{txt},{res}3{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}3{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.   Numeric  Label
+{col 24}{res}     96{col 33}       1{col 43}{txt}white
+{col 24}{res}     26{col 33}       2{col 43}{txt}black
+{col 24}{res}     67{col 33}       3{col 43}{txt}other
+
+{txt}{hline}
+{res}smoke{right:smoked during pregnancy}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}    115{col 33}0
+{col 24}     74{col 33}1
+
+{txt}{hline}
+{res}ptl{right:premature labor history (count)}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}3{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}4{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}    159{col 33}0
+{col 24}     24{col 33}1
+{col 24}      5{col 33}2
+{col 24}      1{col 33}3
+
+{txt}{hline}
+{res}ht{right:has history of hypertension}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}    177{col 33}0
+{col 24}     12{col 33}1
+
+{txt}{hline}
+{res}ui{right:presence, uterine irritability}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}1{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}2{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}    161{col 33}0
+{col 24}     28{col 33}1
+
+{txt}{hline}
+{res}ftv{right:number of visits to physician during 1st trimester}
+{txt}{hline}
+
+{col 19}type:  numeric ({res}byte{txt})
+
+{col 18}range:  [{res}0{txt},{res}6{txt}]{col 55}units:  {res}1
+{col 10}{txt}unique values:  {res}6{col 51}{txt}missing .:  {res}0{txt}/{res}189
+
+{txt}{col 13}tabulation:  Freq.  Value
+{col 24}{res}    100{col 33}0
+{err}{hline 2}Break{hline 2}
+{txt}{search r(1):r(1);}
+
+{com}. regress bwt lwt i.ui i.race
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     189
+{txt}{hline 13}{char +}{hline 30}           F(  4,   184) ={res}    8.13
+    {txt}   Model {char |} {res} 14999612.3     4  3749903.07           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 84915686.3   184  461498.295           {txt}R-squared     = {res} 0.1501
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1316
+    {txt}   Total {char |} {res} 99915298.6   188  531464.354           {txt}Root MSE      = {res} 679.34
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.760547{col 26}{space 2}  1.70824{col 37}{space 1}    2.20{col 46}{space 3}0.029{col 54}{space 4} .3902907{col 67}{space 3} 7.130803
+{txt}{space 8}1.ui {c |}{col 14}{res}{space 2}-526.3824{col 26}{space 2} 140.8155{col 37}{space 1}   -3.74{col 46}{space 3}0.000{col 54}{space 4}-804.2031{col 67}{space 3}-248.5618
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-449.3518{col 26}{space 2} 152.2514{col 37}{space 1}   -2.95{col 46}{space 3}0.004{col 54}{space 4}-749.7348{col 67}{space 3}-148.9688
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-230.7888{col 26}{space 2} 110.0879{col 37}{space 1}   -2.10{col 46}{space 3}0.037{col 54}{space 4}-447.9858{col 67}{space 3}-13.59185
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2677.703{col 26}{space 2} 239.3041{col 37}{space 1}   11.19{col 46}{space 3}0.000{col 54}{space 4} 2205.571{col 67}{space 3} 3149.836
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress bwt lwt ui i.race
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}     189
+{txt}{hline 13}{char +}{hline 30}           F(  4,   184) ={res}    8.13
+    {txt}   Model {char |} {res} 14999612.3     4  3749903.07           {txt}Prob > F      = {res} 0.0000
+    {txt}Residual {char |} {res} 84915686.3   184  461498.295           {txt}R-squared     = {res} 0.1501
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.1316
+    {txt}   Total {char |} {res} 99915298.6   188  531464.354           {txt}Root MSE      = {res} 679.34
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         bwt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lwt {c |}{col 14}{res}{space 2} 3.760547{col 26}{space 2}  1.70824{col 37}{space 1}    2.20{col 46}{space 3}0.029{col 54}{space 4} .3902907{col 67}{space 3} 7.130803
+{txt}{space 10}ui {c |}{col 14}{res}{space 2}-526.3824{col 26}{space 2} 140.8155{col 37}{space 1}   -3.74{col 46}{space 3}0.000{col 54}{space 4}-804.2031{col 67}{space 3}-248.5618
+{txt}{space 12} {c |}
+{space 8}race {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-449.3518{col 26}{space 2} 152.2514{col 37}{space 1}   -2.95{col 46}{space 3}0.004{col 54}{space 4}-749.7348{col 67}{space 3}-148.9688
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-230.7888{col 26}{space 2} 110.0879{col 37}{space 1}   -2.10{col 46}{space 3}0.037{col 54}{space 4}-447.9858{col 67}{space 3}-13.59185
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2677.703{col 26}{space 2} 239.3041{col 37}{space 1}   11.19{col 46}{space 3}0.000{col 54}{space 4} 2205.571{col 67}{space 3} 3149.836
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/fonnescj/Bios301/datasets/oct3.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 3 Oct 2011, 15:23:50
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
