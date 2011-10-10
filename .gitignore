@@ -2,3 +2,4 @@
 .Rhistory
 email.txt
 *.sqlite
+scipy-lecture-notes/*
