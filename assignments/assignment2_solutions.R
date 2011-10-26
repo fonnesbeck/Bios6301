@@ -12,7 +12,7 @@ haart$followup[haart$death==1] <- as.integer(haart$date.death - haart$init.date)
 # Truncate at 1 year
 haart$followup[haart$followup>365] <- 365
 # Loss to followup
-haart$ltf <- haart$followup==365
+haart$ltf <- haart$followup<365 & !haart$death
 
 # Create variable containing array of drugs
 init.reg <- as.character(haart$init.reg)
