@@ -22,7 +22,7 @@ Schedule
 Course Synopsis
 ~~~~~~~~~~~~~~~
 
-This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language), STATA (a commercial statistics package) and Python (a general-purpose programming language) for data manipulation, database querying, report generation, and data summarization and analysis. Topics will include importing, manipulating and documenting data, generation of scientific graphics, reproducible research, procedural and object-oriented programming, and an introduction to sampling and bootstrapping. Students will also be introduced to !LaTeX and Sweave for report writing, version control using Git, and basic SQL programming.
+This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language), STATA (a commercial statistics package) and Python (a general-purpose programming language) for data manipulation, database querying, report generation, and data summarization and analysis. Topics will include importing, manipulating and documenting data, generation of scientific graphics, reproducible research, procedural and object-oriented programming, and an introduction to sampling and bootstrapping. Students will also be introduced to LaTeX and Sweave for report writing, version control using Git, and basic SQL programming.
 
 Prerequisites: None
 
