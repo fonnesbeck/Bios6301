@@ -52,7 +52,7 @@ createSurvivalFrame <- function(f.survﬁt){
 # deﬁne custom function to draw kaplan-meier curve with ggplot
 qplot_survival <- function(f.frame, f.CI="default", f.shape=3){
     # use different plotting commands dependig whether or not strata's are given
-    if("strata" %in% names(t.survframe) == FALSE){
+    if("strata" %in% names(f.frame) == FALSE){
     	 	 # conﬁdence intervals are drawn if not speciﬁed otherwise
         if(f.CI=="default" | f.CI==TRUE ){
             # create plot with 4 layers (ﬁrst 3 layers only events, last layer only censored)
