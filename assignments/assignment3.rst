@@ -9,7 +9,7 @@ Instructions
 
 This assignment is due in electronic format on Monday, November 7, 2011 at the end of the day. Your completed work should be pushed to your private Bios301 repository on GitHub. I am interested in receiving code that I can run myself, in addition to your particular output (so, be sure your code runs as you expect!). There are 3 questions for a total of 40 points.
 
-1. (10 points) During the Oct. 17 lecture, we covered two popular root-finding algorithms, the fixed-point and Newton-Raphson algorithms. A third algorithm discussed in *Jones et al.* is the secant algorithm. Code this algorithm as a Python function, and compare its performance to:
+1. (10 points) During the Oct. 17 lecture, we covered two popular root-finding algorithms, the fixed-point and Newton-Raphson algorithms. A third algorithm discussed in *Jones et al.* is the bisection algorithm. Code this algorithm as a Python function, and compare its performance to:
 
     - The Newton-Raphson algorithm, using the Python script in the GitHub repo.
     - The R implementation, which is available in the `spuRs`_ package that accompanies the book.
