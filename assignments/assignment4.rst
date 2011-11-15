@@ -7,7 +7,7 @@ November 14, 2011
 Instructions
 ************
 
-This assignment is due in electronic format on Friday, December 2, 2011 at the end of the day. This homework should be submitted in LaTeX or Sweave format only. Your completed work should be pushed to your private Bios301 repository on GitHub. There are 3 questions for a total of 30 points.
+This assignment is due in electronic format on Monday, December 5, 2011 at the end of the day. This homework should be submitted in LaTeX or Sweave format only. Your completed work should be pushed to your private Bios301 repository on GitHub. There are 3 questions for a total of 30 points.
 
 From the textbook (Jones et al.):
 
