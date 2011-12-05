@@ -1,13 +1,5 @@
 import numpy as np
 
-# f = lambda x: np.log(x) - np.exp(-x)
-# f1 = lambda x: np.exp(-x) + 1./x
-# f2 = lambda x: -np.exp(-x) - 1./(x**2)
-
-f = lambda x: np.cos(x) - x
-f1 = lambda x: -np.sin(x) - 1
-f2 = lambda x: -np.cos(x)
-
     
 def quadratic_approx(f, f1, f2, x0=1, tol=1e-8, maxiter=20):
     """docstring for quadratic_approx"""
@@ -50,4 +42,18 @@ def quadratic_approx(f, f1, f2, x0=1, tol=1e-8, maxiter=20):
             
     # Failure (None returned as default)
     print "Could not find a root after %i iterations" % maxiter
-        
+    
+f = lambda x: np.log(x) - np.exp(-x)
+f1 = lambda x: np.exp(-x) + 1./x
+f2 = lambda x: -np.exp(-x) - 1./(x**2)
+print quadratic_approx(f, f1, f2, 2.)
+
+f = lambda x: np.cos(x) - x
+f1 = lambda x: -np.sin(x) - 1
+f2 = lambda x: -np.cos(x)
+print quadratic_approx(f, f1, f2, 1.)
+
+f = lambda x: np.log(x) * np.exp(-x)
+f1 = lambda x: np.exp(-x) * (1. - x*np.log(x))/ x
+f2 = lambda x:np.exp(-x) * ((x**2)*np.log(x)-2*x-1)/ (x**2)
+print quadratic_approx(f, f1, f2, 2.)
