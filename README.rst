@@ -15,14 +15,14 @@ chris.fonnesbeck@vanderbilt.edu
 Schedule
 ~~~~~~~~
 
-* Lectures: Mondays 13:00-15:00, Light Hall, Room 202
+* Lectures: TBA
 * Office hours: By appointment
 
 
 Course Synopsis
 ~~~~~~~~~~~~~~~
 
-This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language), STATA (a commercial statistics package) and Python (a general-purpose programming language) for data manipulation, database querying, report generation, and data summarization and analysis. Topics will include importing, manipulating and documenting data, generation of scientific graphics, reproducible research, procedural and object-oriented programming, and an introduction to sampling and bootstrapping. Students will also be introduced to LaTeX and Sweave for report writing, version control using Git, and basic SQL programming.
+This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language) and STATA (a commercial statistics package) for data manipulation, database querying, report generation, and data summarization and analysis. Topics will include importing, manipulating and documenting data, generation of scientific graphics, reproducible research, procedural and object-oriented programming, and an introduction to sampling and bootstrapping. Students will also be introduced to LaTeX and Sweave for report writing, version control using Git, and basic SQL programming.
 
 Prerequisites: None
 
@@ -56,4 +56,4 @@ Course announcements can be found on Twitter, by following `@vandy_biostat <http
 Grading
 ~~~~~~~
 
-Students will be assessed on 4-5 assignments (40% of grade) and a final project (60% of grade). There will be no final exam.
+Students will be assessed on 4-5 assignments (40% of grade) and a final exam (60% of grade).
