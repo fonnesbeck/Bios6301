@@ -1,5 +1,5 @@
 ===========================================================
-BIOS 301: Introduction to Statistical Computing (Fall 2011)
+BIOS 301: Introduction to Statistical Computing (Fall 2012)
 ===========================================================
 
 Instructor
