@@ -45,4 +45,11 @@ Course announcements can be found on Twitter, by following [@vandy_biostat](http
 
 ## Grading
 
-Students will be assessed on 4-5 assignments (40% of grade) and a final exam (60% of grade).
+Students will be assessed on 4-5 assignments (50% of grade) and a final exam (50% of grade).
+
+
+## Assignments
+
+Assignments may be submitted in LaTeX, Sweave, or any markup format that allows for easy conversion to LaTeX (*e.g.* MultiMarkdown, reStructuredText). Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. Hand-written assignments (including scanned documents) are also not permitted.
+
+All assignments will be submitted electronically, via students' private GitHub repositories. Instructions on how to set up and use GitHub accounts will be provided.
