@@ -27,22 +27,22 @@ Prerequisites: None
 Recommended Text:
 
 
-`Introduction to Scientific Programming and Simulation Using R <www.crcpress.com/product/isbn/9781420068726>`_: Jones, Maillardet and Robinson
+[Introduction to Scientific Programming and Simulation Using R](www.crcpress.com/product/isbn/9781420068726): Jones, Maillardet and Robinson
 
 
 ## Software
 
-* `R <http://cran.r-project.org>`_
-* `Stata <http://www.stata.com>`_
-* `Git <http://git-scm.com/>`_
-* `Python <http://python.org>`_
-* `SQLite <http://sqlite.org>`_
-* `LaTeX <http://www.latex-project.org/>`_
+* [R](http://cran.r-project.org)
+* [Stata](http://www.stata.com)
+* [Git](http://git-scm.com/)
+* [Python](http://python.org)
+* [SQLite](http://sqlite.org)
+* [LaTeX](http://www.latex-project.org/)
 
 
 ## Resources
 
-Course announcements can be found on Twitter, by following `@vandy_biostat <https://twitter.com/#!/vandy_biostat>`_
+Course announcements can be found on Twitter, by following [@vandy_biostat](https://twitter.com/#!/vandy_biostat)
 
 
 ## Grading
