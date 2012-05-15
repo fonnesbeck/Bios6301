@@ -21,6 +21,22 @@ This course is designed to provide students the fundamental skills for effective
 
 Prerequisites: None
 
+## Course Outline
+
+- Source control using Git
+- LaTeX and document preparation
+- Data types and data structures
+- Flow control and looping
+- Writing and calling functions
+- Top-down design and scoping
+- Debugging and testing
+- Functions as objects
+- Split/apply/combine
+- Simulation
+- Optimization
+- Regular expressions
+- Databases
+- Stata
 
 ## Textbook and reading materials
 
