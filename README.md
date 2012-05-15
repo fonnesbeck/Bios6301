@@ -25,6 +25,7 @@ Prerequisites: None
 
 - Source control using Git
 - LaTeX and document preparation
+- Basic R syntax and semantics
 - Data types and data structures
 - Flow control and looping
 - Writing and calling functions
