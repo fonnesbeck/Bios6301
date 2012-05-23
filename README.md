@@ -11,13 +11,13 @@ chris.fonnesbeck@vanderbilt.edu
 
 ## Schedule
 
-* Lectures: TBA
+* Lectures: Mondays, 1-3pm; location TBA
 * Office hours: By appointment
 
 
 ## Course Synopsis
 
-This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language) and STATA (a commercial statistics package) for data manipulation, database querying, report generation, and data summarization and analysis. Topics will include importing, manipulating and documenting data, generation of scientific graphics, reproducible research, procedural and object-oriented programming, and an introduction to sampling and bootstrapping. Students will also be introduced to LaTeX and Sweave for report writing, version control using Git, and basic SQL programming.
+This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language) and STATA (a commercial statistics package) for data manipulation, database querying, report generation, and data summarization and analysis. Topics will include importing, manipulating and documenting data, generation of scientific graphics, reproducible research, procedural and object-oriented programming, and an introduction to sampling and bootstrapping. Students will also be introduced to LaTeX and knitr for report writing, version control using Git, and basic SQL programming.
 
 Prerequisites: None
 
@@ -43,21 +43,40 @@ Prerequisites: None
 
 Recommended Text:
 
-[Introduction to Scientific Programming and Simulation Using R](www.crcpress.com/product/isbn/9781420068726): Jones, Maillardet and Robinson
+[The Art of R Programming](http://nostarch.com/artofr.htm): Norman Matloff
 
 
-## Software
+## Essential Software
 
-* [R](http://cran.r-project.org)
-* [Stata](http://www.stata.com)
-* [Git](http://git-scm.com/)
-* [SQLite](http://sqlite.org)
-* [LaTeX](http://www.latex-project.org/)
+* Statistical analysis tools: [R](http://cran.r-project.org), [Stata](http://www.stata.com)
+* Version control system: [Git](http://git-scm.com/)
+* Relational database: [SQLite](http://sqlite.org)
+* Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/)
+* Powerful text editor (pick one!): [TextMate](http://macromates.com), [Vim](http://vim.org), [Emacs](http://www.gnu.org/s/emacs/), [Sublime Text 2](http://www.sublimetext.com/2) 
 
 
 ## Resources
 
 Course announcements can be found on Twitter, by following [@vandy_biostat](https://twitter.com/#!/vandy_biostat)
+
+## Lecture Schedule
+
+This schedule is *tentative* and subject to change at any time.
+
+* **Lecture 1**: Version control using Git; document preparation using LaTeX, `Sweave` and `knitr`
+* **Lecture 2**: Introduction to R; data types and data structures
+* **Lecture 3**: Flow control and looping
+* **Lecture 4**: Writing and calling functions
+* **Lecture 5**: Top-down design; scoping
+* **Lecture 6**: Debugging and testing
+* **Lecture 7**: split, apply and combine; `reshape` and `plyr`
+* **Lecture 8**: Simulation; optimization
+* **Lecture 9**: Scientific graphics; `ggplot2`
+* **Lecture 10**: Programming paradigms; object-oriented programming
+* **Lecture 11**: High performance computing; basic parallel computing
+* **Lecture 12**: I/O and databases; regular expressions
+* **Lecture 13**: Overview of STATA
+
 
 
 ## Grading
@@ -67,6 +86,6 @@ Students will be assessed on 4-5 assignments (50% of grade) and a final exam (50
 
 ## Assignments
 
-Assignments may be submitted in LaTeX, Sweave, or any markup format that allows for easy conversion to LaTeX (*e.g.* MultiMarkdown, reStructuredText). Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. Hand-written assignments (including scanned documents) are also not permitted.
+Assignments may be submitted in LaTeX, Sweave, knitr, or any markup format that allows for easy conversion to LaTeX (*e.g.* MultiMarkdown, reStructuredText). Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. Hand-written assignments (including scanned documents) are also not permitted.
 
 All assignments will be submitted electronically, via students' private GitHub repositories. Instructions on how to set up and use GitHub accounts will be provided.

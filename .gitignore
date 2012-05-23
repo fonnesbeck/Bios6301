@@ -4,3 +4,4 @@ email.txt
 *.sqlite
 scipy-lecture-notes/*
 *.pyc
+external/*
