@@ -17,11 +17,11 @@ chris.fonnesbeck@vanderbilt.edu
 
 ## Course Synopsis
 
-This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language) and STATA (a commercial statistics package) for data manipulation, database querying, report generation, and data summarization and analysis. Topics will include importing, manipulating and documenting data, generation of scientific graphics, reproducible research, procedural and object-oriented programming, and an introduction to sampling and bootstrapping. Students will also be introduced to LaTeX and knitr for report writing, version control using Git, and basic SQL programming.
+This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language) and STATA (a commercial statistics package) for data manipulation, summarization and analysis. Topics will include programming syntax and data structures, generation of scientific graphics, writing functions, debugging and testing, programming paradigms, simulation and optimization. Students will also be introduced to LaTeX and knitr for report writing, version control using Git, and basic SQL programming.
 
 Prerequisites: None
 
-## Course Outline
+<!-- ## Course Outline
 
 - Source control using Git
 - LaTeX and document preparation
@@ -37,7 +37,7 @@ Prerequisites: None
 - Optimization
 - Regular expressions
 - Databases
-- Stata
+- Stata -->
 
 ## Textbook and reading materials
 
@@ -54,10 +54,6 @@ Recommended Text:
 * Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/)
 * Powerful text editor (pick one!): [TextMate](http://macromates.com), [Vim](http://vim.org), [Emacs](http://www.gnu.org/s/emacs/), [Sublime Text 2](http://www.sublimetext.com/2) 
 
-
-## Resources
-
-Course announcements can be found on Twitter, by following [@vandy_biostat](https://twitter.com/#!/vandy_biostat)
 
 ## Lecture Schedule
 
@@ -76,6 +72,10 @@ This schedule is *tentative* and subject to change at any time.
 * **Lecture 11**: High performance computing; basic parallel computing
 * **Lecture 12**: I/O and databases; regular expressions
 * **Lecture 13**: Overview of STATA
+
+## Resources
+
+Course announcements can be found on Twitter, by following [@vandy_biostat](https://twitter.com/#!/vandy_biostat)
 
 
 
