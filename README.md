@@ -60,7 +60,7 @@ Recommended Text:
 This schedule is *tentative* and subject to change at any time.
 
 * **Lecture 1**: Version control using Git; document preparation using LaTeX, `Sweave` and `knitr`
-* **Lecture 2**: Introduction to R; data types and data structures
+* **Lecture 2**: R syntax and semantics; data types and data structures
 * **Lecture 3**: Flow control and looping
 * **Lecture 4**: Writing and calling functions
 * **Lecture 5**: Top-down design; scoping
