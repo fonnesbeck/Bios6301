@@ -53,4 +53,51 @@ Git allows you to control and automate how changes are merged, and helps you man
      |/  
      * c903738 (tag: v2.2) Changed version to 2.2
      * e421f64 Fixed issue #111
+	 
+Notice that the log of changes looks very much like a journal of the development of the project.
+
      
+## Installation
+
+Homebrew, direct download. 
+
+[Installers](git-scm.com/downloads) for Linux, Mac, Windows.
+
+Configure user name and email.
+
+	git config --global user.name "Gary Gradstudent"
+	git congig --global user.email "gary.gradstudent@vanderbilt.edu"
+	
+## Creating repositories
+
+A local repository can be initialized using Git's `init` command, either to create a project folder:
+
+	git init my_first_project
+	
+or from within an existing folder, to turn it into a repository:
+
+	cd my_existing_project
+	git init
+
+## Managing files with Git
+
+Committing a new file to our repository (that is, putting the file under the control of Git) is a two-step process. First, we identify a particular file as something we would like to add to our repo:
+
+	git add new_file.r
+	
+This does not commit the file straight away, but rather, puts it in a staging area, where it is ready to be committed alongside other (perhaps related) files. An explicit `commit` command is then executed to formally give the file membership in the repository:
+
+	git commit -m "Adding some new code"
+	
+Notice that a commit message has been added, using the `-m` flag. This message is *mandatory*, and acts as documentation for that commit. The file `new_file.r` is now part of the permanent history of the project. Notice also that Git is an "opt-in" system -- you must explicitly specify which files are included in a given commit, rather than having to opt-out files that are commited by default.
+
+Git manages files in any particular repository based on the *content* of those files, rather than superficial changes such as filename, location or file size. 
+
+Git, unlike many other version control systems, is a distributed system. There is no central or master repository (though you will see the name "master" used as a default repository branch name) that users' copies of the repository must necessarily sync to; each clone of a repo is a first-class version, identical in status to the original.
+
+In fact, in the simple exampel above, there has been no network communication between the local repository to which changes are being committed and any central, remote repository. When we collaborate with others (e.g. on GitHub) we will want to have a common remote repository to coordinate the work of all contributors, but Git can operate entirely offline. Later, whenever it is convenient, our local changes may be shared with a remote repo, if one exists:
+
+	git push
+	
+We will introduce you to pushing, pulling, and other remote repository interactions a little later.
+
