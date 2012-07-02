@@ -1,0 +1,155 @@
+\documentclass[11pt,oneside]{article}
+\usepackage{geometry}			% See geometry.pdf to learn the layout options.
+								% There are lots.
+								
+\geometry{letterpaper}			% ... or a4paper or a5paper or ... 
+%\geometry{landscape}			% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}	% Activate to begin paragraphs with an empty
+								% line rather than an indent
+
+\usepackage{ifpdf}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+
+% Definitions
+\def\myauthor{Christopher Fonnesbeck}
+\def\mytitle{BIOS 301: Introduction to Statistical Computing}
+\def\mycopyright{\myauthor}
+\def\mykeywords{}
+\def\mybibliostyle{plain}
+\def\mybibliocommand{}
+\def\mysubtitle{Fall 2012}
+
+
+
+%
+%	PDF Stuff
+%
+
+\ifpdf
+  \pdfoutput=1
+  \usepackage[
+  	plainpages=false,
+  	pdfpagelabels,
+  	bookmarksnumbered,
+  	pdftitle={\mytitle},
+  	pagebackref,
+  	pdfauthor={\myauthor},
+  	pdfkeywords={\mykeywords}
+  	]{hyperref}
+  \usepackage{memhfixc}
+\fi
+
+
+% Title Information
+\title{\mytitle \\ \mysubtitle}
+\author{\myauthor}
+
+\begin{document}
+
+
+% Title Page
+
+\maketitle
+
+% Copyright Page
+\textcopyright{} \mycopyright
+
+%
+% Main Content
+%
+
+
+% Layout settings
+\setlength{\parindent}{1em}
+
+
+\section{Instructor}
+\label{instructor}
+
+Chris Fonnesbeck, PhD, Instructor of Biostatistics
+
+T-2303 Medical Center North
+
+chris.fonnesbeck@vanderbilt.edu
+
+\section{Schedule}
+\label{schedule}
+
+\begin{itemize}
+
+\item Lectures: Mondays, 1-3pm; location TBA
+\item Office hours: By appointment
+\end{itemize}
+
+\section{Course Synopsis}
+\label{coursesynopsis}
+
+This course is designed to provide students the fundamental skills for effective statistical programming. Students will learn to use R (a statistical programming language) and STATA (a commercial statistics package) for data manipulation, summarization and analysis. Topics will include programming syntax and data structures, generation of scientific graphics, writing functions, debugging and testing, programming paradigms, simulation and optimization. Students will also be introduced to LaTeX and knitr for report writing, version control using Git, and basic SQL programming.
+
+Prerequisites: None
+
+\section{Textbook and reading materials}
+\label{textbookandreadingmaterials}
+
+Recommended Text:
+
+\href{http://nostarch.com/artofr.htm}{The Art of R Programming}\footnote{\href{http://nostarch.com/artofr.htm}{http://nostarch.com/artofr.htm}}: Norman Matloff
+
+\section{Essential Software}
+\label{essentialsoftware}
+
+\begin{itemize}
+
+\item Statistical analysis tools: \href{http://cran.r-project.org}{R}\footnote{\href{http://cran.r-project.org}{http://cran.r-project.org}}, \href{http://www.stata.com}{Stata}\footnote{\href{http://www.stata.com}{http://www.stata.com}}
+\item Version control system: \href{http://git-scm.com/}{Git}\footnote{\href{http://git-scm.com/}{http://git-scm.com/}}
+\item Relational database: \href{http://sqlite.org}{SQLite}\footnote{\href{http://sqlite.org}{http://sqlite.org}}
+\item Document preparation tools: \href{http://www.latex-project.org/}{LaTeX}\footnote{\href{http://www.latex-project.org/}{http://www.latex-project.org/}}, \href{http://yihui.name/knitr/}{knitr}\footnote{\href{http://yihui.name/knitr/}{http://yihui.name/knitr/}}
+\item Powerful text editor (pick one!): \href{http://macromates.com}{TextMate}\footnote{\href{http://macromates.com}{http://macromates.com}}, \href{http://vim.org}{Vim}\footnote{\href{http://vim.org}{http://vim.org}}, \href{http://www.gnu.org/s/emacs/}{Emacs}\footnote{\href{http://www.gnu.org/s/emacs/}{http://www.gnu.org/s/emacs/}}, \href{http://www.sublimetext.com/2}{Sublime Text 2}\footnote{\href{http://www.sublimetext.com/2}{http://www.sublimetext.com/2}}
+\end{itemize}
+
+\section{Lecture Schedule}
+\label{lectureschedule}
+
+This schedule is {\itshape tentative} and subject to change at any time.
+
+\begin{enumerate}
+
+\item Version control using Git; document preparation using LaTeX, \texttt{Sweave} and \texttt{knitr}
+\item R syntax and semantics; data types and data structures
+\item Flow control and looping
+\item Writing and calling functions
+\item Top-down design; scoping
+\item Debugging and testing
+\item split, apply and combine; \texttt{reshape} and \texttt{plyr}
+\item Simulation; optimization
+\item Scientific graphics; \texttt{ggplot2}
+\item Programming paradigms; object-oriented programming
+\item High performance computing; basic parallel computing
+\item I/O and databases; regular expressions
+\item Overview of STATA
+\end{enumerate}
+
+\section{Resources}
+\label{resources}
+
+Course announcements can be found on Twitter, by following \href{https://twitter.com/#!/vandy_biostat}{\@vandy\_biostat}.
+
+\section{Grading}
+\label{grading}
+
+Students will be assessed on 4-5 assignments (50\% of grade) and a final exam (50\% of grade).
+
+\section{Assignments}
+\label{assignments}
+
+Assignments may be submitted in LaTeX, Sweave, knitr, or any markup format that allows for easy conversion to LaTeX ({\itshape e.g.} MultiMarkdown, reStructuredText). Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. Hand-written assignments (including scanned documents) are also not permitted.
+
+All assignments will be submitted electronically, via students' private GitHub repositories. Instructions on how to set up and use GitHub accounts will be provided.
+
+% Bibliography
+\bibliographystyle{\mybibliostyle}
+\mybibliocommand
+
+\end{document}

@@ -86,6 +86,6 @@ Students will be assessed on 4-5 assignments (50% of grade) and a final exam (50
 
 ## Assignments
 
-Assignments may be submitted in LaTeX, Sweave, knitr, or any markup format that allows for easy conversion to LaTeX (*e.g.* MultiMarkdown, reStructuredText). Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. Hand-written assignments (including scanned documents) are also not permitted.
+Assignments may be submitted in LaTeX, Sweave, knitr, or any markup format that allows for easy conversion to LaTeX (*e.g.* MultiMarkdown, reStructuredText). Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. Hand-written assignments (including scanned documents) are also not permitted. Students will be introduced to valid document formats at the beginning of the course.
 
 All assignments will be submitted electronically, via students' private GitHub repositories. Instructions on how to set up and use GitHub accounts will be provided.
