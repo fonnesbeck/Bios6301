@@ -21,7 +21,7 @@ y = rnorm(1000)
 x[1:4]
 ```
 
-[1] -1.6588  1.6294  0.5589 -1.0540
+[1]  0.68085  0.86829  0.06133 -1.21888
 
 
 ```r
@@ -57,16 +57,16 @@ lm(formula = y ~ x)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--3.290 -0.610 -0.008  0.639  2.735 
+-3.311 -0.640 -0.023  0.664  3.556 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)  0.03863    0.03150    1.23     0.22
-x            0.00328    0.03129    0.10     0.92
+(Intercept)  0.00123    0.03194    0.04     0.97
+x           -0.01843    0.03277   -0.56     0.57
 
-Residual standard error: 0.995 on 998 degrees of freedom
-Multiple R-squared: 1.1e-05,	Adjusted R-squared: -0.000991 
-F-statistic: 0.011 on 1 and 998 DF,  p-value: 0.917 
+Residual standard error: 1.01 on 998 degrees of freedom
+Multiple R-squared: 0.000317,	Adjusted R-squared: -0.000685 
+F-statistic: 0.316 on 1 and 998 DF,  p-value: 0.574 
 
 
 
@@ -702,7 +702,7 @@ Individual columns of the data frame may be added to the R environment by name, 
 attach(nests)
 ```
 
-The following object(s) are masked from 'nests (position 4)':
+The following object(s) are masked from 'nests (position 3)':
 
     eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 5)':
@@ -712,6 +712,9 @@ The following object(s) are masked from 'nests (position 6)':
 
     eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 7)':
+
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 8)':
 
     eggs, lat, lon, parasite, species
 
@@ -825,7 +828,7 @@ summary(ndata)
 ```
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  -1.26    1.45    2.70    2.82    4.11    9.20 
+  -2.59    1.63    2.95    2.96    4.41    9.32 
 
 
 
@@ -841,14 +844,14 @@ where $t_{p,n-1}$ is the $(100*p)$th percentile of the t-distribution with $n-1$
 mean(ndata) + qt(0.025, 99) * sqrt(var(ndata)/100)
 ```
 
-[1] 2.418
+[1] 2.554
 
 
 ```r
 mean(ndata) + qt(0.975, 99) * sqrt(var(ndata)/100)
 ```
 
-[1] 3.213
+[1] 3.375
 
 
 
@@ -911,7 +914,8 @@ while (x <= 0) {
 }
 ```
 
-[1] 1.175
+[1] -0.141
+[1] 0.5784
 
 
 
@@ -929,9 +933,9 @@ repeat {
 }
 ```
 
-[1] -2.798
-[1] -0.5145
-[1] 0.3366
+[1] -0.4729
+[1] -0.06313
+[1] 0.4283
 
 
 
@@ -1229,3 +1233,14 @@ Number of Fisher Scoring iterations: 4
 
 
 
+
+<!-- Scripts -->
+<script type="text/javascript" 
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/javascript">MathJax.Hub.Config({tex2jax: {processEscapes: true, 
+    processEnvironments: false, inlineMath: [ ['$','$'] ], 
+    displayMath: [ ['$$','$$'] ] }, 
+    asciimath2jax: {delimiters: [ ['$','$'] ] }, 
+    "HTML-CSS": {minScaleAdjust: 125 } });
+</script>
