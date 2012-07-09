@@ -24,7 +24,7 @@ x[1:4]
 
 
 ```
-[1] -0.1195  0.1808 -0.9243 -0.4463
+[1] -0.1051 -1.2096  0.5124 -0.5221
 ```
 
 
@@ -65,18 +65,16 @@ lm(formula = y ~ x)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--3.242 -0.646 -0.010  0.676  3.405 
+-3.651 -0.682  0.046  0.677  3.053 
 
 Coefficients:
-            Estimate Std. Error t value Pr(>|t|)  
-(Intercept)  -0.0670     0.0316   -2.12    0.034 *
-x            -0.0391     0.0318   -1.23    0.220  
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept) -0.00116    0.03129   -0.04     0.97
+x            0.00627    0.03026    0.21     0.84
 
-Residual standard error: 0.998 on 998 degrees of freedom
-Multiple R-squared: 0.00151,	Adjusted R-squared: 0.00051 
-F-statistic: 1.51 on 1 and 998 DF,  p-value: 0.22 
+Residual standard error: 0.989 on 998 degrees of freedom
+Multiple R-squared: 4.3e-05,	Adjusted R-squared: -0.000959 
+F-statistic: 0.0429 on 1 and 998 DF,  p-value: 0.836 
 
 ```
 
@@ -926,7 +924,7 @@ The following object(s) are masked from 'nests (position 4)':
 The following object(s) are masked from 'nests (position 5)':
 
     eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 7)':
+The following object(s) are masked from 'nests (position 6)':
 
     eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 8)':
@@ -936,6 +934,9 @@ The following object(s) are masked from 'nests (position 9)':
 
     eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 10)':
+
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 11)':
 
     eggs, lat, lon, parasite, species
 ```
@@ -1059,7 +1060,7 @@ summary(ndata)
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  -1.28    1.65    2.99    2.95    4.28    9.01 
+  -2.84    1.35    2.34    2.69    4.36    7.80 
 ```
 
 
@@ -1080,7 +1081,7 @@ mean(ndata) + qt(0.025, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 2.571
+[1] 2.271
 ```
 
 
@@ -1092,7 +1093,7 @@ mean(ndata) + qt(0.975, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 3.334
+[1] 3.111
 ```
 
 
@@ -1170,8 +1171,7 @@ while (x <= 0) {
 
 
 ```
-[1] -0.8049
-[1] 0.5158
+[1] 0.03034
 ```
 
 
@@ -1194,7 +1194,7 @@ repeat {
 
 
 ```
-[1] 0.1612
+[1] 0.9723
 ```
 
 
@@ -1536,14 +1536,3 @@ Number of Fisher Scoring iterations: 4
 
 
 
-
-<!-- Scripts -->
-<script type="text/javascript" 
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/javascript">MathJax.Hub.Config({tex2jax: {processEscapes: true, 
-    processEnvironments: false, inlineMath: [ ['$','$'] ], 
-    displayMath: [ ['$$','$$'] ] }, 
-    asciimath2jax: {delimiters: [ ['$','$'] ] }, 
-    "HTML-CSS": {minScaleAdjust: 125 } });
-</script>
