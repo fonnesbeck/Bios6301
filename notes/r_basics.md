@@ -10,12 +10,12 @@ R is controlled from a command line interface (CLI), or shell. Many platform-dep
 
 
 ```r
-# Import a package called \342\200\234MASS\342\200\235
+# Import a package called “MASS”
 library(MASS)
 # Generate 1000 standard normal random deviates, and
-#   assign them to variable \342\200\234x\342\200\235
+#   assign them to variable “x”
 x = rnorm(1000)
-# Do the same for \342\200\234y\342\200\235
+# Do the same for “y”
 y = rnorm(1000)
 # Return first 4 values of the vector x
 x[1:4]
@@ -24,7 +24,7 @@ x[1:4]
 
 
 ```
-[1] -1.4710  0.1954 -0.7531  0.2773
+[1] -0.8459  0.4320  0.7762 -0.4060
 ```
 
 
@@ -64,17 +64,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--2.8966 -0.6555  0.0211  0.6615  2.8316 
+   Min     1Q Median     3Q    Max 
+-3.301 -0.677 -0.003  0.713  2.983 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)  0.01752    0.03061    0.57     0.57
-x            0.00976    0.03027    0.32     0.75
+(Intercept) -0.00266    0.03253   -0.08     0.93
+x            0.02430    0.03232    0.75     0.45
 
-Residual standard error: 0.968 on 998 degrees of freedom
-Multiple R-squared: 0.000104,	Adjusted R-squared: -0.000898 
-F-statistic: 0.104 on 1 and 998 DF,  p-value: 0.747 
+Residual standard error: 1.03 on 998 degrees of freedom
+Multiple R-squared: 0.000566,	Adjusted R-squared: -0.000435 
+F-statistic: 0.565 on 1 and 998 DF,  p-value: 0.452 
 
 ```
 
@@ -921,33 +921,6 @@ The following object(s) are masked from 'nests (position 3)':
 The following object(s) are masked from 'nests (position 4)':
 
     eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 5)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 6)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 7)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 8)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 9)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 11)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 12)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 13)':
-
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 14)':
-
-    eggs, lat, lon, parasite, species
 ```
 
 
@@ -971,86 +944,22 @@ Files imported by `read.table` are restricted to delimited text data formats. Th
 
 This file is delimited by commas, and contains a header (a row of column names). Most modern spreadsheet programs can easily export to a comma-delimited text file, sometimes called a comma-separated values (CSV) file. This file can be imported directly into R:
 
+    import = read.table("nests.csv",header=TRUE,sep=",")
 
+`read.table` has a number of optional arguments (call `?read.table` for a comprehensive list), but the two most common are header, which specifies whether or not the first line in the file is a header, and sep, which denotes the separator character(s). Notice that this new data frame, import, is structured similarly to nests, except that the parasite column (indicating parasitism by cowbirds) is in a numeric mode, rather than a logical mode. It is not necessary to change it, unless we want to merge the two data frames. If so, we must coerce one of the frames into the same column types as the other, before combining them using the `rbind` function:
 
-```r
-import = read.table("more_nests.dat", header = TRUE, 
-    sep = ",")
-```
-
-
-
-```
-Warning message: cannot open file 'more_nests.dat': No such file or directory
-```
-
-
-
-```
-Error: cannot open the connection
-```
-
-
-
-```r
-import
-```
-
-
-
-```
-Error: object 'import' not found
-```
-
-
-
-
-read.table has a number of optional arguments (call ?read.table for a comprehensive list), but the two most common are header, which specifies whether or not the first line in the file is a header, and sep, which denotes the separator character(s). Notice that this new data frame, import, is structured similarly to nests, except that the parasite column (indicating parasitism by cowbirds) is in a numeric mode, rather than a logical mode. It is not necessary to change it, unless we want to merge the two data frames. If so, we must coerce one of the frames into the same column types as the other, before combining them using the rbind function:
-
-
-
-```r
-mode(import$parasite) = mode(nests$parasite)
-```
-
-
-
-```
-Error: object 'import' not found
-```
-
-
-
-```r
-nests = rbind(nests, import)
-```
-
-
-
-```
-Error: object 'import' not found
-```
-
-
-
-```r
-nests
-```
-
-
-
-```
-  species eggs parasite    lat   lon
-1    WEVI    4     TRUE -81.30 25.73
-2    WETA    3    FALSE -79.11 21.04
-```
-
-
-
+    > mode(import$parasite)= mode(nests$parasite)
+    > nests = rbind(nests,import)
+    > nests
+       species eggs parasite    lat   lon
+    1     WEVI    4     TRUE -81.30 25.73
+    2     WETA    3    FALSE -79.11 21.04
+    11    WOTH    2    FALSE -82.32 25.10
+    21    TOSO    2    FALSE -80.56 26.66
 
 A second very useful approach to importing data involves interfacing directly with a relational database management system (RDBMS). Relational databases are far more efficient for storing, maintaining and querying data than plain text files or spreadsheets, particularly for large datasets or multiple tables. A number of third parties have created packages for database access in R. For example, *RSQLite* is a package that provides connectivity for SQLite databases.
 
-Though most data can be imported either from a delimited text file or a relational database, there exist a variety of other methods for inviting your data into the R environment. A comprehensive (and relatively up-to-date) summary of data import and export techniques in R is available online at http://cran.r-project.org/doc/manuals/R-data.html
+Though most data can be imported either from a delimited text file or a relational database, there exist a variety of other methods for inviting your data into the R environment. A comprehensive (and relatively up-to-date) summary of data import and export techniques in R is [available online](http://cran.r-project.org/doc/manuals/R-data.html).
 
 ## Probability Distributions
 
@@ -1069,7 +978,7 @@ summary(ndata)
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  -2.67    1.99    3.34    3.33    4.80    7.96 
+  -2.94    1.24    2.87    2.81    4.40    9.60 
 ```
 
 
@@ -1090,7 +999,7 @@ mean(ndata) + qt(0.025, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 2.945
+[1] 2.375
 ```
 
 
@@ -1102,7 +1011,7 @@ mean(ndata) + qt(0.975, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 3.717
+[1] 3.248
 ```
 
 
@@ -1116,7 +1025,7 @@ Many analyses and models require more than single calls to pre-defined functions
 
     if (<condition>) {<do_something>} else {<do_something_else>}
 
-where `<condition>`` defines an expression that returns a logical (`TRUE`, `FALSE`) value, and `<do_something>` and `<do_something_else>` are expressions that are evaluated, depending on the outcome of the condition. For example, a simple conditional expression can be formulated that calculates the absolute value of a scalar variable:
+where `<condition>` defines an expression that returns a logical (`TRUE`, `FALSE`) value, and `<do_something>` and `<do_something_else>` are expressions that are evaluated, depending on the outcome of the condition. For example, a simple conditional expression can be formulated that calculates the absolute value of a scalar variable:
 
 
 
@@ -1180,8 +1089,7 @@ while (x <= 0) {
 
 
 ```
-[1] -0.4945
-[1] 0.03499
+[1] 0.2548
 ```
 
 
@@ -1204,11 +1112,8 @@ repeat {
 
 
 ```
-[1] -0.07699
-[1] -0.5986
-[1] -0.1159
-[1] -1.127
-[1] 0.5154
+[1] -0.8157
+[1] 1.445
 ```
 
 
@@ -1278,7 +1183,7 @@ barplot(t(aggregate(mdeaths + fdeaths, 1)), names = c(1974:1979),
     ylab = "deaths", xlab = "year", col = "red")
 ```
 
-![plot of chunk unnamed-chunk-51](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-51.png) 
+![plot of chunk unnamed-chunk-49](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-49.png) 
 
 
 This plots the number of lung cancer deaths (male and female) in the UK from 1974 to 1979. As with most of the plotting function, there are many optional arguments that can be used to customize the plot. It is essential to format the data appropriately for the function. In this case, the data was aggregated across months (function aggregate) and transposed.
@@ -1291,7 +1196,7 @@ Some more advanced functions allow for plotting of multivariate data. One method
 coplot(lat ~ long | depth, data = quakes)
 ```
 
-![plot of chunk unnamed-chunk-52](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-52.png) 
+![plot of chunk unnamed-chunk-50](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-50.png) 
 
 
 This gives a 3-dimensional snapshot of earthquake occurrence, showing latitude vs. longitude for each conditioning level of depth. The relationship among the variables is specified in the first argument; the response and predictive variables are separated by a tilde (`~`), while conditioning variables follow a pipe (`|`). The data argument allows us to omit the reference to the dataset for each variable.
@@ -1550,13 +1455,3 @@ Number of Fisher Scoring iterations: 4
 
 
 
-<!-- Scripts -->
-<script type="text/javascript" 
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<script type="text/javascript">MathJax.Hub.Config({tex2jax: {processEscapes: true, 
-    processEnvironments: false, inlineMath: [ ['$','$'] ], 
-    displayMath: [ ['$$','$$'] ] }, 
-    asciimath2jax: {delimiters: [ ['$','$'] ] }, 
-    "HTML-CSS": {minScaleAdjust: 125 } });
-</script>
