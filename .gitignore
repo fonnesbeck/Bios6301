@@ -5,3 +5,4 @@ email.txt
 scipy-lecture-notes/*
 *.pyc
 external/*
+*.log

@@ -10,11 +10,32 @@ Christopher Fonnesbeck
 
 ---
 
+# Course Aim
+
+To equip statisticians with relevant, modern, flexible tools for proficient computation.
+
+.notes: Many modern problems/data require a computational approach
+
+---
+
+# Cumulative
+
+.notes: Content later in the course builds on what was presented earlier -- keep up!
+
+---
+
+# Hands-on
+
+* Each lecture will be accompanied by hands on exercises
+* Homeworks are longer and more involved
+
+---
+
 # Textbook
 
 ![The Art of R Programming](http://nostarch.com/sites/default/files/imagecache/product_full/R_cvr_front.png)
 
-.notes: This is a different book from last year's course
+.notes: Read some of it every week.
 
 ---
 

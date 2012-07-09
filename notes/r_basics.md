@@ -1452,6 +1452,3 @@ AIC: 56.76
 Number of Fisher Scoring iterations: 4
 
 ```
-
-
-
