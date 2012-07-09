@@ -24,7 +24,7 @@ x[1:4]
 
 
 ```
-[1] -0.8459  0.4320  0.7762 -0.4060
+[1] -0.3300  1.2935 -0.7033  0.1233
 ```
 
 
@@ -34,7 +34,7 @@ x[1:4]
 truehist(x, nbins = 25)
 ```
 
-![plot of chunk simple_example](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/simple_example1.png) 
+![plot of chunk simple_example](figure/simple_example1.png) 
 
 ```r
 # Generate a 2D density plot
@@ -42,14 +42,14 @@ dd = kde2d(x, y)
 contour(dd)
 ```
 
-![plot of chunk simple_example](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/simple_example2.png) 
+![plot of chunk simple_example](figure/simple_example2.png) 
 
 ```r
 # Generate a color contour plot
 image(dd)
 ```
 
-![plot of chunk simple_example](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/simple_example3.png) 
+![plot of chunk simple_example](figure/simple_example3.png) 
 
 ```r
 # Build a linear model of y|x, and summarize
@@ -64,17 +64,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--3.301 -0.677 -0.003  0.713  2.983 
+    Min      1Q  Median      3Q     Max 
+-3.1114 -0.6384 -0.0179  0.6443  3.0030 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept) -0.00266    0.03253   -0.08     0.93
-x            0.02430    0.03232    0.75     0.45
+(Intercept)  -0.0483     0.0310   -1.56     0.12
+x             0.0438     0.0319    1.37     0.17
 
-Residual standard error: 1.03 on 998 degrees of freedom
-Multiple R-squared: 0.000566,	Adjusted R-squared: -0.000435 
-F-statistic: 0.565 on 1 and 998 DF,  p-value: 0.452 
+Residual standard error: 0.981 on 998 degrees of freedom
+Multiple R-squared: 0.00188,	Adjusted R-squared: 0.000885 
+F-statistic: 1.88 on 1 and 998 DF,  p-value: 0.17 
 
 ```
 
@@ -445,7 +445,7 @@ $names
 
 
 
-As you can see, the previous names call endowed `x` with a character vector, called names that can be used to index its elements. 
+As you can see, the previous names call endowed `x` with a character vector, called names that can be used to index its elements.
 
 ## Factors
 
@@ -776,7 +776,7 @@ xt %*% x
 
 
 
-Similarly, `%o%` is the outer product operator. Somewhat less obviously, computing the inverse of a matrix is performed using the solve function, which is a general function for solving systems of linear equations. Generally, solve (with arguments A and b) calculates the solution to $Ax = b$, where $A$ is a square matrix of coefficients, and $b$ an associated array. If only a matrix is passed, $b$ is assumed to be the identity matrix, and the inverse is computed:
+Similarly, `%o%` is the outer product operator. Somewhat less obviously, computing the inverse of a matrix is performed using the solve function, which is a general function for solving systems of linear equations. Generally, solve (with arguments A and b) calculates the solution to \[Ax = b\], where \[A\] is a square matrix of coefficients, and \[b\] an associated array. If only a matrix is passed, \[b\] is assumed to be the identity matrix, and the inverse is computed:
 
 
 
@@ -914,19 +914,8 @@ attach(nests)
 
 
 
-```
-The following object(s) are masked from 'nests (position 3)':
 
-    eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 4)':
-
-    eggs, lat, lon, parasite, species
-```
-
-
-
-
-The column be removed by using detach with the same argument. It is not recommended that users attach data frames  
+The column be removed by using detach with the same argument. It is not recommended that users attach data frames
 
 All versions of R allow for interactive editing of existing data frames in spreadsheet-like interface. Simply call the function `fix`, with the data frame as the only argument. The edited version replaces the original when the editor is closed.
 
@@ -978,7 +967,7 @@ summary(ndata)
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  -2.94    1.24    2.87    2.81    4.40    9.60 
+  -1.39    1.55    2.82    2.83    4.10    8.32 
 ```
 
 
@@ -986,7 +975,7 @@ summary(ndata)
 
 This generates 100 pseudo-random deviates drawn from a normal distribution with mean 3 and standard deviation 2. It is straightforward to generate a 95% confidence interval for the sample mean of this simulated dataset, using the quantile function for Student’s t-distribution. Recall that the 95% confidence interval for the mean of normally-distributed data satisfies:
 
-$$Pr(\bar{X} - t_{0.025,n-1} S/\sqrt{n} < \mu < \bar{X} + t_{0.025,n-1} S/\sqrt{n}) = 0.95$$
+\[\[Pr(\bar{X} - t_{0.025,n-1} S/\sqrt{n} < \mu < \bar{X} + t_{0.025,n-1} S/\sqrt{n}) = 0.95\]\]
 
 where $t_{p,n-1}$ is the $(100*p)$th percentile of the t-distribution with $n-1$ degrees of freedom, and $S$ is the sample mean. In R, these confidence bounds can be calculated as:
 
@@ -999,7 +988,7 @@ mean(ndata) + qt(0.025, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 2.375
+[1] 2.427
 ```
 
 
@@ -1011,7 +1000,7 @@ mean(ndata) + qt(0.975, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 3.248
+[1] 3.241
 ```
 
 
@@ -1089,7 +1078,7 @@ while (x <= 0) {
 
 
 ```
-[1] 0.2548
+[1] 0.06281
 ```
 
 
@@ -1112,8 +1101,7 @@ repeat {
 
 
 ```
-[1] -0.8157
-[1] 1.445
+[1] 0.261
 ```
 
 
@@ -1183,7 +1171,7 @@ barplot(t(aggregate(mdeaths + fdeaths, 1)), names = c(1974:1979),
     ylab = "deaths", xlab = "year", col = "red")
 ```
 
-![plot of chunk unnamed-chunk-49](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-49.png) 
+![plot of chunk unnamed-chunk-49](figure/unnamed-chunk-49.png) 
 
 
 This plots the number of lung cancer deaths (male and female) in the UK from 1974 to 1979. As with most of the plotting function, there are many optional arguments that can be used to customize the plot. It is essential to format the data appropriately for the function. In this case, the data was aggregated across months (function aggregate) and transposed.
@@ -1196,7 +1184,7 @@ Some more advanced functions allow for plotting of multivariate data. One method
 coplot(lat ~ long | depth, data = quakes)
 ```
 
-![plot of chunk unnamed-chunk-50](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-50.png) 
+![plot of chunk unnamed-chunk-50](figure/unnamed-chunk-50.png) 
 
 
 This gives a 3-dimensional snapshot of earthquake occurrence, showing latitude vs. longitude for each conditioning level of depth. The relationship among the variables is specified in the first argument; the response and predictive variables are separated by a tilde (`~`), while conditioning variables follow a pipe (`|`). The data argument allows us to omit the reference to the dataset for each variable.
@@ -1452,3 +1440,17 @@ AIC: 56.76
 Number of Fisher Scoring iterations: 4
 
 ```
+
+
+
+
+<!-- Scripts -->
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/javascript">MathJax.Hub.Config({tex2jax: {processEscapes: true,
+    processEnvironments: false, inlineMath: [ ['\[','\]'] ],
+    displayMath: [ ['\[\[','\]\]'] ] },
+    asciimath2jax: {delimiters: [ ['\[','\]'] ] },
+    "HTML-CSS": {minScaleAdjust: 125 } });
+</script>
