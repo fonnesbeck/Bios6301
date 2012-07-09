@@ -2,37 +2,74 @@
 
 
 
-```r
-opts_chunk$set(fig.width = 5, fig.height = 5)
-opts_knit$set(results = "asis")
-```
-
-
-
 
 R is an integrated suite of software for data manipulation, statistical analysis and plotting. It is an independent, open-source implementation of the S language, developed by Bell Laboratories and currently available as the S-plus software package (in fact, most R code can be run under S-plus without any changes). Several standard modules (called packages) that provide basic statistical functionality are built into the base R system, while most others that provide advanced or special-purpose statistical methods are available separately. most R packages are freely available from the [Comprehensive R Archive Network (CRAN) website](http://cran.r-project.org). These packages are written and maintained by a large community of statisticians and programmers. In current releases of the R system, packages can be downloaded and installed directly from within the system. Versions of R are available for most modern computing platforms, including Macintosh, Windows and Linux.
 
 R is controlled from a command line interface (CLI), or shell. Many platform-dependent graphical user interfaces (GUI) exist that augment the CLI with drop-down menus of commands to trigger statistical functions. Commands are passed to R from the CLI or GUI, and results are returned, either in the form of data structures or graphical output. Often, output can be used in subsequent calls to R, creating an interactive environment of calls to the system and returned output. Below is a sample R session. Don’t worry if you don’t understand what R is doing at this stage; this is just an example of what can be done.
 
-''' {r simple_example}
-# Import a package called “MASS”
+
+
+```r
+# Import a package called \342\200\234MASS\342\200\235
 library(MASS)
-# Generate 1000 standard normal random deviates, and assign them to variable “x”
-x = rnorm(1000)	
-# Do the same for “y”
+# Generate 1000 standard normal random deviates, and
+#   assign them to variable \342\200\234x\342\200\235
+x = rnorm(1000)
+# Do the same for \342\200\234y\342\200\235
 y = rnorm(1000)
 # Return first 4 values of the vector x
 x[1:4]
+```
+
+[1] -1.6588  1.6294  0.5589 -1.0540
+
+
+```r
 # Generate a histogram
-truehist(x, nbins=25)
+truehist(x, nbins = 25)
+```
+
+![plot of chunk simple_example](figure/simple_example1.png) 
+
+```r
 # Generate a 2D density plot
-dd = kde2d(x,y) 
+dd = kde2d(x, y)
 contour(dd)
+```
+
+![plot of chunk simple_example](figure/simple_example2.png) 
+
+```r
 # Generate a color contour plot
 image(dd)
+```
+
+![plot of chunk simple_example](figure/simple_example3.png) 
+
+```r
 # Build a linear model of y|x, and summarize
-summary(lm(y~x))
-'''
+summary(lm(y ~ x))
+```
+
+
+Call:
+lm(formula = y ~ x)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-3.290 -0.610 -0.008  0.639  2.735 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)  0.03863    0.03150    1.23     0.22
+x            0.00328    0.03129    0.10     0.92
+
+Residual standard error: 0.995 on 998 degrees of freedom
+Multiple R-squared: 1.1e-05,	Adjusted R-squared: -0.000991 
+F-statistic: 0.011 on 1 and 998 DF,  p-value: 0.917 
+
+
+
 
 The greater-than (`>`) symbol is the standard prompt of the R shell that indicates the system is ready to receive a command. Notice that some commands assign values to parameters (an assignment), others generate graphical output, while others return a result to the screen (an expression). Although these commands have been run interactively, they could just as easily have been saved to a text file and run as a *script*.
 
@@ -81,12 +118,7 @@ Calling the variable x reveals its contents:
 x
 ```
 
-
-
-```
-## [1]  9.5  0.4 -2.1  1.0
-```
-
+[1]  9.5  0.4 -2.1  1.0
 
 
 
@@ -98,12 +130,7 @@ Specific elements of vectors can be selected by indexing them using square brack
 x[2]
 ```
 
-
-
-```
-## [1] 0.4
-```
-
+[1] 0.4
 
 
 
@@ -115,12 +142,7 @@ Notice that vectors in R are indexed beginning with 1; in many computing languag
 x[-2]
 ```
 
-
-
-```
-## [1]  9.5 -2.1  1.0
-```
-
+[1]  9.5 -2.1  1.0
 
 
 
@@ -132,12 +154,7 @@ Or, a *logical* vector may be used to select, for example, only positive element
 x[x > 0]
 ```
 
-
-
-```
-## [1] 9.5 0.4 1.0
-```
-
+[1] 9.5 0.4 1.0
 
 
 
@@ -149,12 +166,7 @@ A logical vector is simply a vector containing only `TRUE` or `FALSE` elements. 
 x > 0
 ```
 
-
-
-```
-## [1]  TRUE  TRUE FALSE  TRUE
-```
-
+[1]  TRUE  TRUE FALSE  TRUE
 
 
 
@@ -167,12 +179,7 @@ x[x < 0] = -x[x < 0]
 x
 ```
 
-
-
-```
-## [1] 9.5 0.4 2.1 1.0
-```
-
+[1] 9.5 0.4 2.1 1.0
 
 
 
@@ -185,13 +192,8 @@ names(x) = c("Peter", "Ace", "Gene", "Paul")
 x[c("Peter", "Paul")]
 ```
 
-
-
-```
-## Peter  Paul 
-##   9.5   1.0 
-```
-
+Peter  Paul 
+  9.5   1.0 
 
 
 
@@ -207,13 +209,8 @@ z = x + y
 z
 ```
 
-
-
-```
-## Peter   Ace  Gene  Paul 
-##  15.5   8.4   6.1   2.0 
-```
-
+Peter   Ace  Gene  Paul 
+ 15.5   8.4   6.1   2.0 
 
 
 
@@ -226,13 +223,8 @@ z = x + 5
 z
 ```
 
-
-
-```
-## Peter   Ace  Gene  Paul 
-##  14.5   5.4   7.1   6.0 
-```
-
+Peter   Ace  Gene  Paul 
+ 14.5   5.4   7.1   6.0 
 
 
 
@@ -246,12 +238,7 @@ one may perform the following:
 sum((x - mean(x))^2)/(length(x) - 1)
 ```
 
-
-
-```
-## [1] 17.86
-```
-
+[1] 17.86
 
 
 
@@ -263,12 +250,7 @@ Or, for the lazy, there is the built-in function var:
 var(x)
 ```
 
-
-
-```
-## [1] 17.86
-```
-
+[1] 17.86
 
 
 
@@ -280,12 +262,7 @@ R retains several methods for generating sequences of numbers, in the form of ve
 1:5
 ```
 
-
-
-```
-## [1] 1 2 3 4 5
-```
-
+[1] 1 2 3 4 5
 
 
 Or, in reverse:
@@ -296,12 +273,7 @@ Or, in reverse:
 5:1
 ```
 
-
-
-```
-## [1] 5 4 3 2 1
-```
-
+[1] 5 4 3 2 1
 
 
 
@@ -314,12 +286,7 @@ y = seq(1, 3, by = 0.2)
 y
 ```
 
-
-
-```
-##  [1] 1.0 1.2 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0
-```
-
+ [1] 1.0 1.2 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0
 
 
 
@@ -331,12 +298,7 @@ Here, the by argument specifies the step size for the sequence. Alternately, the
 seq(length = 11, from = 1, by = 0.2)
 ```
 
-
-
-```
-##  [1] 1.0 1.2 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0
-```
-
+ [1] 1.0 1.2 1.4 1.6 1.8 2.0 2.2 2.4 2.6 2.8 3.0
 
 
 
@@ -348,12 +310,7 @@ Of course, vectors can contain more than numbers. Character strings are common i
 paste("X", 1:10, sep = "")
 ```
 
-
-
-```
-##  [1] "X1"  "X2"  "X3"  "X4"  "X5"  "X6"  "X7"  "X8"  "X9"  "X10"
-```
-
+ [1] "X1"  "X2"  "X3"  "X4"  "X5"  "X6"  "X7"  "X8"  "X9"  "X10"
 
 
 
@@ -370,12 +327,7 @@ z = c(3, "foobar")
 z
 ```
 
-
-
-```
-## [1] "3"      "foobar"
-```
-
+[1] "3"      "foobar"
 
 
 
@@ -387,13 +339,8 @@ You can see that R has automatically cast all elements of the vector to the same
 attributes(x)
 ```
 
-
-
-```
-## $names
-## [1] "Peter" "Ace"   "Gene"  "Paul" 
-## 
-```
+$names
+[1] "Peter" "Ace"   "Gene"  "Paul" 
 
 
 
@@ -422,13 +369,8 @@ country_factors = factor(country)
 country_factors
 ```
 
-
-
-```
-## [1] NZ AU AU NZ NZ AU
-## Levels: AU NZ
-```
-
+[1] NZ AU AU NZ NZ AU
+Levels: AU NZ
 
 
 
@@ -448,15 +390,11 @@ The factors can then be used to summarize or analyze this data by country. For e
 
 
 ```r
-tapply(incomes, country.factors, mean)
+tapply(incomes, country_factors, mean)
 ```
 
-
-
-```
-## Error: object 'country.factors' not found
-```
-
+   AU    NZ 
+49.67 61.67 
 
 
 
@@ -483,12 +421,7 @@ Our now-famous vector `x` has been transformed into a 2-dimensional array, using
 x[2, 1]
 ```
 
-
-
-```
-## [1] 0.4
-```
-
+[1] 0.4
 
 
 
@@ -504,24 +437,14 @@ y = array(c(4, 6, 1, 4, 6, 7, 2, 0), dim = c(4,
 y[3, ]
 ```
 
-
-
-```
-## [1] 1 2
-```
-
+[1] 1 2
 
 
 ```r
 y[, 2]
 ```
 
-
-
-```
-## [1] 6 7 2 0
-```
-
+[1] 6 7 2 0
 
 
 
@@ -533,12 +456,7 @@ Identifying slices of a row or column is done using the colon operator, separati
 y[1:2, 2]
 ```
 
-
-
-```
-## [1] 6 7
-```
-
+[1] 6 7
 
 
 
@@ -550,12 +468,7 @@ Indexing an array with a single index argument treats the array as if it were a 
 y[6]
 ```
 
-
-
-```
-## [1] 7
-```
-
+[1] 7
 
 
 
@@ -568,14 +481,9 @@ i = array(c(1, 3, 2, 1), dim = c(2, 2))
 i
 ```
 
-
-
-```
-##      [,1] [,2]
-## [1,]    1    2
-## [2,]    3    1
-```
-
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    1
 
 
 
@@ -587,28 +495,18 @@ it may subsequently be used to extract element [1,2] and [3,1] from array `y`:
 y
 ```
 
-
-
-```
-##      [,1] [,2]
-## [1,]    4    6
-## [2,]    6    7
-## [3,]    1    2
-## [4,]    4    0
-```
-
+     [,1] [,2]
+[1,]    4    6
+[2,]    6    7
+[3,]    1    2
+[4,]    4    0
 
 
 ```r
 y[i]
 ```
 
-
-
-```
-## [1] 6 1
-```
-
+[1] 6 1
 
 
 
@@ -621,16 +519,11 @@ y[i] = -1
 y
 ```
 
-
-
-```
-##      [,1] [,2]
-## [1,]    4   -1
-## [2,]    6    7
-## [3,]   -1    2
-## [4,]    4    0
-```
-
+     [,1] [,2]
+[1,]    4   -1
+[2,]    6    7
+[3,]   -1    2
+[4,]    4    0
 
 
 
@@ -642,24 +535,19 @@ If the vector argument for the array function is smaller than the total size spe
 array(c(4, 5), dim = c(3, 2, 2))
 ```
 
+, , 1
 
+     [,1] [,2]
+[1,]    4    5
+[2,]    5    4
+[3,]    4    5
 
-```
-## , , 1
-## 
-##      [,1] [,2]
-## [1,]    4    5
-## [2,]    5    4
-## [3,]    4    5
-## 
-## , , 2
-## 
-##      [,1] [,2]
-## [1,]    4    5
-## [2,]    5    4
-## [3,]    4    5
-## 
-```
+, , 2
+
+     [,1] [,2]
+[1,]    4    5
+[2,]    5    4
+[3,]    4    5
 
 
 
@@ -672,24 +560,19 @@ Since the vector has only two elements, and the array has 3 * 2 * 2 = 12 element
 array(1:100, dim = c(3, 2, 2))
 ```
 
+, , 1
 
+     [,1] [,2]
+[1,]    1    4
+[2,]    2    5
+[3,]    3    6
 
-```
-## , , 1
-## 
-##      [,1] [,2]
-## [1,]    1    4
-## [2,]    2    5
-## [3,]    3    6
-## 
-## , , 2
-## 
-##      [,1] [,2]
-## [1,]    7   10
-## [2,]    8   11
-## [3,]    9   12
-## 
-```
+, , 2
+
+     [,1] [,2]
+[1,]    7   10
+[2,]    8   11
+[3,]    9   12
 
 
 
@@ -703,28 +586,18 @@ xt = t(x)
 xt
 ```
 
-
-
-```
-##      [,1] [,2]
-## [1,]  9.5  0.4
-## [2,]  2.1  1.0
-```
-
+     [,1] [,2]
+[1,]  9.5  0.4
+[2,]  2.1  1.0
 
 
 ```r
 xt %*% x
 ```
 
-
-
-```
-##       [,1]  [,2]
-## [1,] 90.41 20.35
-## [2,] 20.35  5.41
-```
-
+      [,1]  [,2]
+[1,] 90.41 20.35
+[2,] 20.35  5.41
 
 
 
@@ -737,28 +610,18 @@ xinv = solve(x)
 xinv
 ```
 
-
-
-```
-##          [,1]    [,2]
-## [1,]  0.11547 -0.2425
-## [2,] -0.04619  1.0970
-```
-
+         [,1]    [,2]
+[1,]  0.11547 -0.2425
+[2,] -0.04619  1.0970
 
 
 ```r
 xinv %*% x
 ```
 
-
-
-```
-##      [,1]       [,2]
-## [1,]    1 -2.776e-17
-## [2,]    0  1.000e+00
-```
-
+     [,1]       [,2]
+[1,]    1 -2.776e-17
+[2,]    0  1.000e+00
 
 
 
@@ -776,36 +639,21 @@ nest = list(species = "WEVI", eggs = 4, latlon = c(25.73,
 nest$eggs
 ```
 
-
-
-```
-## [1] 4
-```
-
+[1] 4
 
 
 ```r
 nest[[1]]
 ```
 
-
-
-```
-## [1] "WEVI"
-```
-
+[1] "WEVI"
 
 
 ```r
 nest$lat[2]
 ```
 
-
-
-```
-## [1] -81.3
-```
-
+[1] -81.3
 
 
 
@@ -822,14 +670,9 @@ nests = data.frame(species = c("WEVI", "WETA"),
 nests
 ```
 
-
-
-```
-##   species eggs parasite    lat   lon
-## 1    WEVI    4     TRUE -81.30 25.73
-## 2    WETA    3    FALSE -79.11 21.04
-```
-
+  species eggs parasite    lat   lon
+1    WEVI    4     TRUE -81.30 25.73
+2    WETA    3    FALSE -79.11 21.04
 
 
 
@@ -841,18 +684,13 @@ The `data.frame` is the most common structure for holding data in R. Most statis
 summary(nests)
 ```
 
-
-
-```
-##  species       eggs       parasite            lat             lon      
-##  WETA:1   Min.   :3.00   Mode :logical   Min.   :-81.3   Min.   :21.0  
-##  WEVI:1   1st Qu.:3.25   FALSE:1         1st Qu.:-80.8   1st Qu.:22.2  
-##           Median :3.50   TRUE :1         Median :-80.2   Median :23.4  
-##           Mean   :3.50   NA's :0         Mean   :-80.2   Mean   :23.4  
-##           3rd Qu.:3.75                   3rd Qu.:-79.7   3rd Qu.:24.6  
-##           Max.   :4.00                   Max.   :-79.1   Max.   :25.7  
-```
-
+ species       eggs       parasite            lat             lon      
+ WETA:1   Min.   :3.00   Mode :logical   Min.   :-81.3   Min.   :21.0  
+ WEVI:1   1st Qu.:3.25   FALSE:1         1st Qu.:-80.8   1st Qu.:22.2  
+          Median :3.50   TRUE :1         Median :-80.2   Median :23.4  
+          Mean   :3.50   NA's :0         Mean   :-80.2   Mean   :23.4  
+          3rd Qu.:3.75                   3rd Qu.:-79.7   3rd Qu.:24.6  
+          Max.   :4.00                   Max.   :-79.1   Max.   :25.7  
 
 
 
@@ -864,17 +702,18 @@ Individual columns of the data frame may be added to the R environment by name, 
 attach(nests)
 ```
 
+The following object(s) are masked from 'nests (position 4)':
 
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 5)':
 
-```
-## The following object(s) are masked from 'nests (position 3)':
-## 
-##     eggs, lat, lon, parasite, species
-## The following object(s) are masked from 'nests (position 4)':
-## 
-##     eggs, lat, lon, parasite, species
-```
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 6)':
 
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 7)':
+
+    eggs, lat, lon, parasite, species
 
 
 
@@ -906,13 +745,13 @@ import = read.table("more_nests.dat", header = TRUE,
 
 
 ```
-## Warning message: cannot open file 'more_nests.dat': No such file or directory
+Warning message: cannot open file 'more_nests.dat': No such file or directory
 ```
 
 
 
 ```
-## Error: cannot open the connection
+Error: cannot open the connection
 ```
 
 
@@ -924,7 +763,7 @@ import
 
 
 ```
-## Error: object 'import' not found
+Error: object 'import' not found
 ```
 
 
@@ -941,7 +780,7 @@ mode(import$parasite) = mode(nests$parasite)
 
 
 ```
-## Error: object 'import' not found
+Error: object 'import' not found
 ```
 
 
@@ -953,7 +792,7 @@ nests = rbind(nests, import)
 
 
 ```
-## Error: object 'import' not found
+Error: object 'import' not found
 ```
 
 
@@ -962,14 +801,9 @@ nests = rbind(nests, import)
 nests
 ```
 
-
-
-```
-##   species eggs parasite    lat   lon
-## 1    WEVI    4     TRUE -81.30 25.73
-## 2    WETA    3    FALSE -79.11 21.04
-```
-
+  species eggs parasite    lat   lon
+1    WEVI    4     TRUE -81.30 25.73
+2    WETA    3    FALSE -79.11 21.04
 
 
 
@@ -990,13 +824,8 @@ ndata = rnorm(100, mean = 3, sd = 2)
 summary(ndata)
 ```
 
-
-
-```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  -0.894   1.640   3.100   3.020   4.100   7.650 
-```
-
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  -1.26    1.45    2.70    2.82    4.11    9.20 
 
 
 
@@ -1012,24 +841,14 @@ where $t_{p,n-1}$ is the $(100*p)$th percentile of the t-distribution with $n-1$
 mean(ndata) + qt(0.025, 99) * sqrt(var(ndata)/100)
 ```
 
-
-
-```
-## [1] 2.662
-```
-
+[1] 2.418
 
 
 ```r
 mean(ndata) + qt(0.975, 99) * sqrt(var(ndata)/100)
 ```
 
-
-
-```
-## [1] 3.385
-```
-
+[1] 3.213
 
 
 
@@ -1050,12 +869,7 @@ x = -5
 if (x >= 0) x else -x
 ```
 
-
-
-```
-## [1] 5
-```
-
+[1] 5
 
 
 
@@ -1075,12 +889,7 @@ for (i in 1:length(x)) if (x[i] < 0) x[i] = -x[i]
 x
 ```
 
-
-
-```
-## [1] 4 6 1 0
-```
-
+[1] 4 6 1 0
 
 
 
@@ -1102,13 +911,7 @@ while (x <= 0) {
 }
 ```
 
-
-
-```
-## [1] -0.06602
-## [1] 0.3705
-```
-
+[1] 1.175
 
 
 
@@ -1126,12 +929,9 @@ repeat {
 }
 ```
 
-
-
-```
-## [1] 0.01345
-```
-
+[1] -2.798
+[1] -0.5145
+[1] 0.3366
 
 
 
@@ -1153,12 +953,7 @@ absval = function(value) {
 absval(-7)
 ```
 
-
-
-```
-## [1] 7
-```
-
+[1] 7
 
 
 
@@ -1177,12 +972,7 @@ For example, suppose we wanted an operator that divided the value on the left by
 6 %!% 7
 ```
 
-
-
-```
-## [1] 2.268
-```
-
+[1] 2.268
 
 
 
@@ -1301,14 +1091,9 @@ group = gl(2, 10, labels = c("Ctl", "Trt"))
 group
 ```
 
-
-
-```
-##  [1] Ctl Ctl Ctl Ctl Ctl Ctl Ctl Ctl Ctl Ctl Trt Trt Trt Trt Trt Trt Trt
-## [18] Trt Trt Trt
-## Levels: Ctl Trt
-```
-
+ [1] Ctl Ctl Ctl Ctl Ctl Ctl Ctl Ctl Ctl Ctl Trt Trt Trt Trt Trt Trt Trt
+[18] Trt Trt Trt
+Levels: Ctl Trt
 
 
 We now have everything required to build the linear model:
@@ -1331,28 +1116,23 @@ summary(wt_lm)
 ```
 
 
+Call:
+lm(formula = weight ~ group)
 
-```
-## 
-## Call:
-## lm(formula = weight ~ group)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.0710 -0.4938  0.0685  0.2462  1.3690 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)    5.032      0.220   22.85  9.5e-15 ***
-## groupTrt      -0.371      0.311   -1.19     0.25    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-## 
-## Residual standard error: 0.696 on 18 degrees of freedom
-## Multiple R-squared: 0.0731,	Adjusted R-squared: 0.0216 
-## F-statistic: 1.42 on 1 and 18 DF,  p-value: 0.249 
-## 
-```
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.0710 -0.4938  0.0685  0.2462  1.3690 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    5.032      0.220   22.85  9.5e-15 ***
+groupTrt      -0.371      0.311   -1.19     0.25    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+Residual standard error: 0.696 on 18 degrees of freedom
+Multiple R-squared: 0.0731,	Adjusted R-squared: 0.0216 
+F-statistic: 1.42 on 1 and 18 DF,  p-value: 0.249 
 
 
 
@@ -1365,17 +1145,12 @@ Notice that the format of the summary is the very general form that presents the
 anova(wt_lm)
 ```
 
+Analysis of Variance Table
 
-
-```
-## Analysis of Variance Table
-## 
-## Response: weight
-##           Df Sum Sq Mean Sq F value Pr(>F)
-## group      1   0.69   0.688    1.42   0.25
-## Residuals 18   8.73   0.485               
-```
-
+Response: weight
+          Df Sum Sq Mean Sq F value Pr(>F)
+group      1   0.69   0.688    1.42   0.25
+Residuals 18   8.73   0.485               
 
 
 
@@ -1395,7 +1170,7 @@ print(mydf = data.frame(treatment, group, counts))
 
 
 ```
-## Error: argument "x" is missing, with no default
+Error: argument "x" is missing, with no default
 ```
 
 
@@ -1405,24 +1180,19 @@ my_glm = glm(counts ~ group + treatment, family = poisson())
 anova(my_glm)
 ```
 
+Analysis of Deviance Table
+
+Model: poisson, link: log
+
+Response: counts
+
+Terms added sequentially (first to last)
 
 
-```
-## Analysis of Deviance Table
-## 
-## Model: poisson, link: log
-## 
-## Response: counts
-## 
-## Terms added sequentially (first to last)
-## 
-## 
-##           Df Deviance Resid. Df Resid. Dev
-## NULL                          8      10.58
-## group      2     5.45         6       5.13
-## treatment  2     0.00         4       5.13
-```
-
+          Df Deviance Resid. Df Resid. Dev
+NULL                          8      10.58
+group      2     5.45         6       5.13
+treatment  2     0.00         4       5.13
 
 
 ```r
@@ -1430,37 +1200,32 @@ summary(my_glm)
 ```
 
 
+Call:
+glm(formula = counts ~ group + treatment, family = poisson())
 
-```
-## 
-## Call:
-## glm(formula = counts ~ group + treatment, family = poisson())
-## 
-## Deviance Residuals: 
-##       1        2        3        4        5        6        7        8  
-## -0.6712   0.9627  -0.1696  -0.2200  -0.9555   1.0494   0.8472  -0.0917  
-##       9  
-## -0.9666  
-## 
-## Coefficients:
-##              Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)  3.04e+00   1.71e-01   17.81   <2e-16 ***
-## group2      -4.54e-01   2.02e-01   -2.25    0.025 *  
-## group3      -2.93e-01   1.93e-01   -1.52    0.128    
-## treatment2   1.34e-15   2.00e-01    0.00    1.000    
-## treatment3   1.42e-15   2.00e-01    0.00    1.000    
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-## 
-## (Dispersion parameter for poisson family taken to be 1)
-## 
-##     Null deviance: 10.5814  on 8  degrees of freedom
-## Residual deviance:  5.1291  on 4  degrees of freedom
-## AIC: 56.76
-## 
-## Number of Fisher Scoring iterations: 4
-## 
-```
+Deviance Residuals: 
+      1        2        3        4        5        6        7        8  
+-0.6712   0.9627  -0.1696  -0.2200  -0.9555   1.0494   0.8472  -0.0917  
+      9  
+-0.9666  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.04e+00   1.71e-01   17.81   <2e-16 ***
+group2      -4.54e-01   2.02e-01   -2.25    0.025 *  
+group3      -2.93e-01   1.93e-01   -1.52    0.128    
+treatment2   1.34e-15   2.00e-01    0.00    1.000    
+treatment3   1.42e-15   2.00e-01    0.00    1.000    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 10.5814  on 8  degrees of freedom
+Residual deviance:  5.1291  on 4  degrees of freedom
+AIC: 56.76
+
+Number of Fisher Scoring iterations: 4
 
 
 
