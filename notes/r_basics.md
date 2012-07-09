@@ -21,7 +21,7 @@ y = rnorm(1000)
 x[1:4]
 ```
 
-[1]  0.68085  0.86829  0.06133 -1.21888
+[1]  0.6808  0.4883 -0.1632  1.9628
 
 
 ```r
@@ -57,16 +57,16 @@ lm(formula = y ~ x)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--3.311 -0.640 -0.023  0.664  3.556 
+-2.995 -0.693  0.017  0.661  3.579 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)  0.00123    0.03194    0.04     0.97
-x           -0.01843    0.03277   -0.56     0.57
+(Intercept)  -0.0105     0.0309   -0.34     0.74
+x             0.0241     0.0311    0.77     0.44
 
-Residual standard error: 1.01 on 998 degrees of freedom
-Multiple R-squared: 0.000317,	Adjusted R-squared: -0.000685 
-F-statistic: 0.316 on 1 and 998 DF,  p-value: 0.574 
+Residual standard error: 0.977 on 998 degrees of freedom
+Multiple R-squared: 0.000599,	Adjusted R-squared: -0.000402 
+F-statistic: 0.598 on 1 and 998 DF,  p-value: 0.439 
 
 
 
@@ -705,7 +705,7 @@ attach(nests)
 The following object(s) are masked from 'nests (position 3)':
 
     eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 5)':
+The following object(s) are masked from 'nests (position 4)':
 
     eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 6)':
@@ -715,6 +715,9 @@ The following object(s) are masked from 'nests (position 7)':
 
     eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 8)':
+
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 9)':
 
     eggs, lat, lon, parasite, species
 
@@ -828,7 +831,7 @@ summary(ndata)
 ```
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  -2.59    1.63    2.95    2.96    4.41    9.32 
+  -2.39    2.00    3.20    3.17    4.46    8.43 
 
 
 
@@ -844,14 +847,14 @@ where $t_{p,n-1}$ is the $(100*p)$th percentile of the t-distribution with $n-1$
 mean(ndata) + qt(0.025, 99) * sqrt(var(ndata)/100)
 ```
 
-[1] 2.554
+[1] 2.762
 
 
 ```r
 mean(ndata) + qt(0.975, 99) * sqrt(var(ndata)/100)
 ```
 
-[1] 3.375
+[1] 3.573
 
 
 
@@ -914,8 +917,7 @@ while (x <= 0) {
 }
 ```
 
-[1] -0.141
-[1] 0.5784
+[1] 0.2115
 
 
 
@@ -933,9 +935,7 @@ repeat {
 }
 ```
 
-[1] -0.4729
-[1] -0.06313
-[1] 0.4283
+[1] 0.8939
 
 
 
@@ -1018,6 +1018,7 @@ Finally, the central feature of R is a large suite of facilities for statistical
 Consider a simple linear regression model, with normal, independent and homoscedastic errors:
 
 $$y_i = \sum_{j=0}^p \beta_j x_{ij} + \epsilon_i$$
+
 $$\epsilon_i \sim N(0,\sigma^2)$$
 ￼
 This can be expressed in matrix notation as:
@@ -1029,21 +1030,27 @@ where $y$ is the response vector, $X$ the design matrix and $\beta$ a vector of 
     <response> ~ <operator> <predictor1> <operator> <predictor2> ...
 
 For example, several alternative formulations could implement the linear model described above. The simplest is:
-y ~ x
+
+    y ~ x
+
 or
-y ~ 1 + x
+
+    y ~ 1 + x
 
 the former having an implicit intercept term, the latter explicit. Or, the model could be forced through the origin by explicitly removing the intercept term:
-y ~ 0 + x
-y ~ x - 1
+
+    y ~ 0 + x
+    y ~ x - 1
 
 Alternatively, a second-order polynomial regression could be defined using either:
-y ~ poly(x, 2)
-y ~ 1 + x + I(x^2)
+
+    y ~ poly(x, 2)
+    y ~ 1 + x + I(x^2)
 
 Interaction terms may also be defined:
-y ~ x1 + x2 + x1:x2
-y ~ x1*x2
+
+    y ~ x1 + x2 + x1:x2
+    y ~ x1*x2
 
 These formulations apply broadly to R statistical functions. The basic function for fitting linear models is `lm`. Though more specialized functions exist, it can be used to carry out regression, single stratum analysis of variance and analysis of covariance. A typical `lm` formulation is:
 
