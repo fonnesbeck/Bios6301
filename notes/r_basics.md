@@ -24,7 +24,7 @@ x[1:4]
 
 
 ```
-[1] -0.1051 -1.2096  0.5124 -0.5221
+[1] -1.4710  0.1954 -0.7531  0.2773
 ```
 
 
@@ -34,7 +34,7 @@ x[1:4]
 truehist(x, nbins = 25)
 ```
 
-![plot of chunk simple_example](figure/simple_example1.png) 
+![plot of chunk simple_example](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/simple_example1.png) 
 
 ```r
 # Generate a 2D density plot
@@ -42,14 +42,14 @@ dd = kde2d(x, y)
 contour(dd)
 ```
 
-![plot of chunk simple_example](figure/simple_example2.png) 
+![plot of chunk simple_example](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/simple_example2.png) 
 
 ```r
 # Generate a color contour plot
 image(dd)
 ```
 
-![plot of chunk simple_example](figure/simple_example3.png) 
+![plot of chunk simple_example](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/simple_example3.png) 
 
 ```r
 # Build a linear model of y|x, and summarize
@@ -64,17 +64,17 @@ Call:
 lm(formula = y ~ x)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--3.651 -0.682  0.046  0.677  3.053 
+    Min      1Q  Median      3Q     Max 
+-2.8966 -0.6555  0.0211  0.6615  2.8316 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept) -0.00116    0.03129   -0.04     0.97
-x            0.00627    0.03026    0.21     0.84
+(Intercept)  0.01752    0.03061    0.57     0.57
+x            0.00976    0.03027    0.32     0.75
 
-Residual standard error: 0.989 on 998 degrees of freedom
-Multiple R-squared: 4.3e-05,	Adjusted R-squared: -0.000959 
-F-statistic: 0.0429 on 1 and 998 DF,  p-value: 0.836 
+Residual standard error: 0.968 on 998 degrees of freedom
+Multiple R-squared: 0.000104,	Adjusted R-squared: -0.000898 
+F-statistic: 0.104 on 1 and 998 DF,  p-value: 0.747 
 
 ```
 
@@ -927,16 +927,25 @@ The following object(s) are masked from 'nests (position 5)':
 The following object(s) are masked from 'nests (position 6)':
 
     eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 7)':
+
+    eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 8)':
 
     eggs, lat, lon, parasite, species
 The following object(s) are masked from 'nests (position 9)':
 
     eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 10)':
+The following object(s) are masked from 'nests (position 11)':
 
     eggs, lat, lon, parasite, species
-The following object(s) are masked from 'nests (position 11)':
+The following object(s) are masked from 'nests (position 12)':
+
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 13)':
+
+    eggs, lat, lon, parasite, species
+The following object(s) are masked from 'nests (position 14)':
 
     eggs, lat, lon, parasite, species
 ```
@@ -1060,7 +1069,7 @@ summary(ndata)
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  -2.84    1.35    2.34    2.69    4.36    7.80 
+  -2.67    1.99    3.34    3.33    4.80    7.96 
 ```
 
 
@@ -1081,7 +1090,7 @@ mean(ndata) + qt(0.025, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 2.271
+[1] 2.945
 ```
 
 
@@ -1093,7 +1102,7 @@ mean(ndata) + qt(0.975, 99) * sqrt(var(ndata)/100)
 
 
 ```
-[1] 3.111
+[1] 3.717
 ```
 
 
@@ -1171,7 +1180,8 @@ while (x <= 0) {
 
 
 ```
-[1] 0.03034
+[1] -0.4945
+[1] 0.03499
 ```
 
 
@@ -1194,7 +1204,11 @@ repeat {
 
 
 ```
-[1] 0.9723
+[1] -0.07699
+[1] -0.5986
+[1] -0.1159
+[1] -1.127
+[1] 0.5154
 ```
 
 
@@ -1264,7 +1278,7 @@ barplot(t(aggregate(mdeaths + fdeaths, 1)), names = c(1974:1979),
     ylab = "deaths", xlab = "year", col = "red")
 ```
 
-![plot of chunk unnamed-chunk-51](figure/unnamed-chunk-51.png) 
+![plot of chunk unnamed-chunk-51](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-51.png) 
 
 
 This plots the number of lung cancer deaths (male and female) in the UK from 1974 to 1979. As with most of the plotting function, there are many optional arguments that can be used to customize the plot. It is essential to format the data appropriately for the function. In this case, the data was aggregated across months (function aggregate) and transposed.
@@ -1277,7 +1291,7 @@ Some more advanced functions allow for plotting of multivariate data. One method
 coplot(lat ~ long | depth, data = quakes)
 ```
 
-![plot of chunk unnamed-chunk-52](figure/unnamed-chunk-52.png) 
+![plot of chunk unnamed-chunk-52](https://github.com/fonnesbeck/Bios301/raw/master/notes/figure/unnamed-chunk-52.png) 
 
 
 This gives a 3-dimensional snapshot of earthquake occurrence, showing latitude vs. longitude for each conditioning level of depth. The relationship among the variables is specified in the first argument; the response and predictive variables are separated by a tilde (`~`), while conditioning variables follow a pipe (`|`). The data argument allows us to omit the reference to the dataset for each variable.
@@ -1536,3 +1550,13 @@ Number of Fisher Scoring iterations: 4
 
 
 
+<!-- Scripts -->
+<script type="text/javascript" 
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script type="text/javascript">MathJax.Hub.Config({tex2jax: {processEscapes: true, 
+    processEnvironments: false, inlineMath: [ ['$','$'] ], 
+    displayMath: [ ['$$','$$'] ] }, 
+    asciimath2jax: {delimiters: [ ['$','$'] ] }, 
+    "HTML-CSS": {minScaleAdjust: 125 } });
+</script>
