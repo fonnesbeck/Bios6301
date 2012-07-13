@@ -176,7 +176,10 @@ Editing and running scripts
 
 As noted above, it is generally more efficient to perform statistical analyses in R by generating a *script* that runs a sequence of commands in succession, rather than interactively typing commands into the R console. Composing scripts is straightforward; all that is required is a text editor. There are general text editors available on all computing platforms, such as TextEdit on Mac OS X and Notepad on Windows, as well as more specialized editors, including TextMate on Mac OSX (see image below), Kate on Linux and Tinn-R for Windows that provide niceties such as colored syntax highlighting, an embedded R console and keyboard shortcuts for automating programming tasks. RStudio includes an editor (in the top-left corner of the application) that allows code to be sent directly to the R console.
 
-|Sample R script in TextMate|
+.. image:: figure/editor.png
+    :scale: 40 %
+    :alt: Sample R script in TextMate
+    :align: center
 
 Once you have created a script, it should be saved to your computer's hard disk before it is run in R. You should save the file to the current working directory that is being used by R. You can persuade R to give you this information by using the ``getwd`` (abbreviation for "GET Working Directory") command::
 
@@ -1655,13 +1658,19 @@ At the very simplest level, one may generate a scatterplot by calling the ``plot
 
     > plot(haart$weight, haart$hemoglobin)
 
-|Simple scatterplot|
+.. image:: figure/simple_scatter.png
+    :scale: 30 %
+    :alt: Simple scatterplot
+    :align: center
 
 Notice here that some values of hemoglobin appear to have been rounded to the nearest integer. We can make aesthetic improvements to the plot by adding axis labels::
 
     > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin")
 
-|Scatterplot with labels|
+.. image:: figure/labelled_scatter.png
+    :scale: 30 %
+    :alt: Scatterplot with labels
+    :align: center
 
 We can entirely change the type of plot by specifying the ``type`` argument, which allows for a variety of arguments:
 
@@ -1706,21 +1715,30 @@ In addition to setting plotting device parameters, plots may be augmented after 
     > points(haart$weight, haart$hemoglobin, col=ifelse(haart$male==1,
     + "darkseagreen4", "red"), pch=ifelse(haart$aids==1, 1, 3))
 
-|Custom points|
+.. image:: figure/points.png
+    :scale: 30 %
+    :alt: Custom points
+    :align: center
 
 3) Now axes can be added, with any desired options::
 
     > axis(1, lwd=2)
     > axis(2, lwd=2)
 
-|Adding axes|
+.. image:: figure/axes.png
+    :scale: 30 %
+    :alt: Adding axes
+    :align: center
 
 4) Now axis labels can be added, in the desired orientation::
 
     > mtext("Weight", side=1, line=3)
     > mtext("Hemoglobin", side=2, line=3)
 
-|Axis labels|
+.. image:: figure/labels.png
+    :scale: 30 %
+    :alt: Axis labels
+    :align: center
 
 5) Finally, a legend to decipher the color and shape of the points::
 
@@ -1729,7 +1747,10 @@ In addition to setting plotting device parameters, plots may be augmented after 
     +  col=c("darkseagreen4", "red", "darkseagreen4", "red"),
     +  pch=c(1,1,3,3), bty="n")
 
-|Added legend|
+.. image:: figure/legend.png
+    :scale: 30 %
+    :alt: Added legend
+    :align: center
 
 
 Saving plots
@@ -1745,7 +1766,10 @@ The ``dev.off`` call closes the pdf file, so that it may be used elsewhere. If w
 
 If you wish to save a plot that was drawn to the screen, you can use the appropriate menu item for your particular operating system to save the plot to a graphic file format.
 
-|Saving a plot on Mac OS X|
+.. image:: figure/save.png
+    :scale: 30 %
+    :alt: Saving a plot on Mac OS X
+    :align: center
 
 
 Trellis plots
@@ -1759,7 +1783,10 @@ Trellis plots are available in the recommended R package ``lattice``. As an exam
 
 This notation is slightly different from previous plotting functions, in that a *model* is given as the primary argument, rather than variables. In this case, we indicate that we would like to plot the distribution of weight (hence, no variable to the left of the tilde), conditioning on the variable ``make`` (the *pipe* symbol indicates conditioning). Note that you can specify the data frame as an additional ``data`` argument, so that you do not have to index individual variables. This results in the following:
 
-|Densities of weight by sex|
+.. image:: figure/weight_by_sex.png
+    :scale: 40 %
+    :alt: Densities of weight by sex
+    :align: center
 
 We see separate density plots of weight by sex, with a *rug* of actual data points along the x-axis. However, the labeling of the panels is odd, as they both say "male"; this is because by default it uses the name of the variable as the label, with a dark orange  bar indicating the value of the variable for the particular plot (here, 0 and 1). It would be preferable to simply label the panels "Female" and "Male". For this, we need to change ``male`` to a factor, and rename its levels. This is done as follows::
 
@@ -1767,31 +1794,46 @@ We see separate density plots of weight by sex, with a *rug* of actual data poin
     > levels(haart$male_factor) <- c("Female", "Male")
     > densityplot(~ weight | male_factor, data=haart)
 
-|Weight plot with proper labels|
+.. image:: figure/labelled_weight.png
+    :scale: 40 %
+    :alt: Weight plot with proper labels
+    :align: center
 
 Alternatively, we can display the same data as a box-and-whisker plot, using the ``bwplot`` function, with similar syntax::
 
     > bwplot(~ weight | male_factor, data=haart)
 
-|Box-and-whisker plot|
+.. image:: figure/bwplot.png
+    :scale: 40 %
+    :alt: Box-and-whisker plot
+    :align: center
 
 Notice, however, that this is not an optimal layout of the panels; they are compressed horizontally and it is not easy to compare them side-by-side. It would be better displayed row-wise rather than column-wise. We can change this layout easily::
 
     > bwplot(~ weight | male_factor, data=haart, layout=c(1,2))
 
-|Rotated box-and-whisker plot|
+.. image:: figure/bwplot_rotated.png
+    :scale: 40 %
+    :alt: Rotated box-and-whisker plot
+    :align: center
 
 Now it is much easier to visualize the difference between the two distributions. Yet a third way to display the same information is using a histogram::
 
     > histogram(~ weight | male_factor, data=haart, layout=c(1,2))
 
-|Weight histogram|
+.. image:: figure/histogram.png
+    :scale: 40 %
+    :alt: Weight histogram
+    :align: center
 
 We can also create paneled scatterplots of the relationship between two variables of interest, conditioned on a third, using ``xyplot``::
 
     > xyplot(hemoglobin ~ weight | male_factor, data=haart)
 
-|Hb vs weight by sex|
+.. image:: figure/xyplot.png
+    :scale: 40 %
+    :alt: Hb vs weight by sex
+    :align: center
 
 For an advanced touch, suppose we want to add a linear regression line through each panel's scatterplot. This requires using the ``panel`` argument, which controls the appearance of the plot in each panel. We are going to write a function to do just that: generate a scatterplot of points, and an associated regression line, using another function, ``abline``::
 
@@ -1803,7 +1845,11 @@ For an advanced touch, suppose we want to add a linear regression line through e
 
 Now, ``xyplot`` runs the ``regline`` function for each panel of the plot, passing the appropriate subset of data in each case.
 
-|xyplot with panel function|
+.. image:: figure/xyplot_panel.png
+    :scale: 40 %
+    :alt: xyplot with panel function
+    :align: center
+
 
 
 --------------------------
@@ -1895,7 +1941,10 @@ Quite a few statistical tests are based on the normality of the underlying popul
 
 This should yield the following plot:
 
-|Q-Q plot|
+.. image:: figure/qqplot.png
+    :scale: 40 %
+    :alt: Q-Q plot
+    :align: center
 
 The curve has obvious deviations from the straight line, so we suspect that the data may not in fact be normally-distributed. Lets run a more formal test::
 
@@ -2207,20 +2256,3 @@ It is clear from these graphics that there are two points with large residuals, 
     Coefficients:
     (Intercept)         dist        climb
       -13.53035      6.36456      0.01185
-
-.. |Sample R script in TextMate| image:: http://d.pr/i/awkF+
-.. |Simple scatterplot| image:: http://d.pr/i/B3MQ+
-.. |Scatterplot with labels| image:: http://d.pr/i/TKrw+
-.. |Custom points| image:: http://d.pr/i/v2sP+
-.. |Adding axes| image:: http://d.pr/i/GXJ8+
-.. |Axis labels| image:: http://d.pr/i/gTnt+
-.. |Added legend| image:: http://d.pr/i/GU7I+
-.. |Saving a plot on Mac OS X| image:: http://d.pr/i/RNEn+
-.. |Densities of weight by sex| image:: http://d.pr/i/a4W9+
-.. |Weight plot with proper labels| image:: http://d.pr/i/9QqS+
-.. |Box-and-whisker plot| image:: http://d.pr/i/8yiL+
-.. |Rotated box-and-whisker plot| image:: http://d.pr/i/uZ1n+
-.. |Weight histogram| image:: http://d.pr/i/zoVU+
-.. |Hb vs weight by sex| image:: http://d.pr/i/BwDz+
-.. |xyplot with panel function| image:: http://d.pr/i/ktmT+
-.. |Q-Q plot| image:: http://d.pr/i/JkwF+
