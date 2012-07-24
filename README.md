@@ -11,7 +11,7 @@ chris.fonnesbeck@vanderbilt.edu
 
 ## Schedule
 
-* Lectures: Mondays, 1-3pm; location TBA
+* Lectures: Mondays, 1-3pm in [RLH 412](http://goo.gl/maps/4c3W)
 * Office hours: By appointment
 
 
