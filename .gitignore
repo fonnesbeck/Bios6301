@@ -6,3 +6,9 @@ scipy-lecture-notes/*
 *.pyc
 external/*
 *.log
+*.aux
+*.fdb_latexmk
+*.out
+*.synctex.gz
+*.toc
+cache

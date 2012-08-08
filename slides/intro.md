@@ -39,16 +39,21 @@ To equip statisticians with relevant, modern, flexible tools for proficient comp
 
 ---
 
-# Software
-
----
-
 # Text Editor
 
 <img src=http://f.cl.ly/items/0d1p2M1e380l2j3C2Z40/vim-logo-en.png width=200 align=left>
 <img src=http://f.cl.ly/items/3y0S1S352y1B2c032u2I/textmate.png width=200, align=right>
 <img src=http://f.cl.ly/items/0E3s2a0V3p3d3E432114/Sublime-Text-2.png width=200, align=center>
 <img src=http://f.cl.ly/items/2b1l2c1c0U2L1q3A0A34/gnu-project.png width=200, align=center>
+
+---
+
+# Software
+
+- Statistical analysis tools: [R](http://cran.r-project.org/), [Stata](http://www.stata.com/)
+- Version control system: [Git](http://git-scm.com/)
+- Document preparation tools: LaTeX, [knitr](http://yihui.name/knitr/), [MultiMarkdown](http://fletcherpenney.net/multimarkdown/)
+- Relational database: [SQLite](http://www.sqlite.org/)
 
 ---
 

@@ -1640,12 +1640,7 @@ Another alternative to write the binary representation to a file, using the ``sa
 
     > save(x, file="x.rda", compress=TRUE)
 
-Now, however, the contents of the file are only machine-readable::
-
-    ^_<8B>^H^@^@^@^@^@^@^C^Kr<89>0<E2><8A><E0>b```b`<E2>^E<92><CC>@&^K^S<90>`^DbN^P]<C1>^@<96>a<E0><82>
-    <82>$<C1><AA><80><98>^U<88>ـ<98>^]<88>9<A0>^Z<B8><D0>^L`N<C9><CC>^ER<BC>P<AD>LPm<FF>@^X^@s><E7><E2>^?^@^@^@
-
-Binary files can be imported back into R using the ``load`` function, which only takes the data file itself as an argument.
+Now, however, the contents of the file are only machine-readable. Binary files can be imported back into R using the ``load`` function, which only takes the data file itself as an argument.
 
 
 --------
