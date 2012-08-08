@@ -12,3 +12,5 @@ external/*
 *.synctex.gz
 *.toc
 cache
+temp
+2011

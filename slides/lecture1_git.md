@@ -58,15 +58,40 @@ There are three stages to using Git:
 
 ---
 
+The `git` Command
+=================
+
+The `git` command line tool is used in conjunction with a command and optional arguments.
+
+    $ git
+    usage: git [--version] [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+               [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
+               [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+               [-c name=value] [--help]
+               <command> [<args>]
+
+# Presenter Notes
+
+Notes
+
+---
 
 Git in Action
 =============
 
+Initialize a repository:
 
     git init my_analysis
+
+Add some new work:
+
     cd my_analysis
+    touch fast_code.R
     git add .
-    git commit -m "Made analysis run faster"
+
+Commit your changes:
+
+    git commit -m "Added some fast code!"
 
 
 # Presenter Notes
@@ -75,9 +100,8 @@ Note that a repository ("repo") can reside anywhere, either on your local machin
 
 ---
 
-Git in Action
-=============
-
+Merging Work on Separate Branches
+=================================
 
     git checkout master
     git commit -a -m "Updated documentation"
@@ -87,18 +111,22 @@ Git in Action
     git commit -a -m "Added a new function"
     git push origin master
     
+    git checkout master
     git pull
     git merge new_feature 
 
 
 # Presenter Notes
 
-Git allows individuals to work separately on a project without hindrance, but then be able to merge their work with either the work of others or their own previous work in a logical, streamlined fashion. This applies even when the same document (or even the same sections of a document) are being edited by multiple people.
+Git allows individuals to work separately, but then be able to merge their work with either the work of others or their own previous work in a logical, streamlined fashion. 
+This applies even when the same document (or even the same sections of a document) are being edited by multiple people.
 
 ---
 
 Git in Action
 =============
+
+Git allows you to control and automate how changes are merged
 
      git log --graph --decorate --abbrev-commit --all --pretty=oneline
      
@@ -122,30 +150,16 @@ Git in Action
 
 # Presenter Notes
 
-Git allows you to control and automate how changes are merged, and helps you manage situations when multiple changes are in conflict with one another. While Git can be kept simple, it is also flexible and powerful enough for power users.
+Git helps you manage situations when multiple changes are in conflict with one another. 
+While Git can be kept simple, it is also flexible and powerful enough for power users.
 Notice that the log of changes looks very much like a journal of the development of the project.
 ---
 
-The `Git` Command
+
+Git Configuration
 =================
 
-
-    $ git
-    usage: git [--version] [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
-               [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
-               [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
-               [-c name=value] [--help]
-               <command> [<args>]
-
-# Presenter Notes
-
-Notes
-
----
-
-### Git Configuration
-
-Every time that you interact with Git, it will associate a name and email address with the transaction. Thus, the first step in using Git for the first time is to configure your user name and email.
+The first step in using Git for the first time is to configure your user name and email.
 
     $ git config --global user.name "Moe Szyslak"
     $ git congig --global user.email "moe@moesbar.com"    
@@ -157,29 +171,35 @@ This will create a *.gitconfig* file in your home directory with a very simple s
               name = Moe Szyslak
               email = moe@moesbar.com
 
-If you ever change your email address, for example, you can either run the command again, or simply edit the *.gitconfig* file directly. The *--global* flag indicates that these values are to be applied system-wide; you can override the values for specific projects by running the commands without this flag within the project's directory.
 
-There are a variety of configuration options, but for now, the only other one we will worry about is setting the default text editor. Occasionally you will need to edit files in order to use Git, and this is made easier when your favorite text editor pops up, as needed. You can specify the program you want to associate with Git as follows:
+# Presenter Notes
 
-    $ git config core.editor “C:\Program Files\Accessories\wordpad.exe”
-    $ git config core.editor mate
-    $ git config core.editor vim
+If you ever change your email address, for example, you can either run the command again, or simply edit the *.gitconfig* file directly.
+The *--global* flag indicates that these values are to be applied system-wide; you can override the values for specific projects by running the commands without this flag within the project's directory.
+---
 
+Create a repository
+===================
+ 
+Creating a new repository:
 
-### Create a repository
-
-A local repository can be initialized using Git's `init` command to create a project folder:
-
-    $ git init firstrepo
+     $ git init firstrepo
     
     Initialized empty Git repository in /Users/fonnescj/firstrepo/.git/
 
-Or, if there is an existing working directory, it can be turned into a repository:
+Converting existing code into a repository:
 
     $ cd firstrepo
     $ git init
-
+ 
+# Presenter Notes
+ 
 Have a look at the `.git` directory that is created. This is the only thing that Git adds to the file structure.
+
+--- 
+
+Checking the Status
+===================
 
 The `git status` command is used to monitor the state of the repository and of the working directory.
 
@@ -187,9 +207,7 @@ The `git status` command is used to monitor the state of the repository and of t
     # On branch master
     nothing to commit (working directory clean)
 
-Here, the `status` command reports that there are no outstanding changes to record. This means that the repository has the same state as that of the working directory.
-
-Committing a new file to our repository (that is, putting the file under the control of Git) is a two-step process. First, we identify a particular file as something we would like to add to our repo:
+Adding content to the working directory is picked up by Git.
 
     $ touch model.r
     $ git status
@@ -204,7 +222,18 @@ Committing a new file to our repository (that is, putting the file under the con
     #   model.r
     nothing added to commit but untracked files present (use "git add" to track)
 
-Creating a file then checking the status of the repo will show that Git is aware of the file, but views it as *untracked*. Notice that at the bottom of the message, Git gives you a hint about what to do next. Let's do it.
+
+# Presenter Notes
+
+Here, the `status` command reports that there are no outstanding changes to record. This means that the repository has the same state as that of the working directory.
+Creating a file then checking the status of the repo will show that Git is aware of the file, but views it as *untracked*. Notice that at the bottom of the message, Git gives you a hint about what to do next.
+
+---
+
+The Staging Area
+================
+
+Let Git know you intend to include content in the next commit using `git add`.
 
     $ git add model.r
     
@@ -218,39 +247,82 @@ Creating a file then checking the status of the repo will show that Git is aware
     #   new file:   model.r
     #
 
-This does not commit the file straight away, but rather, puts it in a staging area, where it is ready to be committed alongside other (perhaps related) files. An explicit `commit` command is then executed to formally give the file membership in the repository:
+We can add all modified files simultaneously by the syntax:
+
+    $ git add .
+
+*Why do we need a staging area?*
+
+# Presenter Notes
+
+This does not commit the file straight away, but rather, puts it in a staging area, where it is ready to be committed alongside other (perhaps related) files.
+It makes it easier to gather a set of related changes to be committed as a meaningful unit. 
+It also adds a layer of protection from accidentally committing changes that were unintended.
+
+---
+
+Don't be Afraid to Commit
+=========================
+
+An explicit `commit` command is then executed to formally give the file membership in the repository:
 
     $ git commit -m "Draft of first model"
-    
+
     [master (root-commit) cace59c] Draft of first model
      0 files changed
      create mode 100644 model.r
 
-Notice that a commit message has been added, using the `-m` flag. This message is *mandatory*, and acts as documentation for that commit. The file `new_file.r` is now part of the permanent history of the project. Notice also that Git is an "opt-in" system -- you must explicitly specify which files are included in a given commit, rather than having to opt-out files that are committed by default.
+A (mandatory) commit message has been added, using the `-m` flag.
 
-Git, unlike many other version control systems, is a distributed system. There is no central or master repository (though you will see the name "master" used as a default repository branch name) that users' copies of the repository must necessarily sync to; each clone of a repo is a first-class version, identical in status to the original.
+# Presenter Notes
 
-There is no network activity here. The repo that was created above is a *local* repository. When we collaborate with others (*e.g.* on GitHub) we will want to have a common remote repository to coordinate the work of all contributors, but Git can operate entirely offline. Later, whenever it is convenient, our local changes may be shared with a remote repo, if one exists:
+Notes
 
-    $ git push
+---
 
-We will introduce you to pushing, pulling, and other remote repository interactions a little later.
+How is Git Different?
+=====================
 
-Git manages files in any particular repository based on the *content* of those files, rather than superficial changes such as filename, location or file size. For example, if we try making a directory inside the working directory:
+Git is an **opt-in** system: you must explicitly specify which files are included in a given commit.
+
+Git is a **distributed** system: there is no central repository; each clone is a first-class version of the repo.
+
+Git operates **offline**: in the above transactions there was no network activity. 
+
+# Presenter Notes
+
+Git interacts with remote repositories only when explicitly asked to do so, via `push`, `pull` and other remote commands.
+
+---
+
+It's All About Content
+======================
+
+Git manages files in any particular repository based on the *content* of those files. Other changes are ignored:
 
     $ mkdir docs
     $ git status
     # On branch master
     nothing to commit (working directory clean)
 
-We see that Git does not take notice of it. This is because Git tracks content. There is no content in an empty directory. What if we `touch` our file (`touch` is a UNIX command that changes the access and modification times of a file)?
+What if we change the access timestamp of a file?
+
 
     $ touch model.r
     $ git status
     # On branch master
     nothing to commit (working directory clean)
 
-Again, there is not status change because, again, we have not changed the content of files in the working directory.
+
+# Presenter Notes
+
+There is no content in an empty directory.
+`touch` does not change a file's contents.
+
+---
+
+It's All About Content
+======================
 
     $ echo 'library(ggplot2)' >> model.r
     $ git status
@@ -265,28 +337,33 @@ Again, there is not status change because, again, we have not changed the conten
 
 Now we have changed the contents of our file, so it appears as *modified* in Git.
 
-The use of a staging area allows us to be surgical about our commits. In other words, it makes it easier to gather a set of related changes to be committed as a meaningful unit. It also adds a layer of protection from accidentally committing changes that were unintended.
+# Presenter Notes
 
-We can add all modified files simultaneously by the syntax:
+Notes
 
-    $ git add .
+---
 
-Note that this will add only existing files that have been modified. To add new files, or to commit file deletions, we need to add an additional flag:
+Exercise
+========
 
-    $ git add -A .
+### Try renaming a file under version control
 
-**Exercise: Try renaming a file under version control**
+# Presenter Notes
 
+Notes
 
-### Ignoring, removing and renaming files
+---
 
-Simply removing a file by throwing it in the trash does not remove it from the repository; it only registers as a modification of the file. We can remove files from the repository using `git rm`. For example, if we create a new file, and commit it:
+Removing Files
+==============
+
+Let's try adding a file to the repository ...
 
     $ touch badfile.txt
     $ git add badfile.txt
     $ git commit -m "Here's a new file"
 
-The file `badfile.txt` is now tracked via the repository. If at any stage we want to remove it, you will see that just deleting the file from the file system results in the following:
+... and then remove it.
 
     $ rm badfile.txt
     $ git status
@@ -300,7 +377,18 @@ The file `badfile.txt` is now tracked via the repository. If at any stage we wan
     #
     no changes added to commit (use "git add" and/or "git commit -a")
 
-The file does not exist in our working directory any longer, but Git notices that it is gone (notice the message *Changes not staged for commit*). This message will persist until you tell Git to remove it as well:
+The file does not exist in our working directory any longer, but Git notices that it is gone!
+
+# Presenter Notes
+
+Simply removing a file by throwing it in the trash does not remove it from the repository; it only registers as a modification of the file.
+
+---
+
+Removing Files
+==============
+
+The command for removing files from being tracked by Git is `git rm`.
 
     $ git rm badfile.txt
     
@@ -315,7 +403,15 @@ The file does not exist in our working directory any longer, but Git notices tha
     #   deleted:    badfile.txt
     #
 
-Now the change is staged to be committed, and the file will no longer be tracked by the repository (though evidence of its previous existence still appears in the git log). Later, we will show you how to retrieve files deleted from the repository, if you decide later that you need them.
+Now the change is staged to be committed, and the file will no longer be tracked by the repository.
+
+# Presenter Notes
+
+Note that evidence of its previous existence still appears in the git log. 
+Later, we will show you how to retrieve files deleted from the repository, if you decide later that you need them.
+
+---
+
 
 Similar to deleting files, you cannot change the name of a file without doing so through Git. Here's what happens if, rather than deleting `badfile.txt`, I change its name to `goodfile.txt` simply by using the UNIX command `mv`:
 
@@ -463,8 +559,68 @@ Another powerful use of `git log` is for filtering the commit history, according
     
         Fixed bug in sample code for Stochastic section of modelbuilding.rst
 
+Restoring Files
+===============
+
+Life is full of regret, and Git is no exception. What if you find that you need to recover a file that you previously removed from the repository, or that you want a previous version of an existing file?
+
+    git checkout <commit hash> <file path>
+
+For example, let's say that `badfile.txt` was not so bad after all:
+
+    $ git checkout 770fa5e badfile.txt
+
+However, the checkout command simply restores the file to the working directory; it is not added back to the repository automatically:
+
+    $ git status
+    # On branch master
+    # Changes to be committed:
+    #   (use "git reset HEAD <file>..." to unstage)
+    #
+    #   new file:   badfile.txt
+    #
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #   .gitignore
 
 
-## Hands-on Exercise
+# Presenter Notes
 
-**Test your "Git-fu" by forking my [`git_training`](https://github.com/fonnesbeck/git_training) repository, cloning it to your local machine, then correcting the grammatical error in the README file and pushing the edited file back to your remote on GitHub. If you can do this, I will be reasonably confident that you know the basics if Git.**
+Notes
+
+---
+
+
+Git Anatomy
+===========
+
+![Conventions](http://marklodato.github.com/visual-git-guide/conventions.svg)
+
+# Presenter Notes
+
+Notes
+
+---
+
+GitHub
+======
+
+Content
+
+# Presenter Notes
+
+Notes
+
+---
+
+Hands-on Exercise
+=================
+
+Test your "Git-fu" by forking my [`git_training`](https://github.com/fonnesbeck/git_training) repository, cloning it to your local machine, then correcting the grammatical error in the README file and pushing the edited file back to your remote on GitHub. 
+
+# Presenter Notes
+
+If you can do this, I will be reasonably confident that you know the basics if Git.
+
+---

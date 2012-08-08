@@ -63,18 +63,18 @@ The following software packages are required. If you have trouble obtaining or i
 
 This schedule is *tentative* and subject to change at any time.
 
-* **Lecture 1**: Version control using Git; document preparation using LaTeX, `Sweave` and `knitr`
-* **Lecture 2**: R syntax and semantics; data types and data structures
-* **Lecture 3**: Flow control and looping
-* **Lecture 4**: Writing and calling functions
-* **Lecture 5**: Top-down design; scoping
-* **Lecture 6**: Debugging and testing
-* **Lecture 7**: split, apply and combine; `reshape` and `plyr`
-* **Lecture 8**: Simulation; optimization
-* **Lecture 9**: Scientific graphics; `ggplot2`
-* **Lecture 10**: Programming paradigms; object-oriented programming
-* **Lecture 11**: High performance computing; basic parallel computing
-* **Lecture 12**: I/O and databases; regular expressions
+* **Lecture 1**: Course introduction; Version control using Git
+* **Lecture 2**: Document preparation using LaTeX and `knitr`
+* **Lecture 3**: Data, data types and data structures (Chapters 2-5)
+* **Lecture 4**: Control structures; Writing and calling functions (Chapter 7)
+* **Lecture 5**: Simulation; optimization (Chapter 8)
+* **Lecture 6**: Debugging and testing (Chapter 13)
+* **Lecture 7**: Top-down design and scoping
+* **Lecture 8**: Programming paradigms (Chapter 9)
+* **Lecture 9**: Scientific graphics; `ggplot2` (Chapter 12)
+* **Lecture 10**: Split, apply and combine
+* **Lecture 11**: High performance computing; basic parallel computing (Chapters 14, 16)
+* **Lecture 12**: I/O and databases; regular expressions (Chapters 10-11)
 * **Lecture 13**: Overview of STATA
 
 ## Resources
