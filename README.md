@@ -55,7 +55,7 @@ The following software packages are required. If you have trouble obtaining or i
 * Statistical analysis tools: [R](http://cran.r-project.org), [Stata](http://www.stata.com) ($)
 * Version control system: [Git](http://git-scm.com/)
 * Relational database: [SQLite](http://sqlite.org)
-* Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/), [MultiMarkdown](http://fletcherpenney.net/multimarkdown/)
+* Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/)
 * Programming text editor (pick one of these, or equivalent): [TextMate](http://macromates.com) ($, Mac only), [Vim](http://vim.org), [Emacs](http://www.gnu.org/s/emacs/), [Sublime Text 2](http://www.sublimetext.com/2) ($)
 
 
@@ -67,15 +67,15 @@ This schedule is *tentative* and subject to change at any time.
 * **Lecture 2**: Document preparation using LaTeX and `knitr`
 * **Lecture 3**: Data, data types and data structures (Chapters 2-5)
 * **Lecture 4**: Control structures; Writing and calling functions (Chapter 7)
-* **Lecture 5**: Simulation; optimization (Chapter 8)
+* **Lecture 5**: Simulation; optimization (Chapter 8) **Assignment 1 due**
 * **Lecture 6**: Debugging and testing (Chapter 13)
-* **Lecture 7**: Top-down design and scoping
+* **Lecture 7**: Top-down design and scoping **Assignment 2 due**
 * **Lecture 8**: Programming paradigms (Chapter 9)
 * **Lecture 9**: Scientific graphics; `ggplot2` (Chapter 12)
-* **Lecture 10**: Split, apply and combine
+* **Lecture 10**: Split, apply and combine **Assignment 3 due**
 * **Lecture 11**: High performance computing; basic parallel computing (Chapters 14, 16)
 * **Lecture 12**: I/O and databases; regular expressions (Chapters 10-11)
-* **Lecture 13**: Overview of STATA
+* **Lecture 13**: Overview of STATA **Assignment 4 due**
 
 ## Resources
 
@@ -85,7 +85,7 @@ Course announcements can be found on Twitter, by following [@vandy_biostat](http
 
 ## Grading
 
-Students will be assessed on 4-5 assignments (50% of grade) and a final exam (50% of grade).
+Students will be assessed on 4 assignments (50% of grade) and a final exam (50% of grade).
 
 
 ## Assignments
