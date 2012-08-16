@@ -71,11 +71,11 @@ This schedule is *tentative* and subject to change at any time.
 * **Lecture 6**: Debugging and testing (Chapter 13)
 * **Lecture 7**: Top-down design and scoping **Assignment 2 due**
 * **Lecture 8**: Programming paradigms (Chapter 9)
-* **Lecture 9**: Scientific graphics; `ggplot2` (Chapter 12)
-* **Lecture 10**: Split, apply and combine **Assignment 3 due**
-* **Lecture 11**: High performance computing; basic parallel computing (Chapters 14, 16)
-* **Lecture 12**: I/O and databases; regular expressions (Chapters 10-11)
-* **Lecture 13**: Overview of STATA **Assignment 4 due**
+* **Lecture 9**: Scientific graphics; `ggplot2` (Chapter 12) **Assignment 3 due**
+* **Lecture 10**: Split, apply and combine 
+* **Lecture 11**: High performance computing; basic parallel computing (Chapters 14, 16) 
+* **Lecture 12**: I/O and databases; regular expressions (Chapters 10-11) **Assignment 4 due**
+* **Lecture 13**: Overview of STATA 
 
 ## Resources
 
