@@ -55,8 +55,8 @@ The following software packages are required. If you have trouble obtaining or i
 * Statistical analysis tools: [R](http://cran.r-project.org), [Stata](http://www.stata.com) ($)
 * Version control system: [Git](http://git-scm.com/)
 * Relational database: [SQLite](http://sqlite.org)
-* Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/)
-* Programming text editor (pick one of these, or equivalent): [TextMate](http://macromates.com) ($, Mac only), [Vim](http://vim.org), [Emacs](http://www.gnu.org/s/emacs/), [Sublime Text 2](http://www.sublimetext.com/2) ($)
+* Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/), [MultiMarkdown](http://fletcherpenney.net/multimarkdown/)
+* Programming text editor (pick one of these, or equivalent): [TextMate](http://macromates.com) (Mac only), [Vim](http://vim.org), [Emacs](http://www.gnu.org/s/emacs/), [Sublime Text 2](http://www.sublimetext.com/2) ($)
 
 
 ## Lecture Schedule
@@ -64,7 +64,7 @@ The following software packages are required. If you have trouble obtaining or i
 This schedule is *tentative* and subject to change at any time.
 
 * **Lecture 1**: Course introduction; Version control using Git
-* **Lecture 2**: Document preparation using LaTeX and `knitr`
+* **Lecture 2**: Document preparation using LaTeX, Markdown and `knitr`
 * **Lecture 3**: Data, data types and data structures (Chapters 2-5)
 * **Lecture 4**: Control structures; Writing and calling functions (Chapter 7)
 * **Lecture 5**: Simulation; optimization (Chapter 8) **Assignment 1 due**
