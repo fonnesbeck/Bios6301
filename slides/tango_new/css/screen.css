@@ -4,7 +4,7 @@ h1, h2, h3, h4, h5, h6, p, ul, li {
 
 p, ul, li {
     color: #555753 !important;
-    font-size: 120% !important;
+    /*font-size: 120% !important;*/
 }
 
 header h1, header h2, header h3, header h4, header h5, header h6 {
@@ -15,7 +15,6 @@ header h1, header h2, header h3, header h4, header h5, header h6 {
 
 section h1, section h2, section h3, section h4, section h5, section h6 {
     color: #3465a4 !important;
-    text-align: center;
 }
 
 img { display: block; margin: auto; }
@@ -205,12 +204,35 @@ pre {
   margin: 0px;
 }
 
+blockquote {
+     border : 1px solid #000;
+     margin: 10px;
+     padding: 10px;
+     background-color: #f9f9f9;
+     font-style: italic;
+     font-size: 80%;
+ }
+
+
 li {
   padding: 10px 0;
   font-size: 20px;
 }
 
 .slide header:only-child h1 {
+  line-height: 180%;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  height: 700px;
+  width: 900px;
+  font-size: 50px;
+  margin-top:100px;
+  margin-bottom:100px;
+  background: url('background.png') bottom center no-repeat;
+}
+
+.slide header:only-child h2 {
   line-height: 180%;
   text-align: center;
   display: table-cell;
