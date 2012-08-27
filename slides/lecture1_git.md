@@ -17,9 +17,13 @@ Programming Workflow
 6. Save again
 7. ...
 
+A ***better*** workflow would include tracking the history of the changes that took place, and the ability to roll back changes when necessary.
+
+A **version control system** (or source code management system) is a systematic tool for managing documents, computer programs, large web sites, and other collections of information that are revised by groups or individuals.
+
 # Presenter Notes
 
-We would usually like a "paper trail" or a history of the changes that took place in each document, and the ability to roll back changes when necessary. This is particularly important when collaborating on projects with others, when multiple people are editing the same set of documents, data or source code. We need to know who changed what, when they did it, and why. In the absence of a version control system, developers have had to resort to making "backup" copies of entire folders of code each time they made significant changes, or handed it off for collaborators to contribute.
+This is particularly important when collaborating on projects with others, when multiple people are editing the same set of documents, data or source code. We need to know who changed what, when they did it, and why. In the absence of a version control system, developers have had to resort to making "backup" copies of entire folders of code each time they made significant changes, or handed it off for collaborators to contribute.
 
 ---
 
@@ -106,12 +110,16 @@ Note that a repository ("repo") can reside anywhere, either on your local machin
 Merging Work on Separate Branches
 =================================
 
+Git allows individuals to work separately, but then be able to merge their work with either the work of others or their own previous work in a logical, streamlined fashion. 
+
     !bash
     git checkout master
+    # Do some stuff
     git commit -a -m "Updated documentation"
     git push
     
     git checkout new_feature
+    # Do some other stuff
     git commit -a -m "Added a new function"
     git push origin master
     
@@ -119,11 +127,10 @@ Merging Work on Separate Branches
     git pull
     git merge new_feature 
 
+This applies even when the same document (or even the same sections of a document) are being edited by multiple people.
 
 # Presenter Notes
 
-Git allows individuals to work separately, but then be able to merge their work with either the work of others or their own previous work in a logical, streamlined fashion. 
-This applies even when the same document (or even the same sections of a document) are being edited by multiple people.
 
 ---
 
