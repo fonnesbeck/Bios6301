@@ -29,6 +29,43 @@ Many modern problems/data require a computational approach
 
 ---
 
+Bios 301
+========
+
+* **Lecture 1**: Course introduction; Version control using Git
+* **Lecture 2**: Document preparation using LaTeX, Markdown and `knitr`
+* **Lecture 3**: Data, data types and data structures (Chapters 2-5)
+* **Lecture 4**: Control structures; Writing and calling functions (Chapter 7)
+* **Lecture 5**: Simulation; optimization (Chapter 8) 
+* **Lecture 6**: Debugging and testing (Chapter 13)
+* **Lecture 7**: Top-down design and scoping 
+* **Lecture 8**: Programming paradigms (Chapter 9)
+* **Lecture 9**: Scientific graphics; `ggplot2` (Chapter 12) 
+* **Lecture 10**: Split, apply and combine 
+* **Lecture 11**: High performance computing; basic parallel computing (Chapters 14, 16) 
+* **Lecture 12**: I/O and databases; regular expressions (Chapters 10-11) 
+* **Lecture 13**: Overview of STATA 
+
+# Presenter Notes
+
+
+---
+
+Bios 366
+========
+
+## Advanced Statistical Computing ##
+
+* Python programming
+* numerical optimization
+* Markov Chain Monte Carlo (MCMC)
+* estimation-maximization (EM) algorithms
+* data augmentation algorithms
+* machine learning
+
+
+---
+
 ## Cumulative
 
 # Presenter Notes

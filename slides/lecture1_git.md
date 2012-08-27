@@ -1039,6 +1039,18 @@ Notes
 
 ---
 
+GitHub Educational Accounts
+===========================
+
+### github.com/edu
+
+![Github](images/github_edu.png)
+
+# Presenter Notes
+
+
+---
+
 Adding Remote Repos
 ===================
 
