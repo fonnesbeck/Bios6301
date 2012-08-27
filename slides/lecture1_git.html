@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Version Control using Git</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="file:///Library/Python/2.7/site-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="file:///Users/fonnescj/Bios301/slides/tango_new/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="file:///Library/Python/2.7/site-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Version Control using Git</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Version control is used widely by software developers, but can be employed very widely, by anyone who creates and edits documents of any kind, not just source code.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Programming Workflow</h1></header>
+            
+            
+            <section><ol>
+<li>Create</li>
+<li>Save</li>
+<li>Edit</li>
+<li>Save again</li>
+<li>Edit</li>
+<li>Save again</li>
+<li>...</li>
+</ol>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>We would usually like a "paper trail" or a history of the changes that took place in each document, and the ability to roll back changes when necessary. This is particularly important when collaborating on projects with others, when multiple people are editing the same set of documents, data or source code. We need to know who changed what, when they did it, and why. In the absence of a version control system, developers have had to resort to making "backup" copies of entire folders of code each time they made significant changes, or handed it off for collaborators to contribute.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>What is Git?</h1></header>
+            
+            
+            <section><p>A <em>fast</em>, <em>modern</em> system for version control.</p>
+<ul>
+<li>complete history of changes</li>
+<li>(relatively) easy to learn and use</li>
+<li>distributed</li>
+</ul>
+<p>Git is a <strong>directory content management system</strong></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <ul>
+<li>control of both individual and collaborative projects. </li>
+<li>large and powerful set of commands</li>
+<li>a few core functions, which allow it to be used by non-experts, and learned progressively. </li>
+<li>used both on and offline, rather than having to be constantly connected to a central server. </li>
+<li>Like UNIX, Git is composed of several discrete functions that work together to a common purpose.</li>
+</ul>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>3 Stages of Git</h1></header>
+            
+            
+            <section><p><img alt="Basic usage" src="http://marklodato.github.com/visual-git-guide/basic-usage.svg" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>There are three stages to using Git:</p>
+<ol>
+<li>working</li>
+<li>staging ("shopping cart")</li>
+<li>committing to repository ("permanent history")</li>
+</ol>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>The <code>git</code> Command</h1></header>
+            
+            
+            <section><p>The <code>git</code> command line tool is used in conjunction with a command and optional arguments.</p>
+<pre><code>$ git
+usage: git [--version] [--exec-path[=&lt;path&gt;]] [--html-path] [--man-path] [--info-path]
+           [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=&lt;path&gt;] [--work-tree=&lt;path&gt;] [--namespace=&lt;name&gt;]
+           [-c name=value] [--help]
+           &lt;command&gt; [&lt;args&gt;]
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Notes</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Git in Action</h1></header>
+            
+            
+            <section><p>Initialize a repository:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git init my_analysis
+</pre></div>
+
+<p>Add some new work:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>my_analysis
+<span class="nv">$ </span>touch fast_code.R
+<span class="nv">$ </span>git add .
+</pre></div>
+
+<p>Commit your changes:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git commit -m <span class="s2">&quot;Added some fast code!&quot;</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Note that a repository ("repo") can reside anywhere, either on your local machine, on a remote server, or in most cases, both.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Merging Work on Separate Branches</h1></header>
+            
+            
+            <section><div class="highlight"><pre>git checkout master
+git commit -a -m <span class="s2">&quot;Updated documentation&quot;</span>
+git push
+
+git checkout new_feature
+git commit -a -m <span class="s2">&quot;Added a new function&quot;</span>
+git push origin master
+
+git checkout master
+git pull
+git merge new_feature
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Git allows individuals to work separately, but then be able to merge their work with either the work of others or their own previous work in a logical, streamlined fashion. 
+This applies even when the same document (or even the same sections of a document) are being edited by multiple people.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Git in Action</h1></header>
+            
+            
+            <section><p>Git allows you to control and automate how changes are merged</p>
+<pre><code> $ git log --graph --decorate --abbrev-commit --all --pretty=oneline
+
+ * 6de3c47 (cython) Deleted old cython code locations; continued tweaking cdistir
+ * 4e2e329 Moved cython code to src; began moving from flib to gsl
+ * 2e40665 More progress on cythonization
+ * bd6010a Began cythonization. Changed Container_values and LazyFunction to Cyth
+ | *   8c28e9d (HEAD, origin/master, origin/HEAD, master) Merge pull request #115
+ | |\  
+ |/ /  
+ | * b1b714c HDF5EA: Load meta info from existing file.
+ | * 304e667 Rename hdf52 to hdf5ea, basic functionality works now.
+ | * 7591091 Initial work on using EArray in HDF5.
+ * |   b0daa21 (origin/2.2, 2.2) Merge pull request #114 from memmett/master
+ |\ \  
+ | |/  
+ | * 756d775 SQLITE: Tweak CREATE TABLE statement and don't catch exceptions.
+ |/  
+ * c903738 (tag: v2.2) Changed version to 2.2
+ * e421f64 Fixed issue #111
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Git helps you manage situations when multiple changes are in conflict with one another. 
+While Git can be kept simple, it is also flexible and powerful enough for power users.
+Notice that the log of changes looks very much like a journal of the development of the project.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Git Configuration</h1></header>
+            
+            
+            <section><p>The first step in using Git for the first time is to configure your user name and email.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git config --global user.name <span class="s2">&quot;Moe Szyslak&quot;</span>
+<span class="nv">$ </span>git congig --global user.email <span class="s2">&quot;moe@moesbar.com&quot;</span>
+</pre></div>
+
+<p>This will create a <em>.gitconfig</em> file in your home directory with a very simple structure:</p>
+<div class="highlight"><pre><span class="nv">$ </span>cat ~/.gitconfig
+  <span class="o">[</span>user<span class="o">]</span>
+          <span class="nv">name</span> <span class="o">=</span> Moe Szyslak
+          <span class="nv">email</span> <span class="o">=</span> moe@moesbar.com
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>If you ever change your email address, for example, you can either run the command again, or simply edit the <em>.gitconfig</em> file directly.
+The <em>--global</em> flag indicates that these values are to be applied system-wide; you can override the values for specific projects by running the commands without this flag within the project's directory.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Create a repository</h1></header>
+            
+            
+            <section><p>Creating a new repository:</p>
+<div class="highlight"><pre> <span class="nv">$ </span>git init firstrepo
+
+Initialized empty Git repository in /Users/fonnescj/firstrepo/.git/
+</pre></div>
+
+<p>Converting existing code into a repository:</p>
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>firstrepo
+<span class="nv">$ </span>git init
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Have a look at the <code>.git</code> directory that is created. This is the only thing that Git adds to the file structure.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Checking the Status</h1></header>
+            
+            
+            <section><p>The <code>git status</code> command is used to monitor the state of the repository and of the working directory.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</pre></div>
+
+<p>Adding content to the working directory is picked up by Git.</p>
+<div class="highlight"><pre><span class="nv">$ </span>touch model.r
+<span class="nv">$ </span>git status
+
+<span class="c"># On branch master</span>
+<span class="c">#</span>
+<span class="c"># Initial commit</span>
+<span class="c">#</span>
+<span class="c"># Untracked files:</span>
+<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="c">#</span>
+<span class="c">#   model.r</span>
+nothing added to commit but untracked files present <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> to track<span class="o">)</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Here, the <code>status</code> command reports that there are no outstanding changes to record. This means that the repository has the same state as that of the working directory.
+Creating a file then checking the status of the repo will show that Git is aware of the file, but views it as <em>untracked</em>. Notice that at the bottom of the message, Git gives you a hint about what to do next.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>The Staging Area</h1></header>
+            
+            
+            <section><p>Let Git know you intend to include content in the next commit using <code>git add</code>.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git add model.r
+
+<span class="c"># On branch master</span>
+<span class="c">#</span>
+<span class="c"># Initial commit</span>
+<span class="c">#</span>
+<span class="c"># Changes to be committed:</span>
+<span class="c">#   (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)</span>
+<span class="c">#</span>
+<span class="c">#   new file:   model.r</span>
+<span class="c">#</span>
+</pre></div>
+
+<p>We can add all modified files simultaneously by the syntax:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git add .
+</pre></div>
+
+<p><em>Why do we need a staging area?</em></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>This does not commit the file straight away, but rather, puts it in a staging area, where it is ready to be committed alongside other (perhaps related) files.
+It makes it easier to gather a set of related changes to be committed as a meaningful unit. 
+It also adds a layer of protection from accidentally committing changes that were unintended.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Don't be Afraid to Commit</h1></header>
+            
+            
+            <section><p>An explicit <code>commit</code> command is then executed to formally give the file membership in the repository:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git commit -m <span class="s2">&quot;Draft of first model&quot;</span>
+
+<span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> cace59c<span class="o">]</span> Draft of first model
+ 0 files changed
+ create mode 100644 model.r
+</pre></div>
+
+<p>A (mandatory) commit message has been added, using the <code>-m</code> flag.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Notes</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>How is Git Different?</h1></header>
+            
+            
+            <section><p>Git is an <strong>opt-in</strong> system: you must explicitly specify which files are included in a given commit.</p>
+<p>Git is a <strong>distributed</strong> system: there is no central repository; each clone is a first-class version of the repo.</p>
+<p>Git operates <strong>offline</strong>: in the above transactions there was no network activity. </p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Git interacts with remote repositories only when explicitly asked to do so, via <code>push</code>, <code>pull</code> and other remote commands.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>It's All About Content</h1></header>
+            
+            
+            <section><p>Git manages files in any particular repository based on the <em>content</em> of those files. Other changes are ignored:</p>
+<div class="highlight"><pre><span class="nv">$ </span>mkdir docs
+<span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</pre></div>
+
+<p>What if we change the access timestamp of a file?</p>
+<div class="highlight"><pre><span class="nv">$ </span>touch model.r
+<span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>There is no content in an empty directory.
+<code>touch</code> does not change a file's contents.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>It's All About Content</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">&#39;library(ggplot2)&#39;</span> &gt;&gt; model.r
+<span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+<span class="c"># Changes not staged for commit:</span>
+<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span>
+<span class="c">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+<span class="c">#</span>
+<span class="c">#   modified:   model.r</span>
+<span class="c">#</span>
+no changes added to commit <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> and/or <span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
+</pre></div>
+
+<p>Now we have changed the contents of our file, so it appears as <em>modified</em> in Git.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Notes</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Removing Files</h1></header>
+            
+            
+            <section><p>Let's try adding a file to the repository ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>touch badfile.txt
+<span class="nv">$ </span>git add badfile.txt
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;Here&#39;s a new file&quot;</span>
+</pre></div>
+
+<p>... and then remove it.</p>
+<div class="highlight"><pre><span class="nv">$ </span>rm badfile.txt
+<span class="nv">$ </span>git status
+
+<span class="c"># On branch master</span>
+<span class="c"># Changes not staged for commit:</span>
+<span class="c">#   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</span>
+<span class="c">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+<span class="c">#</span>
+<span class="c">#   deleted:    badfile.txt</span>
+<span class="c">#</span>
+no changes added to commit <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> and/or <span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
+</pre></div>
+
+<p>The file does not exist in our working directory any longer, but Git notices that it is gone!</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Simply removing a file by throwing it in the trash does not remove it from the repository; it only registers as a modification of the file.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Removing Files</h1></header>
+            
+            
+            <section><p>The command for removing files from being tracked by Git is <code>git rm</code>.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git rm badfile.txt
+
+rm <span class="s1">&#39;badfile.txt&#39;</span>
+
+<span class="nv">$ </span>git status
+
+<span class="c"># On branch master</span>
+<span class="c"># Changes to be committed:</span>
+<span class="c">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+<span class="c">#</span>
+<span class="c">#   deleted:    badfile.txt</span>
+<span class="c">#</span>
+</pre></div>
+
+<p>Now the change is staged to be committed, and the file will no longer be tracked by the repository.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Note that evidence of its previous existence still appears in the git log. 
+Later, we will show you how to retrieve files deleted from the repository, if you decide later that you need them.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Exercise</h1></header>
+            
+            
+            <section><h3>Try renaming a file under version control</h3>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Notes</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Renaming Files</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="nv">$ </span>mv badfile.txt goodfile.txt
+<span class="nv">$ </span>git status
+
+<span class="c"># On branch master</span>
+<span class="c"># Changes not staged for commit:</span>
+<span class="c">#   (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)</span>
+<span class="c">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+<span class="c">#</span>
+<span class="c">#   deleted:    badfile.txt</span>
+<span class="c">#</span>
+<span class="c"># Untracked files:</span>
+<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="c">#</span>
+<span class="c">#   goodfile.txt</span>
+no changes added to commit <span class="o">(</span>use <span class="s2">&quot;git add&quot;</span> and/or <span class="s2">&quot;git commit -a&quot;</span><span class="o">)</span>
+</pre></div>
+
+<p>Similar to deleting files, you cannot change the name of a file without doing so through Git.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>So, as far as Git is concerned, you have deleted <code>badfile.txt</code> and created <code>goodfile.txt</code>, which is currently not tracked.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Renaming Files</h1></header>
+            
+            
+            <section><p>For the change to be propagated as a renaming action, use <code>git mv</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git mv badfile.txt goodfile.txt
+<span class="nv">$ </span>git status
+
+<span class="c"># On branch master</span>
+<span class="c"># Changes to be committed:</span>
+<span class="c">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+<span class="c">#</span>
+<span class="c">#   renamed:    badfile.txt -&gt; goodfile.txt</span>
+<span class="c">#</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Ignoring Files</h1></header>
+            
+            
+            <section><p>Just because a file exists in your working directory, it does not necessarily imply that you want to track it with the repository.</p>
+<ul>
+<li>e.g., temporary files, program output, log files, private content</li>
+</ul>
+<p>A <code>.gitignore</code> file in any repo directory can be used to omit files from tracking in that directory, and its subdirectories.</p>
+<div class="highlight"><pre><span class="nv">$ </span>more .gitignore
+.Rhistory
+email.txt
+*.log
+*.aux
+*.fdb_latexmk
+*.out
+*.synctex.gz
+*.toc
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>we do not want our status messages to be cluttered with files that Git can see but does not track.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Ignoring Files</h1></header>
+            
+            
+            <section><p>For example, lets create some phony log files in our working directory:</p>
+<div class="highlight"><pre><span class="nv">$ </span>touch foo.log bar.log
+</pre></div>
+
+<p>If we check the status, these two files will appear in the list of untracked files.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+<span class="c"># Untracked files:</span>
+<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="c">#</span>
+<span class="c">#   foo.log</span>
+<span class="c">#   bar.log</span>
+<span class="c"># nothing added to commit but untracked files present (use &quot;git add&quot; to track)</span>
+</pre></div>
+
+<p>However, if our <code>.gitignore</code> file contains <code>*.log</code>, all files ending in <em>.log</em> will be ignored, even though they are still in the working directory, and are not tracked by the repository. </p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Branches</h1></header>
+            
+            
+            <section><p>When you create a new repository, by default you create a <em>branch</em> within that repository called <code>master</code>. You are free to create as many additional branches as you want:</p>
+<pre><code>git branch &lt;new branch name&gt;
+</code></pre>
+<p>Additional branches allows you to work on additional code, without potentially disturbing the work in your <code>master</code> branch. You can easily switch between branches, merge the work of two branches, or simply discard branches as needed.</p>
+<p><strong>Branches are free, use them!</strong></p>
+<pre><code>$ git branch experimental
+$ git branch
+  experimental
+* master
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Branching and Merging</h1></header>
+            
+            
+            <section><p>Let's create something in our new <code>experimental</code> branch:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git checkout experimental
+Switched to branch <span class="s1">&#39;experimental&#39;</span>
+<span class="nv">$ </span>touch new_stuff.r
+<span class="nv">$ </span>git add .
+<span class="nv">$ </span>git commit -m <span class="s2">&quot;Fancy new code&quot;</span>
+<span class="o">[</span>experimental 136c847<span class="o">]</span> Fancy new code
+ 0 files changed
+ create mode 100644 new_stuff.r
+</pre></div>
+
+<p>Now we can switch back to the <code>master</code> branch and merge the new code.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git checkout master
+Switched to branch <span class="s1">&#39;master&#39;</span>
+<span class="nv">$ </span>git merge experimental
+Updating 8fb82d3..136c847
+Fast-forward
+ 0 files changed
+ create mode 100644 new_stuff.r
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              25/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Cloning</h1></header>
+            
+            
+            <section><p>Its easy to make an identical copy of a given repository using <code>git clone</code></p>
+<pre><code>$ cd ..
+$ git clone firstrepo firstrepo_clone
+Cloning into 'firstrepo_clone'...
+done.
+</code></pre>
+<p>Have a look around ... they're the same!</p>
+<pre><code>$ cd firstrepo_clone
+$ git hist --all
+* fa0d6a5 2012-07-02 | renamed badfile to goodfile (HEAD, origin/master, origin/
+* 0e0cfca 2012-07-02 | Here's a new file again [Christopher Fonnesbeck]
+* 98a6415 2012-07-02 | Deleted badfile [Christopher Fonnesbeck]
+* 770fa5e 2012-07-02 | Here's a new file [Christopher Fonnesbeck]
+* cace59c 2012-06-25 | Draft of first model [Christopher Fonnesbeck]
+(END)
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              26/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Cloning</h1></header>
+            
+            
+            <section><p>Cloning is most relevant when you want to get a copy of someone else's repository. For example, let's take a look at <code>knitr</code>:</p>
+<p><img alt="knitr repo" src="file:///Users/fonnescj/Bios301/slides/images/knitr_repo.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              27/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Cloning</h1></header>
+            
+            
+            <section><pre><code>$ git clone git://github.com/yihui/knitr.git
+Cloning into 'knitr'...
+remote: Counting objects: 9337, done.
+remote: Compressing objects: 100% (2755/2755), done.
+remote: Total 9337 (delta 6646), reused 9207 (delta 6520)
+Receiving objects: 100% (9337/9337), 1.36 MiB | 1.86 MiB/s, done.
+Resolving deltas: 100% (6646/6646), done.
+</code></pre>
+<p>I now have an identical, first-class copy of Yihui Xie's <code>knitr</code> repo!</p>
+<pre><code>$ cd knitr
+$ git hist --all
+* 36c53e1 2012-08-23 | bump version (HEAD, origin/master, origin/HEAD, master) [
+* 52146d4 2012-08-23 | re-roxygenize [Yihui Xie]
+* 961e88c 2012-08-23 | document changes in automatic detection of syntax [Yihui 
+* c02ba37 2012-08-23 | *.brew corresponds to pat_brew() [Yihui Xie]
+* 5df1117 2012-08-23 | detect_pattern() puts higher priority on the file extensi
+* 1178425 2012-08-23 | rm knitr-upload.Rmd [Yihui Xie]
+:
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>try installing it ...</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              28/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Exercise</h1></header>
+            
+            
+            <section><h3>Clone the Bios301 course repository at</h3>
+<pre><code>http://github.com/fonnesbeck/Bios301
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Show what happens when I change something on the repo.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              29/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Hashes</h1></header>
+            
+            
+            <section><p>Git identifies the uniqueness of all its content using <em>hashcodes</em>. </p>
+<pre><code>$ git log
+commit fa0d6a5c6b03c0224fa87879a6454911a41400c9
+Author: Christopher Fonnesbeck &lt;chris.fonnesbeck@vanderbilt.edu&gt;
+Date:   Mon Jul 2 13:55:01 2012 -0500
+
+    renamed badfile to goodfile
+
+commit 0e0cfcad18d7ceb1d9637f1e4184b98a46e9df18
+Author: Christopher Fonnesbeck &lt;chris.fonnesbeck@vanderbilt.edu&gt;
+Date:   Mon Jul 2 13:43:47 2012 -0500
+
+    Here's a new file again
+</code></pre>
+<p>A hashcode is a mapping of some quantity of data to a much smaller dataset that uniquely identifies the original dataset. </p>
+<p>This is done using one of several <em>hashing algorithms</em>.<br />
+</p>
+<h3>But, why??</h3>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>One typically encounters hashcodes and hashing algorithms in the context of security, but Git uses this relationship to identify the content of files, and hence, to reliably track changes in file content.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              30/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Hashes</h1></header>
+            
+            
+            <section><p><img alt="hash" src="file:///Users/fonnescj/Bios301/slides/images/hash.png" /></p>
+<p>Git uses the <a href="http://en.wikipedia.org/wiki/SHA-1">SHA-1 hashing function</a> to encode the files that it tracks.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>a file of arbitrary size is converted into a unique 160-bit string of characters</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              31/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Hashes</h1></header>
+            
+            
+            <section><p>Everything stored in a Git repository is indexed with its own SHA-1 hashcode. For example, each commit in the history is associated with a hashcode.</p>
+<pre><code>$ git log --pretty=oneline
+fa0d6a5c6b03c0224fa87879a6454911a41400c9 renamed badfile to goodfile
+0e0cfcad18d7ceb1d9637f1e4184b98a46e9df18 Here's a new file again
+98a64155f562d40179ac53c551ee0f2670bdb203 Deleted badfile
+770fa5e1ed514a8eef10ddb7013a9f47fadfa98f Here's a new file
+cace59c0bc7feead6cebcaed893ead508770cf28 Draft of first model
+</code></pre>
+<p>What gets a hash?</p>
+<ul>
+<li>BLOBs</li>
+<li>trees</li>
+<li>commmits</li>
+<li>tags</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              32/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Hash Collisions</h1></header>
+            
+            
+            <section><p>Since we are using 160 bits to uniquely identify the contents of every file, commit, tree or tag, one might expect <strong>collisions</strong> to arise occasionally.</p>
+<p>If we assume:</p>
+<ul>
+<li>10 billion humans are programming</li>
+<li>They <em>each</em> produce 5000 git objects every day</li>
+<li>They all push to the same huge repository</li>
+<li>They keep this up for 50 years</li>
+</ul>
+<p>Then, the probability of getting a hash collision 6e-13.</p>
+<p><em>No one has ever found a SHA-1 collision.</em></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              33/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Your Commit History</h1></header>
+            
+            
+            <section><p><code>git log</code> command accesses the record of all the transactions that have been executed under git for the project from which you call it. </p>
+<pre><code>$ git log
+commit fa0d6a5c6b03c0224fa87879a6454911a41400c9
+Author: Christopher Fonnesbeck &lt;chris.fonnesbeck@vanderbilt.edu&gt;
+Date:   Mon Jul 2 13:55:01 2012 -0500
+
+    renamed badfile to goodfile
+
+commit 0e0cfcad18d7ceb1d9637f1e4184b98a46e9df18
+Author: Christopher Fonnesbeck &lt;chris.fonnesbeck@vanderbilt.edu&gt;
+Date:   Mon Jul 2 13:43:47 2012 -0500
+
+    Here's a new file again
+</code></pre>
+<ul>
+<li>unique commit hash</li>
+<li>name and address of the committer</li>
+<li>date of the commit</li>
+<li>mandatory commit message.</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              34/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Your Commit History</h1></header>
+            
+            
+            <section><p>A combination of arguments to <code>git log</code> can be used to obtain a customized display of information:</p>
+<pre><code>$ git log --graph --decorate --abbrev-commit --all --pretty=oneline
+* a33b026 Update master
+* 98a2195 Fixed binning formula bug #120
+* 6be5297 Fixed test directory in test_MCMCSampler.py
+* 16d0b9e Fixed pickle commit bug.
+* 4dbb9d0 Fixed coda_output and bug in Doane's binning formula.
+* 15222e3 Improved binning options for histograms.
+* 3966c74 Fixed issue #118 in utils.coda()
+* f94b148 Restored numpy error settings
+*   8c28e9d Merge pull request #115 from memmett/hdf5-earray
+|\  
+| * b1b714c HDF5EA: Load meta info from existing file.
+| * 304e667 Rename hdf52 to hdf5ea, basic functionality works now.
+| * 7591091 Initial work on using EArray in HDF5.
+| | * 1224865 (origin/gh-pages, gh-pages) Updated windows install instructions
+</code></pre>
+<p>We now see information regarding the various branches, an abbreviated hashcode, and a graph that indicates where code branches were created and merged.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              35/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Filtering Commit History</h1></header>
+            
+            
+            <section><p>Another powerful use of <code>git log</code> is for <em>filtering</em> the commit history, according to desired criteria. </p>
+<p>For example, if we want to see all commits from one month ago until yesterday, limiting the number returned to a maximum of 30 records, we can type:</p>
+<pre><code>$ git log -n 30 --since='1 month ago' --until=yesterday
+commit d159a3b9adba4116722cbddf7ca2b56506ba159d
+Author: Christopher Fonnesbeck &lt;chris.fonnesbeck@vanderbilt.edu&gt;
+Date:   Tue Jul 10 10:47:25 2012 -0500
+
+    Minor fix to buildosx
+
+commit 67e9310b460ad0b07a19acab85da35af059a1980
+Author: Christopher Fonnesbeck &lt;chris.fonnesbeck@vanderbilt.edu&gt;
+Date:   Tue Jul 10 10:20:24 2012 -0500
+
+    Amended install instructions for Windows according to issue #61
+
+commit 4c12d983c188b166997616099e10405814463350
+Author: Christopher Fonnesbeck &lt;chris.fonnesbeck@vanderbilt.edu&gt;
+Date:   Thu Jul 5 10:20:42 2012 -0500
+
+    Fixed bug in sample code for Stochastic section of modelbuilding.rst
+</code></pre></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              36/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Restoring Files</h1></header>
+            
+            
+            <section><p>What if you find that you need to recover a file that you previously removed from the repository, or that you want a previous version of an existing file?</p>
+<div class="highlight"><pre><span class="nv">$ </span>git checkout &lt;commit <span class="nb">hash</span>&gt; &lt;file path&gt;
+</pre></div>
+
+<p>For example, let's say that <code>badfile.txt</code> was not so bad after all:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git checkout 770fa5e badfile.txt
+</pre></div>
+
+<p>However, the checkout command simply restores the file to the working directory; it is not added back to the repository automatically:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+<span class="c"># Changes to be committed:</span>
+<span class="c">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+<span class="c">#</span>
+<span class="c">#   new file:   badfile.txt</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Notes</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              37/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Git Anatomy</h1></header>
+            
+            
+            <section><p><img alt="Conventions" src="file:///Users/fonnescj/Bios301/slides/images/conventions.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Notes</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              38/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>HEAD</h1></header>
+            
+            
+            <section><p>The <strong>HEAD</strong> in Git is the pointer to the current branch reference, which is in turn a pointer to the last commit you made or the last commit that was checked out into your working directory. </p>
+<ul>
+<li>it will be the parent of the next commit you do</li>
+<li>it is the snapshot of your last commit</li>
+</ul>
+<p>You can always see where HEAD is by looking in your <code>.git</code> directory:</p>
+<pre><code>$ cat .git/HEAD 
+ref: refs/heads/master
+</code></pre>
+<p>... which is a reference to:</p>
+<pre><code>$ cat .git/refs/heads/master 
+e9a570524b63d2a2b3a7c3325acf5b89bbeb131e
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Analogy: the arm of a record player</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              39/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Under The Hood</h1></header>
+            
+            
+            <section><div class="highlight"><pre><span class="nv">$ </span>git commit
+</pre></div>
+
+<p><img alt="Commit" src="file:///Users/fonnescj/Bios301/slides/images/commit.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              40/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Amending a Commit</h1></header>
+            
+            
+            <section><p>What if you ...</p>
+<ul>
+<li>forget to add files to a commit?</li>
+<li>make a mistake in the commit message?</li>
+</ul>
+<p>This command takes your staging area and uses it to amend your last commit. </p>
+<div class="highlight"><pre><span class="nv">$ </span>git commit --amend
+</pre></div>
+
+<p>If you’ve made no changes since your last commit, then your snapshot will look exactly the same and all you’ll change is your commit message. Editing the commit message overwrites your previous commit.</p>
+<pre><code>$ git commit -m 'initial commit'
+$ git add forgotten_file
+$ git commit --amend
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              41/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Unstaging a File</h1></header>
+            
+            
+            <section><p>What if you add two files to your index (staging area), but you only wanted to add one? How can you unstage one of the two? <strong>Hint</strong>: check your status!</p>
+<div class="highlight"><pre><span class="nv">$ </span>git add foo.r bar.r
+<span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+<span class="c"># Changes to be committed:</span>
+<span class="c">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+<span class="c">#</span>
+<span class="c">#   new file:   bar.r</span>
+<span class="c">#   new file:   foo.r</span>
+</pre></div>
+
+<p>Following the advice of <code>git status</code>:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git reset HEAD benchmarks.rb
+<span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+<span class="c"># Changes to be committed:</span>
+<span class="c">#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</span>
+<span class="c">#</span>
+<span class="c">#   new file:   foo.r</span>
+<span class="c">#</span>
+<span class="c"># Untracked files:</span>
+<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span>
+<span class="c">#</span>
+<span class="c">#   bar.r</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              42/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Unmodifying a Modified File</h1></header>
+            
+            
+            <section><p>Suppose you modify a file in our working directory, but decide that you make a mistake and would like to revert to the version at the HEAD.<br />
+</p>
+<div class="highlight"><pre><span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+<span class="c"># Changes not staged for commit:</span>
+<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span>
+<span class="c">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+<span class="c">#</span>
+<span class="c">#   modified:   model.r</span>
+</pre></div>
+
+<p>Again, <code>git status</code> gives us a hint!</p>
+<div class="highlight"><pre><span class="nv">$ </span>git checkout -- model.r
+<span class="nv">$ </span>git status
+<span class="c"># On branch master</span>
+nothing to commit <span class="o">(</span>working directory clean<span class="o">)</span>
+</pre></div>
+
+<p>The changes to the file were discarded, not committed.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>This is a dangerous command!</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              43/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Remotes</h1></header>
+            
+            
+            <section><p>Remote repositories are project repositories that are hosted on a network. Collaborating with others involves managing these remote repositories and pushing and pulling data to and from them when you need to share work. </p>
+<p>Go to the <code>Bios301</code> repo that you cloned in the earlier exercise, and check out the remote repositories.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git remote -v
+origin  git@github.com:fonnesbeck/Bios301.git <span class="o">(</span>fetch<span class="o">)</span>
+origin  git@github.com:fonnesbeck/Bios301.git <span class="o">(</span>push<span class="o">)</span>
+</pre></div>
+
+<p>This shows the name of the remote (origin), the corresponding URL for the remote, and what each URL is used for (fetching and pushing).</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Remotes are identical to local branches except that Git will not allow you to check them out - however, you can merge from them, diff them to other branches, run history logs on them, etc.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              44/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>GitHub</h1></header>
+            
+            
+            <section><p>GitHub is a web-based hosting service for git repositories.</p>
+<p><img alt="Github" src="file:///Users/fonnescj/Bios301/slides/images/github.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Notes</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              45/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Adding Remote Repos</h1></header>
+            
+            
+            <section><p>If you want to share your repository, or interact in any way with a new repository, you can specify a remote repository on a networked server like GitHub.</p>
+<p>The general syntax for adding remotes is:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git remote add origin git@github.com:fonnesbeck/firstremote.git
+<span class="nv">$ </span>git remote -v
+origin  git@github.com:fonnesbeck/firstremote.git <span class="o">(</span>fetch<span class="o">)</span>
+origin  git@github.com:fonnesbeck/firstremote.git <span class="o">(</span>push<span class="o">)</span>
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>The remote alias name you give it is arbitrary, though "origin" is conventional; <code>git clone</code> uses this as a default.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              46/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Fetching and Pulling</h1></header>
+            
+            
+            <section><p><code>git fetch</code> will synchronize your repo with another, pulling down any data that you do not have locally.</p>
+<p><code>git pull</code> is a composite command; it runs <code>git fetch</code> followed by <code>git merge</code> on the branch of that remote that is tracked by your local branch.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git fetch origin
+warning: no common commits
+remote: Counting objects: 3, <span class="k">done</span>.
+remote: Total 3 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+Unpacking objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="k">done</span>.
+From github.com:fonnesbeck/firstremote
+ * <span class="o">[</span>new branch<span class="o">]</span>      master     -&gt; origin/master
+</pre></div>
+
+<p>You can see that it identifies the remote master branch as a new one.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              47/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Fetching and Pulling</h1></header>
+            
+            
+            <section><p>Just adding the remote repository does not allow you to merge, however. You need to specify which <em>branch</em> of the remote repo is to be the tracked by the current local branch: </p>
+<pre><code>$ git pull
+warning: no common commits
+remote: Counting objects: 3, done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (3/3), done.
+From github.com:fonnesbeck/foo
+ * [new branch]      master     -&gt; origin/master
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details
+
+    git pull &lt;remote&gt; &lt;branch&gt;
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream master origin/&lt;branch&gt;
+</code></pre>
+<p>Again, git gives you a hint ...</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              48/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Fetching and Pulling</h1></header>
+            
+            
+            <section><p>In order to specify a remote branch for pushing and pulling content, we use <code>git branch</code> with the <code>--set-upstream</code> argument specified:</p>
+<div class="highlight"><pre><span class="nv">$ </span>git branch --set-upstream master origin/master
+Branch master <span class="nb">set </span>up to track remote branch master from origin.
+</pre></div>
+
+<p>Now a pull works as you would expect ...</p>
+<div class="highlight"><pre><span class="nv">$ </span>git pull
+Merge made by the <span class="s1">&#39;recursive&#39;</span> strategy.
+ README.md | 2 ++
+ 1 file changed, 2 insertions<span class="o">(</span>+<span class="o">)</span>
+ create mode 100644 README.md
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              49/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Pushing</h1></header>
+            
+            
+            <section><p>To share your work with others, you need to push your changes to the remote repository. To do this, you run <code>git push &lt;alias&gt; &lt;branch&gt;</code> which will attempt to make your branch the new branch on the remote. </p>
+<p>If no arguments are provided, git will push all branches to their corresponding remotes.</p>
+<div class="highlight"><pre><span class="nv">$ </span>git push
+Counting objects: 22, <span class="k">done</span>.
+Delta compression using up to 4 threads.
+Compressing objects: 100% <span class="o">(</span>15/15<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: 100% <span class="o">(</span>20/20<span class="o">)</span>, 1.93 KiB, <span class="k">done</span>.
+Total 20 <span class="o">(</span>delta 5<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+To git@github.com:fonnesbeck/firstremote.git
+   f947ec8..8fb82d3  master -&gt; master
+</pre></div>
+
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              50/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Pull Before You Push</h1></header>
+            
+            
+            <section><p>If you are collaborating on a remote repository, its usually a good idea to <code>git pull</code> before you push, incase others have committed content since you last pulled.</p>
+<pre><code>$ git push
+To git@github.com:fonnesbeck/Bios301.git
+ ! [rejected]        master -&gt; master (non-fast-forward)
+error: failed to push some refs to 'git@github.com:fonnesbeck/Bios301.git'
+hint: Updates were rejected because a pushed branch tip is behind its remote
+hint: counterpart. If you did not intend to push that branch, you may want to
+hint: specify branches to push or set the 'push.default' configuration
+hint: variable to 'current' or 'upstream' to push only the current branch.
+</code></pre>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              51/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Hands-on Exercise</h1></header>
+            
+            
+            <section><p>Test your "Git-fu" by forking my <a href="https://github.com/fonnesbeck/git_training"><code>git_training</code></a> repository, cloning it to your local machine, then correcting the grammatical error in the README file and pushing the edited file back to your remote on GitHub. </p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>If you can do this, I will be reasonably confident that you know the basics if Git.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              52/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_git.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Want More?</h1></header>
+            
+            
+            <section><p><a href="http://gitimmersion.com">Git Immersion</a> is a step-by-step, hands-on tutorial for learning git.</p>
+<p><img alt="Git Immersion" src="file:///Users/fonnescj/Bios301/slides/images/git_immersion.png" /></p>
+<h3>http://gitimmersion.com</h3></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_git.md">lecture1_git.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              53/53
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Version Control using Git</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-2">
+        <th><a href="#slide2">Programming Workflow</a></th>
+        <td><a href="#slide2">2</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">What is Git?</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">3 Stages of Git</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">The <code>git</code> Command</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6">Git in Action</a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Merging Work on Separate Branches</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Git in Action</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Git Configuration</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Create a repository</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Checking the Status</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">The Staging Area</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Don't be Afraid to Commit</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">How is Git Different?</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">It's All About Content</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">It's All About Content</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">Removing Files</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">Removing Files</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Exercise</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Renaming Files</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Renaming Files</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-22">
+        <th><a href="#slide22">Ignoring Files</a></th>
+        <td><a href="#slide22">22</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Ignoring Files</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Branches</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-25">
+        <th><a href="#slide25">Branching and Merging</a></th>
+        <td><a href="#slide25">25</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-26">
+        <th><a href="#slide26">Cloning</a></th>
+        <td><a href="#slide26">26</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-27">
+        <th><a href="#slide27">Cloning</a></th>
+        <td><a href="#slide27">27</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-28">
+        <th><a href="#slide28">Cloning</a></th>
+        <td><a href="#slide28">28</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-29">
+        <th><a href="#slide29">Exercise</a></th>
+        <td><a href="#slide29">29</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-30">
+        <th><a href="#slide30">Hashes</a></th>
+        <td><a href="#slide30">30</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-31">
+        <th><a href="#slide31">Hashes</a></th>
+        <td><a href="#slide31">31</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-32">
+        <th><a href="#slide32">Hashes</a></th>
+        <td><a href="#slide32">32</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-33">
+        <th><a href="#slide33">Hash Collisions</a></th>
+        <td><a href="#slide33">33</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-34">
+        <th><a href="#slide34">Your Commit History</a></th>
+        <td><a href="#slide34">34</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-35">
+        <th><a href="#slide35">Your Commit History</a></th>
+        <td><a href="#slide35">35</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-36">
+        <th><a href="#slide36">Filtering Commit History</a></th>
+        <td><a href="#slide36">36</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-37">
+        <th><a href="#slide37">Restoring Files</a></th>
+        <td><a href="#slide37">37</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-38">
+        <th><a href="#slide38">Git Anatomy</a></th>
+        <td><a href="#slide38">38</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-39">
+        <th><a href="#slide39">HEAD</a></th>
+        <td><a href="#slide39">39</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-40">
+        <th><a href="#slide40">Under The Hood</a></th>
+        <td><a href="#slide40">40</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-41">
+        <th><a href="#slide41">Amending a Commit</a></th>
+        <td><a href="#slide41">41</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-42">
+        <th><a href="#slide42">Unstaging a File</a></th>
+        <td><a href="#slide42">42</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-43">
+        <th><a href="#slide43">Unmodifying a Modified File</a></th>
+        <td><a href="#slide43">43</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-44">
+        <th><a href="#slide44">Remotes</a></th>
+        <td><a href="#slide44">44</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-45">
+        <th><a href="#slide45">GitHub</a></th>
+        <td><a href="#slide45">45</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-46">
+        <th><a href="#slide46">Adding Remote Repos</a></th>
+        <td><a href="#slide46">46</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-47">
+        <th><a href="#slide47">Fetching and Pulling</a></th>
+        <td><a href="#slide47">47</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-48">
+        <th><a href="#slide48">Fetching and Pulling</a></th>
+        <td><a href="#slide48">48</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-49">
+        <th><a href="#slide49">Fetching and Pulling</a></th>
+        <td><a href="#slide49">49</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-50">
+        <th><a href="#slide50">Pushing</a></th>
+        <td><a href="#slide50">50</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-51">
+        <th><a href="#slide51">Pull Before You Push</a></th>
+        <td><a href="#slide51">51</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-52">
+        <th><a href="#slide52">Hands-on Exercise</a></th>
+        <td><a href="#slide52">52</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-53">
+        <th><a href="#slide53">Want More?</a></th>
+        <td><a href="#slide53">53</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
