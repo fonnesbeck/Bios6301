@@ -129,6 +129,7 @@ R is an open-source implementation of the **S programming language**, and was cr
 - widely-used throughout academia and industry
 - free and open-source
 - extremely flexible and powerful
+- extensible
 - the primary statistical package used in our department
 
 ![R logo](http://developer.r-project.org/Logo/Rlogo-4.png)
@@ -201,6 +202,10 @@ The precise function for doing your particular analysis may not exist!
 ---
 
 ![SPSS](images/spss.png)
+
+---
+
+![R](images/r_console.png)
 
 ---
 

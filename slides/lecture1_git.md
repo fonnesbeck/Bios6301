@@ -174,7 +174,7 @@ The first step in using Git for the first time is to configure your user name an
 
     !bash
     $ git config --global user.name "Moe Szyslak"
-    $ git congig --global user.email "moe@moesbar.com"    
+    $ git config --global user.email "moe@moesbar.com"    
 
 This will create a *.gitconfig* file in your home directory with a very simple structure:
 

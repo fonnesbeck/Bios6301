@@ -11,6 +11,15 @@ external/*
 *.out
 *.synctex.gz
 *.toc
+*.dvi
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
 cache
 temp
 2011
+slides/*html
