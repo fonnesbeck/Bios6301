@@ -2,7 +2,7 @@
 
 ## Instructor
 
-Chris Fonnesbeck, PhD, Instructor of Biostatistics
+Chris Fonnesbeck, PhD, Assistant Professor of Biostatistics
 
 T-2303 Medical Center North
 
