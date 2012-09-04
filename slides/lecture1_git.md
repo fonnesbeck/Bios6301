@@ -620,7 +620,7 @@ Cloning
 
 Cloning is most relevant when you want to get a copy of someone else's repository. For example, let's take a look at `knitr`:
 
-![knitr repo](images/knitr_repo.png)
+![knitr repo](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/knitr_repo.png)
 
 # Presenter Notes
 
@@ -703,7 +703,7 @@ One typically encounters hashcodes and hashing algorithms in the context of secu
 Hashes
 ======
 
-![hash](images/hash.png)
+![hash](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/hash.png)
 
 Git uses the [SHA-1 hashing function](http://en.wikipedia.org/wiki/SHA-1) to encode the files that it tracks.
 
@@ -866,7 +866,7 @@ Notes
 Git Anatomy
 ===========
 
-![Conventions](images/conventions.png)
+![Conventions](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/conventions.png)
 
 # Presenter Notes
 
@@ -906,7 +906,7 @@ Under The Hood
     !bash
     $ git commit
 
-![Commit](images/commit.png)
+![Commit](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/commit.png)
 
 # Presenter Notes
 
@@ -1031,7 +1031,7 @@ GitHub
 
 GitHub is a web-based hosting service for git repositories.
 
-![Github](images/github.png)
+![Github](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/github.png)
 
 # Presenter Notes
 
@@ -1044,7 +1044,7 @@ GitHub Educational Accounts
 
 ### github.com/edu
 
-![Github](images/github_edu.png)
+![Github](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/github_edu.png)
 
 # Presenter Notes
 
@@ -1206,6 +1206,6 @@ Want More?
 
 [Git Immersion](http://gitimmersion.com) is a step-by-step, hands-on tutorial for learning git.
 
-![Git Immersion](images/git_immersion.png)
+![Git Immersion](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/git_immersion.png)
 
 ### http://gitimmersion.com
