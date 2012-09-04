@@ -201,11 +201,11 @@ The precise function for doing your particular analysis may not exist!
 
 ---
 
-![SPSS](images/spss.png)
+![SPSS](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/spss.png)
 
 ---
 
-![R](images/r_console.png)
+![R](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/r_console.png)
 
 ---
 
@@ -234,7 +234,7 @@ The *entire analysis* should be reproducible!
 
 [http://bit.ly/duke_misconduct](http://bit.ly/duke_misconduct)
 
-![Potti scandal](images/potti.png)
+![Potti scandal](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/potti.png)
 
 # Presenter Notes
 
@@ -270,6 +270,6 @@ At the end of each lecture, you will be left with a "programming problem" that s
 
 ### github.com/fonnesbeck/Bios301
 
-![Bios301 Website](images/website.png)
+![Bios301 Website](https://github.com/fonnesbeck/Bios301/raw/master/slides/images/website.png)
 
 [gentleman_lang]: http://biostats.bepress.com/bioconductor/paper2/
