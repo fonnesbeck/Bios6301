@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bios301: Introduction to Statistical Computing</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="file:///Library/Python/2.7/site-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="file:///Users/fonnescj/Bios301/slides/tango_new/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="file:///Library/Python/2.7/site-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Bios301: Introduction to Statistical Computing</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Instructor</h2></header>
+            
+            
+            <section><p><strong>Christopher Fonnesbeck</strong></p>
+<ul>
+<li>Office: T-2303 MCN</li>
+<li>Email: chris.fonnesbeck@vanderbilt.edu</li>
+<li>Twitter: vandy_biostat</li>
+</ul>
+<h2>Teaching Assistant</h2>
+<p><strong>Svetlana Eden</strong></p>
+<ul>
+<li>Office: S-2323 MCN</li>
+<li>Email: svetlana.eden@vanderbilt.edu</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Course Aim</h1></header>
+            
+            
+            <section><p>To equip students with relevant, modern, flexible tools for proficient statistical computation.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Many modern problems/data require a computational approach</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Bios 301</h1></header>
+            
+            
+            <section><ul>
+<li><strong>Lecture 1</strong>: Course introduction; Version control using Git</li>
+<li><strong>Lecture 2</strong>: Document preparation using LaTeX, Markdown and <code>knitr</code></li>
+<li><strong>Lecture 3</strong>: Data, data types and data structures (Chapters 2-5)</li>
+<li><strong>Lecture 4</strong>: Control structures; Writing and calling functions (Chapter 7)</li>
+<li><strong>Lecture 5</strong>: Simulation; optimization (Chapter 8) </li>
+<li><strong>Lecture 6</strong>: Debugging and testing (Chapter 13)</li>
+<li><strong>Lecture 7</strong>: Top-down design and scoping </li>
+<li><strong>Lecture 8</strong>: Programming paradigms (Chapter 9)</li>
+<li><strong>Lecture 9</strong>: Scientific graphics; <code>ggplot2</code> (Chapter 12) </li>
+<li><strong>Lecture 10</strong>: Split, apply and combine </li>
+<li><strong>Lecture 11</strong>: High performance computing; basic parallel computing (Chapters 14, 16) </li>
+<li><strong>Lecture 12</strong>: I/O and databases; regular expressions (Chapters 10-11) </li>
+<li><strong>Lecture 13</strong>: Overview of STATA </li>
+</ul>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Bios 366</h1></header>
+            
+            
+            <section><h2>Advanced Statistical Computing</h2>
+<ul>
+<li>Python programming</li>
+<li>numerical optimization</li>
+<li>Markov Chain Monte Carlo (MCMC)</li>
+<li>estimation-maximization (EM) algorithms</li>
+<li>data augmentation algorithms</li>
+<li>machine learning</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Cumulative</h2></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Content later in the course builds on what was presented earlier -- keep up!</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Hands-on</h1></header>
+            
+            
+            <section><ul>
+<li>Each lecture will be accompanied by hands on exercises</li>
+<li>Homeworks are longer and more involved</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Evaluation</h1></header>
+            
+            
+            <section><p>A final course grade will be calculated based on:</p>
+<ul>
+<li>four (4) equally-weighted homework assignments (50%)</li>
+<li>a take-home final exam (50%)</li>
+</ul>
+<p>The final exam has been tentatively scheduled for December 13.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Textbook</h1></header>
+            
+            
+            <section><p><img alt="The Art of R Programming" src="http://nostarch.com/sites/default/files/imagecache/product_full/R_cvr_front.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>Read some of it every week.</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Text Editor</h1></header>
+            
+            
+            <section><p><img src=http://f.cl.ly/items/0d1p2M1e380l2j3C2Z40/vim-logo-en.png width=200 align=left>
+<img src=http://f.cl.ly/items/3y0S1S352y1B2c032u2I/textmate.png width=200, align=right>
+<img src=http://f.cl.ly/items/0E3s2a0V3p3d3E432114/Sublime-Text-2.png width=200, align=center>
+<img src=http://f.cl.ly/items/2b1l2c1c0U2L1q3A0A34/gnu-project.png width=200, align=center></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Software</h1></header>
+            
+            
+            <section><ul>
+<li>Statistical analysis tools: <a href="http://cran.r-project.org/">R</a>, <a href="http://www.stata.com/">Stata</a></li>
+<li>Version control system: <a href="http://git-scm.com/">Git</a></li>
+<li>Document preparation tools: LaTeX, <a href="http://yihui.name/knitr/">knitr</a>, <a href="http://fletcherpenney.net/multimarkdown/">MultiMarkdown</a></li>
+<li>Relational database: <a href="http://www.sqlite.org/">SQLite</a></li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>R</h1></header>
+            
+            
+            <section><p>R is an open-source implementation of the <strong>S programming language</strong>, and was created by Ross Ihaka and Robert Gentleman. It is a domain-specific language, engineered for doing statistical and graphical computation.</p>
+<h2>Why R?</h2>
+<ul>
+<li>widely-used throughout academia and industry</li>
+<li>free and open-source</li>
+<li>extremely flexible and powerful</li>
+<li>extensible</li>
+<li>the primary statistical package used in our department</li>
+</ul>
+<p><img alt="R logo" src="http://developer.r-project.org/Logo/Rlogo-4.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Git</h1></header>
+            
+            
+            <section><p>Git is a software tool for source code management and revision control. </p>
+<h2>Why Git?</h2>
+<ul>
+<li>provides a method for version control and backup</li>
+<li>facilitates collaboration on code and documents</li>
+<li>fast and scalable</li>
+<li>effective tool for reproducible research</li>
+</ul>
+<h2><img alt="Git logo" src="http://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/256px-Git_icon.svg.png" /></h2>
+<h1>Document Tools</h1></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>No Word Processors</h1></header>
+            
+            
+            <section><p>Assignments may be submitted in <strong>LaTeX</strong>, <strong>Sweave</strong>, <strong>knitr</strong>, or any markup format that allows for easy conversion to LaTeX (e.g. <strong>Markdown</strong>, <strong>reStructuredText</strong>). </p>
+<p>Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. </p>
+<p>Hand-written assignments (including scanned documents) are also not permitted</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Databases</h1></header>
+            
+            
+            <section><p>Relational databases organize data into a structured set of tables, which can be queried and manipulated using the structured querying language (SQL).</p>
+<h2>Why databases?</h2>
+<ul>
+<li>ensures data integrity and security</li>
+<li>changes to data are logged</li>
+<li>efficient means of managing large data</li>
+<li>data can be accessed from models via API</li>
+<li>data do not belong in spreadsheets!</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Statistical Programming</h1></header>
+            
+            
+            <section><p>Real-world statistical analysis rarely involves plugging data into a software package and running built-in routines.</p>
+<p>Typical components of statistical analysis:</p>
+<ul>
+<li>data importation</li>
+<li>data cleaning</li>
+<li>data transformation</li>
+<li>model specification and parameterization</li>
+<li>model fitting</li>
+<li>model checking</li>
+<li>generation of model outputs</li>
+<li>report generation</li>
+</ul>
+<p>Each of these may, and often do, require programming.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>The precise function for doing your particular analysis may not exist!</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            
+            <section><p><img alt="SPSS" src="file:///Users/fonnescj/Bios301/slides/images/spss.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              17/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            
+            <section><p><img alt="R" src="file:///Users/fonnescj/Bios301/slides/images/r_console.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              18/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Reproducible Research</h1></header>
+            
+            
+            <section><p><strong>Research should be reproducible!</strong></p>
+<blockquote>
+<p>"... research papers with accompanying software tools that allow
+the reader to directly reproduce the results and employ the
+methods that are presented in the research paper."
+<a href="http://biostats.bepress.com/bioconductor/paper2/">(Gentleman and Lang 2004)</a></p>
+</blockquote>
+<p>It is important to integrate the computations and code used in generating research.</p>
+<p>However, much of modern research is too complicated to be reproduced from simple methodlogical descriptions.</p>
+<p>Fortunately, tools exist for making statistical analyses and reporting 100% reproducible.</p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>The <em>entire analysis</em> should be reproducible!</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              19/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Reproducible Research</h1></header>
+            
+            
+            <section><p><a href="http://bit.ly/duke_misconduct">http://bit.ly/duke_misconduct</a></p>
+<p><img alt="Potti scandal" src="file:///Users/fonnescj/Bios301/slides/images/potti.png" /></p>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+              <p>About 1500 hours of work to uncover scandal</p>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              20/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Reproducible Research</h1></header>
+            
+            
+            <section><p>More mundane (but equally motivating) justifications for making your work reproducible:</p>
+<p>"Remember that microarray analysis you did six months ago? We ran a few more arrays. Can you add them to the project and repeat the same analysis?"</p>
+<p>"Can you write the methods section for the paper I am submitting based on the analysis you did for me earlier this year?"</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              21/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>Reproducible HOMEWORK</h2></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              22/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Lecture Structure</h1></header>
+            
+            
+            <section><p>Two hours, once per week (Mondays 1-3pm)</p>
+<p>10 min. break</p>
+<p>At the end of each lecture, you will be left with a "programming problem" that should be solved by the beginning of the next class. The contents of these exercises will be testable material on the homeworks and final exam.</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              23/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: lecture1_intro.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Course Website</h1></header>
+            
+            
+            <section><h3>github.com/fonnesbeck/Bios301</h3>
+<p><img alt="Bios301 Website" src="file:///Users/fonnescj/Bios301/slides/images/website.png" /></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="lecture1_intro.md">lecture1_intro.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              24/24
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Bios301: Introduction to Statistical Computing</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">Instructor</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-3">
+        <th><a href="#slide3">Course Aim</a></th>
+        <td><a href="#slide3">3</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Bios 301</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Bios 366</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-6" class="sub">
+          <th><a href="#slide6">Cumulative</a></th>
+          <td><a href="#slide6">6</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Hands-on</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Evaluation</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Textbook</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Text Editor</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Software</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">R</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Git</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">No Word Processors</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">Databases</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">Statistical Programming</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-17">
+        <th><a href="#slide17">-</a></th>
+        <td><a href="#slide17">17</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-18">
+        <th><a href="#slide18">-</a></th>
+        <td><a href="#slide18">18</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-19">
+        <th><a href="#slide19">Reproducible Research</a></th>
+        <td><a href="#slide19">19</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-20">
+        <th><a href="#slide20">Reproducible Research</a></th>
+        <td><a href="#slide20">20</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-21">
+        <th><a href="#slide21">Reproducible Research</a></th>
+        <td><a href="#slide21">21</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-22" class="sub">
+          <th><a href="#slide22">Reproducible HOMEWORK</a></th>
+          <td><a href="#slide22">22</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-23">
+        <th><a href="#slide23">Lecture Structure</a></th>
+        <td><a href="#slide23">23</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-24">
+        <th><a href="#slide24">Course Website</a></th>
+        <td><a href="#slide24">24</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
