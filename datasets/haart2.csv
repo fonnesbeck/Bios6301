@@ -1,0 +1,5 @@
+male,age,aids,cd4baseline,logvl,weight,hemoglobin,init.reg,init.date,last.visit,death,date.death
+0,27,0,232,NA,NA,NA,"3TC,AZT,NVP",12/1/03,1/5/04,0,NA
+1,38.72142368,0,170,NA,84,NA,"3TC,AZT,NVP",9/26/02,3/29/04,0,NA
+1,23,NA,154,3.995635195,65.5,14,"3TC,DDI,EFV",1/31/07,4/16/07,0,NA
+0,31,0,236,NA,45.8136,NA,"3TC,D4T,NVP",12/3/03,10/11/07,0,NA

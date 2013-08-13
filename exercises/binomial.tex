@@ -1,0 +1,68 @@
+\documentclass[11pt]{article}  % required first line, though can vary;
+                               % this says we will use 11-point font,
+                               % in the "article" format
+
+% material beginning with the percent sign is commentary, for human
+% information purposes, not processed by the LaTeX system
+
+% these \setlength etc. lines concern page layout, amount of paragraph
+% indentation etc.; beginners should ignore them (but include them)
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\topmargin}{-0.25in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9.25in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{2mm}
+
+\title{The Binomial Distribution}
+\author{put your name here}
+
+\begin{document}  % required; the document starts here
+	
+\maketitle % generates a title based on the information in the preamble
+
+The binomial distribution is a discrete probability distribution used to
+model bounded counts. Specifically, a binomial random variable $x$ represents
+% the $ delimiter marks the start and end of a mathematical expression
+the number of successes in $n$ independent Bernoulli trials, where $p$ is
+the probability of success, and $1-p$ the probability of failure.
+
+% a blank line means a new paragraph
+
+The probability mass function of the binomial distribution is:
+
+\begin{equation}
+	f(x | n,p) = {n \choose x} p^x (1-p)^{n-x} % note the need for braces around the n-x
+\end{equation}
+
+\noindent where $x = 0,1,2,\ldots,n$ and $p \in [0,1]$.
+
+Applications of the binomial distribution include:
+
+\begin{itemize} % this is an unordered list
+
+	\item Estimation of probabilities of outcomes in any set of success or failure trials
+
+	\item Estimation of probabilities of outcomes in games of chance
+
+	\item Sampling of attribute
+
+\end{itemize}
+
+\section{Binomial sampling} 
+
+Here is a random sample from a binomial distribution with parameters $p=0.4$ and $n=20$:
+
+\begin{figure}[tb]
+    \begin{center}
+        \includegraphics[]{}
+    \end{center}
+    \caption{Caption here}
+    \label{fig:figure1}
+\end{figure}
+
+\end{document}  % required; the document ends here
+

@@ -1,0 +1,129 @@
+# TextMate Shortcuts #
+
+## Keys ##
+
+⇧=Shift, ⌃=Control, ⌥=Option, ⌘=Command,   
+←, →, ↑, ↓ = arrow keys  
+↩=Return, ⌅=Enter, ⎋=Escape  
+
+## Bookmarks ##
+
+F2: next bookmark  
+⇧ F2: previous bookmark  
+⌘ F2: toggle bookmark  
+
+## Commands ##
+
+⌃ R: execute line inserting result  
+⌥ ⌘ R: filter selection dialog  
+⌘ R: run current file  
+
+## Editing ##
+
+F5: sort all / selected lines
+
+⌘ /: toggle comment for line / selection
+
+⇧ ⌃ D: duplicate line / selection  
+⇧ ⌃ K: delete line  
+
+⌃ ⌘ ↑ (↓): move line up (down)  
+⌃ ⌘ ← (→): move column left (right)  
+
+⌘ [ (]): shift line / selection left (right)
+
+⌘ ↩: insert a new line below  
+⇧ ⌘ ↩: end line and insert new line  
+⌅: continue construct on next line  
+
+⇧ ↩: create function using current word
+
+⌃ Q: reformat paragraph  
+⌃ ⌥ Q: unwrap paragraph
+
+⌃ ⌘ V: paste without indention  
+⌃ ⌥ ⌘ V: clipboard history  
+⎋: cycle through completions
+
+⌃ U: upper case  
+⇧ ⌃ U: lower case  
+⌃ ⌥ U: title case  
+⌃ G: toggle case
+
+⌥ ⌘ E: toggle freehanded editing mode  
+⌥ ⌘ O: toggle overwrite editing mode
+
+## General ##
+
+⌃ H: documentation for current word  
+⇧ ⌃ O: open terminal in file directory  
+⇧ ⌃ V: validate document
+
+## HTML / XML ##
+
+⌃ <: open / close tag from prior word  
+⇧ ⌃ W: wrap selection in open/close tag  
+⇧ ⌃ H: tidy  
+⌃ ⌥ ⌘ P: view source as HTML
+
+## Movement ##
+
+⌥ ← (→): beginning (end) of word  
+⌘ ← (→): beginning (end) of visual line
+
+⌃ P (N): previous (next) line  
+⌃ B (F): character backward (forward)  
+⌃ A (E): beginning (end) of actual line
+
+⌘ J: jump to selection  
+⌘ ←: go to line number
+
+⌘ ↑ (↓): beginning (end) of document  
+⌥ ⌘ ← (→): previous (next) file tab  
+⌘ T: go to file
+
+⇧ ⌘ T: go to symbol  
+⌃ ⌘ T: choose bundle item
+
+## Selection ##
+
+⌃ W: select word  
+⇧ ⌘ ←: select line  
+⇧ ⌘ B: smart pair
+
+⌥ ⌘ A: edit each selected line
+
+⌥: toggle column mode for selection
+
+⌘ E: copy selection to find field  
+⇧ ⌘ E: copy selection to replace field
+
+Hold ⇧ with movements to select  
+Hold ⌥ with mouse movement to select column
+
+Enter the first character of a smart pair to wrap selection
+
+## Searching ##
+
+⌃ S: incremental search  
+
+⌘ F: find dialog  
+⇧ ⌘ F: find in project dialog
+
+⌘ G: find next  
+⇧ ⌘ G: find previous
+
+⌥ ⌘ F: replace and find  
+⌃ ⌘ F: replace all  
+⇧ ⌃ ⌘ F: replace all in selection
+
+## View ##
+
+⌥ ⌘ ←: toggle line numbers  
+⌥ ⌘ B: toggle bookmarks  
+⌥ ⌘ I: toggle invisibles  
+⌥ ⌘ W: toggle soft wrap
+
+F1: toggle folding current block
+
+⌃ ⌥ ⌘ D: toggle project drawer

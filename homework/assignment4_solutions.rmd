@@ -1,0 +1,193 @@
+# Bios 301: Assignment 4 #
+
+*Due Friday, 16 November, 12:00 PM*
+
+50 points total.
+
+Submit a single knitr (either `.rnw` or `.rmd`) file, along with a valid PDF (or html) output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Raw R code/output or word processor files are not acceptable. 
+
+### Question 1 ###
+
+10 points
+
+Use the simulated results from question 3 in assignment 3 to *exactly* reproduce the following plot in ggplot2. Please show your code.:
+
+![generations plot](http://d.pr/i/Xh0d+)
+
+**Solution**:
+
+```{r q1}
+library(ggplot2)
+pop <- data.frame(m = rnorm(100, 160, 20), f = rnorm(100, 160, 20))
+
+next_gen <- function(pop) { 
+    pop$m <- sample(pop$m) 
+    pop$m <- apply(pop, 1, mean) 
+    pop$f <- pop$m
+    return(pop)
+}
+
+generations <- cbind(pop, gen=1)
+for (i in 2:9) {
+    pop <- next_gen(pop)
+    generations <- rbind(generations, cbind(pop, gen=i))
+}
+
+ggplot(generations, aes(x=m, y=f)) + geom_point(alpha=0.2) + facet_wrap(~gen)
+```
+
+### Question 2 ###
+
+6 points
+
+Approximate the probability that the proportion of heads obtained will be between 0.50 and 0.52 when a fair coin is tossed
+
+1. 50 times.
+
+**Solution**:
+
+```{r q2.1}
+coin_prob <- function(replications, tosses, lower=0.5, upper=0.52) {
+    x <- rbinom(replications, tosses, 0.5)
+    p <- x/tosses
+    sum((p>=lower) & (p<=upper))/replications
+}
+coin_prob(100000, 50)
+
+```
+
+2. 500 times.
+
+**Solution**:
+
+```{r q2.2}
+coin_prob(100000, 500)
+
+```
+
+### Question 3 ###
+
+10 points
+
+We know that the *U(−1,1)* random variable has mean 0. Use a sample of size 100 to estimate the mean and give a 95% confidence interval. Does the confidence interval contain 0? Repeat the above a large number of times (say, 1000). What percentage of time does the confidence interval contain 0? Write your code so that it produces output similar to the following:
+
+    Number of trials: 10
+
+    Sample mean  lower bound  upper bound  contains mean
+        -0.0733      -0.1888       0.0422             1
+        -0.0267      -0.1335       0.0801             1
+        -0.0063      -0.1143       0.1017             1
+        -0.0820      -0.1869       0.0230             1
+        -0.0354      -0.1478       0.0771             1
+        -0.0751      -0.1863       0.0362             1
+        -0.0742      -0.1923       0.0440             1
+         0.0071      -0.1011       0.1153             1
+         0.0772      -0.0322       0.1867             1
+        -0.0243      -0.1370       0.0885             1
+
+    100 percent of CI's contained the mean
+  
+**Solution**:
+
+```{r q3}
+n <- 100
+trials <- 1000
+
+results <- c()
+for (i in 1:trials) {
+    x <- runif(n, -1, 1)
+    xbar <- mean(x)
+    lower <- xbar - 1.96 * sd(x)/sqrt(n)
+    upper <- xbar + 1.96 * sd(x)/sqrt(n)
+    inside <- as.integer((lower < 0) & (upper > 0))
+    results <- rbind(results, c(xbar, lower, upper, inside))
+}
+results_df <- as.data.frame(results)
+names(results_df) <- c("Sample mean", "lower bound", "upper bound", "contains mean")
+
+cat("Number of trials:", trials, "\n")
+head(results_df)
+cat(sprintf("%1.0f percent of CI's contained the mean", 100*sum(results_df["contains mean"])/trials))
+
+```
+
+### Question 4 ###
+
+24 points
+
+Programming with classes:
+
+1. Create an S3 class `medicalRecord` for objects that are a list with the named elements `name`, `gender`, `date_of_birth`, `date_of_admission`, `pulse`, `temperature`, `fluid_intake`. Note that an individual patient may have multiple measurements for some measurements (Hint: you may need to use a vector or data frame somewhere).
+
+**Solution**:
+
+```{r q4.1a}
+m <- list(name="Chris Fonnesbeck", gender="M", date_of_birth="1970-09-03", date_of_admission="2012-11-14", pulse=c(56,54), temperature=c(98.4, 98.7), fluid_intake=c(12.5, 7.6))
+class(m) <- "medicalRecord"
+```
+
+or perhaps something slightly more sophisticated:
+
+```{r q4.1b}
+m <- list(name="Chris Fonnesbeck", gender="M", date_of_birth="1970-09-03", date_of_admission="2012-11-14", measurements=data.frame(date=c("2012-11-14","2012-11-15"), pulse=c(56,58), temperature=c(98.4,98.7), fluid_intake=c(0,12.5)))
+class(m) <- "medicalRecord"
+```
+
+2. Write a `medicalRecord` method for the generic function `mean`, which returns averages for pulse, temperature and fluids. Also write a `medicalRecord` method either for `print`, which employs some nice formatting, perhaps arranging measurements by date, or `plot` that generates a composite plot of measurements over time.
+
+**Solution**:
+
+Here is a `mean` method for the second implementation:
+
+```{r q4.2a}
+mean.medicalRecord <- function(mr) {
+    cat(sprintf("Mean measurements for %s:\n", mr$name))
+    colMeans(mr$measurements[,-1])
+}
+
+mean(m)
+```
+
+Here is a `print` method for the second implementation:
+
+```{r q4.2b}
+print.medicalRecord <- function(mr) {
+    cat(sprintf("Patient name: %s\n", mr$name))
+    cat(sprintf("Gender: %s\n", ifelse(mr$gender=='M', 'male', 'female')))
+    age <- as.POSIXlt(Sys.Date())$year - as.POSIXlt(mr$date_of_birth)$year
+    cat(sprintf("Age: %i\n", age))
+    cat("Measurements:\n")
+    print.data.frame(data.frame(mr$measurements))
+}
+
+print(m)
+```
+
+Anything that produces sensible, well-organized output would be acceptable. Just a call to generic `print` or `plot` is not acceptable.
+
+3. Create a further class for a cohort (group) of patients, and write methods for `mean` and `print` which, when applied to a cohort, apply mean or print to each patient contained in the cohort. Hint: think of this as a "container" for patients.
+
+**Solution**:
+
+Here is one approach, using composition:
+
+```{r 4.3}
+m1 <- list(name="Chris Fonnesbeck", gender="M", date_of_birth="1970-09-03", date_of_admission="2012-11-14", measurements=list(date="2012-11-15", pulse=56, temperature=98.4, fluid_intake=12.5))
+class(m1) <- "medicalRecord"
+m2 <- list(name="Chipper Jones", gender="M", date_of_birth="1972-04-24", date_of_admission="2012-11-11", measurements=list(date="2012-11-12", pulse=60, temperature=98.1, fluid_intake=2.5))
+class(m2) <- "medicalRecord"
+m3 <- list(name="Oprah Winfrey", gender="F", date_of_birth="1954-01-29", date_of_admission="2012-10-4", measurements=list(date="2012-11-15", pulse=63, temperature=98.7, fluid_intake=0))
+class(m3) <- "medicalRecord"
+
+coh <- list(patients=list(m1, m2, m3))
+class(coh) <- "cohort"
+
+print.cohort <- function(coh) {
+    for (i in 1:length(coh$patients)) {
+        cat("\nPatient", i, "\n")
+        print(coh$patients[[i]])
+    }
+}
+
+print(coh)
+```
