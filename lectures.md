@@ -7,20 +7,24 @@ title: Introduction to Statistical Computing
 
 # Lecture Schedule
 
+**Time and Place**: Tuesdays and Thursdays from 1:30-2:30pm in [RLH 306AB](http://goo.gl/maps/4c3W)
+
+**Office hours**: By appointment
+
 This schedule is *tentative* and subject to change at any time.
 
 * [Course introduction](https://dl.dropbox.com/u/233041/Bios301/lecture1_intro.html)
 * [Version control using Git](https://dl.dropbox.com/u/233041/Bios301/lecture1_git.html)
 * Document preparation:
-    * [LaTeX](https://dl.dropbox.com/u/233041/Bios301/lecture2_latex.html),
+    * [LaTeX](https://dl.dropbox.com/u/233041/Bios301/lecture2_latex.html)
     * [knitr](https://dl.dropbox.com/u/233041/Bios301/lecture2_knitr.html)
-    * [Markdown](https://dl.dropbox.com/u/233041/Bios301/lecture2_markdown.html).
+    * [Markdown](https://dl.dropbox.com/u/233041/Bios301/lecture2_markdown.html)
 * Introduction to R (Chapters 2-5)
-    * [R basics](https://dl.dropbox.com/u/233041/Bios301/lecture3_rbasics.html),
-    * [data](https://dl.dropbox.com/u/233041/Bios301/lecture3_numbers.html),
+    * [R basics](https://dl.dropbox.com/u/233041/Bios301/lecture3_rbasics.html)
+    * [data](https://dl.dropbox.com/u/233041/Bios301/lecture3_numbers.html)
     * [data types and data structures](https://dl.dropbox.com/u/233041/Bios301/lecture3_data_structures.html)
 * R Programming (Chapter 7)
-    * [Control structures](https://dl.dropbox.com/u/233041/Bios301/lecture4_control_structures.html),
+    * [Control structures](https://dl.dropbox.com/u/233041/Bios301/lecture4_control_structures.html)
     * [Writing and calling functions](https://dl.dropbox.com/u/233041/Bios301/lecture4_functions.html)
 * [Data import and export](https://dl.dropbox.com/u/233041/Bios301/lecture5_import_export.html)
     (Chapter 10)
