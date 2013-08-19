@@ -16,4 +16,5 @@ open-source software.
     [Stata](http://www.stata.com) (\$)
 -   Version control system: [Git](http://git-scm.com/)
 -   Relational database: [SQLite](http://sqlite.org)
--   Document preparation tools: [LaTeX](http://www.latex-project.org/),
+-   Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/), [MultiMarkdown](http://fletcherpenney.net/multimarkdown/)
+-   Programming text editor (pick one of these, or equivalent): [TextMate](http://github.com/textmate/textmate) (Mac only), [Vim](http://vim.org), [Emacs](http://www.gnu.org/s/emacs/), [Sublime Text 2](http://www.sublimetext.com/2) ($)
