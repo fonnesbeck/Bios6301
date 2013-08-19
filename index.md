@@ -1,7 +1,7 @@
 ---
 
 layout: default
-title: Advanced Statistical Computing
+title: Introduction to Statistical Computing
 
 ---
 
