@@ -33,19 +33,19 @@ Many modern problems/data require a computational approach
 Bios 301
 ========
 
-* **Lecture 1**: Course introduction; Version control using Git
-* **Lecture 2**: Document preparation using LaTeX, Markdown and `knitr`
-* **Lecture 3**: Data, data types and data structures (Chapters 2-5)
-* **Lecture 4**: Control structures; Writing and calling functions (Chapter 7)
-* **Lecture 5**: Simulation; optimization (Chapter 8) 
-* **Lecture 6**: Debugging and testing (Chapter 13)
-* **Lecture 7**: Top-down design and scoping 
-* **Lecture 8**: Programming paradigms (Chapter 9)
-* **Lecture 9**: Scientific graphics; `ggplot2` (Chapter 12) 
-* **Lecture 10**: Split, apply and combine 
-* **Lecture 11**: High performance computing; basic parallel computing (Chapters 14, 16) 
-* **Lecture 12**: I/O and databases; regular expressions (Chapters 10-11) 
-* **Lecture 13**: Overview of STATA 
+* **Week 1**: Course introduction; Version control using Git
+* **Week 2**: Document preparation using LaTeX, Markdown and `knitr`
+* **Week 3**: Data, data types and data structures (Chapters 2-5)
+* **Week 4**: Control structures; Writing and calling functions (Chapter 7)
+* **Week 5**: Simulation; optimization (Chapter 8)
+* **Week 6**: Debugging and testing (Chapter 13)
+* **Week 7**: Top-down design and scoping
+* **Week 8**: Programming paradigms (Chapter 9)
+* **Week 9**: Scientific graphics; `ggplot2` (Chapter 12)
+* **Week 10**: Split, apply and combine
+* **Week 11**: High performance computing; basic parallel computing (Chapters 14, 16)
+* **Week 12**: I/O and databases; regular expressions (Chapters 10-11)
+* **Week 13**: Overview of STATA
 
 Presenter Notes
 ===============
@@ -91,8 +91,6 @@ A final course grade will be calculated based on:
 - four (4) equally-weighted homework assignments (50%)
 - a take-home final exam (50%)
 
-The final exam has been tentatively scheduled for December 13.
-
 ---
 
 # Textbook
@@ -106,21 +104,14 @@ Read some of it every week.
 
 ---
 
-# Text Editor
-
-<img src=http://f.cl.ly/items/0d1p2M1e380l2j3C2Z40/vim-logo-en.png width=200 align=left>
-<img src=http://f.cl.ly/items/3y0S1S352y1B2c032u2I/textmate.png width=200, align=right>
-<img src=http://f.cl.ly/items/0E3s2a0V3p3d3E432114/Sublime-Text-2.png width=200, align=center>
-<img src=http://f.cl.ly/items/2b1l2c1c0U2L1q3A0A34/gnu-project.png width=200, align=center>
-
----
-
 # Software
 
 - Statistical analysis tools: [R](http://cran.r-project.org/), [Stata](http://www.stata.com/)
 - Version control system: [Git](http://git-scm.com/)
 - Document preparation tools: LaTeX, [knitr](http://yihui.name/knitr/), [MultiMarkdown](http://fletcherpenney.net/multimarkdown/)
 - Relational database: [SQLite](http://www.sqlite.org/)
+- Programming editor: [TextMate](http://macromates.com/ "TextMate — The Missing Editor for Mac OS X"), [SublimeText](http://www.sublimetext.com/ "Sublime Text: The text editor you'll fall in love with"), [Vim](http://www.vim.org/ "welcome home : vim online"), [Emacs](http://www.gnu.org/s/emacs/ "GNU Emacs - GNU Project - Free Software Foundation
+(FSF)")
 
 ---
 
@@ -142,7 +133,7 @@ R is an open-source implementation of the **S programming language**, and was cr
 
 # Git
 
-Git is a software tool for source code management and revision control. 
+Git is a software tool for source code management and revision control.
 
 ## Why Git?
 
@@ -160,9 +151,9 @@ Git is a software tool for source code management and revision control.
 
 # No Word Processors
 
-Assignments may be submitted in **LaTeX**, **Sweave**, **knitr**, or any markup format that allows for easy conversion to LaTeX (e.g. **Markdown**, **reStructuredText**). 
+Assignments may be submitted in **LaTeX**, **Sweave**, **knitr**, or any markup format that allows for easy conversion to LaTeX (e.g. **Markdown**, **reStructuredText**).
 
-Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted. 
+Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted.
 
 Hand-written assignments (including scanned documents) are also not permitted
 
@@ -265,17 +256,15 @@ More mundane (but equally motivating) justifications for making your work reprod
 
 # Lecture Structure
 
-Two hours, once per week (Mondays 1-3pm)
+Two lectures per week (Tue/Thu 1:30-2:30pm)
 
-10 min. break
-
-At the end of each lecture, you will be left with a "programming problem" that should be solved by the beginning of the next class. The contents of these exercises will be testable material on the homeworks and final exam.
+Each lecture will consist of 30-40 minutes of lecturing, followed by a hands-on "programming problem" that should be solved by the beginning of the next class. The contents of these exercises will be testable material on the homeworks and final exam.
 
 ---
 
 # Course Website
 
-### github.com/fonnesbeck/Bios301
+### fonnesbeck.github.io/Bios301
 
 ![Bios301 Website](images/website.png)
 

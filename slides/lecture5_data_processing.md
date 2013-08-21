@@ -158,16 +158,16 @@ Levels may be defined that may not actually be present in the data. For example,
     > (x <- factor(rbinom(20, 4, 0.5)))
      [1] 3 1 2 2 1 1 2 4 1 4 2 2 3 0 2 2 2 0 1 3
     Levels: 0 1 2 3 4
-    
+
 We can redefine the levels to contain the value 5, even though it is not present:
 
     !r
     > levels(x) <- 0:5
     > table(x)
     x
-    0 1 2 3 4 5 
-    2 5 8 3 2 0 
-    
+    0 1 2 3 4 5
+    2 5 8 3 2 0
+
 However, we cannot assign values to a factor variable that is not already among the levels:
 
     !r
@@ -175,7 +175,7 @@ However, we cannot assign values to a factor variable that is not already among 
     Warning message:
     In `[<-.factor`(`*tmp*`, 4, value = 17) :
       invalid factor level, NAs generated
-    
+
 ---
 
 Generating Factor Variables
@@ -183,7 +183,7 @@ Generating Factor Variables
 
 As an example, lets convert the `male` variable into a factor. By default, since it is an indicator variable that equals 1 for male patients and 0 for females, `read.table` assumes it is an integer-valued variable and imports it as such. But, there is no intrinsic ordering to gender, so it is more useful treating it as a factor.
 
-    !r  
+    !r
     > (haart$gender <- factor(haart$male))
      [1] 1 1 1 0 1 0 0 1 1 1 1 1 0 0 0 0 1 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 1 1 1 1 0
      ...
@@ -195,7 +195,7 @@ We may also want to add readable labels to the levels, for use in output and plo
 
     !r
     > levels(haart$gender) <- c("female","male")
-    
+
 These steps can be combined into a single call:
 
     !r
@@ -220,7 +220,7 @@ If you recall from the data structures lecture, we can *index* values from a dat
     [49] 48.00000 24.00000
     # or equivalently ...
     > haart[[2]][1:50]
-    
+
 Multiple columns can be indexed using a vector of column names:
 
     !r
@@ -230,7 +230,7 @@ Multiple columns can be indexed using a vector of column names:
     2      1 49.00000     0
     ...
     1000   0 40.00000     0
-    
+
 ---
 
 Indexing
@@ -264,7 +264,7 @@ Modifying and Creating Variables
 ================================
 
 Suppose now we wish to create a derived variable, based on the values of one or more variables in the data frame. For example, we might want to refer to the number of days between the first visit (`init.date`) and the
-last (`last.visit`). 
+last (`last.visit`).
 
 Recall from the lecture on date-time variables that in order to efficiently calculate temporal variables, we need to convert the date fields from character strings to `POSIXct` or `POXIXlt` objects.
 
@@ -289,7 +289,7 @@ between visits:
 Modifying and Creating Variables
 ================================
 
-However, given the context of the data, we are probably interested in days elapsed between visits, rather than seconds. 
+However, given the context of the data, we are probably interested in days elapsed between visits, rather than seconds.
 
     !r
     > difftime(haart$last.visit, haart$init.date, units="days")[1:50]
@@ -308,7 +308,7 @@ Even easier, since we are only interested in days, is to convert the dates to `D
     [16]    5  657  530 1784  795 1240  405 1090 1302  241 1270  413   21  286  710
     [31] 1110  265 1098 1051 1372  565  944  105  821 1169  405   24 1120 1272  693
     ...
-    
+
 ---
 
 Binning Data
@@ -326,7 +326,7 @@ This creates a group for each group of ages in (18,30], (30, 50], and
     !r
     > table(haart$age_group)
 
-     (0,30]  (30,50] (50,Inf] 
+     (0,30]  (30,50] (50,Inf]
         1167     3021      442
 
 If we wanted to use less than (rather than less than or equal to), we
@@ -336,16 +336,16 @@ upper group:
     !r
     > table(cut(haart$age, c(min(haart$age),30,50,max(haart$age)), right=FALSE))
 
-    [18,30) [30,50) [50,89) 
+    [18,30) [30,50) [50,89)
        1011    3115     502
-       
+
 Presenter Notes
 ===============
 
 For example, perhaps we want to classify subjects into age
 groups, with those 30 or younger in the youngest group, those over 30
 but no older than 50 in the middle group, and those over 50 in the
-oldest group. 
+oldest group.
 
 ---
 
@@ -358,7 +358,7 @@ Often data will contain relevant information in the form of text that must be pr
     > word <- 'foobar'
     > class(word)
     [1] "character"
-    
+
 Even though R considers text to be a vector of characters, indexing and other functions do not work the same way with characters:
 
     !r
@@ -366,7 +366,7 @@ Even though R considers text to be a vector of characters, indexing and other fu
     [1] "foobar"
     > length(word)
     [1] 1
-    
+
 ---
 
 Text Processing
@@ -381,22 +381,22 @@ R provides a separate set of functions to process text.
     [1] "foo"
     > substr(word, 3, 5)
     [1] "oba"
-    
+
 Not only can character strings be indexed, but they can be split up according to patterns in the text:
 
     !r
     > sentence <- "R provides a separate set of functions to process text"
     > (words <- strsplit(sentence, " "))
     [[1]]
-     [1] "R"         "provides"  "a"         "separate"  "set"       "of"       
-     [7] "functions" "to"        "process"   "text"     
-     
+     [1] "R"         "provides"  "a"         "separate"  "set"       "of"
+     [7] "functions" "to"        "process"   "text"
+
 This is useful for analysis of text, where individual words need to be counted, compared or evaluated. Note that this operation is reversible!
 
     !r
     > paste(unlist(words), collapse=" ")
     [1] "R provides a separate set of functions to process text"
-    
+
 ---
 
 Changing Case
@@ -416,16 +416,16 @@ Using these functions, you can create a custom function to convert to "title cas
         substr(str,1,1) <- toupper(substr(str,1,1))
         str
     }
-    
+
     > titlecase(word)
     [1] "Foobar"
-    
+
 The `chartr` function translates characters to their corresponding pair in a text string:
 
     !r
     > (rna <- chartr('atcg', 'uagc', 'aagcgtctac'))
     [1] "uucgcagaug"
-    
+
 ---
 
 String Matching
@@ -442,21 +442,21 @@ returned.
     !r
     > words
     [[1]]
-     [1] "R"         "provides"  "a"         "separate"  "set"       "of"       
-     [7] "functions" "to"        "process"   "text"   
+     [1] "R"         "provides"  "a"         "separate"  "set"       "of"
+     [7] "functions" "to"        "process"   "text"
     > charmatch('fun', unlist(words))
     [1] 7
     > charmatch('foo', unlist(words))
     [1] NA
     > charmatch('pr', unlist(words))
     [1] 0
- 
+
 ---
 
 Text Processing in Action
 =========================
 
-In the HAART database, the field `init.reg` describes the initial drug regimens of each individual, and is imported to R by default as a `factor`. 
+In the HAART database, the field `init.reg` describes the initial drug regimens of each individual, and is imported to R by default as a `factor`.
 
     !r
     > head(haart$init.reg)
@@ -464,16 +464,16 @@ In the HAART database, the field `init.reg` describes the initial drug regimens 
     47 Levels: 3TC,ABC,AZT 3TC,ABC,AZT,LPV,RTV 3TC,ABC,AZT,RTV,SQV ... LPV,NVP,RTV
     > table(haart$init.reg)
 
-            3TC,ABC,AZT 3TC,ABC,AZT,LPV,RTV 3TC,ABC,AZT,RTV,SQV         3TC,ABC,EFV 
-                     29                   1                   1                  11 
-        3TC,ABC,IDV,RTV         3TC,ABC,NVP         3TC,ABC,RTV     3TC,ABC,RTV,SQV 
-                      1                   2                   1                   4 
-            3TC,AZT,DDI         3TC,AZT,EFV     3TC,AZT,EFV,NFV     3TC,AZT,FPV,RTV 
-                      1                 421                   1                   1 
-            3TC,AZT,IDV     3TC,AZT,IDV,RTV     3TC,AZT,LPV,RTV         3TC,AZT,NFV 
-                     12                   8                  16                   4 
+            3TC,ABC,AZT 3TC,ABC,AZT,LPV,RTV 3TC,ABC,AZT,RTV,SQV         3TC,ABC,EFV
+                     29                   1                   1                  11
+        3TC,ABC,IDV,RTV         3TC,ABC,NVP         3TC,ABC,RTV     3TC,ABC,RTV,SQV
+                      1                   2                   1                   4
+            3TC,AZT,DDI         3TC,AZT,EFV     3TC,AZT,EFV,NFV     3TC,AZT,FPV,RTV
+                      1                 421                   1                   1
+            3TC,AZT,IDV     3TC,AZT,IDV,RTV     3TC,AZT,LPV,RTV         3TC,AZT,NFV
+                     12                   8                  16                   4
 
-However, each entry is in fact a list of drugs, and we may not want to analyze the data based on the unique combinations of drugs. 
+However, each entry is in fact a list of drugs, and we may not want to analyze the data based on the unique combinations of drugs.
 
 
 ---
@@ -500,7 +500,7 @@ Now, we can use some of our text processing skill to extract the individual drug
     [1] "3TC" "AZT" "EFV"
 
     ...
-    
+
 ---
 
 The `apply` Functions
@@ -518,7 +518,7 @@ the mean weight of subjects by gender:
 
     !r
     > tapply(haart$weight, haart$male, mean, na.rm=TRUE)
-           0        1 
+           0        1
     51.65059 60.33728
 
 * first argument is the target vector to which the function will be
@@ -561,7 +561,7 @@ This can be further expanded to a 3-way cross-tabulation, if appropriate:
     male        0        1
        0 50.43750 39.78671
        1 52.57965 49.04523
-    
+
 
 ---
 
@@ -598,12 +598,12 @@ example, we may simply want to quickly query which of our variables are numeric:
 
     !r
     > sapply(haart, is.numeric)
-            male          age         aids  cd4baseline        logvl       weight 
-            TRUE         TRUE         TRUE         TRUE         TRUE         TRUE 
-      hemoglobin      init.reg     init.date    last.visit        death    date.death 
-            TRUE        FALSE        FALSE        FALSE         TRUE        FALSE 
-    init.reg_list       gender 
-           FALSE        FALSE 
+            male          age         aids  cd4baseline        logvl       weight
+            TRUE         TRUE         TRUE         TRUE         TRUE         TRUE
+      hemoglobin      init.reg     init.date    last.visit        death    date.death
+            TRUE        FALSE        FALSE        FALSE         TRUE        FALSE
+    init.reg_list       gender
+           FALSE        FALSE
 
 Or, perhaps we are interested in standardizing some of the variables in
 our data frame:
@@ -618,14 +618,56 @@ our data frame:
     [5,] -0.65832124          NA          NA
 
 
-   
+
+---
+
+`mclapply`
+=========
+
+An easy way to speed up apply functions is to take advantage of the fact that your machine will have multiple cores. **Parallel computing** is a general term that refers to the practice of breaking up tasks that are executed serially on a single CPU into multiple components, each of which is calculated simultaneously, by assigning them to multiple available CPUs. The degree to which this improves performance depends upon the nature of the task.
+
+The `parallel` package includes a function `mclapply` that is a multicore implementation of `lapply`. First, let's determine how many cores we have to work with:
+
+    !r
+    > library(parallel)
+    > detectCores()
+    [1] 4
+
+So I can employ a maximum of 4 cores. `mclapply` can be used exactly as `lapply` would be.
+
+    !r
+    > haart_means <- mclapply(haart[,4:6], mean, na.rm=T)
+
+Presenter Notes
+===============
+
+There are several packages available that implement parallel computing in R: `doMC`, `multicore`, `snow`
+
+---
+
+
+`mclapply`
+==========
+
+There are some optional arguments for `mclapply` that can be used to tune its performance:
+
+`mc.preschedule`
+: if set to TRUE, computation is first divided to (at most) as many jobs are there are cores and then the jobs are started. If set to FALSE then one job is spawned for each value of X sequentially. The former is better for short computations or large number of values in X, the latter is better for jobs that have high variance of completion time and not too many values of X.
+
+`mc.cores`
+: The number of cores to use
+
+`mc.set.seed`
+: if set to TRUE then each parallel process first sets its seed to something different from other processes. Otherwise all processes start with the same (namely current) seed
+
+
 ---
 
 Querying List Variables
 =======================
 
 Now, let's use one of these `apply` functions to query our variable containing the vectors of drugs. For example, we might want to know all the patients that have D4T
-as part of their regimens. 
+as part of their regimens.
 
     !r
     > d4t_index <- sapply(haart$init.reg_list, function(x) 'D4T' %in% x)
@@ -645,7 +687,7 @@ as part of their regimens.
     25  8/15/06   4/13/07     0           3TC, D4T, EFV female
     30   3/5/04   2/13/06     0           3TC, D4T, EFV female
     38   9/5/07  12/19/07     0           3TC, D4T, NVP female
-    
+
 The `%in%` operator, returns `TRUE` if the value on the left hand side of the
 operator is contained in the vector on the right hand side, or `FALSE` otherwise.
 
@@ -656,7 +698,7 @@ Creating Indicator Variables
 
 Another approach for transforming `init.reg` is to
 break it into multiple columns of indicators, which specify whether each
-drug is in that individual's regimen. 
+drug is in that individual's regimen.
 
 The first lets create a unique list of all the drugs in all the regimens. Recall `unlist`, which takes all the list elements and concatenates them
 together. We can use this to get a non-unique vector of drugs:
@@ -668,14 +710,14 @@ together. We can use this to get a non-unique vector of drugs:
       [25] "3TC" "ABC" "AZT" "3TC" "DDI" "NVP" "3TC" "AZT" "NVP" "3TC" "AZT" "IDV"
       ...
       [3073] "NVP" "3TC" "AZT" "NVP" "3TC" "D4T" "NVP"
-      
+
 Now, we use the function `unique` to extract the unique items within
 this vector, which comprises a list of all the drugs:
 
     !r
     > (all_drugs <- unique(unlist(haart$init.reg_list)))
-     [1] "3TC"         "AZT"         "EFV"         "NVP"         "D4T"         "ABC"         "DDI"        
-     [8] "IDV"         "LPV"         "RTV"         "SQV"         "FTC"         "TDF"         "DDC"        
+     [1] "3TC"         "AZT"         "EFV"         "NVP"         "D4T"         "ABC"         "DDI"
+     [8] "IDV"         "LPV"         "RTV"         "SQV"         "FTC"         "TDF"         "DDC"
     [15] "NFV"         "T20"         "ATV"         "FPV"         "TPV"         "DLV"         "HIDROXIUREA"
     [22] "APV"
 
@@ -695,7 +737,7 @@ how to do this, for D4T:
       [13] FALSE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
       ...
       [997] FALSE FALSE FALSE  TRUE
-    
+
 Now we generalize this by writing a loop that performs this operation for each drug:
 
     !r
@@ -820,7 +862,7 @@ The convenience function `complete.cases` returns a logical vector identifying w
       [13]  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
       ...
       [997] FALSE  TRUE  TRUE  TRUE
-      
+
 Which is the equivalent of `!is.na(haart$weight)`. We can use this logical vector to extract all observations for which weight is present:
 
     !r
@@ -839,7 +881,7 @@ Which is the equivalent of `!is.na(haart$weight)`. We can use this logical vecto
     6    2/28/08     0           3TC, AZT, NVP female
     7    3/11/08     0           3TC, AZT, NVP female
     11   9/18/02     1   9/18/02 3TC, AZT, NVP   male
-    
+
 
 ---
 
@@ -852,7 +894,7 @@ records/observations/rows according to the value of one or more
 parameters. In this case, it is a two-step process.
 
 First, we create a numeric vector of the indices of each row in our data
-frame, according to the order that we wish to have them. 
+frame, according to the order that we wish to have them.
 
     !r
     > order(haart$init.date, haart$last.visit)
@@ -899,14 +941,14 @@ We have seen how to combine data frames using `cbind` to add additional columns 
     !r
     > dim(rbind(haart[1:500,], haart[501:1000,]))
     [1] 1000   14
-    
+
 This works, provided that the number of columns match:
 
     !r
     > dim(rbind(haart[1:500,], haart[501:1000,1:10]))
-    Error in rbind(deparse.level, ...) : 
+    Error in rbind(deparse.level, ...) :
       numbers of columns of arguments do not match
-      
+
 In some situations, we may have information in one table that *partially* matches information in a second table. What if we want to integrate this information into a single data frame?
 
 ---
@@ -914,7 +956,7 @@ In some situations, we may have information in one table that *partially* matche
 Merging Data Frames
 ===================
 
-To combine data frames based on the values of common variables, we can use the built-in `merge` function. By default, `merge` joins rows of the data frames based on the values of the columns that the data frames have in common. 
+To combine data frames based on the values of common variables, we can use the built-in `merge` function. By default, `merge` joins rows of the data frames based on the values of the columns that the data frames have in common.
 
 Let's look at a trivial example of two data frames with partial overlap in information:
 
@@ -926,7 +968,7 @@ Let's look at a trivial example of two data frames with partial overlap in infor
     1 1  9  8
     2 4 14 19
     3 6  8  2
-    
+
 Note that though there were 6 unique values for `a` among the two data frames, only those rows with values of `a` in both data frames are included in the merged data frame.
 
 ---
@@ -945,7 +987,7 @@ If we want to include all observations from both data frames, we can set the app
     4 4 14 19
     5 5 21 NA
     6 6  8  2
-    
+
 Or we may wish to include all records from just one of the two tables:
 
     !r
@@ -962,4 +1004,3 @@ Or we may wish to include all records from just one of the two tables:
     2 3 NA 14
     3 4 14 19
     4 6  8  2
-    

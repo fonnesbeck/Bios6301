@@ -14,7 +14,7 @@ Input: $\mathbf{X}\_i = (X_{1i}, \ldots, X\_{ki})$
 
 Output: $\mathbf{Y}\_i = h(\mathbf{X}\_i)$
 
-Analysis: 
+Analysis:
 
 $$Pr(h(\mathbf{X}) \le b) \approx \frac{1}{N} \sum_{i=1}^N I(h(\mathbf{X}\_i) \le b)$$
 $$E(h(\mathbf{X})) \approx \frac{1}{N} \sum_{i=1}^N h(\mathbf{X}_i)$$
@@ -55,15 +55,15 @@ Middle Square Method
 
 An early algorithm by Von Neumann
 
-1. specify a 10-digit number: 
-    
+1. specify a 10-digit number:
+
         > x <- 5492364201
-    
+
 2. square the number (usually becomes a 20-digit number)
 
         > (y <- as.character(x**2))
         [1] "30166064516426366976"
-    
+
 3. take middle 10 digits as a random number
 
         > as.numeric(substring(y,5,15))
@@ -89,8 +89,8 @@ Relatively new algorithm (1997)
 
 Algorithm:
 
-* initialize $X\_0 \in \{0,1,\ldots,m-1\}$ 
-* choose "big" numbers $A,B$  
+* initialize $X\_0 \in \{0,1,\ldots,m-1\}$
+* choose "big" numbers $A,B$
 * generate sequence of numbers via:
 
 $$X\_{i+1} = (AX_i) + B \mod m$$
@@ -112,7 +112,7 @@ Example: Mersenne-Twister
     [1] 6
     > (x <- (A*x + B) %% m)
     [1] 5
-    
+
 `m=10` so maximum period is 10.
 
 Better:
@@ -132,7 +132,7 @@ Random Number Seed
 ==================
 
 The sequence of pseudo-random numbers depends on the initial condition,
-or seed. 
+or seed.
 
 In R, it is stored in `.Random.seed`, a global variable. To reproduce
 results exactly, set the seed:
@@ -146,15 +146,15 @@ results exactly, set the seed:
     > runif(2)
     [1] 0.54952918 0.08113291
     > .Random.seed <- old.seed  # Restore old seed
-    
+
 `runif()` generates uniform random variables according to the selected PRNG:
 
     !r
     > RNGkind()
-    [1] "Mersenne-Twister" "Inversion" 
+    [1] "Mersenne-Twister" "Inversion"
     > RNGkind('Wich')
     > RNGkind()
-    [1] "Wichmann-Hill" "Inversion" 
+    [1] "Wichmann-Hill" "Inversion"
 
 ---
 
@@ -188,7 +188,7 @@ Requires an internet connection!
     [1,] 65 47 58 19 39
     [2,] 67 50 14 55 62
     > randomStrings(5, 10)
-         V1          
+         V1
     [1,] "45uvtdAEjp"
     [2,] "MNsAXi0UYD"
     [3,] "bBF8oin409"
@@ -231,7 +231,7 @@ We calculate the CMF of the binomial distribution by summing over the PMF:
         }
         return(Fx)
     }
-    
+
 Now, we can use this code to generate binomial variates from a uniform draw:
 
     !r
@@ -303,7 +303,7 @@ Simulating Continuous Variables
 
 $$F\_X(x) = Pr(X \le x)$$
 
-so, $U = F(x) \in (0,1)$. 
+so, $U = F(x) \in (0,1)$.
 
 ![cdf](http://upload.wikimedia.org/wikipedia/commons/b/ba/Exponential_cdf.svg)
 
@@ -343,7 +343,7 @@ Example: exponential distribution
     > f <- function(x,lam) -1/lam * log(1-x)
     > hist(f(runif(1000), 3), prob=T, xlab="x", main="")
     > lines((1:300)/100, dexp((1:300)/100, 3))
-    
+
 ![exponential example](http://d.pr/i/s0vm+)
 
 ---
@@ -351,7 +351,7 @@ Example: exponential distribution
 Rejection Method
 ================
 
-We can only use the inverse CDF method if we can calculate $F\_X^{-1}$. 
+We can only use the inverse CDF method if we can calculate $F\_X^{-1}$.
 
 $F\_X$ can be inverted numerically, using root-finding methods, but this is inefficient.
 
@@ -419,7 +419,7 @@ The triangular pdf:
             return(0)
         }
     }
-   
+
 A function to sample a single realization from `fx` using rejection sampling:
 
     !r
@@ -598,7 +598,7 @@ In R, the function `sample` draws draw random sample of size points from x, opti
     [1] 5 1 4 2 3
     > sample(5, replace=T)
     [1] 4 4 3 1 2
-    
+
 
 ---
 
@@ -647,7 +647,7 @@ Example
     > s <- numeric(1000)
     > for (i in 1:1000) s[i] <- mean(sample(x, 10, replace=TRUE))
     > hist(s, xlab="Bootstrap means", main="")
-    
+
 ![bootstrap means](http://d.pr/i/LAVF+)
 
 ---
@@ -793,16 +793,16 @@ Package `boot`
     BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
     Based on 999 bootstrap replicates
 
-    CALL : 
+    CALL :
     boot.ci(boot.out = bmed)
 
-    Intervals : 
-    Level      Normal              Basic         
-    95%   (-0.7567,  0.8553 )   (-0.8329,  0.7465 )  
+    Intervals :
+    Level      Normal              Basic
+    95%   (-0.7567,  0.8553 )   (-0.8329,  0.7465 )
 
-    Level     Percentile            BCa          
-    95%   (-0.4833,  1.0961 )   (-0.4833,  1.0961 )  
-    
+    Level     Percentile            BCa
+    95%   (-0.4833,  1.0961 )   (-0.4833,  1.0961 )
+
 
 ---
 
@@ -834,9 +834,9 @@ Let's calculate a bootstrapped confidence interval for pre-treatment weights:
     + bmeans[i] <- mean(s)
     + }
     > quantile(bmeans, c(0.025, 0.975))
-        2.5%    97.5% 
-    81.16104 83.53951  
-    
+        2.5%    97.5%
+    81.16104 83.53951
+
 Compare to parametric CI, and `boot`:
 
     !r
@@ -846,8 +846,8 @@ Compare to parametric CI, and `boot`:
     [1] 83.60542
     > weight_boot <- boot(weight, function(x,i) mean(x[i]), R=999)
     > quantile(weight_boot$t, c(0.025, 0.975))
-        2.5%    97.5% 
-    81.26222 83.49688 
+        2.5%    97.5%
+    81.26222 83.49688
 
 ---
 
@@ -860,8 +860,8 @@ Estimating Coverage Probability
 
 Several ways of calculating confidence intervals:
 
-* Bootstrap Intervals 
-* Theoretical Intervals 
+* Bootstrap Intervals
+* Theoretical Intervals
 * Asymptotic Intervals
 
 All confidence intervals are interpreted in light of assumptions:
@@ -895,23 +895,23 @@ Calculating the coverage probability for normal bootstrap interval:
     true_mu <- 0
     x <- rnorm(100, true_mu)
     R <- 999
-    
+
     lower <- numeric(R)
     upper <- numeric(R)
-    
+
     for (i in 1:R) {
-    
+
         s <- x[sample(length(x), replace=TRUE)]
         xbar <- mean(s)
         s <- sd(s)
-        
+
         lower[i] = xbar + qnorm(0.025) * (s / sqrt(length(x)))
         upper[i] = xbar + qnorm(0.975) * (s / sqrt(length(x)))
     }
-    
+
     > mean(lower < true_mu & upper > true_mu)
     [1] 0.9459459
-    
+
 ---
 
 Exercise
@@ -919,7 +919,7 @@ Exercise
 
 Find the coverage probability for bootstrap percentile intervals of the following model:
 
-$$y \sim \text{Gamma}(7,5)$$
+$$y \sim \text{Poisson}(3)$$
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
