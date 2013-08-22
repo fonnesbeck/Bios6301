@@ -43,10 +43,10 @@ Git is a **directory content management system**
 Presenter Notes
 ===============
 
-- control of both individual and collaborative projects. 
+- control of both individual and collaborative projects.
 - large and powerful set of commands
-- a few core functions, which allow it to be used by non-experts, and learned progressively. 
-- used both on and offline, rather than having to be constantly connected to a central server. 
+- a few core functions, which allow it to be used by non-experts, and learned progressively.
+- used both on and offline, rather than having to be constantly connected to a central server.
 - Like UNIX, Git is composed of several discrete functions that work together to a common purpose.
 
 ---
@@ -116,22 +116,22 @@ Note that a repository ("repo") can reside anywhere, either on your local machin
 Merging Work on Separate Branches
 =================================
 
-Git allows individuals to work separately, but then be able to merge their work with either the work of others or their own previous work in a logical, streamlined fashion. 
+Git allows individuals to work separately, but then be able to merge their work with either the work of others or their own previous work in a logical, streamlined fashion.
 
     !bash
     git checkout master
     # Do some stuff
     git commit -a -m "Updated documentation"
     git push
-    
+
     git checkout new_feature
     # Do some other stuff
     git commit -a -m "Added a new function"
     git push origin master
-    
+
     git checkout master
     git pull
-    git merge new_feature 
+    git merge new_feature
 
 This applies even when the same document (or even the same sections of a document) are being edited by multiple people.
 
@@ -147,29 +147,29 @@ Git in Action
 Git allows you to control and automate how changes are merged
 
      $ git log --graph --decorate --abbrev-commit --all --pretty=oneline
-     
+
      * 6de3c47 (cython) Deleted old cython code locations; continued tweaking cdistir
      * 4e2e329 Moved cython code to src; began moving from flib to gsl
      * 2e40665 More progress on cythonization
      * bd6010a Began cythonization. Changed Container_values and LazyFunction to Cyth
      | *   8c28e9d (HEAD, origin/master, origin/HEAD, master) Merge pull request #115
-     | |\  
-     |/ /  
+     | |\
+     |/ /
      | * b1b714c HDF5EA: Load meta info from existing file.
      | * 304e667 Rename hdf52 to hdf5ea, basic functionality works now.
      | * 7591091 Initial work on using EArray in HDF5.
      * |   b0daa21 (origin/2.2, 2.2) Merge pull request #114 from memmett/master
-     |\ \  
-     | |/  
+     |\ \
+     | |/
      | * 756d775 SQLITE: Tweak CREATE TABLE statement and don't catch exceptions.
-     |/  
+     |/
      * c903738 (tag: v2.2) Changed version to 2.2
      * e421f64 Fixed issue #111
 
 Presenter Notes
 ===============
 
-Git helps you manage situations when multiple changes are in conflict with one another. 
+Git helps you manage situations when multiple changes are in conflict with one another.
 While Git can be kept simple, it is also flexible and powerful enough for power users.
 Notice that the log of changes looks very much like a journal of the development of the project.
 ---
@@ -182,7 +182,7 @@ The first step in using Git for the first time is to configure your user name an
 
     !bash
     $ git config --global user.name "Moe Szyslak"
-    $ git config --global user.email "moe@moesbar.com"    
+    $ git config --global user.email "moe@moesbar.com"
 
 This will create a *.gitconfig* file in your home directory with a very simple structure:
 
@@ -202,12 +202,12 @@ The *--global* flag indicates that these values are to be applied system-wide; y
 
 Create a repository
 ===================
- 
+
 Creating a new repository:
 
     !bash
      $ git init firstrepo
-    
+
     Initialized empty Git repository in /Users/fonnescj/firstrepo/.git/
 
 Converting existing code into a repository:
@@ -215,13 +215,13 @@ Converting existing code into a repository:
     !bash
     $ cd firstrepo
     $ git init
- 
+
 Presenter Notes
 ===============
- 
+
 Have a look at the `.git` directory that is created. This is the only thing that Git adds to the file structure.
 
---- 
+---
 
 Checking the Status
 ===================
@@ -238,7 +238,7 @@ Adding content to the working directory is picked up by Git.
     !bash
     $ touch model.r
     $ git status
-    
+
     # On branch master
     #
     # Initial commit
@@ -265,7 +265,7 @@ Let Git know you intend to include content in the next commit using `git add`.
 
     !bash
     $ git add model.r
-    
+
     # On branch master
     #
     # Initial commit
@@ -287,7 +287,7 @@ Presenter Notes
 ===============
 
 This does not commit the file straight away, but rather, puts it in a staging area, where it is ready to be committed alongside other (perhaps related) files.
-It makes it easier to gather a set of related changes to be committed as a meaningful unit. 
+It makes it easier to gather a set of related changes to be committed as a meaningful unit.
 It also adds a layer of protection from accidentally committing changes that were unintended.
 
 ---
@@ -320,7 +320,7 @@ Git is an **opt-in** system: you must explicitly specify which files are include
 
 Git is a **distributed** system: there is no central repository; each clone is a first-class version of the repo.
 
-Git operates **offline**: in the above transactions there was no network activity. 
+Git operates **offline**: in the above transactions there was no network activity.
 
 Presenter Notes
 ===============
@@ -396,7 +396,7 @@ Let's try adding a file to the repository ...
     !bash
     $ rm badfile.txt
     $ git status
-    
+
     # On branch master
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
@@ -422,11 +422,11 @@ The command for removing files from being tracked by Git is `git rm`.
 
     !bash
     $ git rm badfile.txt
-    
+
     rm 'badfile.txt'
-    
+
     $ git status
-    
+
     # On branch master
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
@@ -439,7 +439,7 @@ Now the change is staged to be committed, and the file will no longer be tracked
 Presenter Notes
 ===============
 
-Note that evidence of its previous existence still appears in the git log. 
+Note that evidence of its previous existence still appears in the git log.
 Later, we will show you how to retrieve files deleted from the repository, if you decide later that you need them.
 
 ---
@@ -462,7 +462,7 @@ Renaming Files
     !bash
     $ mv badfile.txt goodfile.txt
     $ git status
-    
+
     # On branch master
     # Changes not staged for commit:
     #   (use "git add/rm <file>..." to update what will be committed)
@@ -493,7 +493,7 @@ For the change to be propagated as a renaming action, use `git mv`:
     !bash
     $ git mv badfile.txt goodfile.txt
     $ git status
-    
+
     # On branch master
     # Changes to be committed:
     #   (use "git reset HEAD <file>..." to unstage)
@@ -554,7 +554,7 @@ If we check the status, these two files will appear in the list of untracked fil
     #   bar.log
     # nothing added to commit but untracked files present (use "git add" to track)
 
-However, if our `.gitignore` file contains `*.log`, all files ending in *.log* will be ignored, even though they are still in the working directory, and are not tracked by the repository. 
+However, if our `.gitignore` file contains `*.log`, all files ending in *.log* will be ignored, even though they are still in the working directory, and are not tracked by the repository.
 
 ---
 
@@ -632,7 +632,7 @@ Have a look around ... they're the same!
     * 98a6415 2012-07-02 | Deleted badfile [Christopher Fonnesbeck]
     * 770fa5e 2012-07-02 | Here's a new file [Christopher Fonnesbeck]
     * cace59c 2012-06-25 | Draft of first model [Christopher Fonnesbeck]
-    (END) 
+    (END)
 
 Presenter Notes
 ===============
@@ -670,7 +670,7 @@ I now have an identical, first-class copy of Yihui Xie's `knitr` repo!
     $ git hist --all
     * 36c53e1 2012-08-23 | bump version (HEAD, origin/master, origin/HEAD, master) [
     * 52146d4 2012-08-23 | re-roxygenize [Yihui Xie]
-    * 961e88c 2012-08-23 | document changes in automatic detection of syntax [Yihui 
+    * 961e88c 2012-08-23 | document changes in automatic detection of syntax [Yihui
     * c02ba37 2012-08-23 | *.brew corresponds to pat_brew() [Yihui Xie]
     * 5df1117 2012-08-23 | detect_pattern() puts higher priority on the file extensi
     * 1178425 2012-08-23 | rm knitr-upload.Rmd [Yihui Xie]
@@ -687,7 +687,7 @@ try installing it ...
 Exercise
 ========
 
-### Clone the Bios301 course repository at 
+### Clone the Bios301 course repository at
 
     http://github.com/fonnesbeck/Bios301
 
@@ -701,7 +701,7 @@ Show what happens when I change something on the repo.
 Hashes
 ======
 
-Git identifies the uniqueness of all its content using *hashcodes*. 
+Git identifies the uniqueness of all its content using *hashcodes*.
 
     $ git log
     commit fa0d6a5c6b03c0224fa87879a6454911a41400c9
@@ -716,9 +716,9 @@ Git identifies the uniqueness of all its content using *hashcodes*.
 
         Here's a new file again
 
-A hashcode is a mapping of some quantity of data to a much smaller dataset that uniquely identifies the original dataset. 
+A hashcode is a mapping of some quantity of data to a much smaller dataset that uniquely identifies the original dataset.
 
-This is done using one of several *hashing algorithms*.  
+This is done using one of several *hashing algorithms*.
 
 ### But, why??
 
@@ -734,7 +734,9 @@ Hashes
 
 ![hash](images/hash.png)
 
-Git uses the [SHA-1 hashing function](http://en.wikipedia.org/wiki/SHA-1) to encode the files that it tracks.
+Git uses the [SHA-1 cryptographic hashing function](http://en.wikipedia.org/wiki/SHA-1) to encode the files that it tracks. SHA-1 was designed by the United States National Security Agency and published by the United States NIST as a U.S. Federal Information Processing Standard.
+
+The SHA-1 ("secure hash algorithm") produces a 160-bit (20-byte) hash value, which is expressed as a 40-digit hexadecimal number.
 
 Presenter Notes
 ===============
@@ -789,19 +791,19 @@ Presenter Notes
 Your Commit History
 ===================
 
-`git log` command accesses the record of all the transactions that have been executed under git for the project from which you call it. 
+`git log` command accesses the record of all the transactions that have been executed under git for the project from which you call it.
 
     $ git log
     commit fa0d6a5c6b03c0224fa87879a6454911a41400c9
     Author: Christopher Fonnesbeck <chris.fonnesbeck@vanderbilt.edu>
     Date:   Mon Jul 2 13:55:01 2012 -0500
-    
+
         renamed badfile to goodfile
-        
+
     commit 0e0cfcad18d7ceb1d9637f1e4184b98a46e9df18
     Author: Christopher Fonnesbeck <chris.fonnesbeck@vanderbilt.edu>
     Date:   Mon Jul 2 13:43:47 2012 -0500
-    
+
         Here's a new file again
 
 - unique commit hash
@@ -826,7 +828,7 @@ A combination of arguments to `git log` can be used to obtain a customized displ
     * 3966c74 Fixed issue #118 in utils.coda()
     * f94b148 Restored numpy error settings
     *   8c28e9d Merge pull request #115 from memmett/hdf5-earray
-    |\  
+    |\
     | * b1b714c HDF5EA: Load meta info from existing file.
     | * 304e667 Rename hdf52 to hdf5ea, basic functionality works now.
     | * 7591091 Initial work on using EArray in HDF5.
@@ -839,7 +841,7 @@ We now see information regarding the various branches, an abbreviated hashcode, 
 Filtering Commit History
 ========================
 
-Another powerful use of `git log` is for *filtering* the commit history, according to desired criteria. 
+Another powerful use of `git log` is for *filtering* the commit history, according to desired criteria.
 
 For example, if we want to see all commits from one month ago until yesterday, limiting the number returned to a maximum of 30 records, we can type:
 
@@ -847,19 +849,19 @@ For example, if we want to see all commits from one month ago until yesterday, l
     commit d159a3b9adba4116722cbddf7ca2b56506ba159d
     Author: Christopher Fonnesbeck <chris.fonnesbeck@vanderbilt.edu>
     Date:   Tue Jul 10 10:47:25 2012 -0500
-    
+
         Minor fix to buildosx
-        
+
     commit 67e9310b460ad0b07a19acab85da35af059a1980
     Author: Christopher Fonnesbeck <chris.fonnesbeck@vanderbilt.edu>
     Date:   Tue Jul 10 10:20:24 2012 -0500
-    
+
         Amended install instructions for Windows according to issue #61
-        
+
     commit 4c12d983c188b166997616099e10405814463350
     Author: Christopher Fonnesbeck <chris.fonnesbeck@vanderbilt.edu>
     Date:   Thu Jul 5 10:20:42 2012 -0500
-    
+
         Fixed bug in sample code for Stochastic section of modelbuilding.rst
 
 ---
@@ -910,19 +912,19 @@ Notes
 HEAD
 ====
 
-The **HEAD** in Git is the pointer to the current branch reference, which is in turn a pointer to the last commit you made or the last commit that was checked out into your working directory. 
+The **HEAD** in Git is the pointer to the current branch reference, which is in turn a pointer to the last commit you made or the last commit that was checked out into your working directory.
 
 - it will be the parent of the next commit you do
 - it is the snapshot of your last commit
 
 You can always see where HEAD is by looking in your `.git` directory:
 
-    $ cat .git/HEAD 
+    $ cat .git/HEAD
     ref: refs/heads/master
 
 ... which is a reference to:
 
-    $ cat .git/refs/heads/master 
+    $ cat .git/refs/heads/master
     e9a570524b63d2a2b3a7c3325acf5b89bbeb131e
 
 Presenter Notes
@@ -957,7 +959,7 @@ What if you ...
 - forget to add files to a commit?
 - make a mistake in the commit message?
 
-This command takes your staging area and uses it to amend your last commit. 
+This command takes your staging area and uses it to amend your last commit.
 
     !bash
     $ git commit --amend
@@ -1016,7 +1018,7 @@ Presenter Notes
 Unmodifying a Modified File
 ===========================
 
-Suppose you modify a file in our working directory, but decide that you make a mistake and would like to revert to the version at the HEAD.  
+Suppose you modify a file in our working directory, but decide that you make a mistake and would like to revert to the version at the HEAD.
 
     !bash
     $ git status
@@ -1047,7 +1049,7 @@ This is a dangerous command!
 Remotes
 =======
 
-Remote repositories are project repositories that are hosted on a network. Collaborating with others involves managing these remote repositories and pushing and pulling data to and from them when you need to share work. 
+Remote repositories are project repositories that are hosted on a network. Collaborating with others involves managing these remote repositories and pushing and pulling data to and from them when you need to share work.
 
 Go to the `Bios301` repo that you cloned in the earlier exercise, and check out the remote repositories.
 
@@ -1102,7 +1104,7 @@ The general syntax for adding remotes is:
     git remote add <alias> <remote url>
 
 For example, let's connect our `firstrepo` repository to a remote repository called `firstremote`.
-    
+
     !bash
     $ git remote add origin git@github.com:fonnesbeck/firstremote.git
     $ git remote -v
@@ -1143,7 +1145,7 @@ Presenter Notes
 Fetching and Pulling
 ====================
 
-Just adding the remote repository does not allow you to merge, however. You need to specify which *branch* of the remote repo is to be the tracked by the current local branch: 
+Just adding the remote repository does not allow you to merge, however. You need to specify which *branch* of the remote repo is to be the tracked by the current local branch:
 
     $ git pull
     warning: no common commits
@@ -1197,7 +1199,7 @@ Presenter Notes
 Pushing
 =======
 
-To share your work with others, you need to push your changes to the remote repository. To do this, you run `git push <alias> <branch>` which will attempt to make your branch the new branch on the remote. 
+To share your work with others, you need to push your changes to the remote repository. To do this, you run `git push <alias> <branch>` which will attempt to make your branch the new branch on the remote.
 
 If no arguments are provided, git will push all branches to their corresponding remotes.
 
@@ -1240,7 +1242,7 @@ Presenter Notes
 Hands-on Exercise
 =================
 
-Test your "Git-fu" by forking my [`git_training`](https://github.com/fonnesbeck/git_training) repository, cloning it to your local machine, then correcting the grammatical error in the README file and pushing the edited file back to your remote on GitHub. 
+Test your "Git-fu" by forking my [`git_training`](https://github.com/fonnesbeck/git_training) repository, cloning it to your local machine, then correcting the grammatical error in the README file and pushing the edited file back to your remote on GitHub.
 
 Presenter Notes
 ===============
