@@ -68,19 +68,16 @@ Bios 366
 
 ---
 
-## Cumulative
-
-Presenter Notes
-===============
-
-Content later in the course builds on what was presented earlier -- keep up!
-
----
-
 # Hands-on
 
 * Each lecture will be accompanied by hands on exercises
 * Homeworks are longer and more involved
+
+---
+
+## Cumulative
+
+Content later in the course builds on what was presented earlier -- keep up!
 
 ---
 

@@ -667,7 +667,7 @@ Cloning
 I now have an identical, first-class copy of Yihui Xie's `knitr` repo!
 
     $ cd knitr
-    $ git hist --all
+    $ git log --pretty=oneline --graph --date=short --all
     * 36c53e1 2012-08-23 | bump version (HEAD, origin/master, origin/HEAD, master) [
     * 52146d4 2012-08-23 | re-roxygenize [Yihui Xie]
     * 961e88c 2012-08-23 | document changes in automatic detection of syntax [Yihui
@@ -676,6 +676,7 @@ I now have an identical, first-class copy of Yihui Xie's `knitr` repo!
     * 1178425 2012-08-23 | rm knitr-upload.Rmd [Yihui Xie]
     :
 
+***Every clone is a backup***
 
 Presenter Notes
 ===============
