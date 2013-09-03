@@ -996,7 +996,7 @@ What if you add two files to your index (staging area), but you only wanted to a
 Following the advice of `git status`:
 
     !bash
-    $ git reset HEAD benchmarks.rb
+    $ git reset HEAD bar.r
     $ git status
     # On branch master
     # Changes to be committed:
