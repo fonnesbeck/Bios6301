@@ -38,8 +38,8 @@ Pros of LaTeX:
 - style is consistent (layout, fonts, tables, maths, etc.)
 - mathematics are easily typeset
 - indexes, footnotes and references are easily generated
-- the author is forced to correctly structure your documents
-- source document is plain
+- the author is forced to correctly structure documents
+- source document is plain text
 
 Cons of LaTeX:
 
@@ -271,23 +271,23 @@ Notes
 Font Styles
 ===========
 
-\\[\def\sc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\\]
+$$\def\sc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}$$
 
     \textit{italic}
 
-\\[\textit{italic}\\]
+$$\textit{italic}$$
 
     \textbf{boldface}
 
-\\[\textbf{boldface}\\]
+$$\textbf{boldface}$$
 
     \texttt{typewriter}
 
-\\[\mathtt{typewriter}\\]
+$$\mathtt{typewriter}$$
 
     \textsf{sans serif}
 
-\\[\mathsf{sans}\;\mathsf{serif}\\]
+$$\mathsf{sans}\;\mathsf{serif}$$
 
 Presenter Notes
 ===============
@@ -300,23 +300,23 @@ Font size
 
     \begin{tiny} tiny \end{tiny}
 
-\\[{\tiny tiny}\\]
+$${\tiny tiny}$$
 
     \begin{small} small \end{small}
 
-\\[{\small small}\\]
+$${\small small}$$
 
     \begin{large} large \end{large}
 
-\\[{\large large}\\]
+$${\large large}$$
 
     \begin{Large} Large \end{Large}
 
-\\[{\Large Large}\\]
+$${\Large Large}$$
 
     \begin{Huge} Huge \end{Huge}
 
-\\[{\Huge Huge}\\]
+$${\Huge Huge}$$
 
 
 Presenter Notes
@@ -371,7 +371,7 @@ Or as standalone equations:
         f(x | n,p) = {n \choose x} p^x (1-p)^{n-x}
     \end{equation}
 
-\\[f(x | n,p) = {n \choose x} p^x (1-p)^{n-x}\\]
+$$f(x | n,p) = {n \choose x} p^x (1-p)^{n-x}$$
 
 Presenter Notes
 ===============
@@ -436,16 +436,16 @@ Sums:
     \sum_{i=1}^{10} t_i
     \]
 
-\\[\sum_{i=1}^{10} t_i\\]
+$$\sum_{i=1}^{10} t_i$$
 
 Integrals:
 
     !latex
     \[
-    \int_0^\infty e^{−x} \, dx
+    \int_0^\infty e^{-x} \, dx
     \]
 
-\\[\int_0^\infty e^{−x} \, dx\\]
+$$\int_0^\infty e^{-x} \, dx$$
 
 
 Presenter Notes
@@ -653,14 +653,23 @@ Presenter Notes
 justification
 partial line, double line
 
+---
+
+Exercise
+========
+
+![Table exercise](images/table_example.png)
+
     !latex
     \begin{tabular}{|r|l|} \hline
     7C0 & hexadecimal \\
-    3700 & octal \\ \cline{2−2}
+    3700 & octal \\ \cline{2-2}
     11111000000 & binary \\ \hline \hline
     1984 & decimal \\ \hline
     \end{tabular}
 
+Presenter Notes
+===============
 `cline` == column line
 
 
@@ -830,8 +839,8 @@ Articles in your BibTeX database can be cited within the document text using the
 
 Explicit paranthetical (`citep`) and in-text (`citet`) citations can be used by loading the `natbib` package.
 
-    A meta-analysis by \cite{Waisbren:2007es} employed random effects
-    models \cite{DerSimonian:1986wm} to relate IQ to Phe levels.
+    A meta-analysis by \citet{Waisbren:2007es} employed random effects
+    models \citep{DerSimonian:1986wm} to relate IQ to Phe levels.
 
 >  A meta-analysis by Waisbren et al. (2007) employed random effects models (DerSimonian and Laird 1986) to relate IQ to Phe levels.
 
@@ -964,7 +973,6 @@ Example: LaTeX from Word
 
 In the `exercises` folder on github.com/Bios301, there is a short Word (.docx) document. See if you can create the same document using LaTeX.
 
----
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -972,12 +980,11 @@ In the `exercises` folder on github.com/Bios301, there is a short Word (.docx) d
     jax: ["input/TeX", "output/HTML-CSS"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      displayMath: [ ['$$','$$'], ["$$","$$"] ],
       processEscapes: true
     },
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
