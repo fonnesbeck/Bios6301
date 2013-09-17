@@ -78,20 +78,20 @@ A complex value in R is defined via the pure imaginary value i.
     > class(z)
     [1] "complex"
 
-The following gives an error as −1 is not a complex value.
+The following gives an error as -1 is not a complex value.
 
     !r
-    > sqrt(−1)
+    > sqrt(-1)
     [1] NaN
     Warning message:
-    In sqrt(−1) : NaNs produced
+    In sqrt(-1) : NaNs produced
 
-Instead, we have to use the complex value −1 + 0i.
+Instead, we have to use the complex value -1 + 0i.
 
     !r
-    > sqrt(−1+0i)
+    > sqrt(-1+0i)
     [1] 0+1i
-    > sqrt(as.complex(−1))
+    > sqrt(as.complex(-1))
     [1] 0+1i
 
 ---

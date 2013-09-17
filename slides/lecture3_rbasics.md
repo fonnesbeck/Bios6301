@@ -58,7 +58,10 @@ editor. Consecutive expressions can be entered on the same line, if
 separated by semicolons:
 
     !r
-    > 2+3; 5*7; 3-7 [1] 5 [1] 35 [1] -4
+    > 2+3; 5*7; 3-7
+    [1] 5
+    [1] 35
+    [1] -4
 
 ---
 
