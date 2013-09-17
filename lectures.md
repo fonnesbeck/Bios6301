@@ -13,15 +13,15 @@ title: Introduction to Statistical Computing
 
 This schedule is *tentative* and subject to change at any time.
 
-* [Course introduction](https://dl.dropbox.com/u/233041/Bios301/lecture1_intro.html)
-* [Version control using Git](https://dl.dropboxusercontent.com/u/233041/Bios301/lecture1_git.html)
+* [Course introduction](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture1_intro.html)
+* [Version control using Git](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture1_git.html)
 * Document preparation:
-    - [LaTeX](https://dl.dropbox.com/u/233041/Bios301/lecture2_latex.html)
-    - [knitr](https://dl.dropbox.com/u/233041/Bios301/lecture2_knitr.html)
-    - [Markdown](https://dl.dropbox.com/u/233041/Bios301/lecture2_markdown.html)
+    - [LaTeX](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture2_latex.html)
+    - [knitr](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture2_knitr.html)
+    - [Markdown](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture2_markdown.html)
 * Introduction to R (Chapters 2-5)
     - [R basics](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture3_rbasics.html)
-    - [data](https://dl.dropbox.com/u/233041/Bios301/lecture3_numbers.html)
+    - [data](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture3_numbers.html)
     - [data types and data structures](http://htmlpreview.github.com/?raw.github.com/fonnesbeck/Bios301/master/slides/html/lecture3_data_structures.html)
 * R Programming (Chapter 7)
     - [Control structures](https://dl.dropbox.com/u/233041/Bios301/lecture4_control_structures.html)
