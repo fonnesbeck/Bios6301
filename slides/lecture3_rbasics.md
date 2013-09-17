@@ -1,20 +1,16 @@
-R: The Basics
-=============
-
+# R: The Basics
 
 
 ---
 
-Running R
-=========
+## Running R
 
 Upon starting the R  console, you will see a console displaying several lines of
 information:
 
-    R version 2.13.0 (2011-04-13)
-    Copyright (C) 2011 The R Foundation for Statistical Computing
-    ISBN 3-900051-07-0
-    Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+    R version 3.0.1 (2013-05-16) -- "Good Sport"
+    Copyright (C) 2013 The R Foundation for Statistical Computing
+    Platform: x86_64-apple-darwin12.4.0 (64-bit)
 
     R is free software and comes with ABSOLUTELY NO WARRANTY.
     You are welcome to redistribute it under certain conditions.
@@ -30,25 +26,23 @@ information:
     'help.start()' for an HTML browser interface to help.
     Type 'q()' to quit R.
 
-    [Workspace loaded from ~/.RData]
-    
-Presenter Notes
-===============
+    >
+
+### Presenter Notes
 
 This includes information on your the version of the software, your
 platform, licensing, and a few handy commands to get you started. It
 also shows you how to quit the current R session `q()` and where your
-current workspace is located on your computer's file system. 
+current workspace is located on your computer's file system.
 
 ---
 
-The Command Prompt
-==================
+## The Command Prompt
 
 After starting R, you are presented with a command prompt:
 
     !r
-    > 
+    >
 
 It is at this command prompt that the user may interact with R, by
 typing expressions, then hitting return to have the expression
@@ -68,8 +62,7 @@ separated by semicolons:
 
 ---
 
-Getting help
-============
+## Getting help
 
 If you need help regarding any function, simply call its help file by
 typing a question mark (?) followed by the name of the function:
@@ -101,13 +94,12 @@ typing:
 
 ---
 
-Packages
-========
+## Packages
 
 Non-core R functionality is distributed in the form of discrete
 *packages*. This allows third parties to extend R, which allows users to
 access newer methods than are typically available in the base R
-application. 
+application.
 
 `sessionInfo()` reports which packages are currently loaded into your R session:
 
@@ -120,17 +112,16 @@ application.
     [1] C/en_US.UTF-8/C/C/C/C
 
     attached base packages:
-    [1] stats     graphics  grDevices utils     datasets  methods   base     
+    [1] stats     graphics  grDevices utils     datasets  methods   base
 
     loaded via a namespace (and not attached):
     [1] tools_2.13.0
 
 ---
 
-Packages
-========
+## Packages
 
-There are three classes of package: 
+There are three classes of package:
 
 - **base**: pre-installed, loaded automatically
 - **recommended**: pre-installed, loaded manually
@@ -140,21 +131,20 @@ To see the packages that are currently installed (but not necessarily loaded):
 
     !r
     > installed.packages()
-                 Package       
-    bitops       "bitops"      
-    brew         "brew"        
-    coda         "coda"        
-    colorspace   "colorspace"  
-    devtools     "devtools"    
-    dichromat    "dichromat"   
-    digest       "digest"      
-    evaluate     "evaluate"    
-    filehash     "filehash"    
-    formatR      "formatR"     
-    ggplot2      "ggplot2"   
+                 Package
+    bitops       "bitops"
+    brew         "brew"
+    coda         "coda"
+    colorspace   "colorspace"
+    devtools     "devtools"
+    dichromat    "dichromat"
+    digest       "digest"
+    evaluate     "evaluate"
+    filehash     "filehash"
+    formatR      "formatR"
+    ggplot2      "ggplot2"
 
-Presenter Notes
-===============
+### Presenter Notes
 
 This modularity makes R efficient relative to many commercial packages.
 Loading only packages that are relevant to your current work saves
@@ -162,10 +152,37 @@ space, time and memory.
 
 ---
 
-Loading Packages
-================
+## Installing packages
 
-Packages are loaded using the `library` function. 
+The largest source of third-party packages is through an online repository called the
+[Comprehensive R Archive Network](http://cran.r-project.org/). A convenient method for
+installing a single package is to use the `install.packages` command from the R console:
+
+    !r
+    > install.packages("ggplot2", dependencies=TRUE)
+
+Including the `dependencies=TRUE` flag also installs any other packages
+that the target package requires to run on your machine.
+
+Many packages are now developed on GitHub. The `devtools` package contains a function for installing directly from GitHub:
+
+    !r
+    > install.packages("devtools")
+    > library(devtools)
+    > install_github("ggplot2")
+
+### Presenter Notes
+
+packages on CRAN have been vetted for appropriate format and documentation, and
+tend to contain the most up-to-date versions across all of its servers.
+can use GUI installer as well
+
+
+---
+
+## Loading Packages
+
+Packages are loaded using the `library` function.
 
     !r
     > library(ggplot2)
@@ -185,21 +202,20 @@ The function reports *dependencies*, warnings, or error messages, if any
 
 ---
 
-Frames and environments
-=======================
+## Frames and environments
 
 R uses abstractions called *frames* and *environments* as hierarchical levels of
 organization within the R system.
 
-* **frame**: a device that binds objects in R to their names ("catalog")
+* **frame**: a device that *binds* objects in R to their names ("catalog")
 * **environment**: a frame + a reference to another environment ("namespace")
 
-When you start an R session, a global environment is created, called `.GlobalEnv`. 
+When you start an R session, a global environment is created, called `.GlobalEnv`.
 
     !r
     > search()
-    [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
-    [4] "package:grDevices" "package:utils"     "package:datasets" 
+    [1] ".GlobalEnv"        "package:stats"     "package:graphics"
+    [4] "package:grDevices" "package:utils"     "package:datasets"
     [7] "package:methods"   "Autoloads"         "package:base"
 
 When you call a function, R creates a new environment, enclosed in the current
@@ -207,57 +223,24 @@ environment. Objects created inside the function are not available in the enclos
 environment; objects available in the enclosing environment are available to the function running within it.
 
 
-Presenter Notes
-===============
- 
+### Presenter Notes
+
 .GlobalEnv is  the  default  container for  any  objects, including other environments, that are created during the session.
 
 ---
 
-Installing packages
-===================
-
-The largest source of third-party packages is through an online repository called the
-[Comprehensive R Archive Network](http://cran.r-project.org/). A convenient method for
-installing a single package is to use the `install.packages` command from the R console:
-
-    !r
-    > install.packages("ggplot2", dependencies=TRUE)
-
-Including the `dependencies=TRUE` flag also installs any other packages
-that the target package requires to run on your machine. 
-
-Many packages are now developed on GitHub. The `devtools` package contains a function for installing directly from GitHub:
-
-    !r
-    > install.packages("devtools")
-    > library(devtools)
-    > dev_mode(on=T)
-    > install_github("ggplot2")
-
-Presenter Notes
-===============
-
-packages on CRAN have been vetted for appropriate format and documentation, and
-tend to contain the most up-to-date versions across all of its servers.
-can use GUI installer as well
-
----
-
-Editing and running scripts
-===========================
+## Editing and running scripts
 
 It is more efficient to perform statistical analyses in R by generating a *script* that
-runs a sequence of commands in succession. 
+runs a sequence of commands in succession.
 
 ![Sample R script in TextMate](images/editor.png)
 
 ---
 
-Editing and running scripts
-===========================
+## Editing and running scripts
 
-To run the script, it should be saved to the current working directory that is being used by R. 
+To run the script, it should be saved to the current working directory that is being used by R.
 
     !r
     > getwd()
@@ -266,11 +249,7 @@ To run the script, it should be saved to the current working directory that is b
 R scripts retain the  *.r* (or *.R*) suffix at the end of the filename. To run any script, pass the filename to R's `source` function:
 
     !r
-    > source("quartiles.r")
-
-    1st Quartile: 2
-    Median:       4
-    3rd Quartile: 7
+    > source("binomial.r")
 
 Using scripts makes modifying and re-running your code much easier and allows you to
 share, distribute and backup your work.
@@ -278,8 +257,7 @@ share, distribute and backup your work.
 ---
 
 
-Assignment
-==========
+## Assignment
 
 Variables are
 given values using the assignment operator (`<-`), which looks like an
@@ -304,8 +282,7 @@ expression in parentheses:
 
 ---
 
-Built-in functions
-==================
+## Built-in functions
 
 Most commonly-used mathematical functions are available in the base R
 package:
@@ -331,17 +308,16 @@ The trigonometric functions in R measure angles in radians:
     [1] 1
     > cos(pi/2)
     [1] 6.123032e-017
-    
+
 Standard operator precedence is used.
 
     > (1 + 1/100)^100
     [1] 2.704814
-    
+
 ---
 
 
-Operators
-=========
+## Operators
 
 R uses standard arithmetic operator symbols, including `+ - */%% ^`.
 
