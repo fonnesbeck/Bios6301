@@ -1,10 +1,8 @@
-Data Types and Structures in R
-==============================
+# Data Types and Structures in R
 
 ---
 
-Data Types
-==========
+## Data Types
 
 R has several elemental data types.
 
@@ -16,47 +14,45 @@ R has several elemental data types.
 
 ---
 
-Numeric
-=======
+## Numeric
 
 Floating-point numbers are represented by the `numeric` type in R. It is the default computational data type.
 
     !r
-    > x <- 10.5      # assign a decimal value 
-    > x              
-    [1] 10.5 
-    > class(x)       # print the class name of x 
+    > x <- 10.5      # assign a decimal value
+    > x
+    [1] 10.5
+    > class(x)       # print the class name of x
     [1] "numeric"
-    
+
 Even if we assign an integer to a variable, it gets saved as a `numeric` type:
 
     !r
-    > k <- 1 
-    > k              
-    [1] 1 
-    > class(k)       # print the class name of k 
+    > k <- 1
+    > k
+    [1] 1
+    > class(k)       # print the class name of k
     [1] "numeric"
-    
+
 We can query this directly:
 
     !r
-    > is.integer(k)  # is k an integer? 
+    > is.integer(k)  # is k an integer?
     [1] FALSE
-    
+
 ---
 
-Integer
-=======
+## Integer
 
 Integers can be created only by *casting* a numeric value, using the `as.integer()` function:
 
     !r
-    > y <- as.integer(3) 
-    > y              
-    [1] 3 
-    > class(y)       
-    [1] "integer" 
-    > is.integer(y)  
+    > y <- as.integer(3)
+    > y
+    [1] 3
+    > class(y)
+    [1] "integer"
+    > is.integer(y)
     [1] TRUE
 
 We can cast other types to integers this way:
@@ -68,85 +64,81 @@ We can cast other types to integers this way:
     [1] 6
     > as.integer(TRUE)
     [1] 1
-    
+
 ---
 
-Complex
-=======
+## Complex
 
 A complex value in R is defined via the pure imaginary value i.
 
     !r
-    > z <- 1 + 2i      
-    > z              
-    [1] 1+2i 
-    > class(z)       
+    > z <- 1 + 2i
+    > z
+    [1] 1+2i
+    > class(z)
     [1] "complex"
-    
+
 The following gives an error as −1 is not a complex value.
 
     !r
-    > sqrt(−1)      
-    [1] NaN 
-    Warning message: 
+    > sqrt(−1)
+    [1] NaN
+    Warning message:
     In sqrt(−1) : NaNs produced
 
 Instead, we have to use the complex value −1 + 0i.
 
     !r
-    > sqrt(−1+0i)  
+    > sqrt(−1+0i)
     [1] 0+1i
-    > sqrt(as.complex(−1)) 
+    > sqrt(as.complex(−1))
     [1] 0+1i
 
 ---
 
-Logical
-=======
+## Logical
 
 A logical value is often created via comparison between variables.
 
-    > x <- 1; y <- 2   
-    > z <- x > y      
-    > z              
-    [1] FALSE 
-    > class(z)       
+    > x <- 1; y <- 2
+    > z <- x > y
+    > z
+    [1] FALSE
+    > class(z)
     [1] "logical"
-    
+
 Standard logical operations are "&" (and), "|" (or), and "!" (negation).
 
-    > u <- TRUE; v <- FALSE 
-    > u & v          # u AND v 
-    [1] FALSE 
-    > u | v          # u OR v 
-    [1] TRUE 
-    > !u             # negation of u 
+    > u <- TRUE; v <- FALSE
+    > u & v          # u AND v
+    [1] FALSE
+    > u | v          # u OR v
+    [1] TRUE
+    > !u             # negation of u
     [1] FALSE
 
 ---
 
-Character
-=========
+## Character
 
 A character object is used to represent string values in R. We convert objects into character values with the as.character() function:
 
     > (x = as.character(3.14))
-    [1] "3.14" 
-    > class(x)       
+    [1] "3.14"
+    > class(x)
     [1] "character"
-    
+
 Two character values can be concatenated with the paste function.
 
-    > fname = "Joe"; lname ="Smith" 
-    > paste(fname, lname) 
-    [1] "Joe Smith" 
-    
+    > fname = "Joe"; lname ="Smith"
+    > paste(fname, lname)
+    [1] "Joe Smith"
+
 ---
 
 
 
-Vectors
-=======
+## Vectors
 
 The *fundamental* data structure in R.
 
@@ -167,15 +159,13 @@ The function `c` combines the elements specified into a vector.
     > mode(x)
     [1] "character"
 
-Presenter Notes
-===============
+### Presenter Notes
 
 The size of the vector is allocated to memory when it is created.
 
 ---
 
-Indexing
-========
+## Indexing
 
 The elements of a vector can be accessed via *indexing*, using square brackets.
 
@@ -203,15 +193,13 @@ Scalars are just one-element vectors:
     > y[2]
     [1] NA
 
-Presenter Notes
-===============
+### Presenter Notes
 
 which() takes a Boolean vector and gives a vector of indices for the TRUE values; useful with tests
 
 ---
 
-Vector Arithmetic
-=================
+## Vector Arithmetic
 
 Operators apply to vectors “pairwise”:
 
@@ -227,14 +215,12 @@ Operators apply to vectors “pairwise”:
     [1] 81 -3  5  5
 
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Vector Comparisons
-==================
+## Vector Comparisons
 
 Can also do pairwise comparisons, which returns a boolean vector:
 
@@ -260,14 +246,12 @@ To compare whole vectors, best to use `identical()` or `all.equal()`:
     > all.equal(c(0.5-0.3,0.3-0.1),c(0.3-0.1,0.5-0.3))
     [1] TRUE
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Special Values
-==============
+## Special Values
 
 In addition to the standard data types and data structures, there are four "special" values that you will encounter in R.
 
@@ -283,18 +267,17 @@ NA
 
 `NA` is used to represent missing values (*i.e.* not available). For example, if you expand the length of a vector beyond the indices where values were defined, `NA` values are inserted:
 
-    > v <- c(1,2,3) 
+    > v <- c(1,2,3)
     > v
     [1] 1 2 3
-    > length(v) <- 4 
+    > length(v) <- 4
     > v
     [1] 1 2 3 NA
 
 
 ---
 
-Inf
-===
+## Inf
 
 `Inf` represents infinity. It is most commonly encountered when a computation results in a number that is too big:
 
@@ -305,26 +288,24 @@ Inf
 
 This is also the value returned when you divide by 0:
 
-    > 1/ 0 
+    > 1/ 0
     [1] Inf
 
 ---
 
-NaN
-===
+## NaN
 
 `NaN` stands for "not a number", and it is returned when a computation is nonsensical:
 
-    > Inf - Inf 
-    [1] NaN 
+    > Inf - Inf
+    [1] NaN
     > 0/0
     [1] NaN
 
 
 ---
 
-NULL
-====
+## NULL
 
 The `NULL` value indicates that there is no value assigned to a particular object. Note the difference between this and the notion of a missing value or a nonsensical value.
 
@@ -332,15 +313,14 @@ The `NULL` value indicates that there is no value assigned to a particular objec
 
 ---
 
-Vectorized Functions
-====================
+## Vectorized Functions
 
 Lots of functions take vectors as arguments:
 
 - `mean()`, `median()`, `sd()`, `var()`, `max()`, `min()`, `length()`, `sum()` yield single numbers
 - `sort()` returns a new vector
 - `hist()` takes a vector of numbers and produces a histogram and plots it
-- `summary()` gives a five-number summary of numerical vectors 
+- `summary()` gives a five-number summary of numerical vectors
 - `any()` and `all()` are useful on Boolean vectors
 
 For example:
@@ -351,29 +331,27 @@ For example:
     > sort(x)
     [1]  5 12 13 88
     > summary(x)
-       Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-       5.00   10.25   12.50   29.50   31.75   88.00 
+       Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+       5.00   10.25   12.50   29.50   31.75   88.00
     > any(x > 10)
     [1] TRUE
 
-Presenter Notes
-===============
+### Presenter Notes
 
 Making a plot is a "side-effect"
 
 ---
 
-Named Elements
-==============
+## Named Elements
 
 You can give names to elements or components of vectors
-    
+
     !r
     > names(x) <- c("v1","v2","v3","foo")
     > names(x)
     [1] "v1"   "v2"   "v3"   "foo"
     > x[c("foo","v1")]
-    foo  v1 
+    foo  v1
      13  88
 
 Labels are not actually part of the value
@@ -385,14 +363,12 @@ Labels are not actually part of the value
     > which(names(x)=="foo")
     [1] 4
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Arrays
-======
+## Arrays
 
 Arrays add additional structure to vectors.
 
@@ -420,8 +396,7 @@ Notice the array is filled column-wise. Arrays have several properties:
     $dim
     [1] 2 2
 
-Presenter Notes
-===============
+### Presenter Notes
 
 - arrays can be n-dimensional.
 - typeof() returns the type of the elements
@@ -429,11 +404,10 @@ Presenter Notes
 
 ---
 
-Array Indexing
-==============
+## Array Indexing
 
 Can access a 2-D array either by pairs of indices or by the underlying vector:
-    
+
     !r
     > x_arr[1,2]
     [1] 12
@@ -448,16 +422,14 @@ Omitting an index means “all of it”:
     > x_arr[,2]
     [1] 12 13
 
-Presenter Notes
-===============
+### Presenter Notes
 
 ---
 
-Operating on Arrays
-===================
+## Operating on Arrays
 
 Some functions do not respect array structure, and operate on the underlying vector instead:
-    
+
     !r
     > which(x_arr > 9)
     [1] 1 3 4
@@ -472,18 +444,16 @@ Other functions preserve array structure:
     [2,]   -3  -32
 
 Others specifically act on each row or column of the array separately:
-    
+
     !r
     > rowSums(x_arr)
     [1] 100 18
 
-Presenter Notes
-===============
+### Presenter Notes
 
 ---
 
-Matrices
-========
+## Matrices
 
 In R, a matrix is a specialization of a 2D array, with attributes for the numbers of columns and rows.
 
@@ -510,16 +480,14 @@ Matrices can be compared using functions like `identical` and `all.equal`:
     > all.equal(dataset, dataset2)
     [1] "Mean relative difference: 1.902439"
 
-Presenter Notes
-===============
+### Presenter Notes
 
 Alternately, could specify `ncol`.
 Element-wise operations with the usual arithmetic and comparison operators.
 
 ---
 
-Matrix Multiplication
-=====================
+## Matrix Multiplication
 
 Matrix multiplication has a special operator:
 
@@ -545,15 +513,13 @@ Multiplying by a vector:
          [,1] [,2]
     [1,]   30 1600
 
-Presenter Notes
-===============
+### Presenter Notes
 
 R silently casts the vector as a row or column matrix.
 
 ---
 
-Matrix Operations
-=================
+## Matrix Operations
 
 Matrix transpose:
 
@@ -580,17 +546,15 @@ Extracting or replacing the diagonal:
     [1,]    4   40
     [2,]    1   12
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Matrix Operations
-=================
+## Matrix Operations
 
 Creating a diagonal matrix or an identity matrix:
-    
+
     !r
     > diag(c(3,4))
          [,1] [,2]
@@ -613,14 +577,12 @@ Inverting a matrix:
     [1,]    1    0
     [2,]    0    1
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-`solve()`
-=========
+## `solve()`
 
 Solving the linear system \\(\mathbf{A}\mathbf{x} = \mathbf{b}\\) for unknown \\(\mathbf{x}\\):
 
@@ -632,14 +594,12 @@ Solving the linear system \\(\mathbf{A}\mathbf{x} = \mathbf{b}\\) for unknown \\
     [1,]   10
     [2,]   20
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Naming Rows and Columns
-=======================
+## Naming Rows and Columns
 
 We can name either rows or columns or both, with rownames() and colnames():
 
@@ -651,16 +611,14 @@ We can name either rows or columns or both, with rownames() and colnames():
     subject1         1   40
     subject2         1   60
 
-Presenter Notes
-===============
+### Presenter Notes
 
 These are just character vectors, and we use the same function to get and to set their values
 Names help us understand what we’re working with
 
 ---
 
-Lists
-=====
+## Lists
 
 Lists allow for the storage of a sequence of values, not necessarily of the same type:
 
@@ -669,7 +627,7 @@ Lists allow for the storage of a sequence of values, not necessarily of the same
     [[1]]
     [1] "exponential"
 
-    [[2]] 
+    [[2]]
     [1] 7
 
     [[3]]
@@ -679,8 +637,7 @@ Most of things which you can do with vectors you can also do with lists!
 
 ---
 
-Indexing Lists
-==============
+## Indexing Lists
 
 Use single square brackets (`[]`) to index a sub-list and double square brackets (`[[]]`) to access the list element.
 
@@ -694,17 +651,15 @@ Use single square brackets (`[]`) to index a sub-list and double square brackets
 
 What happens when you index a vector with double brackets?
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-List Manipulation
-=================
+## List Manipulation
 
 Add to lists with c() (also works with vectors):
-    
+
     !r
     > my_distribution <- c(my_distribution,7)
     > my_distribution
@@ -731,14 +686,12 @@ Chop off the end of a list by setting length to something smaller:
     [[3]]
     [1] FALSE
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Named List Elements
-===================
+## Named List Elements
 
 Lists are most effective when the list items are named:
 
@@ -766,15 +719,13 @@ This allows access by name:
     $family
     [1] "gaussian"
 
-Presenter Notes
-===============
+### Presenter Notes
 
 Lists give us a way to store and look data up by name rather than number (key-value pairs, dictionary, associative array, hash)
 
 ---
 
-Named List Elements
-===================
+## Named List Elements
 
 Similarly, list elements can be added by name:
 
@@ -793,18 +744,16 @@ Similarly, list elements can be added by name:
     [1] FALSE
 
 Remove an entry in the list by assigning it the value NULL.
-    
+
     !r
     > another_distribution$was.estimated <- NULL
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Data Frames
-===========
+## Data Frames
 
 The `data.frame` is an analog of a spreadsheet data table, with `n` rows, representing observations or cases, and `p` columns, representing variables.
 
@@ -819,8 +768,7 @@ The "default" data strucuture for statistical operations in R.
 
 ---
 
-Data Frames
-===========
+## Data Frames
 
     !r
     > (data_matrix <- matrix(c(55.5,69.5,1,41,81.5,1,53.5,86,1), ncol=3, byrow=T)
@@ -853,14 +801,12 @@ Data Frames
       test1 test2 disease
     2    41  81.5    TRUE
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 ---
 
-Manipulating Data Frames
-========================
+## Manipulating Data Frames
 
 We can add rows or columns to an array or data-frame with `rbind()` and `cbind()`.
 
@@ -883,15 +829,13 @@ We can add rows or columns to an array or data-frame with `rbind()` and `cbind()
     2  41.0  81.5    TRUE   F
     3  53.5  86.0    TRUE   F
 
-Presenter Notes
-===============
+### Presenter Notes
 
 be careful about forced type conversions
 
 ---
 
-Structures of Structures
-========================
+## Structures of Structures
 
 Arbitrarily-complex data structures can be constructed from basic ones.
 
@@ -903,8 +847,7 @@ Recursion allows us to build them.
 
 ---
 
-Example: eigenstructure
-=======================
+## Example: eigenstructure
 
 `eigen()` calculates eigenvalues and eigenvectors of a matrix, and places them in a list:
 
@@ -931,8 +874,7 @@ Example: eigenstructure
     > eigen(dataset2)[[1]][[2]]
     [1] 0.3296503
 
-Presenter Notes
-===============
+### Presenter Notes
 
 
 <!-- Mathjax -->

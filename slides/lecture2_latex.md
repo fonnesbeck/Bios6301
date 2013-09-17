@@ -20,7 +20,7 @@ TeX:
 LaTeX
 
 - is a package of macros based on TEX to make a document preparation system
-- created by Leslie Lamport and still actively maintained 
+- created by Leslie Lamport and still actively maintained
 - easier to code and extendable (classes, packages, styles)
 
 Presenter Notes
@@ -35,16 +35,16 @@ LaTeX vs. WYSIWYG
 
 Pros of LaTeX:
 
-- style is consistent (layout, fonts, tables, maths, etc.) 
+- style is consistent (layout, fonts, tables, maths, etc.)
 - mathematics are easily typeset
 - indexes, footnotes and references are easily generated
-- the author is forced to correctly structure your documents
-- source document is plain
+- the author is forced to correctly structure documents
+- source document is plain text
 
 Cons of LaTeX:
 
 - the final result is not visible straight away
-- the necessary LATEX commands have to be learned 
+- the necessary LATEX commands have to be learned
 - customization can sometimes be difficult
 
 Presenter Notes
@@ -88,11 +88,11 @@ Preamble
 ========
 
     !latex
-    \documentclass[11pt]{article}  
+    \documentclass[11pt]{article}
 
 This is the required first line, though the arguments can vary. This says we will use 11-point font, in the "article" format. Other formats include:
 
-- **article** for articles, presentations, short reports, documentation. 
+- **article** for articles, presentations, short reports, documentation.
 - **report** for reports containing several chapters, small books, thesis
 - **book** for real books
 - **letter** for writing letters
@@ -113,7 +113,7 @@ A lot of packages exist, the most important are:
 
 - `amsmath`, `amssymb` and `amsthm` for mathematical symbols
 - `babel` for the internationalization of LaTeX
-- `fontenc` to choose the font encoding of the output text 
+- `fontenc` to choose the font encoding of the output text
 - `geometry` for easy management of document margins
 - `graphicx` to manage external pictures
 - `inputenc` to choose the encoding of the input text
@@ -152,8 +152,8 @@ A Simple Document
 =================
 
     !latex
-    \documentclass[11pt]{article}  
-    
+    \documentclass[11pt]{article}
+
     \setlength{\oddsidemargin}{0.0in}
     \setlength{\evensidemargin}{0.0in}
     \setlength{\topmargin}{-0.25in}
@@ -166,9 +166,9 @@ A Simple Document
 
     \title{The Binomial Distribution}
     \author{Chris Fonnesbeck}
-    
+
     \begin{document}
-        
+
     \maketitle % generates a title based on the information in the preamble
 
 Presenter Notes
@@ -271,23 +271,23 @@ Notes
 Font Styles
 ===========
 
-\\[\def\sc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}\\]
-    
+$$\def\sc#1{\dosc#1\csod} \def\dosc#1#2\csod{{\rm #1{\small #2}}}$$
+
     \textit{italic}
 
-\\[\textit{italic}\\]
+$$\textit{italic}$$
 
     \textbf{boldface}
 
-\\[\textbf{boldface}\\]
+$$\textbf{boldface}$$
 
     \texttt{typewriter}
 
-\\[\mathtt{typewriter}\\]
+$$\mathtt{typewriter}$$
 
     \textsf{sans serif}
 
-\\[\mathsf{sans}\;\mathsf{serif}\\]
+$$\mathsf{sans}\;\mathsf{serif}$$
 
 Presenter Notes
 ===============
@@ -300,23 +300,23 @@ Font size
 
     \begin{tiny} tiny \end{tiny}
 
-\\[{\tiny tiny}\\]
+$${\tiny tiny}$$
 
     \begin{small} small \end{small}
 
-\\[{\small small}\\]
+$${\small small}$$
 
     \begin{large} large \end{large}
 
-\\[{\large large}\\]
+$${\large large}$$
 
     \begin{Large} Large \end{Large}
 
-\\[{\Large Large}\\]
+$${\Large Large}$$
 
     \begin{Huge} Huge \end{Huge}
 
-\\[{\Huge Huge}\\]
+$${\Huge Huge}$$
 
 
 Presenter Notes
@@ -335,7 +335,7 @@ Positioning
 <p align="right">This text is flushright.</p>
 
     \begin{center}
-    This text is centered. 
+    This text is centered.
     \end{center}
 
 <p align="center">This text is centered.</p>
@@ -371,7 +371,7 @@ Or as standalone equations:
         f(x | n,p) = {n \choose x} p^x (1-p)^{n-x}
     \end{equation}
 
-\\[f(x | n,p) = {n \choose x} p^x (1-p)^{n-x}\\]
+$$f(x | n,p) = {n \choose x} p^x (1-p)^{n-x}$$
 
 Presenter Notes
 ===============
@@ -436,16 +436,16 @@ Sums:
     \sum_{i=1}^{10} t_i
     \]
 
-\\[\sum_{i=1}^{10} t_i\\]
+$$\sum_{i=1}^{10} t_i$$
 
 Integrals:
 
     !latex
     \[
-    \int_0^\infty e^{−x} \, dx
+    \int_0^\infty e^{-x} \, dx
     \]
 
-\\[\int_0^\infty e^{−x} \, dx\\]
+$$\int_0^\infty e^{-x} \, dx$$
 
 
 Presenter Notes
@@ -461,11 +461,11 @@ Matrices
     !latex
     \[
     A_{m,n} = \begin{pmatrix}
-        a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\ 
+        a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
         a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
-        \vdots & \vdots & \ddots & \vdots \\ 
+        \vdots & \vdots & \ddots & \vdots \\
         a_{m,1} & a_{m,2} & \cdots & a_{m,n}
-    \end{pmatrix} 
+    \end{pmatrix}
     \]
 
 $$A_{m,n} = \begin{pmatrix}
@@ -485,9 +485,9 @@ Lists
 Unordered lists:
 
     !latex
-    \begin{itemize} 
+    \begin{itemize}
         \item a thing
-        \item another thing 
+        \item another thing
     \end{itemize}
 
 - a thing
@@ -497,7 +497,7 @@ Enumerated lists:
 
     !latex
     \begin{enumerate}
-        \item first thing 
+        \item first thing
         \item second thing
     \end{enumerate}
 
@@ -522,8 +522,8 @@ Label:
 Reference:
 
     !latex
-    The full model structure is described in Section~\ref{sec:Meta-analytic Methods}. Note 
-    the distinction between the influence of studies with group-summarized data and that of 
+    The full model structure is described in Section~\ref{sec:Meta-analytic Methods}. Note
+    the distinction between the influence of studies with group-summarized data and that of
 
 This is a two-step process: first the compiler stores the labels, then it replaces the `\ref` with the right number. So, multiple compilations are required to see the proper output.
 
@@ -570,7 +570,7 @@ Tables
         & Sampling SD & 14.32 & 0.86 & (12.80, 16.19)\\
         \hline
         \end{tabular}
-        \caption{Estimates of key parameters by model (median, 
+        \caption{Estimates of key parameters by model (median,
         standard deviation and 95\% Bayesian credible interval).
     \end{table}
 
@@ -658,20 +658,20 @@ partial line, double line
 Exercise
 ========
 
+![Table exercise](images/table_example.png)
+
     !latex
     \begin{tabular}{|r|l|} \hline
     7C0 & hexadecimal \\
-    3700 & octal \\ \cline{2−2}
+    3700 & octal \\ \cline{2-2}
     11111000000 & binary \\ \hline \hline
     1984 & decimal \\ \hline
     \end{tabular}
 
-![Table exercise](images/table_example.png)
-
 Presenter Notes
 ===============
-
 `cline` == column line
+
 
 ---
 
@@ -721,9 +721,9 @@ Images
 
         \includegraphics[width=\textwidth]{measurement.png}
         % figure caption is below the figure
-        \caption{Diagram illustrating the four scenarios of PKU and IQ measurement, 
-        depending on whether PKU was measured during the critical period and whether 
-        the corresponding IQ measurement was concurrent with PKU.} 
+        \caption{Diagram illustrating the four scenarios of PKU and IQ measurement,
+        depending on whether PKU was measured during the critical period and whether
+        the corresponding IQ measurement was concurrent with PKU.}
 
         % Give a unique label
         \label{fig:measurement}
@@ -825,6 +825,25 @@ BibTeX Entries
 Presenter Notes
 ===============
 
+---
+
+Inline Citations
+================
+
+Articles in your BibTeX database can be cited within the document text using the `\cite` command.
+
+    A powerful aspect of using random effects for meta-analyses is the
+     notion of partial pooling \cite{Gelman:2003vk}.
+
+>  A powerful aspect of using random effects for meta-analyses is the notion of partial pooling [13].
+
+Explicit paranthetical (`citep`) and in-text (`citet`) citations can be used by loading the `natbib` package.
+
+    A meta-analysis by \citet{Waisbren:2007es} employed random effects
+    models \citep{DerSimonian:1986wm} to relate IQ to Phe levels.
+
+>  A meta-analysis by Waisbren et al. (2007) employed random effects models (DerSimonian and Laird 1986) to relate IQ to Phe levels.
+
 
 ---
 
@@ -875,17 +894,28 @@ DVI (device independent) files are not intended to be human-readable; they consi
 
 ---
 
+Exercise: Compile a LaTeX Document
+==================================
+
+In the `exercises` folder on github.com/Bios301, there is a sample LaTeX document, `binomial.tex`. Try compiling this file into a PDF document.
+
+Presenter Notes
+===============
+
+
+---
+
 Errors
 ======
 
 It is easy to cause a LaTeX build error: mistyping commands, omitting closing braces, using forward slashes rather than backslashes, etc.
 
     ! Undefined control sequence.
-    <argument> \rotFPtop 
-                         
+    <argument> \rotFPtop
+
     l.36 \setlength\rotFPtop{0pt plus 1fil}
-                                           
-    ? 
+
+    ?
 
 LaTeX writes a comprehensive log file (.log suffix) every time it is run, for debugging purposes.
 
@@ -936,19 +966,12 @@ Simplified Intro to LaTeX (`reference` folder)
 
 Not So Short Introduction to LaTeX (`reference` folder)
 
-Presenter Notes
-===============
-
 ---
 
-Exercise: Compile a LaTeX Document
-==================================
+Example: LaTeX from Word
+========================
 
-In the `exercises` folder on github.com/Bios301, there is a sample LaTeX document, `binomial.tex`. Try compiling this file into a PDF document.
-
-Presenter Notes
-===============
-
+In the `exercises` folder on github.com/Bios301, there is a short Word (.docx) document. See if you can create the same document using LaTeX.
 
 
 <script type="text/x-mathjax-config">
@@ -957,12 +980,11 @@ Presenter Notes
     jax: ["input/TeX", "output/HTML-CSS"],
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      displayMath: [ ['$$','$$'], ["$$","$$"] ],
       processEscapes: true
     },
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
