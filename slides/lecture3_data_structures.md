@@ -153,6 +153,8 @@ A vector is a data structure composed of multiple elements, all of the same *mod
 
 The function `c` combines the elements specified into a vector.
 
+Notice what happens when we try to change the data type of one of the elements:
+
     !r
     > x[3] <- 'a'
     [1] "88" "5"  "a"  "13"
@@ -201,7 +203,7 @@ which() takes a Boolean vector and gives a vector of indices for the TRUE values
 
 ## Vector Arithmetic
 
-Operators apply to vectors “pairwise”:
+Operators apply to vectors "element-wise":
 
     !r
     > y <- c(-7, -8, -10, -45)
@@ -255,10 +257,10 @@ To compare whole vectors, best to use `identical()` or `all.equal()`:
 
 In addition to the standard data types and data structures, there are four "special" values that you will encounter in R.
 
-* NA
-* Inf
-* NaN
-* NULL
+* `NA`
+* `Inf`
+* `NaN`
+* `NULL`
 
 ---
 
@@ -354,7 +356,7 @@ You can give names to elements or components of vectors
     foo  v1
      13  88
 
-Labels are not actually part of the value
+Labels are not actually part of the value;
 `names(x)` is just another vector (of characters):
 
     > names(y) <- names(x)
@@ -584,7 +586,7 @@ Inverting a matrix:
 
 ## `solve()`
 
-Solving the linear system \\(\mathbf{A}\mathbf{x} = \mathbf{b}\\) for unknown \\(\mathbf{x}\\):
+Solving the linear system $\mathbf{A}\mathbf{x} = \mathbf{b}$ for unknown $\mathbf{x}$:
 
     !r
     > solve(dataset, y)
@@ -639,7 +641,7 @@ Most of things which you can do with vectors you can also do with lists!
 
 ## Indexing Lists
 
-Use single square brackets (`[]`) to index a sub-list and double square brackets (`[[]]`) to access the list element.
+Use single square brackets (*i.e.* `[]`) to index a sub-list and double square brackets (*i.e.* `[[]]`) to access the list element.
 
     !r
     > class(my_distribution)
@@ -887,6 +889,5 @@ Recursion allows us to build them.
     }
   });
 </script>
-<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
