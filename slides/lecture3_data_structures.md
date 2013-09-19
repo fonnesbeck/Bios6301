@@ -772,9 +772,11 @@ The "default" data strucuture for statistical operations in R.
 
 ## Data Frames
 
+First, consider a `matrix` object, which is another sort of tabular structure we have seen.
+
     !r
     > (data_matrix <- matrix(c(55.5,69.5,1,41,81.5,1,53.5,86,1), ncol=3, byrow=T)
-    <55.5,69.5,1,41,81.5,1,53.5,86,1), ncol=3, byrow=T))
+    55.5,69.5,1,41,81.5,1,53.5,86,1), ncol=3, byrow=T))
          [,1] [,2] [,3]
     [1,] 55.5 69.5    1
     [2,] 41.0 81.5    1
@@ -785,9 +787,27 @@ The "default" data strucuture for statistical operations in R.
     [1,]  55.5  69.5       1
     [2,]  41.0  81.5       1
     [3,]  53.5  86.0       1
-    > data_matrix$test2
-    Error in data_matrix$test2 : $ operator is invalid for atomic vectors
+
+
+### Presenter Notes
+
+---
+
+## Data Frames
+
+We can *cast* the matrix to a `data.frame` as follows:
+
+    !r
     > df <- data.frame(data_matrix)
+    > df
+        test1 test2 disease
+      1  55.5  69.5       1
+      2  41.0  81.5       1
+      3  53.5  86.0       1
+
+and easily manipulate the columns/rows:
+
+    !r
     > df$disease <- as.logical(df$disease)
     > df
       test1 test2 disease
@@ -804,6 +824,7 @@ The "default" data strucuture for statistical operations in R.
     2    41  81.5    TRUE
 
 ### Presenter Notes
+
 
 
 ---

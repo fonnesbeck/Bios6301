@@ -140,7 +140,7 @@ Notice that it is fully reversible. Try a few on your own to convince yourself.
 
 ---
 
-## Naïve Representation
+## Na&#239;ve Representation
 
 Why not simply using one of the bits as a "negative sign" and leaving the other bits the same for the positive and negative representations of each integer?
 
