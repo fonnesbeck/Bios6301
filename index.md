@@ -26,6 +26,8 @@ permission of instructor.
 
 11th floor, 2525 West End Avenue
 
+***Teaching Assistant***: [Svetlana Eden](svetlana.eden@vanderbilt.edu)
+
 
 # Resources
 
