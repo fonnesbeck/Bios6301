@@ -23,7 +23,6 @@ external/*
 cache
 temp
 archive
-slides/*html
 roster*
 *grades*
 CCASAnet*
