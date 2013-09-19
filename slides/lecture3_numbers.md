@@ -299,7 +299,7 @@ Subtracting values that are equal to *n* bits can result in the loss of *n* bits
 $$ \frac{f(x+h) - f(x)}{h} $$
 
     !r
-    > for (h in 10:20) print((sin(1 + 10^-h) - sin(1)) / (10^-h))
+    > for (h in 5:15) print((sin(1 + 10^-h) - sin(1)) / (10^-h))
     [1] 0.5402981
     [1] 0.5403019
     [1] 0.5403023
