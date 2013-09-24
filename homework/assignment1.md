@@ -66,7 +66,7 @@ Submit a single knitr (either `.rnw` or `.rmd`) file, along with a valid PDF out
     \end{array}
     }\right)$
 
-4. **Basic programming** Let $h(x,n)=1+x+x^2+\ldots+x^n = \sum_{i=0}^n x_i$. Write an R program to calculate $h(x,n)$ using a `for` loop. (6 points)
+4. **Basic programming** Let $h(x,n)=1+x+x^2+\ldots+x^n = \sum\_{i=0}^n x\_i$. Write an R program to calculate $h(x,n)$ using a `for` loop. (6 points)
 
 
 <!-- Mathjax -->
