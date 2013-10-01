@@ -1,15 +1,12 @@
-Data Processing in R
-====================
+# Data Processing in R
 
-Presenter Notes
-===============
+## Presenter Notes
 
 This will be a *hands-on* lecture!
 
 ---
 
-Data Frames
-===========
+## Data Frames
 
 Data frames are the default data structure in R for manipulating large, multi-column, heterogeneous datasets.
 
@@ -21,8 +18,7 @@ There are several functions that are important for being able to use data frames
 
 ---
 
-Sample Dataset: HAART
-=====================
+## Sample Dataset: HAART
 
 Our sample database is some de-identified data for Highly Active Antiretroviral Therapy (HAART) patients. The data file, `haart.csv` is located in the `datasets` folder on the GitHub repository.
 
@@ -45,8 +41,7 @@ Since this data is in csv format, it can be easily imported to R with `read.csv`
 
 ---
 
-HAART data frame
-================
+## HAART data frame
 
 You can examine the first few lines of a large data frame using the `head` function:
 
@@ -71,8 +66,7 @@ Similarly, `tail` gives the last several lines of the data frame.
 
 ---
 
-Data Frame Structure
-====================
+## Data Frame Structure
 
 The function `str` reveals the structure of the data frame, including the number of variables (columns) and observations (rows), as well as the data types of each column:
 
@@ -96,8 +90,7 @@ Several columns were imported as a `Factor` type by default.
 
 ---
 
-Attaching Data Frames
-=====================
+## Attaching Data Frames
 
 If you do not wish to prefix each variable by the name of the data frame, it is
 possible to `attach` the data frame to the current environment.
@@ -121,16 +114,14 @@ the end of any script that attaches it:
     > weight
     Error: object 'weight' not found
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Note that the changing the variables that are attached to a particular
 environment does not change them in the original data frame
 
 ---
 
-Factors
-=======
+## Factors
 
 The `factor` type represents variables that are categorical, or nominal. That is, they are not ordinal or rational. We can think of factors as variables whose value is one of a set of labels, with no intrinsic label relative to the other labels. Examples include:
 
@@ -149,8 +140,7 @@ This shows each drug combination has a label and a unique number for each combin
 
 ---
 
-Factors
-=======
+## Factors
 
 Levels may be defined that may not actually be present in the data. For example, let's generate some random data between 0 and 4, and turn it into a factor:
 
@@ -178,8 +168,7 @@ However, we cannot assign values to a factor variable that is not already among 
 
 ---
 
-Generating Factor Variables
-===========================
+## Generating Factor Variables
 
 As an example, lets convert the `male` variable into a factor. By default, since it is an indicator variable that equals 1 for male patients and 0 for females, `read.table` assumes it is an integer-valued variable and imports it as such. But, there is no intrinsic ordering to gender, so it is more useful treating it as a factor.
 
@@ -204,8 +193,7 @@ These steps can be combined into a single call:
 
 ---
 
-Indexing
-========
+## Indexing
 
 If you recall from the data structures lecture, we can *index* values from a data frame in a variety of ways. For example, if we want the ages of the first 50 observations:
 
@@ -233,8 +221,7 @@ Multiple columns can be indexed using a vector of column names:
 
 ---
 
-Indexing
-========
+## Indexing
 
 We can also extract particular rows according to the value of one or more variables. For example, if we are interested in the above columns for males:
 
@@ -260,8 +247,7 @@ the specified columns that correspond to male :
 
 ---
 
-Modifying and Creating Variables
-================================
+## Modifying and Creating Variables
 
 Suppose now we wish to create a derived variable, based on the values of one or more variables in the data frame. For example, we might want to refer to the number of days between the first visit (`init.date`) and the
 last (`last.visit`).
@@ -286,8 +272,7 @@ between visits:
 
 ---
 
-Modifying and Creating Variables
-================================
+## Modifying and Creating Variables
 
 However, given the context of the data, we are probably interested in days elapsed between visits, rather than seconds.
 
@@ -311,8 +296,7 @@ Even easier, since we are only interested in days, is to convert the dates to `D
 
 ---
 
-Binning Data
-============
+## Binning Data
 
 Another common operation is the creation of variable categories from raw
 values. The built-in function `cut` discretizes variables based on boundary values of the implied groups:
@@ -339,8 +323,7 @@ upper group:
     [18,30) [30,50) [50,89)
        1011    3115     502
 
-Presenter Notes
-===============
+## Presenter Notes
 
 For example, perhaps we want to classify subjects into age
 groups, with those 30 or younger in the youngest group, those over 30
@@ -349,8 +332,7 @@ oldest group.
 
 ---
 
-Text Processing
-===============
+## Text Processing
 
 Often data will contain relevant information in the form of text that must be processed so that it can be used quantitatively, or appropriately displayed in a table or figure. Text is represented by the `character` type in R:
 
@@ -369,8 +351,7 @@ Even though R considers text to be a vector of characters, indexing and other fu
 
 ---
 
-Text Processing
-===============
+## Text Processing
 
 R provides a separate set of functions to process text.
 
@@ -399,8 +380,7 @@ This is useful for analysis of text, where individual words need to be counted, 
 
 ---
 
-Changing Case
-=============
+## Changing Case
 
 Character vectors can be changed to lower and upper case using the `tolower` and `toupper` functions:
 
@@ -428,8 +408,7 @@ The `chartr` function translates characters to their corresponding pair in a tex
 
 ---
 
-String Matching
-===============
+## String Matching
 
 The function `charmatch` looks for unique matches for the elements of its first argument among those of its second.
 
@@ -453,8 +432,7 @@ returned.
 
 ---
 
-Text Processing in Action
-=========================
+## Text Processing in Action
 
 In the HAART database, the field `init.reg` describes the initial drug regimens of each individual, and is imported to R by default as a `factor`.
 
@@ -478,8 +456,7 @@ However, each entry is in fact a list of drugs, and we may not want to analyze t
 
 ---
 
-Creating a List Variable
-========================
+## Creating a List Variable
 
 One approach is to change the variable to a useful data structure like a list or a vector, which can be easily queried for individual drugs.
 
@@ -503,8 +480,7 @@ Now, we can use some of our text processing skill to extract the individual drug
 
 ---
 
-The `apply` Functions
-=====================
+## The `apply` Functions
 
 In some situations, users may want to apply functions to elements of a
 list or data frame. To facilitate this, there is a family of functions
@@ -531,8 +507,7 @@ values
 
 ---
 
-Cross-tabulation with `tapply`
-==============================
+## Cross-tabulation with `tapply`
 
 Multiple factors can be passed to `tapply` simultaneously, resulting in
 cross-tabulated output:
@@ -565,8 +540,7 @@ This can be further expanded to a 3-way cross-tabulation, if appropriate:
 
 ---
 
-`lapply`
-========
+## `lapply`
 
 The `lapply` function, after applying the specified function, attempts to coerce output into a list.
 
@@ -590,8 +564,7 @@ This allows the results to be indexed by name.
 
 ---
 
-`sapply`
-========
+## `sapply`
 
 `sapply` tries to return a simpler data structure, generally a vector. For
 example, we may simply want to quickly query which of our variables are numeric:
@@ -621,8 +594,7 @@ our data frame:
 
 ---
 
-`mclapply`
-=========
+## `mclapply`
 
 An easy way to speed up apply functions is to take advantage of the fact that your machine will have multiple cores. **Parallel computing** is a general term that refers to the practice of breaking up tasks that are executed serially on a single CPU into multiple components, each of which is calculated simultaneously, by assigning them to multiple available CPUs. The degree to which this improves performance depends upon the nature of the task.
 
@@ -638,16 +610,14 @@ So I can employ a maximum of 4 cores. `mclapply` can be used exactly as `lapply`
     !r
     > haart_means <- mclapply(haart[,4:6], mean, na.rm=T)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 There are several packages available that implement parallel computing in R: `doMC`, `multicore`, `snow`
 
 ---
 
 
-`mclapply`
-==========
+## `mclapply`
 
 There are some optional arguments for `mclapply` that can be used to tune its performance:
 
@@ -663,8 +633,7 @@ There are some optional arguments for `mclapply` that can be used to tune its pe
 
 ---
 
-Querying List Variables
-=======================
+## Querying List Variables
 
 Now, let's use one of these `apply` functions to query our variable containing the vectors of drugs. For example, we might want to know all the patients that have D4T
 as part of their regimens.
@@ -693,8 +662,7 @@ operator is contained in the vector on the right hand side, or `FALSE` otherwise
 
 ---
 
-Creating Indicator Variables
-============================
+## Creating Indicator Variables
 
 Another approach for transforming `init.reg` is to
 break it into multiple columns of indicators, which specify whether each
@@ -724,8 +692,7 @@ this vector, which comprises a list of all the drugs:
 
 ---
 
-Creating Indicator Variables
-============================
+## Creating Indicator Variables
 
 Now that we have all the drugs, we want a logical vector for each drug
 that identifies its inclusion for each individual. We have already seen
@@ -746,8 +713,7 @@ Now we generalize this by writing a loop that performs this operation for each d
     }
 
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Notice that when you run this function, nothing is returned. This is
 because we have not assigned the resulting vectors to variables, nor
@@ -755,8 +721,7 @@ have we specified that they be printed to the screen.
 
 ---
 
-Creating Indicator Variables
-============================
+## Creating Indicator Variables
 
 The strategy is to create an empty vector, then to `cbind` (column-bind) successive indicator variables for each drug:
 
@@ -784,8 +749,7 @@ The strategy is to create an empty vector, then to `cbind` (column-bind) success
 
 ---
 
-Creating Indicator Variables
-============================
+## Creating Indicator Variables
 
 Turning this into a data frame is as simple as a call to `data.frame`,
 using `all_drugs` as a set of column labels:
@@ -822,8 +786,7 @@ Now use `cbind` to merge the indicator variables with the original data frame:
 
 ---
 
-Subsetting
-==========
+## Subsetting
 
 Though you can manually extract subsets of a particular data frame by manually
 indexing rows, the `subset` function is a more convenient method for extensive
@@ -849,8 +812,7 @@ resulting dataset.
 
 ---
 
-Missing Values
-==============
+## Missing Values
 
 Real-world data are rarely complete. Though analytic methods for dealing with missing values is outside the scope of this lecture, it is useful to know how to identify and remove records with missing values.
 
@@ -885,8 +847,7 @@ Which is the equivalent of `!is.na(haart$weight)`. We can use this logical vecto
 
 ---
 
-Sorting
-=======
+## Sorting
 
 Though the `sort` function in R is the easiest way to sort the elements
 of a single vector, we are usually interested in sorting entire
@@ -907,8 +868,7 @@ The `order` function generates indices of every row in the HAART database, sorte
 
 ---
 
-Sorting
-=======
+## Sorting
 
 The second step is to use these index values to generate a sorted
 version of our data frame:
@@ -933,8 +893,7 @@ version of our data frame:
 
 ---
 
-Merging Data Frames
-===================
+## Merging Data Frames
 
 We have seen how to combine data frames using `cbind` to add additional columns to an existing data frame. Similarly, data frames can be combined by row using `rbind`:
 
@@ -953,8 +912,7 @@ In some situations, we may have information in one table that *partially* matche
 
 ---
 
-Merging Data Frames
-===================
+## Merging Data Frames
 
 To combine data frames based on the values of common variables, we can use the built-in `merge` function. By default, `merge` joins rows of the data frames based on the values of the columns that the data frames have in common.
 
@@ -973,8 +931,7 @@ Note that though there were 6 unique values for `a` among the two data frames, o
 
 ---
 
-Merging Data Frames
-===================
+## Merging Data Frames
 
 If we want to include all observations from both data frames, we can set the appropriate flag, which will result in missing values:
 

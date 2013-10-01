@@ -1,27 +1,25 @@
-Data Import and Export in R
-===========================
+# Data Import and Export in R
 
 
 
 ---
 
-Data Export
-===========
+## Data Export
 
 The most rudimentary way to export data from R is to use the `cat` function, which we have previously used to print data to the screen:
 
     !r
-    > cat("Happy Monday!", "\n")
-    Happy Monday! 
+    > cat("Happy Tuesday!", "\n")
+    Happy Monday!
     > iterations <- 10
     > for (j in 1:iterations) {
     + cat(j, "...")
     + if (j==iterations) cat("Done!", "\n")
     + }
-    1 ...2 ...3 ...4 ...5 ...6 ...7 ...8 ...9 ...10 ...Done! 
-    
+    1 ...2 ...3 ...4 ...5 ...6 ...7 ...8 ...9 ...10 ...Done!
+
 But if we give `cat` a file argument, it appends subsequent arguments to that file:
-    
+
     !r
     > some_file <- tempfile()
     > cat(file=some_file, "foo", "bar", seq(1:10), sep="\n")
@@ -30,8 +28,7 @@ But if we give `cat` a file argument, it appends subsequent arguments to that fi
 
 ---
 
-`write`
-=======
+## `write`
 
 If we are writing a matrix or data frame to a file, it is more convenient to use `write` or `write.table`.
 
@@ -40,7 +37,7 @@ If we are writing a matrix or data frame to a file, it is more convenient to use
     !r
     > my_mat <- outer(c(1,4,6),c(8,-1,4))
     > write(my_mat, "my_mat.dat", ncolumn=3)
-    
+
     $ more my_mat.dat
     8 32 48
     -1 -4 -6
@@ -50,17 +47,16 @@ If we are writing a matrix or data frame to a file, it is more convenient to use
 
     !r
     > write.table(my_mat, "my_df.dat")
-    
+
     $ more my_df.dat
     "V1" "V2" "V3"
     "1" 8 -1 4
     "2" 32 -4 16
     "3" 48 -6 24
-    
+
 ---
 
-Exporting Data Frames
-=====================
+## Exporting Data Frames
 
 There are additional considerations when storing a data frame as a text file:
 
@@ -78,11 +74,10 @@ To write a CSV file for input to Excel:
 
 ---
 
-`write.table`
-=============
+## `write.table`
 
     > ?write.table
-    
+
     write.table               package:utils                R Documentation
 
     Data Output
@@ -99,38 +94,19 @@ To write a CSV file for input to Excel:
                      eol = "\n", na = "NA", dec = ".", row.names = TRUE,
                      col.names = TRUE, qmethod = c("escape", "double"),
                      fileEncoding = "")
-     
+
          write.csv(...)
          write.csv2(...)
-     
+
     ...
-    
+
 Note that `write.table` is inefficient for very large arrays; `write.matrix` is more memory-efficient.
 
 
 ---
 
-Exporting Data Frames
-=====================
 
-There are additional considerations when storing a data frame as a text file:
-
-* precision of `numeric` values
-* header information
-* column separator
-* missing values
-* quoting strings
-
-To write a CSV file for input to Excel:
-
-    !r
-    write.table(x, file = "foo.csv", sep = ",", col.names = NA)
-
-
----
-
-`read.table`
-============
+## `read.table`
 
 The function `read.table` is the easiest way to read in a rectangular grid of data. Considerations include:
 
@@ -139,8 +115,9 @@ The function `read.table` is the easiest way to read in a rectangular grid of da
 * Quoting strings
 * Missing values
 * Unfilled lines
-* White space in character fields Blank lines
-* Classes for the variables 
+* White space in character fields
+* Blank lines
+* Classes for the variables
 * Comments
 
 To read a comma-separated values (csv) file back into R:
@@ -150,11 +127,10 @@ To read a comma-separated values (csv) file back into R:
 
 ---
 
-`read.table`
-============
+## `read.table`
 
     > ?read.table
-    
+
     read.table                package:utils                R Documentation
 
     Data Input
@@ -177,33 +153,27 @@ To read a comma-separated values (csv) file back into R:
                     allowEscapes = FALSE, flush = FALSE,
                     stringsAsFactors = default.stringsAsFactors(),
                     fileEncoding = "", encoding = "unknown", text)
-    
+
 
 ---
 
-`read.table`
-============
+## `read.table`
 
 Due to the frequency with which they are used, there are several helper functions that call `read.table` to import several common file types:
 
-    !r 
-    read.csv(file, header = TRUE, sep = ",", quote="\"", dec=".", 
-        fill = TRUE, ...)
-    
-    read.csv2(file, header = TRUE, sep = ";", quote="\"", dec=",", 
-        fill = TRUE, ...)
-    
-    read.delim(file, header = TRUE, sep = "\t", quote="\"", dec=".", 
-        fill = TRUE, ...)
-    
-    read.delim2(file, header = TRUE, sep = "\t", quote="\"", dec=",", 
-        fill = TRUE, ...)
+    !r
+    read.csv(file, header = TRUE, sep = ',', quote='\"', dec='.', fill = TRUE, ...)
 
-        
+    read.csv2(file, header = TRUE, sep = ';', quote='\"', dec=',', fill = TRUE, ...)
+
+    read.delim(file, header = TRUE, sep = '\t', quote='\"', dec='.', fill = TRUE, ...)
+
+    read.delim2(file, header = TRUE, sep = '\t', quote='\"', dec=',', fill = TRUE, ...)
+
+
 ---
-   
-Fixed-width Format
-==================
+
+## Fixed-width Format
 
 Sometimes data files have no field delimiters but have fields in pre-specified columns. `read.fwf` provides a simple way to read such files, specifying a vector of field widths.
 
@@ -217,8 +187,7 @@ Sometimes data files have no field delimiters but have fields in pre-specified c
 
 ---
 
-`scan`
-======
+## `scan`
 
 Under the hood, both `read.table` and `read.fwf` use the function `scan` to read the file contents into R, before processing them. For increased flexibility, we can use `scan` directly.
 
@@ -245,15 +214,14 @@ The `what` argument can be a list of modes for the variables in the file.
 
 ---
 
-`scan`
-======
+## `scan`
 
     !r
-    > cat("2 3 5 7", "11 13 17 19", file="ex.dat", sep="\n") 
+    > cat("2 3 5 7", "11 13 17 19", file="ex.dat", sep="\n")
     > scan(file="ex.dat")
     Read 8 items
     [1] 2 3 5 7 11 13 17 19
-    > scan(file="ex.dat", what=list(x=0, y="", z=0), flush=TRUE) 
+    > scan(file="ex.dat", what=list(x=0, y="", z=0), flush=TRUE)
     Read 2 records
     $x
     [1] 2 11
@@ -269,23 +237,22 @@ The `what` argument can be a list of modes for the variables in the file.
     1: 4
     2: 7 3
     4:
-    Read 3 items 
+    Read 3 items
     > x
     [1] 4 7 3
-    
+
 
 
 ---
 
-Importing Source Code
-=====================
+## Importing Source Code
 
-You can use source to read in R code: 
+You can use source to read in R code:
 
     !r
     > source("my_script.R")
-    
-The commands in `my_script.R` will be executed, and the objects specified will be created in your current `.RData` file. 
+
+The commands in `my_script.R` will be executed, and the objects specified will be created in your current `.RData` file.
 
 You can also use `source` to read in functions you wrote:
 
@@ -300,17 +267,16 @@ The file you read in can contain more than one function statement, where they ar
 
 ---
 
-Redirecting Output
-==================
+## Redirecting Output
 
-You may wish to redirect output from functions or other R code to a file, rather than having it printed to the screen. `scan` will do this, taking a file as the first argument, and optionally a flag for whether you want to append or overwrite the contents of the file.
+You may wish to redirect output from functions or other R code to a file, rather than having it printed to the screen. `sink` will do this, taking a file as the first argument, and optionally a flag for whether you want to append or overwrite the contents of the file.
 
     !r
     > sink("sink-examp.txt")
     > i <- 1:10
     > outer(i, i, "*")
     > sink() # stops redirection
-    
+
     $ more sink-examp.txt
           [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
      [1,]    1    2    3    4    5    6    7    8    9    10
@@ -326,10 +292,9 @@ You may wish to redirect output from functions or other R code to a file, rather
 
 ---
 
-Storing Data
-============
+## Storing Data
 
-Every R object can be stored into and restored from a file with the commands `save` and `load`, respectively. This uses Sun Microsystems' external data representation (XDR) standard, and is portable among platforms.
+Every R object can be stored into and restored from a file with the commands `save` and `load`, respectively. This uses Sun Microsystems' (RIP) external data representation (XDR) standard, and is portable among platforms.
 
     !r
     > x <- 1:4
@@ -339,12 +304,11 @@ Every R object can be stored into and restored from a file with the commands `sa
     > x
     [1] 1 2 3 4
 
-At the end of a session the objects in the global environment are usually kept in a single binary file in the working directory called .RData. By default, this is loaded to the next session, but can also be loaded manually with `load`.
+At the end of a session the objects in the global environment are usually kept in a single binary file in the working directory called `.RData`. By default, this is loaded to the next session, but can also be loaded manually with `load`.
 
 ---
 
-Importing from Other Systems
-============================
+## Importing from Other Systems
 
 The package `foreign` provides import facilities for files produced by:
 
@@ -357,8 +321,7 @@ and export and import facilities for Stata (`read.dta`, `write.dta`).
 
 ---
 
-Example
-=======
+## Example
 
 In some situations, data are distributed among several files, sometimes in different locations. Rather than manually importing and combining data from different sources, it is preferable to do so programmatically in R.
 
@@ -368,13 +331,12 @@ As a simple example, let's set up three files containing some fake data:
     > cat(file="file1.dat", 5, 12, 13, sep=',')
     > cat(file="file2.dat", 7, 6, 1, sep=',')
     > cat(file="file3.dat", 14, 5, 5, sep=',')
-    
+
 Can we write code to sum the contents of all three files?
 
 ---
 
-Pseudocode
-==========
+## Pseudocode
 
 Before we write code, let's write *pseudocode* to make sure we know what needs to be done to realize our objective.
 
@@ -386,11 +348,10 @@ Before we write code, let's write *pseudocode* to make sure we know what needs t
         * if its a data file, read its contents, if not, move to the next file
         * add contents of file to sum
     4. return result
-    
+
 ---
 
-R Code
-======
+## R Code
 
     !r
     sumfiles <- function(dname) {
@@ -405,7 +366,7 @@ R Code
                 # Sum contents and add to total
                 tot <- tot + sum(scan(f,sep=',',quiet=TRUE))
             }
-        }   
+        }
         return(tot)
     }
 
