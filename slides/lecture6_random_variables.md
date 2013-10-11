@@ -1,16 +1,16 @@
-Random Variables
-================
+# Random Variables
+
 
 ---
 
-Discrete Random Variables
-=========================
+## Discrete Random Variables
+
 
 $$X = \{0,1\}$$
 
 $$Y = \{\ldots,-2,-1,0,1,2,\ldots\}$$
 
-**Probability Mass Function**: 
+**Probability Mass Function**:
 
 For discrete $X$,
 
@@ -20,8 +20,8 @@ $$Pr(X=x) = f(x|\theta)$$
 
 ---
 
-Cumulative Mass Function
-========================
+## Cumulative Mass Function
+
 
 $$Pr(X \le x) = F(x) = \sum\_{t=-\infty}^x f(t|\theta)$$
 
@@ -29,14 +29,14 @@ $$Pr(X \le x) = F(x) = \sum\_{t=-\infty}^x f(t|\theta)$$
 
 ---
 
-Continuous Random Variables
-===========================
+## Continuous Random Variables
+
 
 $$X \in [0,1]$$
 
 $$Y \in (-\infty, \infty)$$
 
-**Probability Density Function**: 
+**Probability Density Function**:
 
 For continuous $X$,
 
@@ -46,8 +46,8 @@ $$Pr(x \le X \le x + dx) = f(x|\theta)dx \, \text{ as } \, dx \rightarrow 0$$
 
 ---
 
-Cumulative Distribution Function
-================================
+## Cumulative Distribution Function
+
 
 $$Pr(X \le x) = F(x) = \int\_{-\infty}^x f(t|\theta)dt$$
 
@@ -55,8 +55,8 @@ $$Pr(X \le x) = F(x) = \int\_{-\infty}^x f(t|\theta)dt$$
 
 ---
 
-Summary Statistics
-==================
+## Summary Statistics
+
 
 ### Expected Value
 
@@ -75,15 +75,15 @@ $$E(X) = (0.5)(2) + (0.5)(7) = 4.5$$
 $$\begin{align}\text{Var}(X) &= E[(X-\mu)^2] \cr
 &= E[X^2] - E[X]^2\end{align}$$
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 Also called the first moment
 
 ---
 
-Expected Value of Functions
-===========================
+## Expected Value of Functions
+
 
 For an arbitrary function, for example, the logarithm:
 
@@ -97,15 +97,15 @@ $$\text{Var}(aX+b) = a^2\text{Var}(X)$$
 
 ---
 
-Probability Distributions
-=========================
+## Probability Distributions
+
 
 ![Normal pdf](http://upload.wikimedia.org/wikipedia/commons/7/74/Normal_Distribution_PDF.svg)
 
 ---
 
-Bernoulli
-=========
+## Bernoulli
+
 
 The Bernoulli distribution describes the outcomes of binary events:
 
@@ -122,8 +122,8 @@ $$\begin{align}E(X) &= (1)(p) + (0)(1-p) = p \cr
 
 ---
 
-Binomial
-========
+## Binomial
+
 
 The binomial distribution models the sum of $n$ Bernoulli trials:
 
@@ -135,15 +135,15 @@ $$Pr(X=x)={n \choose x}p^x(1-p)^{n-x}$$
 $$\begin{align}E(X) &= np \cr
 \text{Var}(X) &= np(1-p)\end{align}$$
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 Model for bounded counts
 
 ---
 
-Poisson
-=======
+## Poisson
+
 
 The Poisson distribution models unbounded counts:
 
@@ -156,8 +156,8 @@ $$E(X) = \text{Var}(X) = \lambda$$
 
 ---
 
-Geometric
-=========
+## Geometric
+
 
 A geometric random variable describes the number of trials before a "success" is observed in repeated trials:
 
@@ -171,8 +171,8 @@ $$\begin{align}E(X) &= \frac{1-p}{p} \cr
 
 ---
 
-Uniform
-=======
+## Uniform
+
 
 A uniform distribution describes equal probability among all outcomes:
 
@@ -185,8 +185,8 @@ $$f(x) = \left\\{ \begin{array}{cl}
 
 ---
 
-Normal
-======
+## Normal
+
 
 $$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left[-\frac{(x-\mu)^2}{2\sigma^2}\right]$$
 
@@ -199,8 +199,8 @@ $$\begin{align}E(X) &= \mu \cr
 
 ---
 
-Log-normal
-==========
+## Log-normal
+
 
 A log-normal distribution is a continuous probability distribution of a random variable whose logarithm is normally distributed
 
@@ -214,8 +214,8 @@ $$\begin{align}E(X) &= e^{\mu + \sigma^2/2} \cr
 
 ---
 
-Gamma
-=====
+## Gamma
+
 
 The gamma distribution is a 2-parameter, positive, continuous distribution:
 
@@ -229,8 +229,8 @@ $$\begin{align}E(X) &= \alpha\beta \cr
 
 ---
 
-Exponential
-===========
+## Exponential
+
 
 The exponential distribution is often used to describe the waiting time between independent random events (Poisson):
 
@@ -241,8 +241,8 @@ $$f(x) = Gamma(\alpha=1, \beta)$$
 
 ---
 
-Chi-squared
-===========
+## Chi-squared
+
 
 Though the Chi-squared distribution is a special form of the gamma distribution, it is the distribution of the sum of the squares of $\nu$ standard normal random variates:
 
@@ -252,8 +252,8 @@ $$f(x) = Gamma(\alpha=\nu/2, \beta=1/2)$$
 
 ---
 
-Beta
-====
+## Beta
+
 
 The beta distribution describes a random variable on the $[0,1]$ interval, such as a probability:
 

@@ -1,10 +1,10 @@
-Simulation
-==========
+# Simulation
+
 
 ---
 
-Stochastic Simulation
-=====================
+## Stochastic Simulation
+
 
 We often want to obtain a simulated result using a model system of interest.
 
@@ -14,15 +14,15 @@ Input: $\mathbf{X}\_i = (X_{1i}, \ldots, X\_{ki})$
 
 Output: $\mathbf{Y}\_i = h(\mathbf{X}\_i)$
 
-Analysis: 
+Analysis:
 
 $$Pr(h(\mathbf{X}) \le b) \approx \frac{1}{N} \sum_{i=1}^N I(h(\mathbf{X}\_i) \le b)$$
 $$E(h(\mathbf{X})) \approx \frac{1}{N} \sum_{i=1}^N h(\mathbf{X}_i)$$
 
 ---
 
-Random Numbers
-==============
+## Random Numbers
+
 
 What is a ***random*** number?
 
@@ -30,8 +30,8 @@ How do we get random numbers?
 
 Computers are intrinsically deterministic, so how are random numbers generated deterministically?
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 No pattern?
 Unpredictable?
@@ -39,8 +39,8 @@ True random numbers require actual unpredictability arising from genuinely physi
 
 ---
 
-Pseudo-random Numbers
-=====================
+## Pseudo-random Numbers
+
 
 Computers cannot generate random numbers, only *pseudo*-random numbers.
 
@@ -50,20 +50,20 @@ We need a pseudo-random number generator (PRNG)
 
 ---
 
-Middle Square Method
-====================
+## Middle Square Method
+
 
 An early algorithm by Von Neumann
 
-1. specify a 10-digit number: 
-    
+1. specify a 10-digit number:
+
         > x <- 5492364201
-    
+
 2. square the number (usually becomes a 20-digit number)
 
         > (y <- as.character(x**2))
         [1] "30166064516426366976"
-    
+
 3. take middle 10 digits as a random number
 
         > as.numeric(substring(y,5,15))
@@ -71,16 +71,16 @@ An early algorithm by Von Neumann
 
 4. repeat as necessary
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 The generated numbers are not random, but hard to predict.
 not a good PRNG, due to short cycles.
 
 ---
 
-Mersenne Twister Algorithm
-==========================
+## Mersenne Twister Algorithm
+
 
 Relatively new algorithm (1997)
 
@@ -89,8 +89,8 @@ Relatively new algorithm (1997)
 
 Algorithm:
 
-* initialize $X\_0 \in \{0,1,\ldots,m-1\}$ 
-* choose "big" numbers $A,B$  
+* initialize $X\_0 \in \{0,1,\ldots,m-1\}$
+* choose "big" numbers $A,B$
 * generate sequence of numbers via:
 
 $$X\_{i+1} = (AX_i) + B \mod m$$
@@ -101,8 +101,8 @@ For well-chosen A,B the sequence is indistinguishable from $U(0,1)$
 
 ---
 
-Example: Mersenne-Twister
-=========================
+## Example: Mersenne-Twister
+
 
     !r
     > m <- 10; A <- 103; B <- 17; x <- 2
@@ -112,7 +112,7 @@ Example: Mersenne-Twister
     [1] 6
     > (x <- (A*x + B) %% m)
     [1] 5
-    
+
 `m=10` so maximum period is 10.
 
 Better:
@@ -128,11 +128,11 @@ Better:
 
 ---
 
-Random Number Seed
-==================
+## Random Number Seed
+
 
 The sequence of pseudo-random numbers depends on the initial condition,
-or seed. 
+or seed.
 
 In R, it is stored in `.Random.seed`, a global variable. To reproduce
 results exactly, set the seed:
@@ -146,32 +146,32 @@ results exactly, set the seed:
     > runif(2)
     [1] 0.54952918 0.08113291
     > .Random.seed <- old.seed  # Restore old seed
-    
+
 `runif()` generates uniform random variables according to the selected PRNG:
 
     !r
     > RNGkind()
-    [1] "Mersenne-Twister" "Inversion" 
+    [1] "Mersenne-Twister" "Inversion"
     > RNGkind('Wich')
     > RNGkind()
-    [1] "Wichmann-Hill" "Inversion" 
+    [1] "Wichmann-Hill" "Inversion"
 
 ---
 
-Generating True Random Numbers
-==============================
+## Generating True Random Numbers
+
 
 ![ranodm.org](http://d.pr/i/42tP+)
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 Gathers atmospheric noise via a radio-receiver card tuned to an unused frequency and connected to a computer where it is sampled and digitized.
 
 ---
 
-Package `random`
-================
+## Package `random`
+
 
 Accesses the true random number service at http://random.org.
 
@@ -188,7 +188,7 @@ Requires an internet connection!
     [1,] 65 47 58 19 39
     [2,] 67 50 14 55 62
     > randomStrings(5, 10)
-         V1          
+         V1
     [1,] "45uvtdAEjp"
     [2,] "MNsAXi0UYD"
     [3,] "bBF8oin409"
@@ -199,8 +199,8 @@ Requires an internet connection!
 
 ---
 
-Generating Discrete Random Variables
-====================================
+## Generating Discrete Random Variables
+
 
 If we know the cumulative mass function (CMF), we can generate pseudorandom draws using $U(0,1)$ realizations.
 
@@ -214,8 +214,8 @@ Stop for first value of $x\_i$ that has cumulative probability greater than samp
 
 ---
 
-Example: Binomial
-=================
+## Example: Binomial
+
 
 The binomial distribution:
 
@@ -231,7 +231,7 @@ We calculate the CMF of the binomial distribution by summing over the PMF:
         }
         return(Fx)
     }
-    
+
 Now, we can use this code to generate binomial variates from a uniform draw:
 
     !r
@@ -245,8 +245,8 @@ Now, we can use this code to generate binomial variates from a uniform draw:
 
 ---
 
-Example: Binomial
-=================
+## Example: Binomial
+
 
     !r
     > x <- numeric(100)
@@ -258,22 +258,22 @@ Example: Binomial
 
 ---
 
-Exercise
-========
+## Exercise
+
 
 Can you come up with a simple, vectorized function for generating samples from a binomial distribution?
 
 *Hint*: take advantage of the fact that a binomial variable is the sum of *n* Bernoulli random variables.
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
     sum(runif(n) < p)
 
 ---
 
-Example: Geometric random variables
-===================================
+## Example: Geometric random variables
+
 
 The geometric distribution models the number of "failure" events expected before a "success" event occurs.
 
@@ -296,23 +296,23 @@ The geometric distribution models the number of "failure" events expected before
 
 ---
 
-Simulating Continuous Variables
-===============================
+## Simulating Continuous Variables
+
 
 ### Cumulative Distribution Function (CDF)
 
 $$F\_X(x) = Pr(X \le x)$$
 
-so, $U = F(x) \in (0,1)$. 
+so, $U = F(x) \in (0,1)$.
 
 ![cdf](http://upload.wikimedia.org/wikipedia/commons/b/ba/Exponential_cdf.svg)
 
 ---
 
-Inverse Transform Method
-========================
+## Inverse Transform Method
 
-We claim that $X = F^{−1}(U)$ is a random variable with CDF *F*.
+
+We claim that $X = F^{-1}(U)$ is a random variable with CDF *F*.
 
 $$ P(X \le x) = P(F^{-1}(U) \le x) = P(U \le F(x)) = F(x) $$
 
@@ -322,8 +322,8 @@ This is the ***quantile transform method***, or ***inverse transformation method
 
 ---
 
-Example: exponential distribution
-=================================
+## Example: exponential distribution
+
 
 $$X \sim \text{Exp}(\lambda)$$
 $$f\_X(x) = \lambda \exp(-\lambda x)$$
@@ -336,22 +336,22 @@ $$x = -\frac{1}{\lambda} \log(1-y) = F^{-1}(y)$$
 
 ---
 
-Example: exponential distribution
-=================================
+## Example: exponential distribution
+
 
     !r
     > f <- function(x,lam) -1/lam * log(1-x)
     > hist(f(runif(1000), 3), prob=T, xlab="x", main="")
     > lines((1:300)/100, dexp((1:300)/100, 3))
-    
+
 ![exponential example](http://d.pr/i/s0vm+)
 
 ---
 
-Rejection Method
-================
+## Rejection Method
 
-We can only use the inverse CDF method if we can calculate $F\_X^{-1}$. 
+
+We can only use the inverse CDF method if we can calculate $F\_X^{-1}$.
 
 $F\_X$ can be inverted numerically, using root-finding methods, but this is inefficient.
 
@@ -368,15 +368,15 @@ $$ f(x) \sim U(0, m) $$
 
 ---
 
-Rejection Method
-================
+## Rejection Method
+
 
 ![rejection](http://d.pr/i/nmuj+)
 
 ---
 
-Rejection Method
-================
+## Rejection Method
+
 
 How do we know this simple approach works?
 
@@ -390,8 +390,8 @@ The *efficiency* of the method depends on the ratio of the function's area to th
 
 ---
 
-Example: Triangular distribution
-================================
+## Example: Triangular distribution
+
 
 Consider the triangular pdf:
 
@@ -404,8 +404,8 @@ x & \text{if } \, 0 \lt x \lt 1 \cr
 
 ---
 
-Example: Triangular distribution
-================================
+## Example: Triangular distribution
+
 
 The triangular pdf:
 
@@ -419,7 +419,7 @@ The triangular pdf:
             return(0)
         }
     }
-   
+
 A function to sample a single realization from `fx` using rejection sampling:
 
     !r
@@ -433,15 +433,15 @@ A function to sample a single realization from `fx` using rejection sampling:
 
 ---
 
-Example: Triangular distribution
-================================
+## Example: Triangular distribution
+
 
 ![triangular sample](http://d.pr/i/imB7+)
 
 ---
 
-Simulating Normal Variates
-==========================
+## Simulating Normal Variates
+
 
 With a standard normal random variable, we can transform to an arbitrary normal:
 
@@ -457,15 +457,15 @@ $$Z = \left(\sum\_{i=1}^{12} U\_i \right) - 6$$
 
 is approximately $N(0,1)$.
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 Inefficient:: 12 draws to generate one realization
 
 ---
 
-Box-Muller Algorithm
-====================
+## Box-Muller Algorithm
+
 
 Consider a *bivariate* standard normal variable:
 
@@ -483,8 +483,8 @@ $$\theta \sim \text{Unif}(0,2\pi)$$
 
 ---
 
-Box-Muller Algorithm
-====================
+## Box-Muller Algorithm
+
 
 Algorithm:
 
@@ -498,8 +498,8 @@ Write a function to generate $n$ variables distributed $N(\mu,\sigma^2)$, using 
 
 ---
 
-Built-in Random Number Generators
-=================================
+## Built-in Random Number Generators
+
 
 R includes random number generators for the most common distributions: `runif`, `rnorm`, `rbinom`, `rpois`, `rexp`, etc.
 
@@ -515,8 +515,8 @@ Subsequent arguments are parameters corresponding to the distribution:
 
 ---
 
-Bootstrapping
-=============
+## Bootstrapping
+
 
 Bootstrapping (Efron 1977) is a prominent simulation method in modern statistics. It is a *resampling* method for deriving a sampling distribution for a statistic. It can be used to obtain:
 
@@ -532,8 +532,8 @@ Bootstrapping uses sample data as a population from which new samples are drawn.
 
 ---
 
-Classical Inference
-===================
+## Classical Inference
+
 
 The sample $S$ is a simple or independent sample from $P$:
 
@@ -551,16 +551,16 @@ $$\text{(population parameter)}$$
 $$ T = h(S)$$
 $$\text{(estimate)}$$
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 make assumptions about pop. structure
 use assumptions to derive sampling distribution for T
 
 ---
 
-Problems
-========
+## Problems
+
 
 Classical inference can be **non-robust**:
 
@@ -575,8 +575,8 @@ An alternative is to estimate the sampling distribution of a statistic *empirica
 
 ---
 
-Non-parametric Bootstrap
-========================
+## Non-parametric Bootstrap
+
 
 Bootstrap sample:
 
@@ -598,12 +598,12 @@ In R, the function `sample` draws draw random sample of size points from x, opti
     [1] 5 1 4 2 3
     > sample(5, replace=T)
     [1] 4 4 3 1 2
-    
+
 
 ---
 
-Bootstrap sample
-================
+## Bootstrap sample
+
 
 In R:
 
@@ -618,16 +618,16 @@ In R:
      [1] -0.71576518  0.62914907 -1.05194033 -1.05194033  0.09901648 -0.92808680
      [7] -0.42132747 -0.92808680 -0.92808680 -1.05194033
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 We regard S as an "estimate" of population P
 population : sample :: sample : bootstrap sample
 
 ---
 
-Non-parametric Bootstrap
-========================
+## Non-parametric Bootstrap
+
 
 Generate replicate bootstrap samples:
 
@@ -639,28 +639,28 @@ $$T\_i^\* = t(S^*)$$
 
 ---
 
-Example
-=======
+## Example
+
 
     !r
     > x <- rnorm(10)
     > s <- numeric(1000)
     > for (i in 1:1000) s[i] <- mean(sample(x, 10, replace=TRUE))
     > hist(s, xlab="Bootstrap means", main="")
-    
+
 ![bootstrap means](http://d.pr/i/LAVF+)
 
 ---
 
-Exercise
-========
+## Exercise
+
 
 Re-formulate the previous example using an `apply` function, rather than a `for` loop.
 
 ---
 
-Bootstrap Estimates
-===================
+## Bootstrap Estimates
+
 
 From our bootstrapped samples, we can extract *estimates* of the expectation and variance:
 
@@ -672,15 +672,15 @@ Since we have estimated the expectation of the bootstrapped statistics, we can e
 
 $$\hat{B}^\* = \bar{T}^\* - T$$
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 estimate of T - theta
 
 ---
 
-Error
-=====
+## Error
+
 
 There are two sources of error in bootstrap estimates:
 
@@ -689,8 +689,8 @@ There are two sources of error in bootstrap estimates:
 
 ---
 
-Bootstrap Confidence Intervals
-==============================
+## Bootstrap Confidence Intervals
+
 
 We can use the bootstrap estimates of sampling variance and bias, and by applying normal theory, estimate confidence intervals for statistic $T$:
 
@@ -698,8 +698,8 @@ $$ (T-\hat{B}^\*) \pm z_{1-\alpha/2} \sqrt{\widehat{\text{Var}}(T^\*)}$$
 
 ---
 
-Bootstrap Percentile Intervals
-==============================
+## Bootstrap Percentile Intervals
+
 
 An alternative approach is to use the empirical quantiles of the bootstrapped statistics. This employs the *ordered* bootstrap replicates:
 
@@ -709,15 +709,15 @@ Simply extract the $100(\alpha/2)$ and $100(1-\alpha/2)$ percentiles:
 
 $$T\_{[(R+1)\alpha/2]}^\* \lt \theta \lt T\_{[(R+1)(1-\alpha/2)]}^\*$$
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 Square brackets indicate rounding to nearest integer.
 
 ---
 
-Bias-corrected Interval
-=======================
+## Bias-corrected Interval
+
 
 Though they do not assume normality, percentile intervals do not generally perform well.
 
@@ -733,8 +733,8 @@ $$z = \Phi^{-1}\left[\frac{\sum\_{i=1}^R I(T\_i^\* \le T)}{R+1}\right]$$
 
 ---
 
-Bias-corrected Interval
-=======================
+## Bias-corrected Interval
+
 
 **Step 2**:
 
@@ -746,8 +746,8 @@ We now have two correction factors, $z$ and $a$.
 
 ---
 
-Bias-corrected Interval
-=======================
+## Bias-corrected Interval
+
 
 **Step 3**:
 
@@ -760,16 +760,16 @@ The corrected interval is:
 
 $$T\_{[R \cdot a\_1]}^\* \lt \theta \lt T\_{[R \cdot a\_2]}^\*$$
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 - when z and a are both zero, corresponds to uncorrected percentile interval
 - R should be on the order of 1000 or more for accuracy
 
 ---
 
-Package `boot`
-==============
+## Package `boot`
+
 
 `boot` provides functions for bootstrapping and related resampling methods.
 
@@ -793,35 +793,35 @@ Package `boot`
     BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
     Based on 999 bootstrap replicates
 
-    CALL : 
+    CALL :
     boot.ci(boot.out = bmed)
 
-    Intervals : 
-    Level      Normal              Basic         
-    95%   (-0.7567,  0.8553 )   (-0.8329,  0.7465 )  
+    Intervals :
+    Level      Normal              Basic
+    95%   (-0.7567,  0.8553 )   (-0.8329,  0.7465 )
 
-    Level     Percentile            BCa          
-    95%   (-0.4833,  1.0961 )   (-0.4833,  1.0961 )  
-    
+    Level     Percentile            BCa
+    95%   (-0.4833,  1.0961 )   (-0.4833,  1.0961 )
+
 
 ---
 
-Example: Anorexia data
-======================
+## Example: Anorexia data
+
 
 ![Anorexia data](http://d.pr/i/oCsq+)
 
 ---
 
-Normal?
-=======
+## Normal?
+
 
 ![qqplot](http://d.pr/i/yMkp+)
 
 ---
 
-Example: Anorexia data
-======================
+## Example: Anorexia data
+
 
 Let's calculate a bootstrapped confidence interval for pre-treatment weights:
 
@@ -834,9 +834,9 @@ Let's calculate a bootstrapped confidence interval for pre-treatment weights:
     + bmeans[i] <- mean(s)
     + }
     > quantile(bmeans, c(0.025, 0.975))
-        2.5%    97.5% 
-    81.16104 83.53951  
-    
+        2.5%    97.5%
+    81.16104 83.53951
+
 Compare to parametric CI, and `boot`:
 
     !r
@@ -846,13 +846,13 @@ Compare to parametric CI, and `boot`:
     [1] 83.60542
     > weight_boot <- boot(weight, function(x,i) mean(x[i]), R=999)
     > quantile(weight_boot$t, c(0.025, 0.975))
-        2.5%    97.5% 
-    81.26222 83.49688 
+        2.5%    97.5%
+    81.26222 83.49688
 
 ---
 
-Estimating Coverage Probability
-===============================
+## Estimating Coverage Probability
+
 
 *Coverage probability* is the proportion of time that a calculated confidence interval contains the true parameter value.
 
@@ -860,8 +860,8 @@ Estimating Coverage Probability
 
 Several ways of calculating confidence intervals:
 
-* Bootstrap Intervals 
-* Theoretical Intervals 
+* Bootstrap Intervals
+* Theoretical Intervals
 * Asymptotic Intervals
 
 All confidence intervals are interpreted in light of assumptions:
@@ -873,8 +873,8 @@ What happens when assumptions are violated? Robust?
 
 ---
 
-Estimating Coverage Probability
-===============================
+## Estimating Coverage Probability
+
 
 We can use simulation to assess an interval's coverage probability.
 
@@ -886,8 +886,8 @@ We can use simulation to assess an interval's coverage probability.
 
 ---
 
-R code
-======
+## R code
+
 
 Calculating the coverage probability for normal bootstrap interval:
 
@@ -895,27 +895,27 @@ Calculating the coverage probability for normal bootstrap interval:
     true_mu <- 0
     x <- rnorm(100, true_mu)
     R <- 999
-    
+
     lower <- numeric(R)
     upper <- numeric(R)
-    
+
     for (i in 1:R) {
-    
+
         s <- x[sample(length(x), replace=TRUE)]
         xbar <- mean(s)
         s <- sd(s)
-        
+
         lower[i] = xbar + qnorm(0.025) * (s / sqrt(length(x)))
         upper[i] = xbar + qnorm(0.975) * (s / sqrt(length(x)))
     }
-    
+
     > mean(lower < true_mu & upper > true_mu)
     [1] 0.9459459
-    
+
 ---
 
-Exercise
-========
+## Exercise
+
 
 Find the coverage probability for bootstrap percentile intervals of the following model:
 
