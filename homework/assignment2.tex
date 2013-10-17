@@ -1,0 +1,151 @@
+\documentclass[]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+% Redefine labelwidth for lists; otherwise, the enumerate package will cause
+% markers to extend beyond the left margin.
+\makeatletter\AtBeginDocument{%
+  \renewcommand{\@listi}
+    {\setlength{\labelwidth}{4em}}
+}\makeatother
+\usepackage{enumerate}
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={},
+            colorlinks=true,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{0}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Bios 301: Assignment 2}
+
+\emph{Due Thursday, 31 October 👻 2013, 12:00 PM}
+
+50 points total.
+
+Submit a single knitr (either \texttt{.rnw} or \texttt{.rmd}) file,
+along with a valid PDF output file. Inside the file, clearly indicate
+which parts of your responses go with which problems (you may use the
+original homework document as a template). Raw R code/output or word
+processor files are not acceptable.
+
+\subsubsection{Question 1}
+
+\textbf{20 points}
+
+A problem with the Newton-Raphson algorithm is that it needs the
+derivative $f′$. If the derivative is hard to compute or does not exist,
+then we can use the \emph{secant method}, which only requires that the
+function $f$ is continuous.
+
+Like the Newton-Raphson method, the \textbf{secant method} is based on a
+linear approximation to the function $f$. Suppose that $f$ has a root at
+$a$. For this method we assume that we have \emph{two} current guesses,
+$x_0$ and $x_1$, for the value of $a$. We will think of $x_0$ as an
+older guess and we want to replace the pair $x_0$, $x_1$ by the pair
+$x_1$, $x_2$, where $x_2$ is a new guess.
+
+To find a good new guess x2 we first draw the straight line from
+$(x_0,f(x_0))$ to $(x_1,f(x_1))$, which is called a secant of the curve
+$y = f(x)$. Like the tangent, the secant is a linear approximation of
+the behavior of $y = f(x)$, in the region of the points $x_0$ and $x_1$.
+As the new guess we will use the x-coordinate $x_2$ of the point at
+which the secant crosses the x-axis.
+
+The general form of the recurrence equation for the secant method is:
+
+\[x_{i+1} = x_i - f(x_i)\frac{x_i - x_{i-1}}{f(x_i) - f(x_{i-1})}\]
+
+Notice that we no longer need to know $f′$ but in return we have to
+provide \emph{two} initial points, $x_0$ and $x_1$.
+
+\textbf{Write a function that implements the secant algorithm.} Validate
+your program by finding the root of the function $f(x) = \cos(x) − x$.
+Compare its performance with that of the either the Newton-Raphson or
+the Fixed-point method -- which is faster, and by how much?
+
+\subsubsection{Question 2}
+
+\textbf{15 points}
+
+Import the HAART dataset (\texttt{haart.csv}) from the GitHub repository
+into R, and perform the following manipulations:
+
+\begin{enumerate}[1.]
+\item
+  Convert date columns into a usable (for analysis) format.
+\item
+  Create an indicator variable (one which takes the values 0 or 1 only)
+  to represent death within 1 year of the initial visit.
+\item
+  Use the \texttt{init.date}, \texttt{last visit} and
+  \texttt{death.date} to calculate a followup time, which is the
+  difference between the first and either the last visit or a death
+  event (whichever comes first). If these times are longer than 1 year,
+  censor them.
+\item
+  Create another indicator variable representing loss to followup; that
+  is, if their status 1 year after the first visit was unknown.
+\item
+  Recall our work in class, which separated the \texttt{init.reg} field
+  into a set of indicator variables, one for each unique drug. Create
+  these fields and append them to the database as new columns.
+\item
+  The dataset \texttt{haart2.csv} contains a few additional observations
+  for the same study. Import these and append them to your master
+  dataset (if you were smart about how you coded the previous steps,
+  cleaning the additional observations should be easy!).
+\end{enumerate}
+
+\subsubsection{Question 3}
+
+\textbf{15 points}
+
+The game of craps is played as follows. First, you roll two six-sided
+dice; let x be the sum of the dice on the first roll. If x = 7 or 11 you
+win, otherwise you keep rolling until either you get x again, in which
+case you also win, or until you get a 7 or 11, in which case you lose.
+
+Write a program to simulate a game of craps. You can use the following
+snippet of code to simulate the roll of two (fair) dice:
+
+\begin{verbatim}
+x <- sum(ceiling(6*runif(2)))
+\end{verbatim}
+
+The instructor should be able to easily import and run your program
+(function), and obtain output that clearly shows how the game
+progressed.
+
+\end{document}
