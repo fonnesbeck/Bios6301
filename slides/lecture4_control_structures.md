@@ -1,15 +1,12 @@
-Control Structures
-==================
+# Control Structures
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Go over document conversion workflow
 
 ---
 
-Control Structures
-==================
+## Control Structures
 
 See Chapter 7 of *Matloff*
 
@@ -19,34 +16,32 @@ See Chapter 7 of *Matloff*
 
 ---
 
-Conditional Statements
-======================
+## Conditional Statements
 
 Conditionals specify which calculation to execute, based on conditions:
 
 ###Examples:###
 
-$$|x| = \left\\{  \begin{array}{rl} x & \text{if } x \ge 0 \cr 
+$$|x| = \left\\{  \begin{array}{rl} x & \text{if } x \ge 0 \cr
 -x & \text{if } x < 0 \end{array} \right.$$
 
-$$\phi(x) = \left\\{  \begin{array}{rl} x^2 & \text{if } |x| \le 1 \cr 
+$$\phi(x) = \left\\{  \begin{array}{rl} x^2 & \text{if } |x| \le 1 \cr
 2|x|-1 & \text{if } |x| > 0 \end{array} \right.$$
 
-assign: 
+assign:
 
-- group="child" if age<13 
-- group="adolescent" if age<18 
+- group="child" if age<13
+- group="adolescent" if age<18
 - group="adult" otherwise
 
 ---
 
-`if` statement
-==============
+## `if` statement
 
     !r
-    if (x >= 0) { 
+    if (x >= 0) {
         x
-    } else { 
+    } else {
         -x
     }
 
@@ -56,8 +51,7 @@ The condition in if needs to give one TRUE or FALSE value else clause is optiona
 
 ---
 
-What is TRUE?
-=============
+## What is TRUE?
 
 Any valid *numerical* value except 0 counts as TRUE (0 is FALSE).
 
@@ -85,8 +79,7 @@ Most non-numerical values raise exceptions:
 
 ---
 
-`else if`
-=========
+## `else if`
 
 When there are more than two conditions, they can be specified using `else if`:
 
@@ -101,15 +94,17 @@ When there are more than two conditions, they can be specified using `else if`:
         group <- 'adult'
     }
 
+## Presenter Notes
+
+Be sure `}` and `else` are on the same line when using interactively
 
 
 ---
 
-Nested `if` statements
-======================
+## Nested `if` statements
 
 Conditionals can nest arbitrarily deeply:
-    
+
     !r
     if (x^2 < 1) {
         x^2
@@ -117,14 +112,13 @@ Conditionals can nest arbitrarily deeply:
         if (x >= 0) {
             x
         } else {
-            -x 
+            -x
         }
     }
 
 ---
 
-`switch` statement
-==================
+## `switch` statement
 
 There can be an arbitrary number of alternatives for an `if` statement, but the syntax becomes awkward for a large number of conditions.
 
@@ -137,15 +131,21 @@ There can be an arbitrary number of alternatives for an `if` statement, but the 
               median = median(x),
               trimmed = mean(x, trim = .1))
      }
-     x <- rnorm(10)
-     centre(x, "mean")
-     centre(x, "median")
-     centre(x, "trimmed")
+
+ This results in the appropriate measure of central tendency when requested:
+
+     !r
+     > x <- rnorm(10)
+     >  centre(x, "mean")
+     [1] -0.05387708
+     >  centre(x, "median")
+     [1] 0.5685357
+     >  centre(x, "trimmed")
+     [1] 0.04333905
 
 ---
 
-`for` loops
-===========
+## `for` loops
 
 Often, a programming task requires that we iterate over a set of values, applying the same (or similar) action several times in a row. If the number of calculations is known *a priori*, we can apply a `for` loop:
 
@@ -165,33 +165,31 @@ Because `x` is a vector, it is *iterable*. Starting at the first element, `n` ta
     +   logs[i] <- log(i)
     + }
     > logs
-     [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379 
+     [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379
      [6] 1.7917595 1.9459101 2.0794415 2.1972246 2.3025851
 
 
 ---
 
-Combining Control Structures
-============================
+## Combining Control Structures
 
 Control structures can be combined. For example, when a decision is made at every iteration of a loop, depending on the current value:
 
     !r
     x <- c(-5,7,-8,0)
-    y <- vector(length=length(x))
+    y <- rep(NULL, length(x))
     for (i in 1:length(x)) {
         if (x[i] >= 0) {
             y[i] <- x[i]
         } else {
             y[i] <- -x[i]
-        } 
+        }
     }
 
 
 ---
 
-Conditional Iteration: `while`
-==============================
+## Conditional Iteration: `while`
 
 In some cases, we do not know how many iterations will be required in order to achieve a result. The `while` statement executes until its argument evaluates to `FALSE`:
 
@@ -200,7 +198,7 @@ In some cases, we do not know how many iterations will be required in order to a
     > while(i<2) i <- i + rnorm(1)
     > i
     [1] 2.015834
-    
+
 Loop is executed forever if the condition is always `TRUE`!
 
 All loops can be broken:
@@ -214,22 +212,20 @@ All loops can be broken:
 
 ---
 
-Exercise
-========
+## Exercise
 
 Change the following `for` loop into a `while` loop:
 
-    !r 
+    !r
     x <- 0
     for (i in 1:10) {
-        x <- x + log(x)
+        x <- x + log(i)
     }
 
 
 ---
 
-Unconditional Iteration: `repeat`
-=================================
+## Unconditional Iteration: `repeat`
 
 `repeat` iterates endlessly, unless broken:
 
@@ -241,23 +237,16 @@ Unconditional Iteration: `repeat`
 More useful implementation:
 
     !r
+    x <- 0
     repeat {
-        if (watched) {
-            next()
-        }
-        print("I am trapped in an endless loop!!")
-        if (rescued) {
-            break()
-        }
+        x <- x + log(i)
+        if (x > 20) break()
     }
-    
-The `next` function skips the rest of the body and goes back into the loop.
 
 
 ---
 
-Programming with Control Structures:
-====================================
+## Programming with Control Structures:
 
 ### Root-finding
 
@@ -270,8 +259,7 @@ Consider a function $f:\mathbf{R} \Rightarrow \mathbf{R}$. The *root* is a solut
 
 ---
 
-Fixed-point Iteration
-=====================
+## Fixed-point Iteration
 
 One method for finding roots computationally is *fixed-point iteration*. For some function $g:\mathbf{R} \Rightarrow \mathbf{R}$, a fixed point is:
 
@@ -287,8 +275,7 @@ $$g(x) = cf(x) + x$$
 
 ---
 
-Iterative Method
-================
+## Iterative Method
 
 In order to find a fixed point, we will generate a sequence of "guesses" $x_0, x_1, x_2, \ldots$ that (hopefully) converges to $a: g(a)=a$.
 
@@ -300,15 +287,14 @@ $$x_{n+1} = g(x_{n})$$
 
 We can show that $x_n \rightarrow a$ is a fixed point of $g$.
 
-$$a = \lim_{n \rightarrow \infty} x_{n+1} = \lim_{n \rightarrow \infty} g(x_n)$$ 
+$$a = \lim_{n \rightarrow \infty} x_{n+1} = \lim_{n \rightarrow \infty} g(x_n)$$
 $$ = g(\lim_{n \rightarrow \infty} x_n) = a$$
 
 therefore, $a$ is a fixed point of $g$.
 
 ---
 
-Convergence
-===========
+## Convergence
 
 Sadly for us, $\\{x_n\\}_{n=0}^{\infty}$ does not always converge.
 
@@ -318,7 +304,7 @@ $$g_1(x) = x^{1.5}, \, g_2(x) = x^{0.75}$$
 
 both $g_1, g_2$ have fixed points at 1 (by inspection), but $g_1$ diverges.
 
-In general, 
+In general,
 
 * the algorithm converges if $|g'(a)<1|$, and diverges otherwise.
 * the initial value should be in the "neighborhood" of $x_0$ to guarantee convergence.
@@ -329,8 +315,7 @@ $$ |x_n - x_{n-1}| \le \epsilon$$
 
 ---
 
-Example
-=======
+## Example
 
 ### Find the root of $f(x) = \log(x) - \exp(-x)$
 
@@ -339,26 +324,24 @@ How do we define $g$?
 1. Put one term on both sides of the equation, and exponentiate:
 
     $g_1: x = \exp(\exp(-x))$
-    
+
 2. Subtract $x$ from both sides:
 
     $g_2: x = x - \log(x) + \exp(-x)$
-    
+
 3. Add $x$ to both sides:
 
     $g_3: x = x + \log(x) - \exp(-x)$
 
 ---
 
-R Code
-======
+## R Code
 
 How do we implement this in R?
 
 ---
 
-R Code
-======
+## R Code
 
 How do we implement this in R?
 
@@ -373,44 +356,11 @@ Before plunging into programming, its a good idea to write *pseudocode* to outli
         - calculate new value based on current value
         - set new value to current value
     4. return result
-    
----
-
-R Code
-======
-
-    !r
-    # Initialize value
-    x <- 10
-    x_old <- x + 1e6
-    # Set tolerance
-    tol <- 1e-9
-    # Specify maximum number of iterations
-    max_iter <- 100
-    # Keep track of number of interations
-    iter <- 0
-    # Loop
-    while((abs(x-x_old) > tol) && (iter<max_iter)) {
-        # Replace old value with current
-        x_old <- x
-        # Calculate new value
-        x <- exp(exp(-x))
-        # Increment counter
-        iter <- iter + 1
-    }
-    
-    > x
-    [1] 1.3098
-    > abs(x-x_old)
-    [1] 4.49629e-10
-    > iter
-    [1] 22
 
 
 ---
 
-Problems with Fixed-point Iteration?
-====================================
+## Problems with Fixed-point Iteration?
 
 1. There are many ways of expressing $g(x)$, each having different convergence properties.
 2. The algorithm is relatively **slow**.
@@ -418,8 +368,7 @@ Problems with Fixed-point Iteration?
 
 ---
 
-Newton-Raphson
-==============
+## Newton-Raphson
 
 Suppose $f$ is differentiable, with continuous $f'$ and root $a$. Starting with an initial guess $x_0$, we can draw a straight line through $(x_0, f(x_0))$ that has slope $f'(x_0)$:
 
@@ -429,8 +378,7 @@ $$f'(x_0) = \frac{f(x_0) - y}{x_0 - x}$$
 
 ---
 
-Newton-Raphson
-==============
+## Newton-Raphson
 
 The tangent line crosses the x-axis at some point $x_1$, which is (we hope) a better approximation to $a$.
 
@@ -448,15 +396,13 @@ $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
 
 ---
 
-Newton-Raphson
-==============
+## Newton-Raphson
 
 ![Newton-Raphson](images/newton-raphson.png)
 
 ---
 
-Convergence of Newton-Raphson
-=============================
+## Convergence of Newton-Raphson
 
 The Newton-Raphson algorithm converges quickly if:
 
@@ -474,8 +420,7 @@ x_n - \frac{f(x_n)}{f'(x_n)}\right] \cr
 
 ---
 
-Convergence of Newton-Raphson
-=============================
+## Convergence of Newton-Raphson
 
 We stop when $f(x_n)$ is sufficiently close to zero:
 
@@ -489,8 +434,7 @@ $$\Rightarrow |x-a| \le \frac{\epsilon}{f'(a)}$$
 
 ---
 
-Pseudocode
-==========
+## Pseudocode
 
 1. Specify functions $f(x)$, $f'(x)$
 2. Specify tolerance for convergence
@@ -500,23 +444,20 @@ Pseudocode
     * calculate new value $x_{i+1}$
 5. Return result
 
-Presenter Notes
-===============
+## Presenter Notes
 
-Convergence checking, maximum iterations    
+Convergence checking, maximum iterations
 
 ---
 
-Exercise
-========
+## Exercise
 
 ### Implement the Newton-Raphson algorithm in R
 
 
 ---
 
-Vectorization
-=============
+## Vectorization
 
 Though iteration (looping) is a fundamental and useful programming tool, in R we often want to *avoid* iteration and perform operations on data structures as a whole.
 
@@ -535,8 +476,7 @@ But in R, as we have seen, we can add the entire vector rather than operating el
 
 ---
 
-Vectorization
-=============
+## Vectorization
 
 There are several advantages to vectorized operations:
 
@@ -549,21 +489,20 @@ There are several advantages to vectorized operations:
 
 ---
 
-Vectorized Calculations
-=======================
+## Vectorized Calculations
 
 Many of R's built-in functions are already vectorized:
 
     !r
     abs(x)
     log(x)
-    
+
 Conditional statements can avoid embedding `if` statements in loops:
 
     !r
     ifelse(x<0, -x, x)
     ifelse(x^2>1, abs(x), x^2)
-    
+
 Generate sequences:
 
     !r
@@ -574,8 +513,7 @@ Generate sequences:
 
 ---
 
-Arrays with Repeated Structure
-==============================
+## Arrays with Repeated Structure
 
 We can generate combinations of values from vectors, using `expand.grid`:
 
@@ -590,12 +528,12 @@ We can generate combinations of values from vectors, using `expand.grid`:
 Matrices can be generated from vectors with `outer`:
 
     !r
-    > outer(c(1,3,5),c(2,3,7),‘*‘)
+    > outer(c(1,3,5),c(2,3,7),'*')
          [,1] [,2] [,3]
     [1,]    2    3    7
     [2,]    6    9   21
     [3,]   10   15   35
-    
+
 We can repeat the same action repeatedly using `replicate`:
 
     !r
@@ -614,6 +552,5 @@ We can repeat the same action repeatedly using `replicate`:
     }
   });
 </script>
-<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
