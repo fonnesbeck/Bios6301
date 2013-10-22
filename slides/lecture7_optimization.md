@@ -84,8 +84,8 @@ R Code
             return(x)
         }
     }
-    
-To use `newton`, we need a function $f$ that contains a vector $(f(x), f'(x), f''(x))$. 
+
+To use `newton`, we need a function $f$ that contains a vector $(f(x), f'(x), f''(x))$.
 
 
 ---
@@ -103,14 +103,14 @@ Let's try to find the maximum of a Gamma(3,2) distribution:
         y <- exp(-2*x)
         return(c(4*x^2*y, 8*x*(1-x)*y, 8*(1-2*x^2)*y))
     }
-    
+
     > newton(gamma32, 4)
     [1] 1
     > newton(gamma32, 0.1)
     [1] 1.846855e-17
     > newton(gamma32, 20)
     [1] 20
-    
+
 ---
 
 Convergence
@@ -159,32 +159,32 @@ $$x\_a \lt x\_c \lt x\_b$$
 While $x\_b - x\_a \gt \epsilon$:
 
 * if $x\_b - x\_c \gt x\_c - x\_a$, choose $y \in (x\_c, x\_b)$:
-    
+
     - if $f(y) \ge f(x\_c)$:
-    
+
         + $x\_a = x\_c$
         + $x\_c = y$
-        
+
     - else:
-    
+
         + $x\_b = y$
-        
+
 ---
 
 Algorithm
 =========
-        
+
 * else if $x\_b - x\_c \lt x\_c - x\_a$, choose $y \in (x\_a, x\_c)$:
-    
+
     - if $f(y) \ge f(x\_c)$:
-    
+
         + $x\_b = x\_c$
         + $x\_c = y$
-        
+
     - else:
-    
+
         + $x\_a = y$
-        
+
 So, $y$ stays in the larger of the two intervals.
 
 ---
@@ -404,7 +404,7 @@ Putting it all together, our steepest ascent algorithm should look something lik
     * Find optimal step size
     * Calculate new $\mathbf{x}\_i = \mathbf{x}\_{i-1} + \alpha \nabla f(\mathbf{x}\_{i-1})$
     * Increment $i$
-    
+
 ---
 
 R Code
@@ -416,14 +416,14 @@ There is no guarantee of a suitable $\alpha$ because the function $g$ may be inc
 
     !r
     line_search <- function(f, x, y, eps=1e-9, amax=2^5) {
-        
+
         # specify function g(alpha) to optimize
         g <- function(a) f(x + a*y)
-        
+
         # get left point
         a_l <- 0
         g_l <- g(a_l)
-        
+
         # get mid point
         a_m <- 1
         g_m <- g(a_m)
@@ -432,7 +432,7 @@ There is no guarantee of a suitable $\alpha$ because the function $g$ may be inc
             a_m <- a_m/2
             g_m <- g(a_m)
         }
-        
+
 ---
 
 R Code
@@ -441,7 +441,7 @@ R Code
     !r
         # use 0 for a if we cannot get a suitable mid-point
         if ((a_m <= eps) & (g_m < g_l)) return(0)
-        
+
         # get right point
         a_r <- 2*a_m
         g_r <- g(a_r)
@@ -452,15 +452,15 @@ R Code
             a_r <- 2*a_m
             g_r <- g(a_r)
         }
-        
+
         # use a_max for a if we cannot get a suitable right point
         if ((a_r >= a_max) & (g_m < g_r)) return(a_max)
 
         # apply golden-section algorithm to g to find a
         a <- gsection(g, a_l, a_r, a_m)
-        
+
         return(a)
-    
+
     } # end of function
 
 ---
@@ -472,7 +472,7 @@ Now, we can call this line search function from the steepest ascent code:
 
     !r
     ascent <- function(f, grad_f, x0, eps = 1e-9, max_iter = 100) {
-        
+
         # Initialize x values
         x_old <- x0
         gx <- grad.f(x0)
@@ -561,7 +561,7 @@ Remember that the function `solve` in R is used to obtain the inverse of a matri
 
     !r
     solve(a, b, ...)
-    
+
 If you only pass the first matrix `a`, it will assume `b` to be the identity matrix, and so the solution to `ax = b` will be the inverse of `a`. More generally, this is solved by $a^{-1}b$, which is the term that we require to use Newton's method.
 
 Thus, we must pass the Hessian evaluated at $\mathbf{x}$ and the gradient of $f$ evaluated at $\mathbf{x}$ as the arguments to `solve`.
@@ -575,7 +575,7 @@ Here is an implementation of Newton's method in R:
 
     !r
     newton <- function(H, grad, x0, eps = 1e-9, max_iter = 100) {
-        
+
         x <- x0
         gradx <- grad(x)
         Hx <- H(x)
@@ -598,7 +598,7 @@ Here is an implementation of Newton's method in R:
 Newton's Method
 ===============
 
-![newton](http://d.pr/i/fiiX+)
+![newton](http://cl.ly/S5YB/Screenshot%202012-10-14%20at%2015.09.48.png)
 
 ---
 

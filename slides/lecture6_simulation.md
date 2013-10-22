@@ -811,6 +811,10 @@ $$T\_{[R \cdot a\_1]}^\* \lt \theta \lt T\_{[R \cdot a\_2]}^\*$$
 
 ![Anorexia data](http://d.pr/i/oCsq+)
 
+## Presenter Notes
+
+Pre-treatment weights for anorexia patients
+
 ---
 
 ## Normal?
