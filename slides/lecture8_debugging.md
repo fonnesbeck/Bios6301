@@ -385,3 +385,8 @@ Calling `untrace` allows you to remove trace code.
 
     Selection:
 
+---
+
+## Exercise
+
+Use one or more of the debugging tools described in this section to locate the bug in the `logistic_debug.r` script located in the `exercises` folder.
