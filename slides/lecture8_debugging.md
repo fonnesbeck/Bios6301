@@ -1,10 +1,10 @@
-Debugging
-=========
+# Debugging
+
 
 ---
 
-Notifications
-=============
+## Notifications
+
 
 There are several ways that R can provide feedback:
 
@@ -15,8 +15,8 @@ There are several ways that R can provide feedback:
 
 ---
 
-Warnings and Errors
-===================
+## Warnings and Errors
+
 
     !r
     > x <- c(1,2,3,4)
@@ -34,49 +34,49 @@ Warnings and Errors
 
 ---
 
-Example
-=======
+## Example
+
 
 Here is a simple function for checking passed values:
 
     !r
     is_even <- function(x) {
-    
+
         if (x %% 2) {
             print("Value is odd")
         } else {
             print("Value is even")
         }
         invisible(x)
-    
+
     }
-    
+
     > is_even(5)
     [1] "Value is odd"
     > is_even(NA)
     Error in if (x%%2) { : argument is not interpretable as logical
-        
-Presenter Notes
-===============
+
+## Presenter Notes
+
 
 `invisible` returns but does not print the result
-        
+
 ---
 
-Example
-=======
+## Example
+
 
     !r
     is_even <- function(x) {
-        
+
         if(is.na(x)) print("Value is NA")
         else if(x %% 2) print("Value is odd")
         else print("Value is even")
-        
+
         invisible(x)
-    
+
     }
-    
+
     > is_even(NA)
     [1] "Value is NA"
     > is_even(log(-1))
@@ -86,19 +86,19 @@ Example
 
 ---
 
-Preventing Bugs
-===============
+## Preventing Bugs
 
-In some situations, you may be aware of conditions that would cause your code to silently fail. You can guard against this by inserting checks in the code. For example, in our secant method code, we need the point `xc` to be between `xa` and `xb`. The `stopifnot` function will throw an error if the specified condition is not met:
+
+In some situations, you may be aware of conditions that would cause your code to silently fail. You can guard against this by inserting checks in the code. For example, in our **golden section** method code, we need the point `xc` to be between `xa` and `xb`. The `stopifnot` function will throw an error if the specified condition is not met:
 
     !r
     golden_section <- function(f, xa, xb, xc, tol=1e-9) {
-    
+
         stopifnot(xc < xb)
         stopifnot(xc > xa)
-        
+
         ...
-        
+
     > golden_section(cos, 2,5,6)
     Error: xc < xb is not TRUE
 
@@ -106,8 +106,8 @@ Be careful about over-using this approach. If the code would fail on its own, th
 
 ---
 
-Locating the Problem
-====================
+## Locating the Problem
+
 
 There are several steps that will help you diagnose an issue:
 
@@ -118,16 +118,18 @@ There are several steps that will help you diagnose an issue:
 
 It is useful to use a RNG seed, so that stochastic output can be exactly reproduced.
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 Not all issues are reliably reproducible (stochastice)
 Issues involving network connectivity can be hard to reproduce
 
+    seed.set(n)
+
 ---
 
-`print` Statements
-==================
+## `print` Statements
+
 
 A rudimentary form of debugging is to place `print` (or `cat`) statements at key locations of your code, to verify the values of variables:
 
@@ -153,18 +155,18 @@ A rudimentary form of debugging is to place `print` (or `cat`) statements at key
             iter <- iter + 1
         }
     }
-    
+
 `sprintf` allows for fancier formatting.
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 Editing your code for debugging is tedious. Remember, they need to be removed when you are done!
 
 ---
 
-R Debugging Tools
-=================
+## R Debugging Tools
+
 
 While it is possible to track down and fix bugs in R without any specialized debugging tools, several functions are available that make debugging more interactive and effective:
 
@@ -176,17 +178,17 @@ While it is possible to track down and fix bugs in R without any specialized deb
 
 ---
 
-`traceback`
-===========
+## `traceback`
 
-By default `traceback()` prints the call stack of the last uncaught error, *i.e.*, the sequence of calls that lead to the error. This is useful when an error occurs with an unidentifiable error message. 
+
+By default `traceback()` prints the call stack of the last uncaught error, *i.e.*, the sequence of calls that lead to the error. This is useful when an error occurs with an unidentifiable error message.
 
     !r
     > sample(x)
     Error in sample(x) : object 'x' not found
     > traceback()
     1: sample(x)
-    
+
     > lm(x~y)
     Error in eval(expr, envir, enclos) : object 'x' not found
     > traceback()
@@ -199,11 +201,11 @@ By default `traceback()` prints the call stack of the last uncaught error, *i.e.
     1: lm(x ~ y)
 
 The default display is of the stack of the last uncaught error as stored as a list of deparsed calls in *.Traceback*, which `traceback` prints in a user-friendly format.
-  
+
 ---
 
-`debug`
-=======
+## `debug`
+
 
 Frequently, we might want to step through a function line-by-line to locate a bug. Calling `debug` with a particular function as its argument *flags* that function for debugging. Then, each time it is called, execution stops just prior to the function call, so that the user can walk through it:
 
@@ -213,12 +215,12 @@ Frequently, we might want to step through a function line-by-line to locate a bu
     debugging in: sample(x)
     debug: {
         if (length(x) == 1L && is.numeric(x) && x >= 1) {
-            if (missing(size)) 
+            if (missing(size))
                 size <- x
             .Internal(sample(x, size, replace, prob))
         }
         else {
-            if (missing(size)) 
+            if (missing(size))
                 size <- length(x)
             x[.Internal(sample(length(x), size, replace, prob))]
         }
@@ -227,19 +229,19 @@ Frequently, we might want to step through a function line-by-line to locate a bu
 
 ---
 
-`debug`
-=======
+## `debug`
+
 
 Typing `n` executes the current line and moves to the next line; `c` executes the rest of the function without stopping; `Q` exits the debugger; and `where` shows you your current location, incase you get lost:
 
     !r
     Browse[2]> n
     debug: if (length(x) == 1L && is.numeric(x) && x >= 1) {
-        if (missing(size)) 
+        if (missing(size))
             size <- x
         .Internal(sample(x, size, replace, prob))
     } else {
-        if (missing(size)) 
+        if (missing(size))
             size <- length(x)
         x[.Internal(sample(length(x), size, replace, prob))]
     }
@@ -254,15 +256,15 @@ Typing `n` executes the current line and moves to the next line; `c` executes th
     [1] 3 2 1
     > undebug(sample)
 
-Presenter Notes
-===============
+## Presenter Notes
+
 
 You cannot debug primitive functions
 
 ---
 
-`browser`
-=========
+## `browser`
+
 
 A call to `browser` anywhere in your code invokes the browser when execution reaches that line, rather than at the start of the corresponding function. So, if you know more precisely where an error may be, this is a more direct approach:
 
@@ -279,7 +281,7 @@ A call to `browser` anywhere in your code invokes the browser when execution rea
             browser()
             x_new <- x1 -  f1*(x1 - x0)/(f1 - f0)
     ...
-    
+
     > secant(f_test, 2, 3)
     Called from: secant(f_test, 2, 3)
     Browse[1]> n
@@ -287,8 +289,8 @@ A call to `browser` anywhere in your code invokes the browser when execution rea
 
 ---
 
-`browser`
-=========
+## `browser`
+
 
 You can pass `browser` a condition argument that only invokes the browser when that condition is met. For example, if you only want to look at the code if a variable is negative, you can inject this statement:
 
@@ -299,35 +301,35 @@ which is shorthand for:
 
     !r
     if (x < 0) browser()
-    
+
 As another example, if a problem seems to arise in your code after several iterations, you can use your counter value as a condition:
 
     !r
     browser(i > 100)
-    
+
 which will trigger the browser at the 101st iteration.
 
 ---
 
-`setBreakpoint`
-===============
+## `setBreakpoint`
+
 
 Rather than editing your source code, `setBreakpoint` allows you to invoke the browser at a particular line of the code:
 
     !r
     setBreakpoint('secant.r', 12)
-    
+
 These breakpoints can be set *during* a debugging session, as well as before.
 
 
 ---
 
-`trace`
-=======
+## `trace`
+
 
 The `trace` function allows you to temporarily add arbitrary code to a function,  without permanently changing it.
 
-Among its arguments, `trace` accepts the name of the function to be traced (`what`), a function or unevaluated evaluated expression to execute (`tracer`), and the line number at which to execute it (`at`). 
+Among its arguments, `trace` accepts the name of the function to be traced (`what`), a function or unevaluated evaluated expression to execute (`tracer`), and the line number at which to execute it (`at`).
 
     !r
     trace(what, tracer, exit, at, print, signature,
@@ -338,8 +340,8 @@ For complex tracing, the `edit=TRUE` argument can be passed to `trace`. This wil
 
 ---
 
-`trace`
-=======
+## `trace`
+
 
 Calling `trace` on a function without an argument will print the function name whenever it is called. For example:
 
@@ -349,20 +351,20 @@ Calling `trace` on a function without an argument will print the function name w
     trace: sum
     trace: sum
     trace: sum
-    
+
 Here, the function `hist` (plots a histogram) calls the `sum` function 3 times.
 
     !r
     trace("secant", browser)
-    
+
 will start the browser, similar to placing a `browser` call at the start of `secant`.
 
 Calling `untrace` allows you to remove trace code.
 
 ---
 
-`recover`
-=========
+## `recover`
+
 
 `browser` allows you to browse the environment in the current function call, but not the environments for previous function calls. In some situations, you may want to halt execution in one location, then browse a previous function call to hunt down a bug. `recover` allows you to jump up to higher positions in the call stack:
 
@@ -371,7 +373,7 @@ Calling `untrace` allows you to remove trace code.
     > lm(y~x)
     Error in eval(expr, envir, enclos) : object 'y' not found
 
-    Enter a frame number, or 0 to exit   
+    Enter a frame number, or 0 to exit
 
     1: lm(y ~ x)
     2: eval(mf, parent.frame())
@@ -381,5 +383,5 @@ Calling `untrace` allows you to remove trace code.
     6: eval(predvars, data, env)
     7: eval(expr, envir, enclos)
 
-    Selection: 
+    Selection:
 
