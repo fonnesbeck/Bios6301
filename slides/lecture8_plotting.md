@@ -1,10 +1,8 @@
-Plotting
-========
+# Plotting
 
 ---
 
-Plotting Packages in R
-======================
+## Plotting Packages in R
 
 The key built-in graphics packages for R include:
 
@@ -19,8 +17,7 @@ We will cover one third-party graphics package, `ggplot2`, in a later lecture.
 
 ---
 
-Planning
-========
+## Planning
 
 In order to plot your data or statistical output efficiently, you need to consider:
 
@@ -33,8 +30,7 @@ In order to plot your data or statistical output efficiently, you need to consid
 
 ---
 
-Base graphics vs. Lattice graphics
-==================================
+## Base graphics vs. Lattice graphics
 
 A given plot may be constructed using base graphics or lattice graphics, but not both.
 
@@ -45,8 +41,7 @@ Lattice graphics are created with a single function call, containing all informa
 
 ---
 
-Basic Plotting in R
-===================
+## Basic Plotting in R
 
 Calling the `plot` function with the predictor and response variables as an
 argument:
@@ -55,17 +50,15 @@ argument:
 
 ![Simple scatterplot](images/simple_scatter.png)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Lots of default arguments that should be set manually.
 Notice here that some values of hemoglobin appear to have been rounded
-to the nearest integer. 
+to the nearest integer.
 
 ---
 
-Scatterplot
-===========
+## Scatterplot
 
 We can make aesthetic improvements to the plot by adding axis labels:
 
@@ -75,8 +68,7 @@ We can make aesthetic improvements to the plot by adding axis labels:
 
 ---
 
-Plot Type
-=========
+## Plot Type
 
 We can entirely change the type of plot by specifying the `type`
 argument, which allows for a variety of arguments:
@@ -96,106 +88,98 @@ argument, which allows for a variety of arguments:
 
 ---
 
-Axis Limits
-===========
+## Axis Limits
 
 Though `plot` usually does a reasonable job of setting the boundaries of
 the plot, you can manually change these using `xlim` and `ylim`:
 
-    > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin", 
+    > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin",
     xlim=c(40,80), ylim=c(5, 15))
-    
+
 ![axis limits](images/axis_limits.png)
 
 ---
 
-Adding Color
-============
+## Adding Color
 
     > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin",
     col='red')
-    
+
 ![color symbols](images/color_symbols.png)
 
 ---
 
-R Colors
-========
+## R Colors
 
     !r
     > colors()
-      [1] "white"                "aliceblue"            "antiquewhite"         "antiquewhite1"       
-      [5] "antiquewhite2"        "antiquewhite3"        "antiquewhite4"        "aquamarine"          
-      [9] "aquamarine1"          "aquamarine2"          "aquamarine3"          "aquamarine4"         
-     [13] "azure"                "azure1"               "azure2"               "azure3"              
-     [17] "azure4"               "beige"                "bisque"               "bisque1"             
-     [21] "bisque2"              "bisque3"              "bisque4"              "black"               
-     [25] "blanchedalmond"       "blue"                 "blue1"                "blue2"               
-     [29] "blue3"                "blue4"                "blueviolet"           "brown"               
-     [33] "brown1"               "brown2"               "brown3"               "brown4"              
-     [37] "burlywood"            "burlywood1"           "burlywood2"           "burlywood3"          
-     [41] "burlywood4"           "cadetblue"            "cadetblue1"           "cadetblue2"          
-     [45] "cadetblue3"           "cadetblue4"           "chartreuse"           "chartreuse1"         
-     [49] "chartreuse2"          "chartreuse3"          "chartreuse4"          "chocolate"           
-     [53] "chocolate1"           "chocolate2"           "chocolate3"           "chocolate4"          
-     [57] "coral"                "coral1"               "coral2"               "coral3"              
-     [61] "coral4"               "cornflowerblue"       "cornsilk"             "cornsilk1"           
-     [65] "cornsilk2"            "cornsilk3"            "cornsilk4"            "cyan"                
-     [69] "cyan1"                "cyan2"                "cyan3"                "cyan4"               
-     [73] "darkblue"             "darkcyan"             "darkgoldenrod"        "darkgoldenrod1"      
-     [77] "darkgoldenrod2"       "darkgoldenrod3"       "darkgoldenrod4"       "darkgray"            
-     [81] "darkgreen"            "darkgrey"             "darkkhaki"            "darkmagenta"         
-     [85] "darkolivegreen"       "darkolivegreen1"      "darkolivegreen2"      "darkolivegreen3"     
-     [89] "darkolivegreen4"      "darkorange"           "darkorange1"          "darkorange2"         
-     [93] "darkorange3"          "darkorange4"          "darkorchid"           "darkorchid1" 
-     ...        
+      [1] "white"                "aliceblue"            "antiquewhite"         "antiquewhite1"
+      [5] "antiquewhite2"        "antiquewhite3"        "antiquewhite4"        "aquamarine"
+      [9] "aquamarine1"          "aquamarine2"          "aquamarine3"          "aquamarine4"
+     [13] "azure"                "azure1"               "azure2"               "azure3"
+     [17] "azure4"               "beige"                "bisque"               "bisque1"
+     [21] "bisque2"              "bisque3"              "bisque4"              "black"
+     [25] "blanchedalmond"       "blue"                 "blue1"                "blue2"
+     [29] "blue3"                "blue4"                "blueviolet"           "brown"
+     [33] "brown1"               "brown2"               "brown3"               "brown4"
+     [37] "burlywood"            "burlywood1"           "burlywood2"           "burlywood3"
+     [41] "burlywood4"           "cadetblue"            "cadetblue1"           "cadetblue2"
+     [45] "cadetblue3"           "cadetblue4"           "chartreuse"           "chartreuse1"
+     [49] "chartreuse2"          "chartreuse3"          "chartreuse4"          "chocolate"
+     [53] "chocolate1"           "chocolate2"           "chocolate3"           "chocolate4"
+     [57] "coral"                "coral1"               "coral2"               "coral3"
+     [61] "coral4"               "cornflowerblue"       "cornsilk"             "cornsilk1"
+     [65] "cornsilk2"            "cornsilk3"            "cornsilk4"            "cyan"
+     [69] "cyan1"                "cyan2"                "cyan3"                "cyan4"
+     [73] "darkblue"             "darkcyan"             "darkgoldenrod"        "darkgoldenrod1"
+     [77] "darkgoldenrod2"       "darkgoldenrod3"       "darkgoldenrod4"       "darkgray"
+     [81] "darkgreen"            "darkgrey"             "darkkhaki"            "darkmagenta"
+     [85] "darkolivegreen"       "darkolivegreen1"      "darkolivegreen2"      "darkolivegreen3"
+     [89] "darkolivegreen4"      "darkorange"           "darkorange1"          "darkorange2"
+     [93] "darkorange3"          "darkorange4"          "darkorchid"           "darkorchid1"
+     ...
 
 
 ---
 
-Manipulating Plot Symbols
-=========================
+## Manipulating Plot Symbols
 
 Users can manipulate point shapes with `pch`:
 
     > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin",
     pch=3)
-    
+
 ![plot symbols](images/plot_symbols.png)
 
 ---
 
-Plot Symbols
-============
+## Plot Symbols
 
     !r
     > example(points)
 
 ![plot symbol list](images/symbols.png)
-    
+
 ---
 
-Manipulating Line Styles
-========================
+## Manipulating Line Styles
 
 Users can manipulate line styles and widths with `lty` and `lwd`, respectively:
 
     > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin",
     type='l', lty=2, lwd=2)
-    
+
 ![thick dashed lines](images/thick_dash.png)
 
 ---
 
-Line Styles
-===========
+## Line Styles
 
 ![line styles](images/lty.png)
 
 ---
 
-Plotting Parameters
-===================
+## Plotting Parameters
 
 Parameters for the plotting device can be set using the `par` function.
 
@@ -216,8 +200,7 @@ Parameters for the plotting device can be set using the `par` function.
 
 ---
 
-Accessing Plotting Parameters
-=============================
+## Accessing Plotting Parameters
 
     !r
     > par("lty")
@@ -233,18 +216,16 @@ Accessing Plotting Parameters
 
 ---
 
-Plotting Margins
-================
+## Plotting Margins
 
     !r
     > par(mar=c(1,1,1,1))
-    
+
 ![margins](images/margins.png)
-    
+
 ---
 
-Backend Options
-===============
+## Backend Options
 
 `par` accepts multiple arguments, so several options can be set at once.
 Additionally, `par` returns a list of the current parameters, which can
@@ -268,53 +249,49 @@ parameters:
 
 ---
 
-Building Plots
-==============
+## Building Plots
 
 Plots may be augmented after they are drawn. This allows desired custom plots to
-be built up in several steps, interactively. 
+be built up in several steps, interactively.
 
 First, create an "empty" scatterplot that sets up the dimensions of the space,
 but does not plot anything.
 
     !r
     > some_pars <- par(las=1, mar=c(4,4,3,2))
-    > plot(haart$weight, haart$hemoglobin, xlab="", ylab="", 
+    > plot(haart$weight, haart$hemoglobin, xlab="", ylab="",
     + axes=FALSE, type="n")
-        
+
 ![blank](images/blank.png)
 
 ---
 
-Building Plots
-==============
+## Building Plots
 
 Add the points of the scatterplot, using different colors for males and females:
 
     !r
-    > points(haart$weight[haart$male==1], haart$hemoglobin[haart$male==1], 
+    > points(haart$weight[haart$male==1], haart$hemoglobin[haart$male==1],
         col="darkseagreen4")
-    > points(haart$weight[haart$male==0], haart$hemoglobin[haart$male==0], 
+    > points(haart$weight[haart$male==0], haart$hemoglobin[haart$male==0],
         col="red")
-        
+
 ![MF points](images/mf_points.png)
 
 ---
 
-Building Plots
-==============    
+## Building Plots
 
 A more efficient way to add the points of the scatterplot, using different colors and symbols for different combinations of groups:
 
-    > points(haart$weight, haart$hemoglobin, col=ifelse(haart$male==1, 
+    > points(haart$weight, haart$hemoglobin, col=ifelse(haart$male==1,
     + "darkseagreen4", "red"), pch=ifelse(haart$aids==1, 1, 3))
 
 ![Custom points](images/points.png)
 
 ---
 
-Building Plots
-==============
+## Building Plots
 
 Now axes can be added, with any desired options:
 
@@ -325,8 +302,7 @@ Now axes can be added, with any desired options:
 
 ---
 
-Building Plots
-==============
+## Building Plots
 
 Now axis labels, in the desired orientation:
 
@@ -337,12 +313,11 @@ Now axis labels, in the desired orientation:
 
 ---
 
-Building Plots
-==============
+## Building Plots
 
 A legend to decipher the color and shape of the points:
 
-    > legend(x=75, y=7, 
+    > legend(x=75, y=7,
     +  c("Male, AIDS", "Female, AIDS", "Male, no AIDS", "Female, no AIDS"),
     +  col=c("darkseagreen4", "red", "darkseagreen4", "red"),
     +  pch=c(1,1,3,3), bty="n")
@@ -351,12 +326,11 @@ A legend to decipher the color and shape of the points:
 
 ---
 
-Graphics Devices
-================
+## Graphics Devices
 
 Rather than writing plots to the screen, as we have done, it is
 straightforward to instead write them directly to a file, where they can
-be imported into other documents, or posted online. 
+be imported into other documents, or posted online.
 
 There are over a dozen graphics devices to which plots may be rendered. Important ones include:
 
@@ -366,7 +340,7 @@ There are over a dozen graphics devices to which plots may be rendered. Importan
 * `png`: Lossless compressed format; best for use with HTML or Markdown.
 * `jpeg`: Lossy compressed format; only use for images.
 
-`dev.off` shuts down the specified device, and makes the next open device  current. 
+`dev.off` shuts down the specified device, and makes the next open device  current.
 
     !r
     > pdf(file="sample_plot.pdf", width=4, height=3)
@@ -378,8 +352,7 @@ the pdf file. This can be overridden with `onefile=FALSE`.
 
 ---
 
-Multiple Plots
-==============
+## Multiple Plots
 
 Using the `mfrow` parameter, we can create multiple plots on the same canvas.
 
@@ -387,25 +360,23 @@ Using the `mfrow` parameter, we can create multiple plots on the same canvas.
     > par(mfrow=c(1,2))
     > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin")
     > plot(haart$weight, haart$cd4baseline, xlab="Weight", ylab="CD4 Baseline")
-    
+
 ![mfrow](images/mfrow.png)
 
 ---
 
-Trellis Plots
-=============
+## Trellis Plots
 
 Trellis plots display multiple variables as a series of
 plots, each of which is two dimensional and conditions on particular values of
-the third variable. Trellis plots are provided by the recommended R package `lattice`. 
+the third variable. Trellis plots are provided by the recommended R package `lattice`.
 
     !r
     > densityplot(~ weight | male, data=haart)
-    
+
 ![Densities of weight by sex](images/weight_by_sex.png)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Often we wish to express more than two dimensions of data
 simultaneously. While 3-dimensional plots are often available, they tend
@@ -414,8 +385,7 @@ interpreting them.
 
 ---
 
-Trellis Plots
-=============
+## Trellis Plots
 
 The labeling of the panels is wrong, because by default it uses the name of the
 variable as the label, with a dark orange bar indicating the value of the
@@ -430,8 +400,7 @@ variable.
 
 ---
 
-Formulae
-========
+## Formulae
 
 The `formula` class is a structure that represents a relationship between sets of variables in R. Formulae are denoted by the tilde (`~`) operator:
 
@@ -447,7 +416,7 @@ The `formula` class is a structure that represents a relationship between sets o
     y ~ x1 * x2
     > y ~ sin(x1) + x2^2
     y ~ sin(x1) + x2^2
-    
+
 Formulae are used throughout R to specify models, and in `lattice` to express conditioning statements.
 
 In `lattice`, conditioning variables are *factors*.
@@ -456,25 +425,23 @@ If no data frame is passed to the function with the formula, the function looks 
 
 ---
 
-`lattice` Notation
-==================
+## `lattice` Notation
 
 Our example `densityplot` used a formula to express the appropriate quantities for plotting:
 
     !r
     densityplot(~ weight | male_factor, data=haart)
-    
+
 Here, there is no response variable (left side of tilde), but we indicate that we
 would like to plot the distribution of weight, conditioning on the variable
-`male_factor`. 
+`male_factor`.
 
 Note that you can specify the data frame as an additional `data`
 argument, so that you do not have to index individual variables.
 
 ---
 
-Lattice Plotting
-================
+## Lattice Plotting
 
 Base graphics plot functions as side effects, directly to the graphics device. Lattice graphics functions return objects of type `trellis`:
 
@@ -485,7 +452,7 @@ Base graphics plot functions as side effects, directly to the graphics device. L
     > str(dp)
     List of 45
      $ formula          :Class 'formula' length 2 ~weight | male_factor
-      .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv> 
+      .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv>
      $ as.table         : logi FALSE
      $ aspect.fill      : logi TRUE
      $ legend           : NULL
@@ -495,16 +462,15 @@ Base graphics plot functions as side effects, directly to the graphics device. L
      $ skip             : logi FALSE
      $ strip            : chr "strip.default"
      $ strip.left       : logi FALSE
-     $ xscale.components:function (lim, packet.number = 0, packet.list = NULL, top = TRUE, ...)  
-     $ yscale.components:function (lim, packet.number = 0, packet.list = NULL, right = TRUE, ...)  
+     $ xscale.components:function (lim, packet.number = 0, packet.list = NULL, top = TRUE, ...)
+     $ yscale.components:function (lim, packet.number = 0, packet.list = NULL, right = TRUE, ...)
      ...
-     
+
 There is a `print` method that plots the object to a graphics device.
-     
+
 ---
 
-Box-and-Whisker Plot
-====================
+## Box-and-Whisker Plot
 
 We can display the same data as a box-and-whisker plot,
 using the `bwplot` function, with similar syntax:
@@ -513,17 +479,15 @@ using the `bwplot` function, with similar syntax:
 
 ![Box-and-whisker plot](images/bwplot.png)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Notice, however, that this is not an optimal layout of the panels; they
 are compressed horizontally and it is not easy to compare them
-side-by-side. 
+side-by-side.
 
 ---
 
-Box-and-Whisker Plot
-====================
+## Box-and-Whisker Plot
 
 It would be better displayed row-wise rather than
 column-wise. We can change this using the `layout` optional argument:
@@ -535,8 +499,7 @@ column-wise. We can change this using the `layout` optional argument:
 
 ---
 
-`histogram`
-===========
+## `histogram`
 
 It can be easier to visualize the difference between the two distributions with
 a histogram:
@@ -547,8 +510,7 @@ a histogram:
 
 ---
 
-`xyplot`
-========
+## `xyplot`
 
 We can also create paneled scatterplots of the relationship between two
 variables of interest, conditioned on a third, using `xyplot`:
@@ -559,8 +521,7 @@ variables of interest, conditioned on a third, using `xyplot`:
 
 ---
 
-Panel Functions
-===============
+## Panel Functions
 
 Suppose we want to add a linear regression line through each panel's scatterplot.
 This requires using a `panel` function, which controls the appearance of the
@@ -583,15 +544,13 @@ passing the appropriate subset of data in each case.
 
 ---
 
-Customizing Lattice Panels
-==========================
+## Customizing Lattice Panels
 
 ![xyplot with panel function](images/xyplot_panel.png)
 
 ---
 
-Conditioning on Continuous Variables
-====================================
+## Conditioning on Continuous Variables
 
 We may wish to condition on continuous variables, but it does not make sense to have a panel for each value of a variable that is not a factor. One alternative is to *bin* the continuous variable into discrete categories for different ranges of that variable.
 
@@ -613,30 +572,27 @@ For example, if we are interested in visualizing how the distribution of `weight
 
 ---
 
-Conditioning on Continuous Variables
-====================================
+## Conditioning on Continuous Variables
 
     !r
     > histogram(~weight|hb_cut, data=haart)
-    
+
 ![shingles](images/shingles.png)
 
 ---
 
-Conditioning on Continuous Variables
-====================================
+## Conditioning on Continuous Variables
 
 It can be easier to see trends if we optimize the layout:
 
     !r
     > histogram(~weight|hb_cut, data=haart, layout=c(1,4))
-    
+
 ![panel layout](images/panel_layout.png)
 
 ---
 
-Plotting Interactions
-=====================
+## Plotting Interactions
 
 We can condition on two or more variables simultaneously by creating an interaction term as the conditioning variable:
 
@@ -646,27 +602,24 @@ We can condition on two or more variables simultaneously by creating an interact
 
 ![interaction plot](images/interaction_plot.png)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Demonstrate adding panel function for regression line
 
 ---
 
-Pairwise Scatterplot
-====================
+## Pairwise Scatterplot
 
 The `splom` function generates a scatterplot matrix of a subset of a data frame:
 
     !r
     > splom(~haart[c("age", "weight", "cd4baseline", "hemoglobin", "male_factor")])
-    
+
 ![splom](images/splom.png)
 
 ---
 
-Typesetting Math in R Graphics
-==============================
+## Typesetting Math in R Graphics
 
 R allows for the annotation of plots using LaTeX-like math expressions. Generally, any functions that produce axis labels, titles, legends or text annotation will accept math symbols as arguments.
 
@@ -677,16 +630,27 @@ Text containing math should be wrapped in the `expression` function.
     > y <- sin(x)
     > plot(x, y, type = "l", xaxt = "n",
     +   main = expression(paste(plain(sin) * phi)),
-    +   ylab = expression("sin" * phi), 
+    +   ylab = expression("sin" * phi),
     +   xlab = expression(paste("Phase Angle ", phi)))
     > axis(1, at = c(-pi, -pi/2, 0, pi/2, pi),
     +   labels = expression(-pi, -pi/2, 0, pi/2, pi))
     > text(-1,1,substitute(bar(x)==k, list(k=mean(x))))
     > text(-1,0.8,substitute(bar(y)==k, list(k=mean(y))))
-    
+
 ---
 
-Typesetting Math in R Graphics
-==============================
+## Typesetting Math in R Graphics
 
 ![plotmath](images/plotmath.png)
+
+---
+
+## Exercise: Nashville precipitation
+
+Load the `nashville_precip.txt` data from the `datasets` directory, and create a plot of the total annual precipitation in Nashville. Augment your plot as follows:
+
+* Create an x-axis with labels every 5 years
+* Add a horizontal dotted line for the grand mean
+* Add a label (and arrow?) for the average line
+* Add meaningful labels to the axes
+
