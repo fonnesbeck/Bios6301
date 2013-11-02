@@ -345,7 +345,7 @@ There are over a dozen graphics devices to which plots may be rendered. Importan
     !r
     > pdf(file="sample_plot.pdf", width=4, height=3)
     > plot(haart$weight, haart$hemoglobin, xlab="Weight", ylab="Hemoglobin")
-    > def.off()
+    > dev.off()
 
 If we create another plot before closing the file, it will add another page to
 the pdf file. This can be overridden with `onefile=FALSE`.

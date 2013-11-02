@@ -254,9 +254,8 @@ The test is generally done at one and five minutes after birth, and may be repea
 
 ---
 
-## Dealing with Overstrike
+## What's wrong with this plot?
 
-What's wrong with this plot?
 
 ![Basic scatterplot](images/basic_qplot.png)
 
@@ -325,7 +324,7 @@ However, the plot object `p` cannot be *displayed* until we add a layer.
 Let's re-create the simple scatterplot of gestational age and birthweight that we saw with `qplot`:
 
     !r
-    > p + geom_point()
+    > p <- p + geom_point()
 
 There is an entire suite of `geom_` functions for adding layers to an existing plot object:
 
@@ -334,7 +333,7 @@ There is an entire suite of `geom_` functions for adding layers to an existing p
 * `geom_boxplot`:	Box and whiskers plot.
 * `geom_contour`:	Display contours of a 3d surface in 2d.
 * `geom_density`:	Display a smooth density estimate.
-* `geom_hex`:	Hexagon bining.
+* `geom_hex`:	Hexagon binning.
 * many, many more
 
 ---
