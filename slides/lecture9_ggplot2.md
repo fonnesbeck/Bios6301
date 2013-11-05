@@ -49,13 +49,7 @@ These components are independent!
     install.packages("ggplot2")
     library(ggplot2)
 
-    install.packages("Hmisc")
-    library(Hmisc)
-
 There is a set of dependencies, each of which should get installed alongside `ggplot2`.
-
-Installing and loading `Hmisc` will allow us to work with labelled data frames.
-
 
 ---
 
@@ -66,7 +60,9 @@ Data on 671 infants with very low (<1600 grams) birth weight from 1981-87 were c
 Of interest is the relationship between the outcome intra-ventricular hemorrhage and the predictors birth weight, gestational age, presence of pneumothorax, mode of delivery, single vs. multiple birth, and whether the birth occurred at Duke or at another hospital with later transfer to Duke.
 
     !r
-    > load(url("http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/vlbw.sav"))
+    > library(RCurl)
+    > url <- getURL("https://raw.github.com/fonnesbeck/Bios366/master/data/vlbw.csv")
+    > vlbw <- read.csv(text=url, row.names=1)
     > ls()
     [1] "jpeg" "pdf"  "png"  "vlbw"
     > head(vlbw, 3)
@@ -481,7 +477,7 @@ By combining geoms and stats, you can easily create new types of graphs.
 ## Geoms and Stats
 
     !r
-    > g <- ggplot(vlbw, aes(bwt, pltct))
+    > g <- ggplot(vlbw, aes(x=bwt, y=pltct))
     > g + stat_density2d(aes(fill=..density..), binwidth=50, geom='tile',
         contour=F) + scale_fill_gradient(low = "blue", high = "red")
 
@@ -531,8 +527,8 @@ The `stat_summary` function provides a means for summarizing response data, cond
 ## Displaying Uncertainty
 
     !r
-    > ggplot(vlbw, aes(apg1, bwt)) + geom_point()
-        + stat_summary(fun.data = "mean_sdl", geom=c("errorbar"), color="red")
+    > ggplot(vlbw, aes(apg1, bwt)) + geom_point() +
+        stat_summary(fun.data = "mean_sdl", geom=c("errorbar"), color="red")
 
 ![stat_summary geom smooth](images/stat_summary_errorbar.png)
 
@@ -561,8 +557,8 @@ Or, you may write custom functions to provide what you need:
 ## Displaying Uncertainty
 
     !r
-    > ggplot(vlbw, aes(apg1, bwt)) + geom_point()
-        + stat_summary(fun.data = "mean_sdl", geom=c("smooth"))
+    > ggplot(vlbw, aes(apg1, bwt)) + geom_point() +
+        stat_summary(fun.data = "mean_sdl", geom=c("smooth"))
 
 ![stat_summary geom smooth](images/stat_summary_smooth.png)
 
@@ -571,8 +567,8 @@ Or, you may write custom functions to provide what you need:
 ## Displaying Uncertainty
 
     !r
-    > ggplot(vlbw, aes(apg1, bwt)) + geom_point()
-        + stat_summary(fun.data = "iqr", geom=c("ribbon"), alpha=0.4)
+    > ggplot(vlbw, aes(apg1, bwt)) + geom_point() +
+        stat_summary(fun.data = "iqr", geom=c("ribbon"), alpha=0.4)
 
 ![stat_summary iqr](images/stat_summary_iqr.png)
 
@@ -581,8 +577,8 @@ Or, you may write custom functions to provide what you need:
 ## Displaying Uncertainty
 
     !r
-    > ggplot(vlbw, aes(factor(apg1), bwt)) + geom_jitter(alpha=0.5)
-        + stat_summary(fun.data = "median_hilow", geom="crossbar")
+    > ggplot(vlbw, aes(factor(apg1), bwt)) + geom_jitter(alpha=0.5) +
+        stat_summary(fun.data = "median_hilow", geom="crossbar")
 
 ![stat_summary hilow](images/stat_summary_hilow.png)
 
@@ -712,6 +708,15 @@ The commonest color space is **RGB**.
 
 ---
 
+## HCL Color Space
+
+Constant hue of 260 (blue), allowing chroma and luminance to vary.
+
+![HCL Blue](http://f.cl.ly/items/0o2E0c3v2j0f233j1i2x/hcl.png)
+
+---
+
+
 ## Default Color Scales
 
 Discrete
@@ -736,9 +741,9 @@ Alternate color scales are available in `RColorBrewer` package.
 ## Default Color Scales
 
     !r
-    > g <- ggplot(vlbw, aes(bwt, pltct))
-    > g + stat_density2d(aes(fill=..density..), binwidth=50, geom='tile', contour=F)
-        + scale_fill_gradientn(colours=topo.colors(7))
+    > g <- ggplot(vlbw, aes(x=bwt, y=pltct))
+    > g + stat_density2d(aes(fill=..density..), binwidth=50, geom='tile', contour=F) +
+        scale_fill_gradientn(colours=topo.colors(7))
 
 ![Topo colors](images/ggplot_topo_colors.png)
 
@@ -747,18 +752,22 @@ Alternate color scales are available in `RColorBrewer` package.
 ## RColorBrewer
 
     !r
-    library(RColorBrewer)
-    display.brewer.all()
+    > library(RColorBrewer)
+    > display.brewer.all()
 
 ![RColorBrewer](images/rcolorbrewer.png)
+
+## Presenter Notes
+
+The packages provides palettes for drawing nice maps shaded according to a variable.
 
 ---
 
 ## RColorBrewer
 
     !r
-    > g + stat_density2d(aes(fill=..density..), binwidth=50, geom='tile', contour=F)
-        + scale_fill_gradientn(colours=brewer.pal(7,"Greens"))
+    > g + stat_density2d(aes(fill=..density..), binwidth=50, geom='tile', contour=F) +
+        scale_fill_gradientn(colours=brewer.pal(7,"Greens"))
 
 ![RColorBrewer greens](images/colorbrewer_greens.png)
 
