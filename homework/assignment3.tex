@@ -1,0 +1,132 @@
+\documentclass[]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \usepackage{fontspec}
+  \ifxetex
+    \usepackage{xltxtra,xunicode}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={},
+            pdftitle={},
+            colorlinks=true,
+            urlcolor=blue,
+            linkcolor=magenta,
+            pdfborder={0 0 0}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{0}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Bios 301: Assignment 3}
+
+\emph{Due Thursday, 21 November, 12:00 PM}
+
+50 points total.
+
+Submit a single knitr (either \texttt{.rnw} or \texttt{.rmd}) file,
+along with a valid PDF output file. Inside the file, clearly indicate
+which parts of your responses go with which problems (you may use the
+original homework document as a template). Raw R code/output or word
+processor files are not acceptable.
+
+\subsubsection{Question 1}
+
+\textbf{20 points}
+
+Code a function that does golden section search, and use this function
+to find all of the local maxima on the following function:
+
+\[
+f(x) = \left\{\begin{array}{lr}0 & \text{if } x=0 \\
+|x| \log\left(\frac{|x|}{2}\right)e^{-|x|} & \text{otherwise}
+\end{array}\right.\]
+
+on the interval [-10, 10].
+
+To get an idea of what the function looks like, it might be helpful to
+plot it.
+
+\subsubsection{Question 2}
+
+\textbf{10 points}
+
+Obtain the code for using Newton's Method to estimate logistic
+regression parameters (\texttt{logtistic.r}) and modify it to predict
+\texttt{death} from \texttt{weight}, \texttt{hemoglobin} and
+\texttt{cd4baseline} in the HAART dataset. Use complete cases only.
+Report the estimates for each parameter, including the intercept.
+
+\subsubsection{Question 3}
+
+\textbf{20 points}
+
+Consider the following very simple genetic model (\emph{very} simple --
+don't worry if you're not a geneticist!). A population consists of equal
+numbers of two sexes: male and female. At each generation men and women
+are paired at random, and each pair produces exactly two offspring, one
+male and one female. We are interested in the distribution of height
+from one generation to the next. Suppose that the height of both
+children is just the average of the height of their parents, how will
+the distribution of height change across generations?
+
+Represent the heights of the current generation as a dataframe with two
+variables, m and f, for the two sexes. The command rnorm(100, 160, 20)
+will generate a vector of length 100, according to the normal
+distribution with mean 160 and standard deviation 20 (see Section
+16.5.1). We use it to randomly generate the population at generation 1:
+
+\begin{verbatim}
+pop <- data.frame(m = rnorm(100, 160, 20), f = rnorm(100, 160, 20))
+\end{verbatim}
+
+The command \texttt{sample(x, size = length(x))} will return a random
+sample of size \texttt{size} taken from the vector \texttt{x}. The
+following function takes the data frame \texttt{pop} and randomly
+permutes the ordering of the men. Men and women are then paired
+according to rows, and heights for the next generation are calculated by
+taking the mean of each row. The function returns a data frame with the
+same structure, giving the heights of the next generation.
+
+\begin{verbatim}
+next_gen <- function(pop) {
+    pop$m <- sample(pop$m)
+    pop$m <- apply(pop, 1, mean)
+    pop$f <- pop$m
+    return(pop)
+\end{verbatim}
+
+\}
+
+Use the function \texttt{next\_gen} to generate nine generations, then
+use the function \texttt{histogram} from the \texttt{lattice} to plot
+the distribution of male heights in each generation. The phenomenon you
+see is called regression to the mean.
+
+Hint: construct a data frame with variables height and generation, where
+each row represents a single man.
+
+\end{document}
