@@ -40,7 +40,7 @@ This schedule is *tentative* and subject to change at any time.
     - [Plotting with `ggplot2`](https://dl.dropbox.com/u/233041/Bios301/lecture9_ggplot2.html)
     - [Scientific graphics](https://dl.dropbox.com/u/233041/Bios301/lecture9_viz.html)
 * [Estimation](https://dl.dropbox.com/u/233041/Bios301/lecture10_estimation.html)
-    (Chapter 17)
+    ([Chapter 17 of Jones et al.](https://dl.dropboxusercontent.com/u/233041/Bios301/Jones%202009%20%28Ch.17%29.pdf))
 * [Object-oriented programming](https://dl.dropbox.com/u/233041/Bios301/lecture10_oop.html) (Chapter 9)
 * [String manipulation and regular expressions](https://dl.dropbox.com/u/233041/Bios301/lecture11_regex.html) (Chapters 11)
 * [Performance computing](https://dl.dropbox.com/u/233041/Bios301/lecture11_performance.html) (Chapter 14)
