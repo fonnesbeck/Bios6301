@@ -1,10 +1,8 @@
-Object-Oriented Programming
-===========================
+# Object-Oriented Programming
 
 ---
 
-Programming Paradigms
-=====================
+## Programming Paradigms
 
 There are a handful of prevalent programming styles, or paradigms, in modern computing.
 
@@ -18,12 +16,11 @@ R can be used to support any of these paradigms.
 
 ---
 
-Object-Oriented Programming
-===========================
+## Object-Oriented Programming
 
-Object-oriented programming (OOP) for short can simplify many problems. 
+Object-oriented programming (OOP) for short can simplify many problems.
 
-It is based on defining **classes**, and creating instances of those classes called **objects**. A class is a structure that keeps data, functions and other attributes that are related to one another in some way together as a portable unit. 
+It is based on defining **classes**, and creating instances of those classes called **objects**. A class is a structure that keeps data, functions and other attributes that are related to one another in some way together as a portable unit.
 
 OOP tends to result in clearer, more reusable code.
 
@@ -31,8 +28,7 @@ Though very different from the familiar OOP languages like C++, Java, and Python
 
 ---
 
-OOP in R
-========
+## OOP in R
 
 The following themes are key to R:
 
@@ -41,33 +37,31 @@ The following themes are key to R:
 * R classes are **polymorphic**, which means that the same function call leads to different operations for objects of different classes. Polymorphism promotes reusability.
 * R allows **inheritance**, which extends a general class to a more specialized class.
 
-R supports OOP through so-called old-style (S3) and new-style (S4) classes. 
+R supports OOP through so-called old-style (S3) and new-style (S4) classes.
 
 It is not essential to apply the principles of OOP when writing R code, but doing so can have advantages, especially when writing code that is to be used by other people.
 
 ---
 
-S3 Classes
-==========
+## S3 Classes
 
-The original R structure for classes, S3 is still the dominant class paradigm in R use today. 
+The original R structure for classes, S3 is still the dominant class paradigm in R use today.
 
 Most of R’s own built-in classes are of the S3 type.
 
-An S3 class consists of a list, with a class name attribute and **dispatch** capability added. 
+An S3 class consists of a list, with a class name attribute and **dispatch** capability added.
 
-S3's **generic functions** are a means for polymorphism in R, in the sense that the same function can lead to different operations for different classes. 
+S3's **generic functions** are a means for polymorphism in R, in the sense that the same function can lead to different operations for different classes.
 
 * e.g. you can apply `plot` to many different types of objects, getting a different type of plot for each.
 
 ---
 
-S3 Classes
-==========
+## S3 Classes
 
 When a generic function is called, R will then *dispatch* the call to the proper class method, meaning that it will reroute the call to a function defined for the object’s class.
 
-**The advantage to the user** is that we get a *uniform interface* to different classes. 
+**The advantage to the user** is that we get a *uniform interface* to different classes.
 
 * If a function is new to you, just try running `plot` on the function’s output; it will likely work.
 
@@ -75,8 +69,7 @@ When a generic function is called, R will then *dispatch* the call to the proper
 
 ---
 
-Example: `lm`
-=============
+## Example: `lm`
 
 R's `lm` function runs a linear regression and returns an object of class `lm`:
 
@@ -92,89 +85,85 @@ R's `lm` function runs a linear regression and returns an object of class `lm`:
     lm(formula = y ~ x)
 
     Coefficients:
-    (Intercept)            x  
-           -3.0          3.5  
-    
-Recall that typing the name of an object will print that object. The R interpreter is aware that the object is class `lm` and called `print.lm`. 
+    (Intercept)            x
+           -3.0          3.5
+
+Recall that typing the name of an object will print that object. The R interpreter is aware that the object is class `lm` and called `print.lm`.
 
 ---
-Example: `lm`
-=============
+## Example: `lm`
 
 This is an example of **dispatch**. The call to the generic function `print` was dispatched to the method `print.lm`
 
 The generic function `print` consists solely of a call to `UseMethod`.
 
-    > print 
-    function(x, ...) UseMethod("print") 
-    <environment: namespace:base> 
-    > print.lm 
-    function (x, digits = max(3, getOption("digits") - 3), ...) { 
-        cat("\nCall:\n", deparse(x$call), "\n\n", sep = "") 
-        if (length(coef(x))) { 
-            cat("Coefficients:\n") 
-            print.default(format(coef(x), digits = digits), 
-              print.gap = 2, quote = FALSE) 
-        } 
-        else cat("No coefficients\n") 
-        cat("\n") 
-        invisible(x) 
-    } 
+    > print
+    function(x, ...) UseMethod("print")
+    <environment: namespace:base>
+    > print.lm
+    function (x, digits = max(3, getOption("digits") - 3), ...) {
+        cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
+        if (length(coef(x))) {
+            cat("Coefficients:\n")
+            print.default(format(coef(x), digits = digits),
+              print.gap = 2, quote = FALSE)
+        }
+        else cat("No coefficients\n")
+        cat("\n")
+        invisible(x)
+    }
     <environment: namespace:stats>
-    
-What gets printed depends on *context*. 
+
+What gets printed depends on *context*.
 
 ---
 
-Example: `lm`
-=============
+## Example: `lm`
 
 Notice what happens when we print `lmout` with its class attribute removed:
 
     !r
     > unclass(lmout)
     $coefficients
-    (Intercept)           x 
-           -3.0         3.5 
+    (Intercept)           x
+           -3.0         3.5
 
     $residuals
-       1    2    3 
-     0.5 -1.0  0.5 
+       1    2    3
+     0.5 -1.0  0.5
 
     $effects
-    (Intercept)           x             
-      -6.928203   -4.949747    1.224745 
+    (Intercept)           x
+      -6.928203   -4.949747    1.224745
 
     $rank
     [1] 2
 
     $fitted.values
-      1   2   3 
-    0.5 4.0 7.5 
-    
+      1   2   3
+    0.5 4.0 7.5
+
 ---
 
-Generic Methods
-===============
+## Generic Methods
 
 The function `methods` reveals all implementations of a generic method:
 
     !r
     > methods(print)
-      [1] print.acf*                                  print.anova                                
-      [3] print.aov*                                  print.aovlist*                             
-      [5] print.ar*                                   print.Arima*                               
-      [7] print.arima0*                               print.AsIs  
+      [1] print.acf*                                  print.anova
+      [3] print.aov*                                  print.aovlist*
+      [5] print.ar*                                   print.Arima*
+      [7] print.arima0*                               print.AsIs
       ...
-      [167] print.warnings                              print.xgettext*                            
-      [169] print.xngettext*                            print.xtabs* 
-      
+      [167] print.warnings                              print.xgettext*
+      [169] print.xngettext*                            print.xtabs*
+
 Asterisks denote *non-visible* functions, meaning ones that are not in the default namespaces.
 
 ---
 
-Example: `aspell`
-=================
+## Example: `aspell`
 
 The `aspell` function itself does a spellcheck on the file specified in its argument.
 
@@ -189,20 +178,19 @@ The `aspell` function itself does a spellcheck on the file specified in its argu
     aov
       ~/Bios301/slides/lecture10_oop.md:165:17
     ...
-    
+
 The `aspell` function returns an object of class `aspell`, which has its own generic print function, `print.aspell`. However:
 
     !r
     > aspout <- aspell("~/Bios301/slides/lecture10_oop.md")
     > print.aspell(aspout)
     Error: could not find function "print.aspell"
-    
+
 This is because `print.aspell` is a non-visible function.
 
 ---
 
-Example: `aspell`
-=================
+## Example: `aspell`
 
 You can access non-visible functions via `getAnywhere`.
 
@@ -214,11 +202,11 @@ You can access non-visible functions via `getAnywhere`.
       namespace:utils
     with value
 
-    function (x, sort = TRUE, verbose = FALSE, indent = 2L, ...) 
+    function (x, sort = TRUE, verbose = FALSE, indent = 2L, ...)
     {
-        if (!(nr <- nrow(x))) 
+        if (!(nr <- nrow(x)))
     ...
-    
+
 `print.aspell` is in the `utils` namespace, and we can execute it by adding a qualifier:
 
     !r
@@ -230,15 +218,14 @@ You can access non-visible functions via `getAnywhere`.
     anova
       ~/Bios301/slides/lecture10_oop.md:164:61
     ...
-    
+
 ---
 
-Writing S3 Classes
-==================
+## Writing S3 Classes
 
-A class instance is created by forming a list, with the components of the list being the member variables of the class. 
+A class instance is created by forming a list, with the components of the list being the member variables of the class.
 
-The `class` attribute is set by hand by using the `attr` or `class` function, and then  implementations of generic functions are defined as needed. 
+The `class` attribute is set by hand by using the `attr` or `class` function, and then  implementations of generic functions are defined as needed.
 
 e.g the `lm` function:
 
@@ -256,8 +243,7 @@ e.g the `lm` function:
 
 ---
 
-Writing S3 Classes
-==================
+## Writing S3 Classes
 
 Take a simple example of creating an `employee` class:
 
@@ -267,30 +253,29 @@ Take a simple example of creating an `employee` class:
     > attributes(j)
     $names
     [1] "name" "salary" "union"
-    
+
     $class
     [1] "employee"
-    
+
 If we call the generic `print` function on `j`:
 
     !r
     >j
     $name
     [1] "Joe"
-    
+
     $salary
     [1] 55000
-    
+
     $union
     [1] TRUE
-    
+
     attr(,"class")
     [1] "employee"
 
 ---
 
-Writing S3 Classes
-==================
+## Writing S3 Classes
 
 Let's implement the generic `print` function for the `employee` class:
 
@@ -300,54 +285,51 @@ Let's implement the generic `print` function for the `employee` class:
        cat("salary: $",wrkr$salary,"\n", sep='')
        cat("union member:",wrkr$union,"\n")
     }
-    
-Any call to `print` on an object of class `employee` should now be dispatched to `print.employee`. We can check that formally: 
+
+Any call to `print` on an object of class `employee` should now be dispatched to `print.employee`. We can check that formally:
 
     !r
     > methods(,"employee")
     [1] print.employee
     > j
     name: Joe
-    salary: $55000 
+    salary: $55000
     union member: TRUE
 
 ---
 
-Inheritance
-===========
+## Inheritance
 
 The idea of **inheritance** is to form new classes as specialized versions of old ones. For example, we could subclass `employee` form a new class devoted to hourly employees, `hourly_employee`:
 
     !r
     k <- list(name="Kate", salary=68000, union=F, hrs_this_month=2)
     class(k) <- c("hourly_employee","employee")
-    
-`hourly_employee` has one extra attribute: `hrs_this_month`. 
 
-The class assignment consists of two character strings, representing the new class and the old class. 
+`hourly_employee` has one extra attribute: `hrs_this_month`.
 
-`hourly_employee` inherits the methods of `employee`. 
+The class assignment consists of two character strings, representing the new class and the old class.
+
+`hourly_employee` inherits the methods of `employee`.
 
     !r
     > k
     name: Kate
     salary: $68000
     union member: FALSE
-    
-Presenter Notes
-===============
 
-typing k resulted in the call print(k). 
-that caused UseMethod() to search for a print method 
-tries the first of k’s two class names, "hrlyemployee". 
+## Presenter Notes
+
+typing k resulted in the call print(k).
+that caused UseMethod() to search for a print method
+tries the first of k’s two class names, "hrlyemployee".
 tries the other class name, "employee", and found print.employee().
 
 ---
 
-Example: Upper-triangular Matrices
-==================================
+## Example: Upper-triangular Matrices
 
-A less trivial example involves writing an R class to store upper-triangular matrices. 
+A less trivial example involves writing an R class to store upper-triangular matrices.
 
 $$\left({
 \begin{array}{c}
@@ -362,18 +344,17 @@ Our motivation here is to save storage space (though at the expense of a little 
 
 ---
 
-Example: Upper-triangular Matrices
-==================================
+## Example: Upper-triangular Matrices
 
 Key components:
 
-`mat`: stores the diagonal and above-diagonal elements of the matrix. 
+`mat`: stores the diagonal and above-diagonal elements of the matrix.
 
 - e.g. previous example consists of the vector (1,5,6,12,9,2)
 
-`ix`: indices to show where in `mat` the various columns begin. 
+`ix`: indices to show where in `mat` the various columns begin.
 
-- e.g. for the preceding case, `ix <- c(1,2,4)`, meaning that column 1 begins at mat[1], column 2 begins at mat[2], and column 3 begins at mat[4]. 
+- e.g. for the preceding case, `ix <- c(1,2,4)`, meaning that column 1 begins at mat[1], column 2 begins at mat[2], and column 3 begins at mat[4].
 
 $$\left({
 \begin{array}{c}
@@ -386,8 +367,7 @@ $$\left({
 
 ---
 
-Example: Upper-triangular Matrices
-==================================
+## Example: Upper-triangular Matrices
 
 First, create an object of class `ut` from the full matrix `inmat`:
 
@@ -405,9 +385,9 @@ First, create an object of class `ut` from the full matrix `inmat`:
         }
         return(rtrn)
     }
-    
+
 This function is a **constructor**, which is a function whose job it is to create an instance of the given class, eventually returning that instance.
-    
+
 We need a utility function to return the sum from 1 to i:
 
     !r
@@ -416,8 +396,7 @@ We need a utility function to return the sum from 1 to i:
 
 ---
 
-Example: Upper-triangular Matrices
-==================================
+## Example: Upper-triangular Matrices
 
 Functions that are tied to classes are called **methods**.
 
@@ -441,26 +420,25 @@ Implementing the generic print:
 
     !r
     print.ut <- function(ut_mat) print(expand_ut(ut_mat))
-    
+
 ---
 
-Example: Upper-triangular Matrices
-==================================
+## Example: Upper-triangular Matrices
 
 Users will probably want to be able to multiply one `ut` matrix by another, returning another `ut` instance. We can implement this as a binary operation:
 
     !r
     "%mut%" <- function(ut_mat1,ut_mat2) {
         # Dimension of matrix
-        n <- length(ut_mat1$ix) 
+        n <- length(ut_mat1$ix)
         # Pre-allocate product matrix
         ut_prod <- ut(matrix(0,nrow=n,ncol=n))
         # Compute col i of product
-        for (i in 1:n) { 
+        for (i in 1:n) {
             start_bi <- ut_mat2$ix[i]
             prod_coli <- rep(0,i)
             # Find bi[j]*a[j], add to prodcoli
-            for (j in 1:i) { 
+            for (j in 1:i) {
                 start_aj <- ut_mat1$ix[j]
                 bi_element <- ut_mat2$mat[start_bi+j-1]
                 prod_coli[1:j] <- prod_coli[1:j] +
@@ -472,16 +450,14 @@ Users will probably want to be able to multiply one `ut` matrix by another, retu
         }
         return(ut_prod)
     }
-    
-Presenter Notes
-===============
+
+## Presenter Notes
 
 we avoid multiplying by zeros simply by not adding terms to sums when the terms include a 0 factor
-    
+
 ---
 
-Example: Upper-triangular Matrices
-==================================
+## Example: Upper-triangular Matrices
 
     !r
     > (utm1 <- ut(rbind(1:2,c(0,2))))
@@ -512,14 +488,13 @@ Example: Upper-triangular Matrices
     [1,]    4    5    9
     [2,]    0    1    4
     [3,]    0    0    5
-    
+
 
 ---
 
-Example: polynomial Regression
-=============================
+## Example: polynomial Regression
 
-Consider a univariate regression. One can get better model fits by including polynomials of higher degrees. 
+Consider a univariate regression. One can get better model fits by including polynomials of higher degrees.
 
 $$f(x|\mathbf{\theta}) = \theta_0 + \theta_1 x_i + \theta_2 x_i^2 + \ldots + \theta_k x_i^k$$
 
@@ -530,8 +505,7 @@ In this example, we will create a class `polyreg` for doing polynomial regressio
 
 ---
 
-Cross-validation
-================
+## Cross-validation
 
 To identify when additional parameters begin to degrade a model's predictive ability, we fit a model with part of the data, then try to predict the remainder. One criterion for the best model is the one with the lowest predictive error.
 
@@ -544,8 +518,7 @@ Here, we will use **leave-one-out cross-validation**
 
 ---
 
-Example: Polynomial Regression
-==============================
+## Example: Polynomial Regression
 
 We will create a function to instantiate an S3 class `polyreg` that performs polynomial regression for one predictor variable.
 
@@ -558,7 +531,7 @@ Fits all polynomials up to degree `maxdeg`.
         # List to hold class attributes
         lmout <- list()
         # create a new class
-        class(lmout) <- "polyreg" 
+        class(lmout) <- "polyreg"
         for (i in 1:maxdeg) {
             lmo <- lm(y ~ pwrs[,1:i])
             # Cross-validated predictions
@@ -569,14 +542,13 @@ Fits all polynomials up to degree `maxdeg`.
         lmout$y <- y
         return(lmout)
       }
-      
+
 ---
 
-Example: Polynomial Regression
-==============================
+## Example: Polynomial Regression
 
 The generic `print` function for `polyreg` class. Prints a list of the MSPE for each model.
-      
+
     !r
     print.polyreg <- function(fits) {
         maxdeg <- length(fits) - 2
@@ -587,17 +559,16 @@ The generic `print` function for `polyreg` class. Prints a list of the MSPE for 
             fi <- fits[[i]]
             errs <- fits$y - fi$fitted.cvvalues
             # sum of squared prediction errors
-            spe <- crossprod(errs,errs) 
+            spe <- crossprod(errs,errs)
             tbl[i,1] <- spe/n
         }
         cat("mean squared prediction errors, by degree\n")
         print(tbl)
     }
-      
+
 ---
 
-Example: Polynomial Regression
-==============================
+## Example: Polynomial Regression
 
 The `polyreg` class requires a couple of support functions.
 
@@ -613,15 +584,14 @@ First, `powers` calculates sequence of powers of predictor variable:
         }
         return(pw)
     }
-    
+
     > powers(3, 5)
            prod prod prod prod
     [1,] 3    9   27   81  243
-    
+
 ---
 
-Example: Polynomial Regression
-==============================
+## Example: Polynomial Regression
 
 `leave_one_out` performs sequence of regressions on all possible samples of size *n-1*, returning the prediction from each.
 
@@ -640,12 +610,11 @@ The leave-one-out method takes advantage of R’s use of negative indices.
          }
          return(pred_y)
     }
-    
+
 
 ---
 
-Example: Polynomial Regression
-==============================
+## Example: Polynomial Regression
 
     !r
     > n <- 60
@@ -675,8 +644,7 @@ Example: Polynomial Regression
 
 ---
 
-S4 Classes
-==========
+## S4 Classes
 
 The S3 approach to OOP is very informal. Each class characteristic is essentially a convention, and R does little to enforce these conventions. As a result, it is easy to accidentally break S3 classes:
 
@@ -691,8 +659,7 @@ S4 classes provide a formal object-method framework for OOP, in an effort to mak
 
 ---
 
-Writing S4 Classes
-==================
+## Writing S4 Classes
 
 You define an S4 class by calling `setClass`. Re-implementing our earlier example:
 
@@ -714,18 +681,17 @@ The new class can be instantiated using the `new` function:
 
     Slot "union":
     [1] TRUE
-    
+
 ---
 
-Writing S4 Classes
-==================
+## Writing S4 Classes
 
 A unique aspect of S4 classes is how attributes are referenced.
 
     !r
     > joe@salary
     [1] 55000
-    
+
 S4 attributes are called `slots`. They can be assigned values:
 
     !r
@@ -741,29 +707,27 @@ S4 attributes are called `slots`. They can be assigned values:
 
     Slot "union":
     [1] FALSE
-    
+
 ---
 
-Writing S4 Classes
-==================
+## Writing S4 Classes
 
 Note that S4 classes protect against slots being assigned illegal values and against additional slots being added:
 
     !r
     > joe@salary <- TRUE
-    Error in checkSlotAssignment(object, name, value) : 
-      assignment of an object of class “logical” is not valid for slot "salary" in an 
+    Error in checkSlotAssignment(object, name, value) :
+      assignment of an object of class “logical” is not valid for slot "salary" in an
       object of class “employee”; is(value, "numeric") is not TRUE
     > joe@celery <- 100000
-    Error in checkSlotAssignment(object, name, value) : 
+    Error in checkSlotAssignment(object, name, value) :
       "celery" is not a slot in class “employee”
-    
-By contrast, in S3 there would be no error message. S3 classes are just lists, and you are allowed to add a new component at any time. 
+
+By contrast, in S3 there would be no error message. S3 classes are just lists, and you are allowed to add a new component at any time.
 
 ---
 
-Implementing a Generic Function in S4
-=====================================
+## Implementing a Generic Function in S4
 
 To define an implementation of a generic function on an S4 class, use `setMethod`.
 
@@ -777,18 +741,17 @@ In S4, the equivalent of S3's `print` generic is `show`.
              "and", inorout, "in the union", "\n")
        }
     )
-    
-The first argument gives the name of the generic function for which we will define a class-specific method, and the second argument gives the class name.   
+
+The first argument gives the name of the generic function for which we will define a class-specific method, and the second argument gives the class name.
 
     !r
     > show(joe)
-    Joe has a salary of 65000 and is in the union 
+    Joe has a salary of 65000 and is in the union
 
 
 ---
 
-S3 vs S4
-========
+## S3 vs S4
 
 <table border="0" cellspacing="7" cellpadding="5">
     <tr><th>Operation</th><th>S3</th><th>S4</th></tr>
@@ -808,8 +771,7 @@ Google's R style guide:
 
 ---
 
-Object Management
-=================
+## Object Management
 
 There are several functions for managing objects in an interactive R session. These include:
 
@@ -820,8 +782,7 @@ There are several functions for managing objects in an interactive R session. Th
 
 ---
 
-Listing Objects
-===============
+## Listing Objects
 
 The `ls` function lists all objects in the current environment.
 
@@ -832,41 +793,39 @@ The `pattern` argument allows users to filter the objects listed by name.
 
     !r
     > ls()
-     [1] "%mut%"         "dg"            "expand_ut"     "i"             "joe"           "jpeg"         
-     [7] "leave_one_out" "lmo"           "n"             "pdf"           "png"           "polyfit"      
-    [13] "powers"        "print.polyreg" "print.ut"      "sum1toi"       "ut"            "utm1"         
-    [19] "utm2"          "utp"           "x"             "y"            
+     [1] "%mut%"         "dg"            "expand_ut"     "i"             "joe"           "jpeg"
+     [7] "leave_one_out" "lmo"           "n"             "pdf"           "png"           "polyfit"
+    [13] "powers"        "print.polyreg" "print.ut"      "sum1toi"       "ut"            "utm1"
+    [19] "utm2"          "utp"           "x"             "y"
     > ls(pattern='ut')
-    [1] "%mut%"         "expand_ut"     "leave_one_out" "print.ut"      "ut"            "utm1"         
-    [7] "utm2"          "utp" 
-    
+    [1] "%mut%"         "expand_ut"     "leave_one_out" "print.ut"      "ut"            "utm1"
+    [7] "utm2"          "utp"
+
 ---
 
-Removing Objects
-================
+## Removing Objects
 
 To remove objects you no longer need, use `rm`:
 
     > rm(x,y,n,i)
-    
+
 You can use `rm` in conjunction with `ls` to delete objects by pattern:
 
     > rm(list=ls(pattern="ut"))
     > ls()
-     [1] "dg"            "joe"           "jpeg"          "lmo"           "pdf"           "png"          
-     [7] "polyfit"       "powers"        "print.polyreg" "sum1toi" 
+     [1] "dg"            "joe"           "jpeg"          "lmo"           "pdf"           "png"
+     [7] "polyfit"       "powers"        "print.polyreg" "sum1toi"
 
 To delete all objects in the current frame,
 
     !r
     rm(list = ls())
-    
+
 This code assigns all of our objects to list, thus removing everything.
 
 ---
 
-Saving Objects
-==============
+## Saving Objects
 
 Calling `save` on one or more objects will write them to disk for later retrieval by `load`:
 
@@ -878,11 +837,10 @@ Calling `save` on one or more objects will write them to disk for later retrieva
     > load("joe.Rdata")
     > ls(pattern="joe")
     [1] "joe"
-    
+
 ---
 
-Querying Objects
-================
+## Querying Objects
 
 Several functions are available to query the structure of any function.
 
@@ -894,7 +852,7 @@ The `class` function reveals the class of an object:
     > lm_obj <- lm(y~x)
     > class(lm_obj)
     [1] "lm"
-    
+
 The generic `print` implementation for a particular object may hide several attributes:
 
     !r
@@ -904,48 +862,46 @@ The generic `print` implementation for a particular object may hide several attr
     lm(formula = y ~ x)
 
     Coefficients:
-    (Intercept)            x  
-        0.27804      0.07412 
-        
+    (Intercept)            x
+        0.27804      0.07412
+
 ---
 
-Querying Objects
-================
+## Querying Objects
 
 `unclass` returns a copy of its argument with its class attribute removed. It is useful for overriding the generic `print` implementation:
 
     !r
     > unclass(lm_obj)
     $coefficients
-    (Intercept)           x 
-     0.27804032  0.07411601 
+    (Intercept)           x
+     0.27804032  0.07411601
 
     $residuals
-             1          2          3          4          5          6          7          8          9 
-     0.1300593 -2.7578351 -0.6427454  0.1491311  0.4297138  0.8466837  1.3672231 -0.2179880  0.8766061 
-            10 
-    -0.1808485 
+             1          2          3          4          5          6          7          8          9
+     0.1300593 -2.7578351 -0.6427454  0.1491311  0.4297138  0.8466837  1.3672231 -0.2179880  0.8766061
+            10
+    -0.1808485
 
     $effects
-    (Intercept)           x                                                                         
-    -0.91123624 -0.23639639 -1.22305099 -1.19007008 -0.30554788  1.69755644  0.74842812 -0.06236931 
-                        
-     1.13581336 -1.98396992 
+    (Intercept)           x
+    -0.91123624 -0.23639639 -1.22305099 -1.19007008 -0.30554788  1.69755644  0.74842812 -0.06236931
+
+     1.13581336 -1.98396992
 
     $rank
     [1] 2
 
     $fitted.values
-            1         2         3         4         5         6         7         8         9        10 
-    0.3848569 0.3257164 0.2620332 0.1938128 0.2481035 0.3906879 0.2585732 0.3281885 0.3375005 0.1521091 
+            1         2         3         4         5         6         7         8         9        10
+    0.3848569 0.3257164 0.2620332 0.1938128 0.2481035 0.3906879 0.2585732 0.3281885 0.3375005 0.1521091
 
     $assign
     [1] 0 1
-    
+
 ---
 
-Querying Objects
-================
+## Querying Objects
 
 Additional object functions:
 

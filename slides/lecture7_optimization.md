@@ -580,7 +580,7 @@ Here is an implementation of Newton's method in R:
         gradx <- grad(x)
         Hx <- H(x)
         i <- 0
-        while ((max(abs(gradx)) > eps) && (n < max_iter)) {
+        while ((max(abs(gradx)) > eps) && (i < max_iter)) {
             x <- x - solve(Hx, gradx)
             gradx <- grad(x)
             Hx <- H(x)
@@ -598,7 +598,7 @@ Here is an implementation of Newton's method in R:
 Newton's Method
 ===============
 
-![newton](http://cl.ly/S5YB/Screenshot%202012-10-14%20at%2015.09.48.png)
+![newton](http://cl.ly/S5YB/Screenshot%202012-10-14%20at%2015.09.48.png
 
 ---
 
