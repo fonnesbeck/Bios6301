@@ -47,7 +47,7 @@ It is not essential to apply the principles of OOP when writing R code, but doin
 
 The original R structure for classes, S3 is still the dominant class paradigm in R use today.
 
-Most of R’s own built-in classes are of the S3 type.
+Most of R's own built-in classes are of the S3 type.
 
 An S3 class consists of a list, with a class name attribute and **dispatch** capability added.
 
@@ -59,11 +59,11 @@ S3's **generic functions** are a means for polymorphism in R, in the sense that 
 
 ## S3 Classes
 
-When a generic function is called, R will then *dispatch* the call to the proper class method, meaning that it will reroute the call to a function defined for the object’s class.
+When a generic function is called, R will then *dispatch* the call to the proper class method, meaning that it will reroute the call to a function defined for the object's class.
 
 **The advantage to the user** is that we get a *uniform interface* to different classes.
 
-* If a function is new to you, just try running `plot` on the function’s output; it will likely work.
+* If a function is new to you, just try running `plot` on the function's output; it will likely work.
 
 **The advantage to the programmer** is polymorphism allows writing fairly general code, without worrying about what type of object is being manipulated, because the underlying class mechanisms take care of that.
 
@@ -196,7 +196,7 @@ You can access non-visible functions via `getAnywhere`.
 
     !r
     > getAnywhere(print.aspell)
-    A single object matching ‘print.aspell’ was found
+    A single object matching ‘print.aspell' was found
     It was found in the following places
       registered S3 method for print from namespace utils
       namespace:utils
@@ -303,7 +303,7 @@ Any call to `print` on an object of class `employee` should now be dispatched to
 The idea of **inheritance** is to form new classes as specialized versions of old ones. For example, we could subclass `employee` form a new class devoted to hourly employees, `hourly_employee`:
 
     !r
-    k <- list(name="Kate", salary=68000, union=F, hrs_this_month=2)
+    k <- list(name="Kate", salary=NA, union=F, rate=10.50, hrs_this_month=2)
     class(k) <- c("hourly_employee","employee")
 
 `hourly_employee` has one extra attribute: `hrs_this_month`.
@@ -315,14 +315,14 @@ The class assignment consists of two character strings, representing the new cla
     !r
     > k
     name: Kate
-    salary: $68000
+    salary: $NA
     union member: FALSE
 
 ## Presenter Notes
 
 typing k resulted in the call print(k).
 that caused UseMethod() to search for a print method
-tries the first of k’s two class names, "hrlyemployee".
+tries the first of k's two class names, "hrlyemployee".
 tries the other class name, "employee", and found print.employee().
 
 ---
@@ -502,6 +502,11 @@ However, including too many polynomial terms results in *over-fitting*, which re
 
 In this example, we will create a class `polyreg` for doing polynomial regression that assesses the relative fit of different polynomial functions using **cross-validation**.
 
+---
+
+## Polynomial Regression
+
+![polyfit](./images/polyfit.png)
 
 ---
 
@@ -595,7 +600,7 @@ First, `powers` calculates sequence of powers of predictor variable:
 
 `leave_one_out` performs sequence of regressions on all possible samples of size *n-1*, returning the prediction from each.
 
-The leave-one-out method takes advantage of R’s use of negative indices.
+The leave-one-out method takes advantage of R's use of negative indices.
 
     !r
     leave_one_out <- function(y, xmat) {
@@ -717,11 +722,11 @@ Note that S4 classes protect against slots being assigned illegal values and aga
     !r
     > joe@salary <- TRUE
     Error in checkSlotAssignment(object, name, value) :
-      assignment of an object of class “logical” is not valid for slot "salary" in an
-      object of class “employee”; is(value, "numeric") is not TRUE
+      assignment of an object of class "logical" is not valid for slot "salary" in an
+      object of class "employee"; is(value, "numeric") is not TRUE
     > joe@celery <- 100000
     Error in checkSlotAssignment(object, name, value) :
-      "celery" is not a slot in class “employee”
+      "celery" is not a slot in class "employee"
 
 By contrast, in S3 there would be no error message. S3 classes are just lists, and you are allowed to add a new component at any time.
 

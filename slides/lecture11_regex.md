@@ -15,18 +15,18 @@ R includes a range of string-manipulation utilities, including an implementation
 `nchar`
 =======
 
-The call `nchar(x)` finds the length of a string x. 
+The call `nchar(x)` finds the length of a string x.
 
     !r
     > nchar("Markov chain Monte Carlo")
     [1] 24
-    
+
 ---
 
 `paste`
 =======
 
-`paste` concatenates several strings, returning the result in one long string. 
+`paste` concatenates several strings, returning the result in one long string.
 
     !r
     > paste("Markov", "chain", "Monte", "Carlo")
@@ -47,7 +47,7 @@ The call `sprintf` assembles a string from parts in a formatted manner.
 
     !r
     > i <- 8
-    > s <- sprintf("the square of %d is %d",i,i^2) 
+    > s <- sprintf("the square of %d is %d",i,i^2)
     > s
     [1] "the square of 8 is 64"
 
@@ -64,18 +64,18 @@ There are a variety of format options:
     [1] "3.141593E+00"
     > sprintf("%+f", pi)
     [1] "+3.141593"
-    
+
 ---
 
 `substr`
 ========
 
-The call `substr(x,start,stop)` returns the substring in the given character position range `start`:`stop` in the given string `x`. 
+The call `substr(x,start,stop)` returns the substring in the given character position range `start`:`stop` in the given string `x`.
 
     !r
     > substr("biostatistics", 4, 7)
     [1] "stat"
-    
+
 It can also be used to substitute characters:
 
     !r
@@ -83,13 +83,13 @@ It can also be used to substitute characters:
     > substr(x, 12, 16) <- "won't"
     > x
     [1] "The Titans won't win this weekend."
-    
+
 ---
 
 `strsplit`
 ==========
 
-The call `strsplit` splits a string into a list of substrings based on another string (a delimiter): 
+The call `strsplit` splits a string into a list of substrings based on another string (a delimiter):
 
     !r
     > strsplit("6-16-2011",split="-")
@@ -97,7 +97,7 @@ The call `strsplit` splits a string into a list of substrings based on another s
     [1] "6"    "16"   "2011"
     > strsplit("Markov chain Monte Carlo", " ")
     [[1]]
-    [1] "Markov" "chain"  "Monte"  "Carlo" 
+    [1] "Markov" "chain"  "Monte"  "Carlo"
 
 ---
 
@@ -120,18 +120,6 @@ Regular expressions
 ===================
 
 ![email regex](images/email-regexp.png)
-
----
-
-Regular expressions
-===================
-
-![email regex describe](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/RegularExpressionPrimer/email-regexp.png)
-
-Presenter Notes
-===============
-
-1 Text-version: `^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$`
 
 
 ---
@@ -161,7 +149,7 @@ The simplest regular expression
 ===============================
 
 The function `grep` can be used to find matches in a character vector. It returns the indices of matching strings:
-    
+
     !r
     > grep("test", c("foo", "bar", "test"))
     [1] 3
@@ -171,7 +159,7 @@ The function `grep` can be used to find matches in a character vector. It return
 * "test" is a perfectly valid regular expression
 * Works just like CTRL+F in your browser
 
-![Browser find](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/RegularExpressionPrimer/browser-find.png)
+![Browser find](images/browser-find.png)
 
 Presenter Notes
 ===============
@@ -184,13 +172,13 @@ How do you describe more complex patterns?
 Metacharacters
 ==============
 
-How do we find more complex patterns? 
+How do we find more complex patterns?
 
 Characters with special meaning in regular expressions are called **metacharacters**.
 
 There are eleven metacharacters:
 
-    [ \ˆ$.|?*+()
+    [ \^$.|?*+()
 
 Non-metacharacters are called *literals*.
 
@@ -237,7 +225,7 @@ In order to search for a character that is a metacharacter, it must be *escaped*
     !r
     > grep("\\.", c("fooxbar", "foo bar", "foobar", "foo.bar"))
     [1] 4
-    
+
 Why are there two backslashes?
 
 ---
@@ -279,7 +267,7 @@ Even more generally, to match at least *n* times, but not more than *m* times:
 
     > grep("10{2,4}1", c("101", "1001", "10001", "100001", "1000001"))
     [1] 2 3 4
-    
+
 Presenter Notes
 ===============
 
@@ -339,14 +327,27 @@ Anchor Symbols
 
 The anchor symbols include:
 
-* `ˆ` : beginning of the string
-* `$` : end of the string 
+* `^` : beginning of the string
+* `$` : end of the string
 * `\<` : beginning of a word
 * `\>` : end of a word
 * `\b` : edge of a word
 * `\B` : NOT at an edge of a word
 
 ---
+
+Email regex
+===========
+
+![email regex describe](images/email-regexp-labeled.png)
+
+Presenter Notes
+===============
+
+1 Text-version: `^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$`
+
+---
+
 
 Example: Extracting Variable Names
 ==================================
@@ -356,7 +357,7 @@ In our HAART dataset, perhaps we would like to extract the variable names that b
     !r
     > grep('^init',names(haart),value=TRUE)
     [1] "init.reg"  "init.date"
-    
+
 This expression can be used directly to index the variables themselves:
 
     !r
@@ -379,17 +380,17 @@ A **character class** matches anything inside a set of square brackets for one c
 Specify the characters in square brackets:
 
     !r
-    > grep("ab[cdef]", c("abc", "abd", "abe", "abf", "abg")) 
+    > grep("ab[cdef]", c("abc", "abd", "abe", "abf", "abg"))
     [1] 1 2 3 4
 
 Similarly, the dash (-) metacharacter can be used to specify a range of characters:
 
     !r
-    > grep("ab[c-f]", c("abc", "abd", "abe", "abf", "abg")) 
+    > grep("ab[c-f]", c("abc", "abd", "abe", "abf", "abg"))
     [1] 1 2 3 4
-    > grep("ab[c-fC-F]", c("abc", "abC", "abf", "abF", "abg")) 
+    > grep("ab[c-fC-F]", c("abc", "abC", "abf", "abF", "abg"))
     [1] 1 2 3 4
-    > grep("ab[c-fC-F123]", c("abc", "abF", "ab1", "ab2")) 
+    > grep("ab[c-fC-F123]", c("abc", "abF", "ab1", "ab2"))
     [1] 1 2 3 4
 
 The order of the characters inside a character class does not matter.
@@ -404,8 +405,8 @@ Example: Finding Files
 A common use of regular expressions is to find text corresponding to particular filenames. Here is one that looks for JPEG files, which are typically given a `.jpg` extension:
 
     ^[a-zA-Z]+\\.jpg$
-    
-* caret anchors to the start of a line  
+
+* caret anchors to the start of a line
 * character class looks for one or more letters, any case
 * escaped period looks for the separator
 * dollar sign anchors to the end of a line
@@ -417,7 +418,7 @@ Metacharacters and Character Classes
 
 Some metacharacters mean different things depending on *context*. For example, inside of brackets, most metacharacters lose their powers.
 
-Only `ˆ- \]` are special inside character classes.
+Only `^- \]` are special inside character classes.
 
     !r
     > grep("[.+*]", c(".", "+", "*", "x"))
@@ -426,8 +427,8 @@ Only `ˆ- \]` are special inside character classes.
     [1] 1 2 3 4
 
 * To include a literal ] place it *first* in the list
-* To include a literal ˆ place it *anywhere but first*
-* To include a literal - place it *first or last* 
+* To include a literal ^ place it *anywhere but first*
+* To include a literal - place it *first or last*
 
 ---
 
@@ -459,17 +460,17 @@ For example,
     [1] 1
     > grep("[[:blank:]]", c("foo","bar","foo bar","foobar"))
     [1] 3
-    > grep("^[[:alpha:].]+@[[:alpha:].]+$", 
+    > grep("^[[:alpha:].]+@[[:alpha:].]+$",
         c("chris.fonnesbeck@vanderbilt.edu", "@fonnesbeck", "fonnesbeck_chris@yahoo.com"))
     [1] 1
-    
+
 
 ---
 
 Perl Character Classes
 ======================
 
-* `\w` : match any character in the range 0-9, A-Z or a-z and `_` 
+* `\w` : match any character in the range 0-9, A-Z or a-z and `_`
 * `\W` : match any character NOT in the range 0-9, A-Z and a-z or `_`
 * `\d` : match any character in the range 0-9
 * `\D` : match any character NOT in the range 0-9
@@ -483,9 +484,9 @@ Perl Character Classes
 `regexpr` and `gregexpr`
 ========================
 
-Sometimes we want more details regarding the matches than is provided by `grep`. `regexpr` and `gregexpr` pinpoint and possibly extract those parts of a string that were matched by a regular expression. 
+Sometimes we want more details regarding the matches than is provided by `grep`. `regexpr` and `gregexpr` pinpoint and possibly extract those parts of a string that were matched by a regular expression.
 
-The output from these functions is a vector of starting positions of the regular expressions which were found. 
+The output from these functions is a vector of starting positions of the regular expressions which were found.
 
     !r
     > tst = c(’one x7 two b1’,’three c5 four b9’,
@@ -496,7 +497,7 @@ The output from these functions is a vector of starting positions of the regular
     attr(,"match.length")
     [1]  2  2 -1  2
 
-The `match.length` attribute is associated with the vector of starting positions to provide information about exactly which characters were involved in the match. 
+The `match.length` attribute is associated with the vector of starting positions to provide information about exactly which characters were involved in the match.
 
 * `regexpr` only provides information about the first match in its input strings
 * `gregexpr` returns information about *all* matches found
@@ -504,7 +505,7 @@ The `match.length` attribute is associated with the vector of starting positions
 Presenter Notes
 ===============
 
-if no match occurred, a value of -1 is returned. 
+if no match occurred, a value of -1 is returned.
 
 ---
 
@@ -554,13 +555,13 @@ We can use `substring` to extract the characters corresponding to the expression
     > res <- substring(tst, wh, wh + attr(wh,'match.length') - 1)
     > res
     [1] "x7" "c5" ""   "a8"
-    
+
 Or, in the case of `gregexpr`:
 
     !r
     res1 <- list()
     for(i in 1:length(wh1))
-        res1[[i]] <- substring(tst[i], wh1[[i]], 
+        res1[[i]] <- substring(tst[i], wh1[[i]],
             wh1[[i]] + attr(wh1[[i]],'match.length')-1)
 
     > res1
@@ -581,7 +582,7 @@ Or, in the case of `gregexpr`:
 `regexpr` and `gregexpr`
 ========================
 
-Another possibility for processing the output is to use `mapply`. 
+Another possibility for processing the output is to use `mapply`.
 
 This involves turning the `substring` call into a function:
 
@@ -604,14 +605,6 @@ Now `mapply` can be called with the two vectors of interest:
 
     $`a8 eight nine`
     [1] "a8"
-    
-
----
-
-Email Regular Expression
-========================
-
-![email regex describe](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/RegularExpressionPrimer/email-regexp.png)
 
 
 ---
@@ -619,7 +612,15 @@ Email Regular Expression
 Email Regular Expression
 ========================
 
-![Email regexp 2](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/RegularExpressionPrimer/email-regexp-2.png)
+![email regex describe](images/email-regexp.png)
+
+
+---
+
+Email Regular Expression
+========================
+
+![Email regexp 2](images/email-regexp-2.png)
 
 Presenter Notes
 ===============
@@ -668,9 +669,9 @@ Full Email Validation Regexp
 Substituting Text
 =================
 
-Search-and-replace operations are carried out using `sub` and `gsub`. 
+Search-and-replace operations are carried out using `sub` and `gsub`.
 
-* `sub` replaces only the first occurrence of a pattern  
+* `sub` replaces only the first occurrence of a pattern
 * `gsub` replaces all occurrences
 
 Example: replace lower-case with upper-case:
@@ -681,13 +682,13 @@ Example: replace lower-case with upper-case:
     [1] "arm" "leg" "Head" "foot" "Hand" "Hindleg" "elbow"
     > sub("o","O",text)
     [1] "arm" "leg" "head" "fOot" "hand" "hindleg" "elbOw"
-    
+
 More generally, to replace the first character of every string with upper-case ‘O’ we use the wildcard with an anchor:
 
     !r
     gsub("^.","O",text)
     [1] "Orm" "Oeg" "Oead" "Ooot" "Oand" "Oindleg" "Olbow"
-    
+
 ---
 
 Svetlana's Tutorial
