@@ -1,10 +1,8 @@
-Relational Databases
-====================
+# Relational Databases
 
 ---
 
-Databases
-=========
+## Databases
 
 A database is generally any organized collection of data.
 
@@ -16,8 +14,7 @@ Databases are commonly **relational**.
 
 ---
 
-Databases
-=========
+## Databases
 
 Why should a statistician use databases?
 
@@ -28,8 +25,7 @@ Why should a statistician use databases?
 
 ---
 
-Interacting with Databases
-==========================
+## Interacting with Databases
 
 Within the R environment, several packages are available for interacting with various database management systems (DBMS).
 
@@ -37,8 +33,7 @@ All databases have their own client software to run queries directly within the 
 
 ---
 
-Relational Databases
-====================
+## Relational Databases
 
 A relational database consists of a set of **tables**
 
@@ -49,8 +44,7 @@ Databases are typically **normalized** to reduce redundancy in data storage.
 
 ---
 
-Example: healthcare providers
-=============================
+## Example: healthcare providers
 
 Consider a hypothetical database of patients and physicians.
 
@@ -70,15 +64,13 @@ Consider a hypothetical database of patients and physicians.
 
 What happens if a doctor changes their address?
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Too much redundant information
 
 ---
 
-Example: healthcare database
-============================
+## Example: healthcare database
 
 We can eliminate redundant storage by breaking the data into two tables:
 
@@ -104,8 +96,7 @@ We can eliminate redundant storage by breaking the data into two tables:
 
 ---
 
-Keys
-====
+## Keys
 
 Records are associated with unique identifiers.
 
@@ -115,8 +106,7 @@ How do we connect patients with their doctors when they reside in different tabl
 
 ---
 
-Normalization
-=============
+## Normalization
 
 The process of dividing large tables with redundant information into a set of tables in a relational database is called **normalization**.
 
@@ -138,8 +128,7 @@ Keys are used to relate one table to another.
 
 ---
 
-Example: healthcare database
-============================
+## Example: healthcare database
 
 Suppose now that we add tests conducted on individual patients by physicians. How would we add this information to the database?
 
@@ -150,8 +139,7 @@ Suppose now that we add tests conducted on individual patients by physicians. Ho
 
 ---
 
-Example: healthcare database
-============================
+## Example: healthcare database
 
 **tests**
 
@@ -165,8 +153,7 @@ Example: healthcare database
 
 ---
 
-Database Server
-===============
+## Database Server
 
 Databases are typically based on a client-server model
 
@@ -184,8 +171,7 @@ Example: web server
 
 ---
 
-Database Server
-===============
+## Database Server
 
 Server:
 
@@ -199,8 +185,7 @@ Client:
 
 ---
 
-Database Interaction
-====================
+## Database Interaction
 
 The database interaction paradigm consists of multiple steps:
 
@@ -212,8 +197,7 @@ The database interaction paradigm consists of multiple steps:
 
 ---
 
-Client Access
-=============
+## Client Access
 
 There are three common ways of interacting with a database server:
 
@@ -223,15 +207,13 @@ There are three common ways of interacting with a database server:
 
 ---
 
-SQLite
-======
+## SQLite
 
 ![sqlite home](images/sqlite_home.png)
 
 ---
 
-SQLite
-======
+## SQLite
 
 We will learn how to manipulate a relational database using the SQLite database.
 
@@ -243,20 +225,18 @@ We will use both the native SQLite client and the R package `RSQLite`.
 
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
 To fully-demonstrate relational database functionality, we will use baseball statistics from `Baseball-DataBank.org`.
 
 A SQLite database of all the tables has been added as a submodule of the course GitHub repository:
 
-    git submodule add https://github.com/jknecht/baseball-archive-sqlite 
+    git submodule add https://github.com/jknecht/baseball-archive-sqlite
         baseball-databank
-        
+
 ---
 
-SQLite Client
-=============
+## SQLite Client
 
 Move into the directory containing the database you wish to access (or create), and run `sqlite3`:
 
@@ -264,8 +244,7 @@ Move into the directory containing the database you wish to access (or create), 
 
 ---
 
-.tables
-=======
+## .tables
 
 Calling `.tables` lists all the tables in the current database:
 
@@ -273,8 +252,7 @@ Calling `.tables` lists all the tables in the current database:
 
 ---
 
-.schema
-=======
+## .schema
 
 We can describe particular tables using `.schema`:
 
@@ -282,15 +260,13 @@ We can describe particular tables using `.schema`:
 
 ---
 
-.schema
-=======
+## .schema
 
 ![salaries schema](images/sqlite_salaries.png)
 
 ---
 
-Querying
-========
+## Querying
 
 How do we extract particular subsets of interest from the database?
 
@@ -300,8 +276,7 @@ How do we extract particular subsets of interest from the database?
 
 ---
 
-SQL
-===
+## SQL
 
 Structured Querying Language (SQL) is a declarative language for programming relational databases.
 
@@ -319,60 +294,56 @@ SQL keywords are case insensitive (though table and column names are not)
 
 ---
 
-`SELECT`
-========
+## `SELECT`
 
 The command most relevant to querying a relational database is `SELECT`.
 
 `SELECT` returns a table, which includes names of columns and rows with values.
 
-The `SELECT` syntax is a generic template that allows users to express different types of queries. 
+The `SELECT` syntax is a generic template that allows users to express different types of queries.
 
 * `SELECT` has a large number of optional clauses
 
 ---
 
-`SELECT`
-========
+## `SELECT`
 
 The most general format of `SELECT` in SQLite:
 
     SELECT [DISTINCT] select_heading FROM source_tables
     WHERE filter_expression
     GROUP BY grouping_expressions
-    HAVING filter_expression 
-    ORDER BY ordering_expressions 
+    HAVING filter_expression
+    ORDER BY ordering_expressions
     LIMIT count
     OFFSET count
-    
+
 Each clause of the `SELECT` statement is a step in a "pipeline" that processes an initial working table.
 
 Most clauses are optional.
 
 ---
 
-`SELECT`
-========
+## `SELECT`
 
     !sql
-    SELECT [DISTINCT] select_heading FROM source_tables WHERE filter_expression 
-    GROUP BY grouping_expressions HAVING filter_expression ORDER BY ordering_expressions 
+    SELECT [DISTINCT] select_heading FROM source_tables WHERE filter_expression
+    GROUP BY grouping_expressions HAVING filter_expression ORDER BY ordering_expressions
     LIMIT count OFFSET count
 
 1. **`FROM source_tables`** Designates one or more source tables and combines them together into one largeworking table.
-2. **`WHERE filter_expression`** Filters specific rows out of the working table. 
-3. **`GROUP BY grouping_expressions`** Groups sets of rows in the working table based off similar values. 
-4. **`SELECT select_heading`** Defines the result set columns and (if applicable) grouping aggregates. 
-5. **`HAVING filter_expression`** Filters specific rows out of the grouped table. Requires a GROUP BY. 
+2. **`WHERE filter_expression`** Filters specific rows out of the working table.
+3. **`GROUP BY grouping_expressions`** Groups sets of rows in the working table based off similar values.
+4. **`SELECT select_heading`** Defines the result set columns and (if applicable) grouping aggregates.
+5. **`HAVING filter_expression`** Filters specific rows out of the grouped table. Requires a GROUP BY.
 6. **`DISTINCT`** Eliminates duplicate rows.
-7. **`ORDER BY ordering_expressions`** Sorts the rows of the result set. 
-8. **`OFFSET count`** Skips over rows at the beginning of the result set. Requires a LIMIT. 
+7. **`ORDER BY ordering_expressions`** Sorts the rows of the result set.
+8. **`OFFSET count`** Skips over rows at the beginning of the result set. Requires a LIMIT.
 9. **`LIMIT count`** Limits the result set output to a specific number of rows.
 
 ---
 
-Selecting Columns
-=================
+## Selecting Columns
 
 The columns of interest are specified in a comma-separated list:
 
@@ -393,11 +364,10 @@ The columns of interest are specified in a comma-separated list:
     zwilldu01|1914|592|185
     zwilldu01|1915|548|157
     zwilldu01|1916|53|6
-    
+
 ---
 
-Selecting Columns
-=================
+## Selecting Columns
 
 The wildcard (`*`) selects all columns:
 
@@ -413,11 +383,10 @@ The wildcard (`*`) selects all columns:
     1985|ATL|NL|barkele01|870000.0
     1985|ATL|NL|bedrost01|550000.0
     ...
-    
+
 ---
 
-`ORDER BY` Clause
-=================
+## `ORDER BY` Clause
 
     !sql
     sqlite> SELECT * from Salaries ORDER BY Salary;
@@ -439,11 +408,10 @@ The wildcard (`*`) selects all columns:
     2008|NYA|AL|rodrial01|28000000.0
     2009|NYA|AL|rodrial01|33000000.0
     2010|NYA|AL|rodrial01|33000000.0
-    
+
 ---
 
-Top 10 Salaries
-===============
+## Top 10 Salaries
 
 We can use two additional clauses to obtain a list of the top 10 salaries:
 
@@ -462,15 +430,14 @@ We can use two additional clauses to obtain a list of the top 10 salaries:
 
 ---
 
-Selecting Rows
-==============
+## Selecting Rows
 
-The `WHERE` clause is used to filter rows from the working table generated by the `FROM` clause. 
+The `WHERE` clause is used to filter rows from the working table generated by the `FROM` clause.
 
 Generates a boolean condition that is evaluated for each row.
 
     !sql
-    sqlite> SELECT PlayerID, yearID, AB, H FROM Batting WHERE AB>300 
+    sqlite> SELECT PlayerID, yearID, AB, H FROM Batting WHERE AB>300
         ORDER BY H LIMIT 10;
     bergebi01|1909|346|48
     bakerge01|1884|317|52
@@ -482,16 +449,15 @@ Generates a boolean condition that is evaluated for each row.
     doolami01|1918|308|55
     penato01|1993|304|55
     stantle01|1978|302|55
-    
+
 
 ---
 
-Aggregate Functions
-===================
+## Aggregate Functions
 
-An **aggregate function** takes a column expression as input and aggregates the column values from the rows of a group to produce a single output value. 
+An **aggregate function** takes a column expression as input and aggregates the column values from the rows of a group to produce a single output value.
 
-Common aggregate functions: 
+Common aggregate functions:
 
 * `COUNT`
 * `AVG`
@@ -506,16 +472,16 @@ We can use these functions to generate interesting statistics:
     !sql
     sqlite> SELECT MAX(AB), AVG(AB) FROM Batting;
     716|154.786044471438
-    
+
 ---
 
-Aggregate Functions
-===================
+## Aggregate Functions
 
 Suppose we wish to calculate batting averages for all player-years:
 
     !sql
-    sqlite> SELECT PlayerID, AB, H, H/AB FROM Batting WHERE AB>300;
+    sqlite> SELECT PlayerID, AB, H, H/AB FROM Batting
+    WHERE AB>300;
     aaronha01|468|131|0
     aaronha01|602|189|0
     aaronha01|609|200|0
@@ -532,13 +498,12 @@ Suppose we wish to calculate batting averages for all player-years:
     aaronha01|600|184|0
     aaronha01|606|174|0
     ...
-    
+
 What happened?
 
 ---
 
-Aggregate Functions
-===================
+## Aggregate Functions
 
 `H` and `AB` are both integers, so the result is also an integer! We need to *cast* one of the columns to a REAL.
 
@@ -559,15 +524,14 @@ Aggregate Functions
     aaronha01|603|168|0.278606965174129
     aaronha01|600|184|0.306666666666667
     aaronha01|606|174|0.287128712871287
-    
+
 Notice that the results are ordered by `PlayerID` by default. We probably want to order by batting average.
 
 How do we order by a calculated column?
 
 ---
 
-Aggregate Functions
-===================
+## Aggregate Functions
 
 We need to assign a name to the calculated column:
 
@@ -583,18 +547,17 @@ We need to assign a name to the calculated column:
     sislege01|586|246|0.419795221843003
     cobbty01|591|248|0.419627749576988
     turnetu01|339|141|0.415929203539823
-    
+
 ---
 
-Aggregation
-===========
+## Aggregation
 
-The `GROUP BY` clause enables group-wise calculations. 
+The `GROUP BY` clause enables group-wise calculations.
 
 To calculate the average salary by player, we must aggregate on `playerID`, which averages across years:
 
     !sql
-    sqlite> SELECT playerID, AVG(salary) AS AvgSalary FROM Salaries 
+    sqlite> SELECT playerID, AVG(salary) AS AvgSalary FROM Salaries
         GROUP BY playerID ORDER BY AvgSalary DESC;
     rodrial01|15553897.1764706
     jeterde01|13695333.3333333
@@ -607,11 +570,10 @@ To calculate the average salary by player, we must aggregate on `playerID`, whic
     zambrca01|9634375.0
     beltrca01|9621445.5
     ...
-    
+
 ---
 
-Aggregation
-===========
+## Aggregation
 
 There are two ways of selecting rows in conjunction with aggregation.
 
@@ -620,13 +582,12 @@ There are two ways of selecting rows in conjunction with aggregation.
 
 ---
 
-`WHERE` Clause
-==============
+## `WHERE` Clause
 
 Calculating the average salary for Atlanta Braves players in 1995:
 
     !sql
-    sqlite> SELECT playerID, AVG(salary) AS AvgSalary FROM Salaries 
+    sqlite> SELECT playerID, AVG(salary) AS AvgSalary FROM Salaries
         WHERE teamID='ATL' AND yearID='1995' GROUP BY playerID;
     averyst01|4000000.0
     bedrost01|750000.0
@@ -639,16 +600,15 @@ Calculating the average salary for Atlanta Braves players in 1995:
     jonesch06|114000.0
     justida01|5200000.0
     ...
-    
+
 ---
 
-`HAVING` Clause
-===============
+## `HAVING` Clause
 
 To filter on an aggregate value, we must use `HAVING` instead. Here are the Atlanta players with average salaries higher than $5M:
 
     !sql
-    sqlite> SELECT playerID, AVG(salary) AS AvgSalary FROM Salaries 
+    sqlite> SELECT playerID, AVG(salary) AS AvgSalary FROM Salaries
         WHERE teamID='ATL' GROUP BY playerID HAVING AvgSalary>5000000;
     galaran01|8383333.33333334
     hamptmi01|14725621.1666667
@@ -670,21 +630,18 @@ To filter on an aggregate value, we must use `HAVING` instead. Here are the Atla
 
 ---
 
-Exercise
-========
+## Exercise
 
 ### Construct a query to return the largest salary from each team in 2001.
 
-Presenter Notes
-===============
+## Presenter Notes
 
-    SELECT playerID, teamID, MAX(salary) FROM Salaries WHERE yearID=2001 
+    SELECT playerID, teamID, MAX(salary) FROM Salaries WHERE yearID=2001
     GROUP BY teamID ORDER BY salary;
 
 ---
 
-Joining Tables
-==============
+## Joining Tables
 
 So far we have only seen queries *within* a single table. If we have properly normalized our database, we need to be able to query *across* tables.
 
@@ -693,11 +650,10 @@ Tables are combined using the `JOIN` operator, which temporarily combines two ta
 The commonest is the `INNER JOIN`, which matches rows in 2 tables based on a common key.
 
     SELECT ... FROM t1 JOIN t2 ON conditional_expression ...
-    
+
 ---
 
-`INNER JOIN`
-============
+## `INNER JOIN`
 
 ![inner join](images/sqlite_inner_join.png)
 
@@ -705,8 +661,7 @@ Notice `INNER JOIN` ignores rows that do not have a corresponding key in the adj
 
 ---
 
-`INNER JOIN`
-============
+## `INNER JOIN`
 
 Recall our fictitious healthcare database, which we normalized based on the unique `gpno`:
 
@@ -732,8 +687,7 @@ Recall our fictitious healthcare database, which we normalized based on the uniq
 
 ---
 
-`INNER JOIN`
-============
+## `INNER JOIN`
 
 A full inner join of these tables on `gpno` would produce the following table:
 
@@ -753,8 +707,7 @@ Internally, there are 2 steps to an inner join:
 
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
 Perhaps we wanted to obtain the full names of players and display them alongside their batting statistics.
 
@@ -765,11 +718,10 @@ We can query across these tables using an inner join on `playerID`
 
 ---
 
-`INNER JOIN`
-============
+## `INNER JOIN`
 
     !sql
-    sqlite> SELECT nameLast, nameFirst, yearID, HR, RBI FROM Master 
+    sqlite> SELECT nameLast, nameFirst, yearID, HR, RBI FROM Master
         JOIN Batting USING(playerID);
     Aaron|Hank|1954|13|69
     Aaron|Hank|1955|27|106
@@ -791,31 +743,29 @@ We can query across these tables using an inner join on `playerID`
     Clevenger|Steve|2011|0|0
     Dolis|Rafael|2011|0|0
     Parker|Jarrod|2011|0|0
-    
+
 Notice that `INNER` is optional. It is the default join.
 
 ---
 
-`INNER JOIN`
-============
+## `INNER JOIN`
 
 Alternately, the key column can be specified using the `ON` clause:
 
     !sql
-    SELECT nameLast, nameFirst, yearID, HR, RBI FROM Master 
+    SELECT nameLast, nameFirst, yearID, HR, RBI FROM Master
             JOIN Batting ON Master.playerID==Batting.playerID;
-            
+
 This is useful when the key column is named differently in the two tables.
 
 ---
 
-`NATURAL JOIN`
-==============
+## `NATURAL JOIN`
 
 A convenient shortcut for tables that have exactly one column in common is the `NATURAL JOIN`. Here, we do not need to specify the key column.
 
     !sql
-    sqlite> SELECT nameLast, nameFirst, yearID, HR, RBI FROM Master 
+    sqlite> SELECT nameLast, nameFirst, yearID, HR, RBI FROM Master
             NATURAL JOIN Batting;
     Aaron|Hank|1954|13|69
     Aaron|Hank|1955|27|106
@@ -823,16 +773,15 @@ A convenient shortcut for tables that have exactly one column in common is the `
     Aaron|Hank|1957|44|132
     Aaron|Hank|1958|30|95
     ...
-    
+
 ---
 
-Multiple Joins
-==============
+## Multiple Joins
 
 Joins can be chained together to query across multiple tables. For example, if we wish to add salary information to our query:
 
     !sql
-    sqlite> SELECT nameLast, nameFirst, yearID, HR, RBI, salary FROM Master 
+    sqlite> SELECT nameLast, nameFirst, yearID, HR, RBI, salary FROM Master
         NATURAL JOIN Batting NATURAL JOIN Salaries ORDER BY HR DESC LIMIT 15;
     Bonds|Barry|2001|73|137|10300000.0
     McGwire|Mark|1998|70|147|8928354.0
@@ -852,15 +801,14 @@ Joins can be chained together to query across multiple tables. For example, if w
 
 ---
 
-Name Collisions
-===============
+## Name Collisions
 
 When tables have columns with the same name, we can prepend the table name to the column to distinguish them.
 
 For example, in our baseball database, pitchers will have name collisions in the `Batting` and `Pitching` tables.
 
     !sql
-    sqlite> SELECT playerID, Pitching.H, Batting.H FROM Pitching 
+    sqlite> SELECT playerID, Pitching.H, Batting.H FROM Pitching
         JOIN Batting USING(playerID) ORDER BY Batting.H DESC;
     sislege01|62|257
     sislege01|18|257
@@ -876,30 +824,28 @@ For example, in our baseball database, pitchers will have name collisions in the
     cobbty01|6|248
     cobbty01|0|248
     sislege01|62|246
-    sislege01|18|246 
+    sislege01|18|246
     ...
 
 ---
 
-Name Collisions
-===============
+## Name Collisions
 
 We can use `AS` to create aliases for both the colliding names and their respective tables:
 
     !sql
-    sqlite> SELECT playerID, p.H as oppHits, b.H as Hits FROM Pitching AS p 
-        JOIN Batting AS b USING(playerID) ORDER BY Hits DESC limit 15;  
+    sqlite> SELECT playerID, p.H as oppHits, b.H as Hits FROM Pitching AS p
+        JOIN Batting AS b USING(playerID) ORDER BY Hits DESC limit 15;
 
 ---
 
-Creating Tables
-===============
+## Creating Tables
 
 A new table can be added to the current database using `CREATE TABLE`. At a minimum, this specifies the name of the table and the names of the columns. You will usually want to specify the column types as well:
 
     !sql
     CREATE TABLE table_name (column_name column_type,[...] );
-    
+
 SQLite supports only five concrete datatypes (or *storage classes*):
 
 * NULL
@@ -910,8 +856,7 @@ SQLite supports only five concrete datatypes (or *storage classes*):
 
 ---
 
-`CREATE TABLE`
-==============
+## `CREATE TABLE`
 
 You can see the `CREATE TABLE` command used to create tables in an existing database by looking at the schema.
 
@@ -924,17 +869,16 @@ You can see the `CREATE TABLE` command used to create tables in an existing data
     NAassoc TEXT
     );
     CREATE UNIQUE INDEX Index_B2BF8FA0_DC1C_4010 on TeamsFranchises (franchID);
-    
+
 In addition to column names and types, a table definition can also impose constraints on specific columns or sets of columns.
 
     !sql
-    CREATE TABLE table_name(column_name column_type column_constraints..., 
-        [... ,] table_constraints, [...] );    
-    
+    CREATE TABLE table_name(column_name column_type column_constraints...,
+        [... ,] table_constraints, [...] );
+
 ---
 
-`CREATE TABLE`
-==============
+## `CREATE TABLE`
 
 For example, let's try to create a table in the trivial patient database we showed earlier. We may do the following:
 
@@ -946,35 +890,33 @@ For example, let's try to create a table in the trivial patient database we show
         gpname TEXT CHECK( gpname != '' ),
         gpaddr TEXT
     )
-    
-Each table can have only one primary key. Primary keys must be unique, so designating a column as `PRIMARY KEY` implies the `UNIQUE` constraint as well, and will result in an automatic unique index being created. 
+
+Each table can have only one primary key. Primary keys must be unique, so designating a column as `PRIMARY KEY` implies the `UNIQUE` constraint as well, and will result in an automatic unique index being created.
 
 A primary key is valuable for using as an *index* by the database, which serves to speed up queries in larger databases.
-    
+
 ---
 
-Modifying Tables
-================
+## Modifying Tables
 
-There are three commands used for adding, modifying, and removing data from a database. 
+There are three commands used for adding, modifying, and removing data from a database.
 
 * `INSERT` adds new rows
-* `UPDATE` modifies existing rows   
+* `UPDATE` modifies existing rows
 * `DELETE` removes rows
 
 Each operates on a single table.
 
 ---
 
-`INSERT`
-========
+## `INSERT`
 
 The INSERT command is used to create new rows in the specified table.
 
     !sql
     INSERT INTO table_name (column_name [, ...]) VALUES (new_value [, ...]);
-    
-The columns can be listed in any order, but must be aligned with values. 
+
+The columns can be listed in any order, but must be aligned with values.
 
     !sql
     sqlite> INSERT INTO Salaries VALUES (2012, 'KC', 'AL', 'fonnesch', 3000000);
@@ -985,18 +927,17 @@ Any columns that are not listed will receive their default values.
 
 ---
 
-`INSERT`
-========
+## `INSERT`
 
 Rows may be inserted into tables based on the results of a `SELECT` query.
 
     !sql
     INSERT INTO table_name (column_name, [...]) SELECT query_statement;
-    
+
 For example,
 
     !sql
-    sqlite> INSERT INTO Salaries SELECT MIN(yearID)+40, MIN(teamID), 
+    sqlite> INSERT INTO Salaries SELECT MIN(yearID)+40, MIN(teamID),
         MIN(lgID), playerID, AVG(salary) FROM Salaries WHERE playerID=='stiebda01';
     sqlite> SELECT * FROM Salaries WHERE yearID>2012;
     2020|CHA|AL|stiebda01|1049333.33333333
@@ -1005,46 +946,43 @@ This is often used to bulk copy data from one table to another.
 
 ---
 
-`UPDATE`
-========
+## `UPDATE`
 
-`UPDATE` is used to assign new values to one or more columns of existing rows in a table. 
+`UPDATE` is used to assign new values to one or more columns of existing rows in a table.
 
     !sql
-    UPDATE table_name SET column_name=new_value [, ...] WHERE expression 
-    
+    UPDATE table_name SET column_name=new_value [, ...] WHERE expression
+
 This is the easiest way to change individual elements of rows, without removing and re-creating the row.
 
     !sql
     sqlite> UPDATE Salaries SET salary=4000000 WHERE playerID=='fonnesch';
-    sqlite> SELECT * FROM Salaries WHERE yearID==2012;                              
-    2012|KC|AL|fonnesch|4000000.0   
-    
+    sqlite> SELECT * FROM Salaries WHERE yearID==2012;
+    2012|KC|AL|fonnesch|4000000.0
+
 ---
 
-`DELETE`
-========
+## `DELETE`
 
-DELETE command is used to delete or remove one or more rows from a single table. 
+DELETE command is used to delete or remove one or more rows from a single table.
 
     !sql
     DELETE FROM table_name WHERE expression;
-    
+
 The rows where the expression evaluate to TRUE are deleted.
 
     !sql
     sqlite> DELETE FROM Salaries WHERE yearID>2011;
-    
+
 An easy way to empty a table:
 
     !sql
     sqlite> DELETE FROM Salaries WHERE 1;
-      
-        
+
+
 ---
 
-Accessing Databases From R
-==========================
+## Accessing Databases From R
 
 Every database server has its own software package for controlling the database: Relational Database Management System (RDBMS)
 
@@ -1054,8 +992,7 @@ Rather than learn a different interface for every database, it can be beneficial
 
 ---
 
-DBI
-===
+## DBI
 
 The primary interface to relational databases from R is the `DBI` package:
 
@@ -1066,8 +1003,7 @@ The primary interface to relational databases from R is the `DBI` package:
 
 ---
 
-Drivers
-=======
+## Drivers
 
 The driver handles back-end communication with the database server.
 
@@ -1082,11 +1018,10 @@ For access to SQLite, we require the `RSQLite` DBI device driver:
 
     !r
     > install.packages("RSQLite", dep=T)
-    
+
 ---
 
-`DBI` Usage
-===========
+## `DBI` Usage
 
 1. Load RDBMS driver
 2. Connect to RDBMS
@@ -1096,8 +1031,7 @@ For access to SQLite, we require the `RSQLite` DBI device driver:
 
 ---
 
-Connecting to SQLite
-====================
+## Connecting to SQLite
 
 To connect to our SQLite database via DBI, we use the functions `dbDriver` and `dbConnect`:
 
@@ -1107,13 +1041,12 @@ To connect to our SQLite database via DBI, we use the functions `dbDriver` and `
     Loading required package: DBI
     > drv <- dbDriver('SQLite')
     > con <- dbConnect(drv, dbname='baseball-archive-2011.sqlite')
-    
+
 Other RDBMS may require user name, password and host arguments to connect.
 
 ---
 
-DBI Functions
-=============
+## DBI Functions
 
 The primary functions for interacting with the RDBMS from DBI include:
 
@@ -1124,40 +1057,37 @@ The primary functions for interacting with the RDBMS from DBI include:
 
 ---
 
-`dbListTables`
-==============
+## `dbListTables`
 
 `dbListTables` returns a vector of available tables in the database to which the connection `con` has been established:
 
     !r
     > dbListTables(con)
-     [1] "AllstarFull"         "Appearances"         "AwardsManagers"     
-     [4] "AwardsPlayers"       "AwardsShareManagers" "AwardsSharePlayers" 
-     [7] "Batting"             "BattingPost"         "Fielding"           
-    [10] "FieldingOF"          "FieldingPost"        "HallOfFame"         
-    [13] "Managers"            "ManagersHalf"        "Master"             
-    [16] "Pitching"            "PitchingPost"        "Salaries"           
-    [19] "Schools"             "SchoolsPlayers"      "SeriesPost"         
-    [22] "Teams"               "TeamsFranchises"     "TeamsHalf" 
-    
+     [1] "AllstarFull"         "Appearances"         "AwardsManagers"
+     [4] "AwardsPlayers"       "AwardsShareManagers" "AwardsSharePlayers"
+     [7] "Batting"             "BattingPost"         "Fielding"
+    [10] "FieldingOF"          "FieldingPost"        "HallOfFame"
+    [13] "Managers"            "ManagersHalf"        "Master"
+    [16] "Pitching"            "PitchingPost"        "Salaries"
+    [19] "Schools"             "SchoolsPlayers"      "SeriesPost"
+    [22] "Teams"               "TeamsFranchises"     "TeamsHalf"
+
 ---
 
-`dbListFields`
-==============
+## `dbListFields`
 
 `dbListFields` returns the columns associated with the passed table name:
 
     !r
     > dbListFields(con, 'Batting')
-     [1] "playerID"  "yearID"    "stint"     "teamID"    "lgID"      "G"        
-     [7] "G_batting" "AB"        "R"         "H"         "2B"        "3B"       
-    [13] "HR"        "RBI"       "SB"        "CS"        "BB"        "SO"       
-    [19] "IBB"       "HBP"       "SH"        "SF"        "GIDP"      "G_old"  
+     [1] "playerID"  "yearID"    "stint"     "teamID"    "lgID"      "G"
+     [7] "G_batting" "AB"        "R"         "H"         "2B"        "3B"
+    [13] "HR"        "RBI"       "SB"        "CS"        "BB"        "SO"
+    [19] "IBB"       "HBP"       "SH"        "SF"        "GIDP"      "G_old"
 
 ---
 
-`dbReadTable`
-=============
+## `dbReadTable`
 
 For importing an entire table as a `data.frame`, `dbReadTable` is your friend:
 
@@ -1175,8 +1105,7 @@ For importing an entire table as a `data.frame`, `dbReadTable` is your friend:
 
 ---
 
-`dbGetQuery`
-============
+## `dbGetQuery`
 
 SQL queries can be passed as a character string to `dbGetQuery`:
 
@@ -1194,11 +1123,10 @@ SQL queries can be passed as a character string to `dbGetQuery`:
     3 36    NA 6.40   3  2   1  0 151  7 24 NA NA   NA
     4 49    NA 5.55   2  3   5  0 228  7 32 NA NA   NA
     5 80    NA 2.52   3  2   0  0 296 53 23 NA NA   NA
-  
+
 ---
 
-Queries
-=======
+## Queries
 
 More complex queries can be assembled piece-wise using `paste`:
 
@@ -1227,8 +1155,7 @@ More complex queries can be assembled piece-wise using `paste`:
 
 ---
 
-Cleaning Up
-===========
+## Cleaning Up
 
 When interaction with the database is complete, it is good practice to close the connection and unload the driver (in that order!):
 
@@ -1238,8 +1165,7 @@ When interaction with the database is complete, it is good practice to close the
 
 ---
 
-Databases and R
-===============
+## Databases and R
 
 Why not just import the entire database into R and manipulate the tables locally?
 

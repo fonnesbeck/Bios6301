@@ -1,10 +1,8 @@
-String Manipulation
-===================
+# String Manipulation
 
 ---
 
-String Manipulation
-===================
+## String Manipulation
 
 When importing, cleaning or manipulating data, character strings are reasonably common.
 
@@ -12,8 +10,7 @@ R includes a range of string-manipulation utilities, including an implementation
 
 ---
 
-`nchar`
-=======
+## `nchar`
 
 The call `nchar(x)` finds the length of a string x.
 
@@ -23,8 +20,7 @@ The call `nchar(x)` finds the length of a string x.
 
 ---
 
-`paste`
-=======
+## `paste`
 
 `paste` concatenates several strings, returning the result in one long string.
 
@@ -40,8 +36,7 @@ The optional argument sep can be used to put something other than a space betwee
 
 ---
 
-`sprintf`
-=========
+## `sprintf`
 
 The call `sprintf` assembles a string from parts in a formatted manner.
 
@@ -67,8 +62,7 @@ There are a variety of format options:
 
 ---
 
-`substr`
-========
+## `substr`
 
 The call `substr(x,start,stop)` returns the substring in the given character position range `start`:`stop` in the given string `x`.
 
@@ -86,8 +80,7 @@ It can also be used to substitute characters:
 
 ---
 
-`strsplit`
-==========
+## `strsplit`
 
 The call `strsplit` splits a string into a list of substrings based on another string (a delimiter):
 
@@ -101,8 +94,7 @@ The call `strsplit` splits a string into a list of substrings based on another s
 
 ---
 
-What are Regular Expressions?
-=============================
+## What are Regular Expressions?
 
 ### Regular expressions are a way to describe patterns in text.
 
@@ -116,16 +108,14 @@ Regular expressions express patterns in character values which can then be used 
 
 ---
 
-Regular expressions
-===================
+## Regular expressions
 
 ![email regex](images/email-regexp.png)
 
 
 ---
 
-Regular Expressions
-===================
+## Regular Expressions
 
 There are 3 main regular expression standards:
 
@@ -137,16 +127,14 @@ R supports ERE by default, but it also has support for Perl-based RE (`perl=TRUE
 
 A good reference: http://en.wikipedia.org/wiki/Regular_expression#Syntax
 
-Presenter Notes
-===============
+## Presenter Notes
 
 1 There is a caveat when using regular expressions in R, but that will appear later on in this talk.
 1 If you use regular expressions in a language and find that it doesn't behave as you expect, it may be because the language doesn't support certain features.
 
 ---
 
-The simplest regular expression
-===============================
+## The simplest regular expression
 
 The function `grep` can be used to find matches in a character vector. It returns the indices of matching strings:
 
@@ -159,18 +147,14 @@ The function `grep` can be used to find matches in a character vector. It return
 * "test" is a perfectly valid regular expression
 * Works just like CTRL+F in your browser
 
-![Browser find](images/browser-find.png)
-
-Presenter Notes
-===============
+## Presenter Notes
 
 How do you describe more complex patterns?
 
 
 ---
 
-Metacharacters
-==============
+## Metacharacters
 
 How do we find more complex patterns?
 
@@ -182,16 +166,14 @@ There are eleven metacharacters:
 
 Non-metacharacters are called *literals*.
 
-Presenter Notes
-===============
+## Presenter Notes
 
 We add "meta", which means "about", because we're describing information about other characters.
 
 
 ---
 
-Wildcard Metacharacter
-======================
+## Wildcard Metacharacter
 
 Dot (.) is a *wildcard* that matches any character:
 
@@ -217,8 +199,7 @@ The + metacharacter means: *one or more times*
 
 ---
 
-Escaping Metacharacters
-=======================
+## Escaping Metacharacters
 
 In order to search for a character that is a metacharacter, it must be *escaped* using a backslash:
 
@@ -230,8 +211,7 @@ Why are there two backslashes?
 
 ---
 
-Quantifiers
-===========
+## Quantifiers
 
 The + metacharacter is a *quantifier*, metacharacters that describe how many times the preceding element is to be repeated.
 
@@ -248,8 +228,7 @@ Both "foobar" and "ba" match now, because we're matching zero or more times inst
 
 ---
 
-Quantifiers
-===========
+## Quantifiers
 
 The question mark searches for exactly zero or one occurrence of the preceding character:
 
@@ -268,16 +247,14 @@ Even more generally, to match at least *n* times, but not more than *m* times:
     > grep("10{2,4}1", c("101", "1001", "10001", "100001", "1000001"))
     [1] 2 3 4
 
-Presenter Notes
-===============
+## Presenter Notes
 
 n or m may be blank!
 
 
 ---
 
-Anchors
-=======
+## Anchors
 
 Quantifiers can return unexpected results on their own:
 
@@ -291,8 +268,7 @@ The third string matches because this regular expression is "floating". It match
 
 ---
 
-Anchors
-=======
+## Anchors
 
 Anchors specify string *positions*, rather than strings themselves.
 
@@ -304,8 +280,7 @@ A dollar sign (`$`) metacharacter anchors the regular expression to the end of t
 
 ---
 
-Anchors
-=======
+## Anchors
 
 The caret (`^`) "anchors" the regular expression to the beginning of the string.
 
@@ -322,8 +297,7 @@ Anchors can be combined to provide more control over localizing the regular expr
 
 ---
 
-Anchor Symbols
-==============
+## Anchor Symbols
 
 The anchor symbols include:
 
@@ -336,21 +310,18 @@ The anchor symbols include:
 
 ---
 
-Email regex
-===========
+## Email regex
 
 ![email regex describe](images/email-regexp-labeled.png)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 1 Text-version: `^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$`
 
 ---
 
 
-Example: Extracting Variable Names
-==================================
+## Example: Extracting Variable Names
 
 In our HAART dataset, perhaps we would like to extract the variable names that begin with "init". Using `grep`, this is easy:
 
@@ -372,8 +343,7 @@ This expression can be used directly to index the variables themselves:
 
 ---
 
-Character Classes
-=================
+## Character Classes
 
 A **character class** matches anything inside a set of square brackets for one character position once and only once.
 
@@ -399,8 +369,7 @@ Typing a caret after the opening square bracket will negate the character class.
 
 ---
 
-Example: Finding Files
-======================
+## Example: Finding Files
 
 A common use of regular expressions is to find text corresponding to particular filenames. Here is one that looks for JPEG files, which are typically given a `.jpg` extension:
 
@@ -413,8 +382,7 @@ A common use of regular expressions is to find text corresponding to particular 
 
 ---
 
-Metacharacters and Character Classes
-====================================
+## Metacharacters and Character Classes
 
 Some metacharacters mean different things depending on *context*. For example, inside of brackets, most metacharacters lose their powers.
 
@@ -432,8 +400,7 @@ Only `^- \]` are special inside character classes.
 
 ---
 
-POSIX Character Classes
-=======================
+## POSIX Character Classes
 
 POSIX Extended Regular Expressions define a set of character classes that denote certain common ranges.
 
@@ -450,8 +417,7 @@ POSIX Extended Regular Expressions define a set of character classes that denote
 
 ---
 
-POSIX Character Classes
-=======================
+## POSIX Character Classes
 
 For example,
 
@@ -467,8 +433,7 @@ For example,
 
 ---
 
-Perl Character Classes
-======================
+## Perl Character Classes
 
 * `\w` : match any character in the range 0-9, A-Z or a-z and `_`
 * `\W` : match any character NOT in the range 0-9, A-Z and a-z or `_`
@@ -481,17 +446,16 @@ Perl Character Classes
 
 ---
 
-`regexpr` and `gregexpr`
-========================
+## `regexpr` and `gregexpr`
 
 Sometimes we want more details regarding the matches than is provided by `grep`. `regexpr` and `gregexpr` pinpoint and possibly extract those parts of a string that were matched by a regular expression.
 
 The output from these functions is a vector of starting positions of the regular expressions which were found.
 
     !r
-    > tst = c(’one x7 two b1’,’three c5 four b9’,
-    +         ’five six seven’,’a8 eight nine’)
-    > wh = regexpr(’[a-z][0-9]’,tst)
+    > tst = c('one x7 two b1','three c5 four b9',
+    +         'five six seven','a8 eight nine')
+    > wh = regexpr('[a-z][0-9]',tst)
     > wh
     [1]  5  7 -1  1
     attr(,"match.length")
@@ -502,15 +466,13 @@ The `match.length` attribute is associated with the vector of starting positions
 * `regexpr` only provides information about the first match in its input strings
 * `gregexpr` returns information about *all* matches found
 
-Presenter Notes
-===============
+## Presenter Notes
 
 if no match occurred, a value of -1 is returned.
 
 ---
 
-`regexpr` and `gregexpr`
-========================
+## `regexpr` and `gregexpr`
 
 `gregexpr` returns a list.
 
@@ -546,8 +508,7 @@ if no match occurred, a value of -1 is returned.
 
 ---
 
-`regexpr` and `gregexpr`
-========================
+## `regexpr` and `gregexpr`
 
 We can use `substring` to extract the characters corresponding to the expression match:
 
@@ -579,8 +540,7 @@ Or, in the case of `gregexpr`:
 
 ---
 
-`regexpr` and `gregexpr`
-========================
+## `regexpr` and `gregexpr`
 
 Another possibility for processing the output is to use `mapply`.
 
@@ -609,29 +569,25 @@ Now `mapply` can be called with the two vectors of interest:
 
 ---
 
-Email Regular Expression
-========================
+## Email Regular Expression
 
 ![email regex describe](images/email-regexp.png)
 
 
 ---
 
-Email Regular Expression
-========================
+## Email Regular Expression
 
 ![Email regexp 2](images/email-regexp-2.png)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Complete with Titans colors!
 `^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$`
 
 ---
 
-Full Email Validation Regexp
-============================
+## Full Email Validation Regexp
 
 `(?:(?:\r\n)?[ \t])*(?:(?:(?:[^()<>@,;:\\".\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t] )+|\Z|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.|(?:(?:\r\n)?[ \t]))*"(?:(?: \r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\".\[\] \000-\031]+(?:(?:( ?:\r\n)?[ \t])+|\Z|(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.|(?:(?:\r\n)?[ \t]))*"(?:(?:\r\n)?[ \t])*))*@(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\".\[\] \000-\0 31]+(?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\["()<>@,;:\\".\[\]]))|\[([^\[\]\r\\]|\\.)*\ ](?:(?:\r\n)?[ \t])*)(?:\.(?:(?:\r\n)?[ \t])*(?:[^()<>@,;:\\".\[\] \000-\031]+ (?:(?:(?:\r\n)?[ \t])+|\Z|(?=[\["()<>@,;:\\".\[\]]))|\[([^\[\]\r\\]|\\.)*\](?: (?:\r\n)?[ \t])*))*|(?:[^()<>@,;:\\".\[\] \000-\031]+(?:(?:(?:\r\n)?[ \t])+|\Z |(?=[\["()<>@,;:\\".\[\]]))|"(?:[^\"\r\\]|\\.|(?:(?:\r\n)?[ \t]))*"(?:(?:\r\n) ?[ \t])*)*\<(?:(?:\r\n)?[ \t])*(?:@(?:[^()<>@,;:\\".\[\] \000-\031]+(?:(?:(?:\ r\n)?[ \t])+|\Z|(?=[\["()<>@,;:\\".\[\]]))|\[([^\[\]\r\\]|\\.)*\](?:(?:\r\n)?[1`
 
@@ -666,8 +622,7 @@ Full Email Validation Regexp
 
 ---
 
-Substituting Text
-=================
+## Substituting Text
 
 Search-and-replace operations are carried out using `sub` and `gsub`.
 
@@ -683,7 +638,7 @@ Example: replace lower-case with upper-case:
     > sub("o","O",text)
     [1] "arm" "leg" "head" "fOot" "hand" "hindleg" "elbOw"
 
-More generally, to replace the first character of every string with upper-case ‘O’ we use the wildcard with an anchor:
+More generally, to replace the first character of every string with upper-case 'O' we use the wildcard with an anchor:
 
     !r
     gsub("^.","O",text)
@@ -691,8 +646,7 @@ More generally, to replace the first character of every string with upper-case �
 
 ---
 
-Svetlana's Tutorial
-===================
+## Svetlana's Tutorial
 
 Svetlana Eden wrote an excellent tutorial (2007): ***Introduction to String Matching and Modification in R Using Regular Expressions***
 
