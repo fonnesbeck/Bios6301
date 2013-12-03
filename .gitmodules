@@ -4,3 +4,6 @@
 [submodule "baseball-databank"]
 	path = baseball-databank
 	url = https://github.com/jknecht/baseball-archive-sqlite
+[submodule "baseball-archive-sqlite"]
+	path = baseball-archive-sqlite
+	url = https://github.com/jknecht/baseball-archive-sqlite

@@ -1,10 +1,8 @@
-Reshaping Data
-==============
+# Reshaping Data
 
 ---
 
-Reshaping Data
-==============
+## Reshaping Data
 
 The best layout for recording data is not always the same as the appropriate layout for analyzing the same data.
 
@@ -18,8 +16,7 @@ There are built-in R functions for reshaping:
 
 ---
 
-`aggregate`
-===========
+## `aggregate`
 
 The `aggregate` function splits data into subsets and computes summary statistics for each. Its arguments depends on the class passed to it:
 
@@ -37,7 +34,7 @@ The `aggregate` function splits data into subsets and computes summary statistic
     ## S3 method for class 'ts'
     aggregate(x, nfrequency = 1, FUN = sum, ndeltat = 1,
               ts.eps = getOption("ts.eps"), ...)
-              
+
 For example, using the built-in states database:
 
     !r
@@ -52,8 +49,7 @@ For example, using the built-in states database:
 
 ---
 
-Aggregate
-=========
+## Aggregate
 
 Let's use `aggregate` to compute variable averages, grouped by region:
 
@@ -91,23 +87,21 @@ Now compute how many regions had more than 130 days of frost:
       5 56.35000 160.5000  13519.00
       6 55.66667 157.6667  68567.50
       7 64.20000 161.8333 184162.17
-      
+
 ---
 
-Long and Wide Data Tables
-=========================
+## Long and Wide Data Tables
 
 Consider a longitudinal dataset, in which multiple measurements are taken over time.
 
-A *wide* longitudinal dataset will have one record for each individual with some time-constant variables that occupy single columns and some time-varying variables that occupy a column for each time point. 
+A *wide* longitudinal dataset will have one record for each individual with some time-constant variables that occupy single columns and some time-varying variables that occupy a column for each time point.
 
-A *long* format will have multiple records for each individual, with some variables being constant across these records and others varying across the records. 
+A *long* format will have multiple records for each individual, with some variables being constant across these records and others varying across the records.
 
 
 ---
 
-Example: Rainfall
-=================
+## Example: Rainfall
 
 Here is a trivial rainfall dataset, in wide format:
 
@@ -116,7 +110,7 @@ Here is a trivial rainfall dataset, in wide format:
              city jan feb mar apr
     1   Nashville 5.6 7.1 2.1 5.0
     2 Chattanooga 4.6 4.4 5.4 4.8
-    
+
 Here is the same dataset, in long format:
 
     !r
@@ -130,11 +124,10 @@ Here is the same dataset, in long format:
     6 Chattanooga   mar 5.4
     7   Nashville   apr 5.0
     8 Chattanooga   apr 4.8
-    
+
 ---
 
-`reshape`
-=========
+## `reshape`
 
 `reshape` reshapes a data frame between wide and long formats:
 
@@ -142,9 +135,9 @@ Here is the same dataset, in long format:
     reshape(data, varying = NULL, v.names = NULL, timevar = "time",
             idvar = "id", ids = 1:NROW(data),
             times = seq_along(varying[[1]]),
-            drop = NULL, direction, new.row.names = NULL, 
+            drop = NULL, direction, new.row.names = NULL,
             ...)
-            
+
 * `varying`: names of sets of variables in the wide format that correspond to single variables in long format
 * `v.names`: names of variables in the long format that correspond to multiple variables in the wide format
 * `timevar`: the variable in long format that differentiates multiple records from the same group or individual
@@ -155,8 +148,7 @@ Here is the same dataset, in long format:
 
 ---
 
-Example: States Data
-====================
+## Example: States Data
 
 Wide to long:
 
@@ -173,7 +165,7 @@ Wide to long:
     Arkansas.Population       Population       2110   Arkansas
     California.Population     Population      21198 California
     Colorado.Population       Population       2541   Colorado
-    
+
 ... and back again:
 
     !r
@@ -192,16 +184,14 @@ Wide to long:
     Arkansas.Population      39.9    65  51945
     California.Population    62.6    20 156361
     Colorado.Population      63.9   166 103766
-    
-Presenter Notes
-===============
+
+## Presenter Notes
 
 The row names are the states in this dataset.
 
 ---
 
-A Better Way?
-=============
+## A Better Way?
 
 The suite of built-in R functions for manipulating the shape of data frames is *ad hoc*.
 
@@ -212,8 +202,7 @@ The `reshape` (more recently, `reshape2`) package by Hadley Wickham provides a m
 
 ---
 
-Conceptual Framework
-====================
+## Conceptual Framework
 
 For the purposes of manipulating the shape of datasets, we can break variables into one of two classes:
 
@@ -227,8 +216,7 @@ In our trivial rainfall example:
 
 ---
 
-Melting
-=======
+## Melting
 
 In `reshape` parlance, expressing a dataset in "long" format, whereby each row represents one observation of one variable is called **melting**.
 
@@ -238,7 +226,7 @@ Here is another simple example:
          subject time age weight height
     1 John Smith    1  33     90   1.87
     2 Mary Smith    1  NA     NA   1.54
-    
+
 And in melted form:
 
     !r
@@ -254,19 +242,18 @@ Note that the measurement fields have been converted to variable-value pairs.
 
 ---
 
-`melt`
-======
+## `melt`
 
 The `reshape2` function `melt` operates on data frames, arrays and matrices. The user needs to specify identifiers, variables, or both.
 
 If only one is specified, the remaining variables are assumed to be the other class. Thus, each of the following are equivalent:
 
     !r
-    > melt(smiths, id = c("subject", "time"), 
+    > melt(smiths, id = c("subject", "time"),
         measured = c("age", "weight", "height"))
     > melt(smiths, id = c("subject", "time"))
     > melt(smiths, id = 1:2)
-    
+
          subject time variable value
     1 John Smith    1      age 33.00
     2 Mary Smith    1      age    NA
@@ -274,13 +261,12 @@ If only one is specified, the remaining variables are assumed to be the other cl
     4 Mary Smith    1   weight    NA
     5 John Smith    1   height  1.87
     6 Mary Smith    1   height  1.54
-    
+
 All measured variables need to be of the same type.
 
 ---
 
-Example: rainfall
-=================
+## Example: rainfall
 
 In our simple rainfall data table, melting the original data frame is very straightforward:
 
@@ -295,11 +281,10 @@ In our simple rainfall data table, melting the original data frame is very strai
     6 Chattanooga      mar   5.4
     7   Nashville      apr   5.0
     8 Chattanooga      apr   4.8
-    
+
 ---
 
-Extracting Variables from Names
-===============================
+## Extracting Variables from Names
 
 Unfortunately, data are sometimes recorded with data encoded into the names of variables. For example, consider a study that includes 2 treatments and two time periods. This data layout is not uncommon:
 
@@ -310,7 +295,7 @@ Unfortunately, data are sometimes recorded with data encoded into the names of v
     2  2   2   1   3
     3  3   1   2   3
     4  4   2   1   3
-    
+
 Notice that the time information is part of the names of the treatments. If we try to melt this:
 
     !r
@@ -329,19 +314,18 @@ Notice that the time information is part of the names of the treatments. If we t
     10  2      B_1     3
     11  3      B_1     3
     12  4      B_1     3
-    
+
 We see that time and treatment are still confounded.
 
 ---
 
-`colsplit`
-==========
+## `colsplit`
 
 The `colsplit` function will split a column into multiple variables that are  delimited.
 
     !r
     colsplit(string, pattern, names)
-    
+
 where `string` is the column name to split, `pattern` is the delimiter, and `names` are the names of the new columns.
 
     !r
@@ -359,11 +343,10 @@ where `string` is the column name to split, `pattern` is the delimiter, and `nam
     10         B    1
     11         B    1
     12         B    1
-    
+
 ---
 
-`colsplit`
-==========
+## `colsplit`
 
 Now we can replace the concatenated column with the parsed columns:
 
@@ -382,13 +365,12 @@ Now we can replace the concatenated column with the parsed columns:
     10  2     3         B    1
     11  3     3         B    1
     12  4     3         B    1
-    
+
 If there is no delimiter, you can use `substr` instead.
 
 ---
 
-Missing Data
-============
+## Missing Data
 
 We can remove missing measurements from a melted dataset using `na.rm`:
 
@@ -401,18 +383,17 @@ We can remove missing measurements from a melted dataset using `na.rm`:
     4 Mary Smith    1   weight    NA
     5 John Smith    1   height  1.87
     6 Mary Smith    1   height  1.54
-    
+
     > melt(smiths, id=1:2, na.rm=T)
          subject time variable value
     1 John Smith    1      age 33.00
     3 John Smith    1   weight 90.00
     5 John Smith    1   height  1.87
     6 Mary Smith    1   height  1.54
-    
+
 ---
 
-Casting
-=======
+## Casting
 
 The main advantage of melting datasets is that it is the most flexible layout. From the "molten" state, we can "cast" a data frame to whatever shape is required for analysis.
 
@@ -430,8 +411,7 @@ and two important optional arguments:
 
 ---
 
-Casting
-=======
+## Casting
 
 Let's start with our simple dataset:
 
@@ -442,7 +422,7 @@ Let's start with our simple dataset:
     3 John Smith    1   weight 90.00
     5 John Smith    1   height  1.87
     6 Mary Smith    1   height  1.54
-    
+
 Suppose we want to revert back to the original "wide" format. We can use `dcast`:
 
     !r
@@ -450,22 +430,21 @@ Suppose we want to revert back to the original "wide" format. We can use `dcast`
          subject age weight height
     1 John Smith  33     90   1.87
     2 Mary Smith  NA     NA   1.54
-    
+
 ---
 
-Casting
-=======
+## Casting
 
 The key to casting effectively is understanding the casting formula.
 
     !r
     row_labels ~ column_headers
-    
+
 The tilde separates variables that we want to appear down the left side of the table from those we want as column headers.
 
     !r
     subject ~ variable
-    
+
     > dcast(msmiths, subject ~ variable)
          subject age weight height
     1 John Smith  33     90   1.87
@@ -475,8 +454,7 @@ The tilde separates variables that we want to appear down the left side of the t
 
 ---
 
-Casting Formula
-===============
+## Casting Formula
 
     !r
     dcast(df, row_labels ~ column_headers)
@@ -485,8 +463,7 @@ Casting Formula
 
 ---
 
-Casting
-=======
+## Casting
 
 Adding another row label variable places an additional label down the left of the table:
 
@@ -495,11 +472,10 @@ Adding another row label variable places an additional label down the left of th
       time    subject age weight height
     1    1 John Smith  33     90   1.87
     2    1 Mary Smith  NA     NA   1.54
-    
+
 ---
 
-Casting
-=======
+## Casting
 
 Adding another column header variable creates columns that comprise all combinations of the two column header variable values. Let's add another sample of data from the Smiths:
 
@@ -518,7 +494,7 @@ Adding another column header variable creates columns that comprise all combinat
     10 Mary Smith    2   weight     NA
     11 John Smith    2   height  1.870
     12 Mary Smith    2   height  1.540
-    
+
 Now, try casting with two column header variables:
 
     !r
@@ -527,15 +503,13 @@ Now, try casting with two column header variables:
     1 John Smith  36.3    33       99       90    2.057     1.87
     2 Mary Smith    NA    NA       NA       NA    1.694     1.54
 
-Presenter Notes
-===============
+## Presenter Notes
 
 data frames are not allowed to have hierarchical column headers
 
 ---
 
-Exercise
-========
+## Exercise
 
 Start with the `smiths` dataset and reshape it as follows:
 
@@ -545,17 +519,15 @@ Start with the `smiths` dataset and reshape it as follows:
       2   weight      90.00         NA
       3   height       1.87       1.54
 
-Presenter Notes
-===============
+## Presenter Notes
 
     > msmiths <- melt(smiths, id=1:2)
     > dcast(msmiths, variable ~ subject)
-    
+
 
 ---
 
-Aggregation
-===========
+## Aggregation
 
 Aggregation occurs when the combination of variables in the cast formula does not identify individual observations.
 
@@ -575,8 +547,7 @@ Consider the Nashville precipitation data on the GitHub repo:
 
 ---
 
-Aggregation
-===========
+## Aggregation
 
 Using aggregation, we can calculate the total annual precipitation:
 
@@ -589,7 +560,7 @@ Using aggregation, we can calculate the total annual precipitation:
     4   1874 58.24
     5   1875 53.45
     ...
-    
+
 Or, the average precipitation per month:
 
     !r
@@ -604,8 +575,7 @@ Or, the average precipitation per month:
 
 ---
 
-Margins
-=======
+## Margins
 
 Its often useful to see the total for each row and column. These totals are known as margins or marginal distributions.
 
@@ -615,14 +585,13 @@ Its often useful to see the total for each row and column. These totals are know
     1    1871   2.76   4.58   5.01   4.13 ...   0.95 1.31   2.13   1.65 32.74
     2    1872   2.32   2.11   3.14   5.91 ...   4.50 1.58   2.25   2.38 40.20
     3    1873   2.96   7.14   4.11   3.59 ...   1.81 4.28   4.36   5.94 51.69
-    ...                                    
+    ...
     141  2011   2.31   5.54   4.59   7.51 ...   6.20   0.93   6.15   4.25   52.14
     142 (all) 637.84 577.79 701.84 592.83 ... 476.25 365.47 519.71 588.85 6640.71
-    
+
 ---
 
-Example: rainfall data
-======================
+## Example: rainfall data
 
 Import the `nashville_precip.txt` and perform the following:
 
@@ -635,20 +604,18 @@ Import the `nashville_precip.txt` and perform the following:
     * summer: jun, jul, aug,
     * autumn: sep, oct, nov
 
-Presenter Notes
-===============
+## Presenter Notes
 
     > mprecip <- melt(precip, id=1)
-    > mprecip$season <- ifelse(mprecip$variable %in% c('Jan','Feb','Dec'), 
-    "winter", ifelse(mprecip$variable %in% c('Mar','Apr','May'), 
-    "spring", ifelse(mprecip$variable %in% c('Jun','Jul','Aug'), 
+    > mprecip$season <- ifelse(mprecip$variable %in% c('Jan','Feb','Dec'),
+    "winter", ifelse(mprecip$variable %in% c('Mar','Apr','May'),
+    "spring", ifelse(mprecip$variable %in% c('Jun','Jul','Aug'),
     "summer", "autumn")))
     > dcast(mprecip, Year ~ season, sum)
-    
+
 ---
 
-More `reshape`
-==============
+## More `reshape`
 
 Wickham, H. 2007. *Reshaping Data with the reshape Package*, Journal of Statistical Software, 21(12).
 

@@ -1,10 +1,8 @@
-Split-Apply-Combine
-===================
+# Split-Apply-Combine
 
 ---
 
-Split-Apply-Combine
-===================
+## Split-Apply-Combine
 
 The split-apply-combine approach to data analysis is used to:
 
@@ -20,8 +18,7 @@ We encounter these situations often:
 
 ---
 
-Split-Apply-Combine
-===================
+## Split-Apply-Combine
 
 There are many tools for implementing split-apply-combine:
 
@@ -32,24 +29,44 @@ There are many tools for implementing split-apply-combine:
 In R, the use of `apply` can be unintuitive:
 
     !r
-    > yrs <- 2001:2003
-    > head(sapply(yrs, getData))
-             [,1]           [,2]           [,3]          
-    playerID Character,1339 Character,1319 Character,1347
-    yearID   Integer,1339   Integer,1319   Integer,1347  
-    stint    Integer,1339   Integer,1319   Integer,1347  
-    teamID   Character,1339 Character,1319 Character,1347
-    lgID     Character,1339 Character,1319 Character,1347
-    G        Integer,1339   Integer,1319   Integer,1347  
+    > library(RSQLite)
+    > setwd("~/Bios301/baseball-databank")
+    > con <- dbConnect(dbDriver('SQLite'), dbname='baseball-archive-2011.sqlite')
+    > batting <- dbReadTable(con, "Batting")
+    > getData <- function(y) batting[batting$yearID==y,]
+    > head(getData(2001), 3)
+         playerID yearID stint teamID lgID   G G_batting  AB   R   H X2B X3B HR RBI
+    50   abadan01   2001     1    OAK   AL   1         1   1   0   0   0   0  0   0
+    98  abbotje01   2001     1    FLO   NL  28        28  42   5  11   3   0  0   5
+    119 abbotku01   2001     1    ATL   NL   6         6   9   0   2   0   0  0   0
+        SB CS  BB  SO IBB HBP SH SF GIDP G_old
+    50   0  0   0   0   0   0  0  0    0     1
+    98   0  0   3   7   0   1  0  0    1    28
+    119  1  0   0   3   0   0  0  0    0     6
 
 ---
 
-`plyr`
-======
+## Split-Apply-Combine
+
+    > yrs <- 2001:2003
+    > head(sapply(yrs, getData))
+             [,1]           [,2]           [,3]
+    playerID Character,1339 Character,1319 Character,1347
+    yearID   Integer,1339   Integer,1319   Integer,1347
+    stint    Integer,1339   Integer,1319   Integer,1347
+    teamID   Character,1339 Character,1319 Character,1347
+    lgID     Character,1339 Character,1319 Character,1347
+    G        Integer,1339   Integer,1319   Integer,1347
+
+![Homer](http://www.simpsoncrazy.com/content/pictures/homer/homer-doh.png)
+
+---
+
+## `plyr`
 
 An effective implementation of split-apply-combine in R is in the `plyr` package.
 
-There is a suite of `ply` functions that are named according to the desired input and output formats. 
+There is a suite of `ply` functions that are named according to the desired input and output formats.
 
 * the first letter denotes the type of data **input**: `d` for data frame, `a` for array, `l` for list.
 * the second letter denotes the type of data **output**
@@ -58,16 +75,16 @@ For example, `ddply` takes a data frame as input and returns a data frame; `alpl
 
 ---
 
-Example: Ozone
-==============
+## Example: Ozone
 
-The `plyr` package contains a sample dataset containing monthly ozone averages on a 24 x 24 grid in Central America, from Jan 1995 to Dec 2000. 
+The `plyr` package contains a sample dataset containing monthly ozone averages on a 24 x 24 grid in Central America, from Jan 1995 to Dec 2000.
 
 * 3 dimensions: latitude, longitude, time (24 x 24 x 72)
 
-We may want to remove the seasonality from the dataset by running a robust linear model `rlm` on each location, and extracting the residuals. For a single loction:
+We may want to remove the seasonality from the dataset by running a robust linear model `rlm` on each location, and extracting the residuals.
 
     !r
+    > data(ozone)
     > one_loc <- ozone[1, 1, ]
     > month <- ordered(rep(1:12, length = 72))
     > model <- rlm(one_loc ~ month - 1)
@@ -75,10 +92,13 @@ We may want to remove the seasonality from the dataset by running a robust linea
 
 ![residuals](images/resid.png)
 
+## Presenter Notes
+
+This example is for one location
+
 ---
 
-Example: Ozone
-==============
+## Example: Ozone
 
 How would we apply this to **all** the locations?
 
@@ -102,14 +122,13 @@ Using `for` loops:
         deseas[i, j, ] <- resid(mod)
       }
     }
-    
+
 ---
 
-Example: Ozone
-==============    
+## Example: Ozone
 
 Using `apply` functions:
-    
+
     !r
     models <- apply(ozone, 1:2, deseasf)
     resids_list <- lapply(models, resid)
@@ -119,36 +138,35 @@ Using `apply` functions:
     # Transpose residuals
     deseas <- aperm(resids, c(2, 3, 1))
     dimnames(deseas) <- dimnames(ozone)
-    
+
 These approaches either require a lot of "bookkeeping" (`for` loops) or a lot of manual shape manipulation (`apply`).
+
+* `aperm` is an array permutation function, allowing for a transposition among multiple dimensions
 
 ---
 
-Example: Ozone
-==============
+## Example: Ozone
 
 Using `plyr` functions:
 
     !r
     > models <- aaply(ozone, 1:2, deseasf)
     > deseas <- aaply(models, 1:2, resid)
-    
+
 The general form of `aaply` is:
 
     !r
     aaply(.data, .margins, .fun, ..., progress="none")
-    
+
 So, in our example, data are split by the first two dimensions (`.margins`) over which the function `.fun` is applied.
 
-Presenter Notes
-===============
+## Presenter Notes
 
 dot notation to prevent name collisions with arguments of the processing function.
 
 ---
 
-Margins
-=======
+## Margins
 
 Three ways of splitting up data are:
 
@@ -160,8 +178,7 @@ Three ways of splitting up data are:
 
 ---
 
-Useful Functions
-================
+## Useful Functions
 
 The function specified in `.fun` can be almost anything, but there are some common ones that are broadly useful:
 
@@ -174,12 +191,17 @@ The function specified in `.fun` can be almost anything, but there are some comm
 
 ---
 
-`d*ply`
-=======
+## `d*ply`
 
-When operating on a data frame, we split on variables using the `d*ply` functions. So, the second argument specifies the variable(s):
+When operating on a data frame, we split on variables using the `d*ply` functions, *e.g.* `ddply`:
 
-* `.(var1)` will split the data frame into groups defined by the value of the `var1` variable. 
+    ddply(.data, .variables, .fun = NULL, ...,
+      .progress = "none", .inform = FALSE, .drop = TRUE,
+      .parallel = FALSE, .paropts = NULL)
+
+So, the second argument specifies the variable(s):
+
+* `.(var1)` will split the data frame into groups defined by the value of the `var1` variable.
 * `.(a, b, c)` will group by interaction of variables, with output labelled with all variables.
 * functions of variables: `.(round(a))`, `.(a * b)`
 * character vector of column names: `c("var1", "var2")`
@@ -187,17 +209,15 @@ When operating on a data frame, we split on variables using the `d*ply` function
 
 ---
 
-`d*ply`
-=======
+## `d*ply`
 
 ![data frame split](images/dfsplit.png)
 
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
-Let's use `plyr` to explore the baseball databank database. Let's say we want to examine the performance of players over their careers. 
+Let's use `plyr` to explore the baseball databank database. Let's say we want to examine the performance of players over their careers.
 
 To make players comparable, we need to transform the year into "career year", which is the number of years since the player started in the major leagues.
 
@@ -220,24 +240,22 @@ To make players comparable, we need to transform the year into "career year", wh
     43111  0  6   19   157     5
     43112  1  8   17   160     6
     43113  0  6   20   157     7
-    
+
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
 To perform this transformation on all the players, we can use `ddply`:
 
     !r
-    > batting <- ddply(batting, .(playerID), transform, cyear = yearID - min(yearID) + 1, 
+    > batting <- ddply(batting, .(playerID), transform, cyear = yearID - min(yearID) + 1,
     + .progress="text")
     |===============================================================================| 100%
 
 ---
 
-Summarize
-=========
-    
+## Summarize
+
 We have seen how the `plyr` function `transform` adds columns to a data frame. `summarize` similarly performs group-wise summaries.
 
 For example, we can determine how many years a player has played, and with how many teams:
@@ -246,11 +264,11 @@ For example, we can determine how many years a player has played, and with how m
     > summarize(chipper, career=max(yearID)-min(yearID), nteams=length(unique(teamID)))
       career nteams
     1     18      1
-    
+
 This is more powerful when used alongside `ddply` to summarize the careers of every player in the dataset:
 
     !r
-    > batting_sum <- ddply(batting, .(playerID), summarize, career=max(yearID)-min(yearID), 
+    > batting_sum <- ddply(batting, .(playerID), summarize, career=max(yearID)-min(yearID),
         nteams=length(unique(teamID)))
     > head(batting_sum)
        playerID career nteams
@@ -260,12 +278,11 @@ This is more powerful when used alongside `ddply` to summarize the careers of ev
     4  aasedo01     13      5
     5  abadan01      5      3
     6  abadfe01      1      1
-            
+
 
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
 Now, let's examine the on base percentage of players over their careers.
 
@@ -277,8 +294,7 @@ Chipper Jones:
 
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
 We can hypothesize a linear trend:
 
@@ -286,25 +302,24 @@ We can hypothesize a linear trend:
     model <- function(df) {
         lm((H+BB+HBP)/(AB+BB+HBP+SF) ~ cyear, data = df)
     }
-    
+
     > model(chipper)
     Call:
     lm(formula = (H + BB + HBP)/(AB + BB + HBP + SF) ~ cyear, data = df)
 
     Coefficients:
-    (Intercept)        cyear  
-        0.48650     -0.00632  
-      
+    (Intercept)        cyear
+        0.48650     -0.00632
+
 To apply this to all players:
 
     !r
     > batting$OBP <- with(batting, (H + BB + HBP)/(AB + BB + HBP + SF))
     > bmodels <- dlply(batting[!is.na(batting$OBP),], .(playerID), model)
-    
+
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
 `bmodels` is a list of linear model objects; we probably want to extract key model outputs, such as coefficient estimates, r-squared, etc.
 
@@ -319,18 +334,16 @@ Example: Baseball
      3 aaronto01  0.27953573 -0.0007069448 0.005608915
      4  aasedo01  0.00000000            NA 0.000000000
      5  abadan01 -0.05872576  0.0786703601 0.979025053
-    
+
 ![r-square](images/rsquare.png)
 
-Presenter Notes
-===============
+## Presenter Notes
 
 Most models fit very poorly; some perfectly
 
 ---
 
-Example: Baseball
-=================
+## Example: Baseball
 
 If we want to see which players had perfect fits to the linear model, we need to merge bcoefs with the original data frame.
 
@@ -339,15 +352,14 @@ If we want to see which players had perfect fits to the linear model, we need to
     > subset(battingcoef, rsquare > 0.999)$playerID[1:10]
     [1] "abbotky01" "abbotky01" "abbotky01" "abbotky01" "accarje01" "accarje01" "accarje01" "accarje01"
     [9] "accarje01" "accarje01"
-     
+
 We can also evaluate the intercept-slope relationship.
 
 ![intercept vs slope](images/intercept-slope.png)
 
 ---
 
-Exercise: BABIP
-===============
+## Exercise: BABIP
 
 An advanced baseball metric known as **Batting Average on Balls In Play** (BABIP) attempts to tease apart the component of a pitcher's performance that is due to things beyond the pitcher's control. A consistently low BABIP means that a pitcher may be getting lucky!
 
@@ -359,8 +371,7 @@ Perhaps more meaningfully, find the highest season (rather than career) BABIP in
 
 ---
 
-More `plyr`
-===========
+## More `plyr`
 
 Wickham, H. 2011. *The Split-Apply-Combine Strategy for Data Analysis*, Journal of Statistical Software, 40(1).
 
