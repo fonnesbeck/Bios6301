@@ -18,21 +18,21 @@ To obtain full marks, you must:
 
 a. Write a function `eval_poly` which will evaluate and return polynomials of the form:
 
-$$P(x) = c_n x^{n−1} + c_{n−1} x^{n−2} + \ldots + c_2 x + c_1$$
+$$P(x) = c\_n x^{n−1} + c\_{n−1} x^{n−2} + \ldots + c\_2 x + c\_1$$
 
 The arguments of the function should include $x$ and the vector of polynomial coefficients $c = [c_1, \ldots, c_n]$.
 
 b. For moderate to large values of n, evaluation of a polynomial at x can be done more efficiently using Horner’s Rule:
 
-1. Set $a_n \leftarrow c_n$.
-2. For $i=n−1,\ldots,1$ set $a_i = a_{i+1} x+c_i$.
+1. Set $a\_n \leftarrow c_n$.
+2. For $i=n−1,\ldots,1$ set $a\_i = a\_{i+1} x+c\_i$.
 3. Return $a_1$. (This is the computed value of $P(x)$).
 
 Write an R function with arguments x and a vector of polynomial coefficients and which returns the value of the polynomial evaluated at x. Ensure that your function returns an appropriate vector of values when x is a vector.
 
 c. Do some timings to compare the algorithms used in the previous two questions. In particular, try the following code:
 
-```r
+```
 system.time(eval_poly(x=seq(-10, 10, length=500000), c(1,-2,2,3,4,6,7)))
 ```
 
@@ -97,3 +97,22 @@ b. Calculate **team** home run rate (not individual players) using `ddply` (*rem
 c. Import the `leagues.csv` table from the `databases` folder and merge it with your dataset to get the proper league names corresponding to `lgID` (league ID -- though there are only 2 today, there have been 7 leagues in the history of baseball).
 
 d. Create a single scatter plot using `ggplot2` of HR rate plotted against year, and color code the points according to  league.
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<!--<script type="text/javascript"
+    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>-->
+<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
