@@ -6,16 +6,16 @@
 \usepackage{fixltx2e} % provides \textsubscript
 % use microtype if available
 \IfFileExists{microtype.sty}{\usepackage{microtype}}{}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \usepackage{fontspec}
-  \ifxetex
-    \usepackage{xltxtra,xunicode}
-  \fi
-  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
-  \newcommand{\euro}{€}
-\fi
+% \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+%   \usepackage[utf8]{inputenc}
+% \else % if luatex or xelatex
+%   \usepackage{fontspec}
+%   \ifxetex
+%     \usepackage{xltxtra,xunicode}
+%   \fi
+%   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+%   \newcommand{\euro}{€}
+% \fi
 \usepackage{color}
 \usepackage{fancyvrb}
 \DefineShortVerb[commandchars=\\\{\}]{\|}
