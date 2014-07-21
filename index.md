@@ -22,6 +22,8 @@ permission of instructor.
 
 # Instructor
 
+[Cole Beck](cole.beck@vanderbilt.edu), BSc, Computer Systems Analyst III
+
 [Chris Fonnesbeck](chris.fonnesbeck@vanderbilt.edu), PhD, Assistant Professor of Biostatistics
 
 Room 11137, 11th floor, 2525 West End Avenue
