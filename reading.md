@@ -14,3 +14,5 @@ Programming](http://nostarch.com/sites/default/files/imagecache/product_main_pag
 
 [The Art of R Programming](http://nostarch.com/artofr.htm): Norman
 Matloff
+
+[Advanced R](http://adv-r.had.co.nz/): Hadley Wickham
