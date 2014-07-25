@@ -7,7 +7,7 @@ title: Introduction to Statistical Computing
 
 # Lecture Schedule
 
-**Time and Place**: Tuesdays and Thursdays from 1:30-2:30pm in [RLH 306AB](http://goo.gl/maps/4c3W)
+**Time and Place**: Tuesdays and Thursdays from 1:30-2:30pm in 11105 (11th floor), 2525 West End Ave
 
 **Office hours**: By appointment
 
