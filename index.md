@@ -26,7 +26,7 @@ permission of instructor.
 
 [Chris Fonnesbeck](chris.fonnesbeck@vanderbilt.edu), PhD, Assistant Professor of Biostatistics
 
-Room 11137, 11th floor, 2525 West End Avenue
+Room 11105, 11th floor, 2525 West End Avenue
 
 ***Teaching Assistant***: [Svetlana Eden](svetlana.eden@vanderbilt.edu)
 
