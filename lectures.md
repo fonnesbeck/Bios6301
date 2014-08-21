@@ -16,7 +16,7 @@ title: Introduction to Statistical Computing
 
 This schedule is *tentative* and subject to change at any time.
 
-* [Course introduction](https://dl.dropbox.com/u/233041/Bios301/lecture1_intro.html)
+* [Course introduction](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture1_intro.html)
 * [Version control using Git](https://dl.dropbox.com/u/233041/Bios301/lecture1_git.html)
 * Document preparation:
     - [LaTeX](https://dl.dropbox.com/u/233041/Bios301/lecture2_latex.html)
