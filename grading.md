@@ -17,6 +17,4 @@ All assignments will be submitted electronically, via students' private GitHub r
 
 ## Final exam
 
-This year's final exam will be a take-home exam which will be pushed to this repository at on the morning of Thursday, 12 December 2013 and be due no later than noon the following day (12/13/13).
-
-It will consist of 4-5 questions based on the entire course syllabus.
+Information about the final exam will be released later.
