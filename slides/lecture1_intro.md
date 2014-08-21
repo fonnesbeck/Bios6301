@@ -4,17 +4,16 @@
 
 ## Instructor
 
-**Christopher Fonnesbeck**
+**Cole Beck**
 
-* Office: T-2303 MCN
-* Email: chris.fonnesbeck@vanderbilt.edu
-* Twitter: vandy_biostat
+* Office: 11113Q, 2525 WEA
+* Email: cole.beck@vanderbilt.edu
 
 ## Teaching Assistant
 
 **Svetlana Eden**
 
-* Office: S-2323 MCN
+* Office: 2525 WEA
 * Email: svetlana.eden@vanderbilt.edu
 
 ---
@@ -33,19 +32,19 @@ Many modern problems/data require a computational approach
 Bios 301
 ========
 
-* **Week 1**: Course introduction; Version control using Git
-* **Week 2**: Document preparation using LaTeX, Markdown and `knitr`
-* **Week 3**: Data, data types and data structures (Chapters 2-5)
+* **Week 1**: Course introduction
+* **Week 2**: Data, data types and data structures (Chapters 2-5); Version control using Git
+* **Week 3**: Document preparation using LaTeX, Markdown and `knitr`
 * **Week 4**: Control structures; Writing and calling functions (Chapter 7)
 * **Week 5**: Simulation; optimization (Chapter 8)
 * **Week 6**: Debugging and testing (Chapter 13)
 * **Week 7**: Top-down design and scoping
 * **Week 8**: Programming paradigms (Chapter 9)
-* **Week 9**: Scientific graphics; `ggplot2` (Chapter 12)
+* **Week 9**: Regular expressions; High performance computing (Chapters 11, 14)
 * **Week 10**: Split, apply and combine
-* **Week 11**: High performance computing; basic parallel computing (Chapters 14, 16)
-* **Week 12**: I/O and databases; regular expressions (Chapters 10-11)
-* **Week 13**: Overview of STATA
+* **Week 11**: Scientific graphics; `ggplot2` (Chapter 12)
+* **Week 12**: Overview of STATA
+* **Week 13**: R package development
 
 Presenter Notes
 ===============
@@ -86,7 +85,7 @@ Content later in the course builds on what was presented earlier -- keep up!
 A final course grade will be calculated based on:
 
 - four (4) equally-weighted homework assignments (50%)
-- a take-home final exam (50%)
+- a final exam (50%)
 
 ---
 
@@ -105,10 +104,9 @@ Read some of it every week.
 
 - Statistical analysis tools: [R](http://cran.r-project.org/), [Stata](http://www.stata.com/)
 - Version control system: [Git](http://git-scm.com/)
-- Document preparation tools: LaTeX, [knitr](http://yihui.name/knitr/), [MultiMarkdown](http://fletcherpenney.net/multimarkdown/)
+- Document preparation tools: [LaTeX](http://www.latex-project.org/), [knitr](http://yihui.name/knitr/), [MultiMarkdown](http://fletcherpenney.net/multimarkdown/)
 - Relational database: [SQLite](http://www.sqlite.org/)
-- Programming editor: [TextMate](http://macromates.com/ "TextMate — The Missing Editor for Mac OS X"), [SublimeText](http://www.sublimetext.com/ "Sublime Text: The text editor you'll fall in love with"), [Vim](http://www.vim.org/ "welcome home : vim online"), [Emacs](http://www.gnu.org/s/emacs/ "GNU Emacs - GNU Project - Free Software Foundation
-(FSF)")
+- Programming editor: [RStudio](http://www.rstudio.com/)
 
 ---
 
