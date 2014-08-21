@@ -10,6 +10,7 @@ title: Introduction to Statistical Computing
 **Time and Place**: Tuesdays and Thursdays from 1:30-2:30pm in 11105 (11th floor), 2525 West End Ave
 
 **Office hours**
+
 * Cole: after class, or by appointment
 * Svetlana: Wednesdays, 11:00-12:00, 11102, 2525 WEA
 
