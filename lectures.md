@@ -17,11 +17,11 @@ title: Introduction to Statistical Computing
 This schedule is *tentative* and subject to change at any time.
 
 * [Course introduction](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture1_intro.html)
-* [Version control using Git](https://dl.dropbox.com/u/233041/Bios301/lecture1_git.html)
+* [Version control using Git](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture2_git.html)
 * Document preparation:
-    - [LaTeX](https://dl.dropbox.com/u/233041/Bios301/lecture2_latex.html)
-    - [knitr](https://dl.dropbox.com/u/233041/Bios301/lecture2_knitr.html)
-    - [Markdown](https://dl.dropbox.com/u/233041/Bios301/lecture2_markdown.html)
+    - [LaTeX](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture3_latex.html)
+    - [knitr](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture3_knitr.html)
+    - [Markdown](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture3_markdown.html)
 * Introduction to R (Chapters 2-5)
     - [R basics](https://dl.dropbox.com/u/233041/Bios301/lecture3_rbasics.html)
     - [data](https://dl.dropbox.com/u/233041/Bios301/lecture3_numbers.html)
