@@ -15,8 +15,6 @@ The advantages of using Markdown over HTML (and LaTeX):
 - allows writers to focus on content rather than formatting and layout
 - easier to learn and use
 
-See [The Markdown Tutorial](http://slekx.com) for more.
-
 Presenter Notes
 ===============
 
@@ -455,9 +453,7 @@ Markdown's underlying philosophy is one of simplicity.
 
 As a result, some content that one would expect in a scientific document is not supported directly by Markdown. There exist a several 3rd party tools to extend Markdown's functionality
 
-- MathJax
-- MultiMarkdown
-- Pandoc
+MathJax, MultiMarkdown, Pandoc
 
 ---
 
@@ -554,161 +550,108 @@ It adds multiple syntax features:
 
 ---
 
-## MultiMarkdown
+## R Markdown
 
-MultiMarkdown adds multiple output formats.
+[R markdown](http://rmarkdown.rstudio.com/) is similar to MultiMarkdown, as it extends the functionality of Markdown.
 
-![MMD](images/MMD-Map.png)
+It's an R package (rmarkdown), with integrated support in RStudio.
 
-Presenter Notes
-===============
-
-Plain markdown typically only becomes html.
+![RMDNEW](images/new_rmd.png)
 
 ---
 
-Using MultiMarkdown
-===================
-
-MultiMarkdown is run from the command line, using the `multimarkdown` executable. By default, it generates html to standard output:
-
-    multimarkdown file.txt > file.html
-
-Other output formats can be specified using the `-t` flag:
-
-    multimarkdown -t latex file.txt > file.tex
-
-MultiMarkdown provides several convenience functions for common conversions:
-
-    mmd file.txt
-    mmd2tex file.txt
-    mmd2opml file.txt
-    mmd2odf file.txt
-
-Presenter Notes
+R Code Chunks
 ===============
 
+## Code Block
+
+    !r
+    ```{r mychunk1}
+    set.seed(44)
+    n <- 10000
+    x <- sort(rnorm(n))
+    (x[n*0.975] - mean(x))/sd(x)
+    ```
+
+## Inline Code Chunk
+
+    The Z-score for the 97.5 percentile point of a
+    standard normal distribution is `r qt(0.975, Inf)`.
+
+![RMDCODE](images/code_rmd.png)
+
+---
+
+R Table Output
+===============
+
+By default data frames and matrixes are output as they would be in the R terminal (in a monospaced font).
+
+    !r
+    ```{r}
+    x <- data.frame(id=1:18,
+        par=sample(3:5, 18, replace=TRUE, prob=c(4/18,14/18,4/18)),
+        handicap=sample(18)
+    )
+    x
+    ```
+
+![RMDTAB](images/table_rmd.png)
+
+
+---
+
+R Table Output
+===============
+
+However, data can be displayed with additional formatting, such as HTML.
+
+    !r
+    ```{r, results='asis'}
+    knitr::kable(x)
+    ```
+
+![RMDKAB](images/kable_rmd.png)
+
+---
+
+Embedding Equations
+===============
+
+- \$equation\$ for inline equations
+- \$\$ equation \$\$ for display equations
+- &lt;math ...>&lt;/math> for MathML equations
+
+<!-- -->
+
+    Arithmetic mean: $\frac{1}{n} \sum_{i=1}^{n} x_{i}$
+
+Arithmetic mean: $\frac{1}{n} \sum_{i=1}^{n} x_{i}$
 
 ---
 
 Metadata
-========
-
-MMD optionally allows users to specify document metadata that can be used to control processing of certain document formats.
-
-    latex input:        mmd-article-header  
-    Title:              Introduction to R  
-    Affiliation:        Bios301       
-    Author:             Christopher J. Fonnesbeck
-    Date:               Fall 2012
-    latex mode:         memoir  
-    xhtml header:       <script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?
-        config=TeX-AMS-MML_HTMLorMML"></script>
-    latex input:        mmd-article-begin-doc  
-    latex footer:       mmd-memoir-footer 
-
-The metadata must be placed at the top of the document in *key: value* format, as shown above. It is particularly useful when the target format is pdf via LaTeX.
-
-Presenter Notes
 ===============
 
+RMD documents can contain a metadata section.
 
----
+    ---
+    title: "Sample Document"
+    output:
+      html_document:
+        toc: true
+    bibliography: bibliography.bib
+    ---
 
-Image and Link Attributes
-=========================
-
-MMD allows for the customization of images and links without having to drop back to html.
-
-Specifying image size:
-
-    [histogram]: images/histogram.png "Weight by age" width=40px 
-    height=400px
-
-Putting a border around a link:
-
-    [Bios301 link]:  http://bit.ly/bios301 class=external
-                  style="border: solid black 1px;"
-
-Presenter Notes
-===============
-
----
-
-Tables
-======
-
-MMD allows you to turn this:
-
-    [MultiMarkdown vs. Crayons]  
-    | Features                          | MultiMarkdown |  Crayons |  
-    ----------------------------------- | :-----------: | :------: |  
-    Melts in warm places                |       No      |    Yes   |  
-    Mistakes can be easily fixed        |      Yes      |    No    |  
-    Easy to copy documents for friends  |      Yes      |    No    |  
-    Fun at parties                      |       No      | Why not? |  
-
-... into this:
-
-![MMD table](images/mmd_table.png)
-
-Presenter Notes
-===============
-
-It is optional whether you have |’s at the beginning and end of lines.
-You can use normal Markdown markup within the table cells.
-To set alignment, you can use a colon to designate left or right alignment, or a colon at each end to designate center alignment
-
----
-
-Citations
-=========
-
-To use citations in MultiMarkdown, you use a syntax much like that for anchors:
-
-    For a good intro to R programming, see the Bios 301 textbook 
-    [Chapters 1-3][#Matloff:2011].
-     
-And following is the description of the reference to be used in the bibliography.
-
-     [#Matloff:2011]: Norman Matloff. *The Art of R Programming: 
-     A Tour of Statistical Software Design*.  No Starch Press, 2011.
-
-Which appears as:
-
-<p>For a good intro to R programming, see the Bios 301 textbook <a class="citation" href="#fn:1" title="Jump to citation">[<span class="locator">Chapters 1&#8211;3</span>, 1]<span class="citekey" style="display:none">Matloff:2011</span></a>.</p>
-
-<ol>
-<li id="fn:1" class="citation"><span class="citekey" style="display:none">Matloff:2011</span><p>Norman Matloff. <em>The Art of R Programming: A Tour of Statistical Software Design</em>. No Starch Press, 2011.</p>
-</li>
-</ol>
-
-
-Presenter Notes
-===============
-
-
----
-
-Bundestag and Markdown
-======================
-
-The German Bundestag hosts a repository of all Germany’s rules and regulations on GitHub, all in Markdown.
-
-![bundestag](images/bundestag.png)
-
-Presenter Notes
-===============
-
+The metadata must be placed at the top of the document in *key: value* format (YAML), as shown above.
 
 ---
 
 # Exercise
 
-To get some practice using Markdown, complete the Markdown tutorial (`markdown_tutorial.md`) located in the *exercises* folder on the course GitHub repository.
+Create a new R markdown file in RStudio and compile it as a PDF and HTML document.
 
-Try building the `r_basics.mmd` file located in the *notes* folder.
+To get some practice using Markdown, complete the Markdown tutorial (`markdown_tutorial.md`) located in the *exercises* folder on the course GitHub repository.
 
 <!-- Mathjax -->
 <script type="text/x-mathjax-config">
