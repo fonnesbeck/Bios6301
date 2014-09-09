@@ -356,8 +356,6 @@ Grab the files `binomial.tex` and `binomial.R` in the exercises folder of the Bi
 2. Change the options on the R code so that it shows shows the plot, but not the code itself.
 3. Add a sentence at the bottom of the document that says: "*The mean value of the binomial sample was was x*", but replace *x* with a variable that inserts the actual mean value.
 
-Try building the `r_basics.rmd` file located in the *notes* folder.
-
 [knitr]: http://yihui.name/knitr/
 [noweb]: http://www.cs.tufts.edu/~nr/noweb/
 
