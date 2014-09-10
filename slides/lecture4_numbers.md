@@ -365,10 +365,7 @@ What happens if you set the value of *x* to 10? What about 1000, or 1 million?
 
 What is a simple way to expand this function to deal with large values of *x*?
 
-### Presenter Notes
 
-
-<!-- Mathjax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -378,6 +375,5 @@ What is a simple way to expand this function to deal with large values of *x*?
     }
   });
 </script>
-<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>

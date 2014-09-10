@@ -897,8 +897,6 @@ Recursion allows us to build them.
     > eigen(dataset2)[[1]][[2]]
     [1] 0.3296503
 
-### Presenter Notes
-
 
 <!-- Mathjax -->
 <script type="text/x-mathjax-config">
