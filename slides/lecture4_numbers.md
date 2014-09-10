@@ -368,6 +368,7 @@ What is a simple way to expand this function to deal with large values of *x*?
 ### Presenter Notes
 
 
+<!-- Mathjax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -377,5 +378,6 @@ What is a simple way to expand this function to deal with large values of *x*?
     }
   });
 </script>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript"
+    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
