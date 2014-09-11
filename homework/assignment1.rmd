@@ -69,7 +69,7 @@ Submit a single knitr file (named `homework1.rmd`), along with a valid PDF outpu
 
 4. **Basic programming** (10 points)
 
-    1. Let $h(x,n)=1+x+x^2+\ldots+x^n = \sum_{i=0}^n x_i$. Write an R program to calculate $h(x,n)$ using a `for` loop. (5 points)
+    1. Let $h(x,n)=1+x+x^2+\ldots+x^n = \sum_{i=0}^n x^i$. Write an R program to calculate $h(x,n)$ using a `for` loop. (5 points)
 
     1. If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Write an R program to perform the following calculations. (5 points)
 
