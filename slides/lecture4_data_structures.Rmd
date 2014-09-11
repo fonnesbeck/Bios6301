@@ -1,0 +1,731 @@
+---
+title: "Data Types and Structures in R"
+output: pdf_document
+---
+
+## Data Types
+
+R has several elemental data types.
+
+* numeric
+* integer
+* complex
+* logical
+* character
+
+---
+
+## Numeric
+
+Floating-point numbers are represented by the `numeric` type in R. It is the default computational data type.
+
+```{r}
+x <- 10.5      # assign a decimal value
+x
+class(x)       # print the class name of x
+```
+
+Even if we assign an integer to a variable, it gets saved as a `numeric` type:
+
+```{r}
+k <- 1
+k
+class(k)       # print the class name of k
+```
+
+We can query this directly:
+
+```{r}
+is.integer(k)  # is k an integer?
+```
+
+---
+
+## Integer
+
+Integers can be created by *casting* a numeric value, using the `as.integer()` function or attaching the `L` suffix:
+
+```{r}
+y <- as.integer(3)
+y
+class(y)
+is.integer(y)
+is.integer(5L)
+```
+
+We can cast other types to integers this way:
+
+```{r}
+as.integer(42.1343)
+as.integer("6.778")
+as.integer(TRUE)
+```
+
+---
+
+## Complex
+
+A complex value in R is defined via the pure imaginary value i.
+
+```{r}
+z <- 1 + 2i
+z
+class(z)
+```
+
+The following gives a warning as -1 is not a complex value.
+
+```{r}
+sqrt(-1)
+```
+
+Instead, we have to use the complex value -1 + 0i.
+
+```{r}
+sqrt(-1+0i)
+sqrt(as.complex(-1))
+```
+
+---
+
+## Logical
+
+A logical value is often created via comparison between variables.
+
+```{r}
+x <- 1; y <- 2
+z <- x > y
+z
+class(z)
+```
+
+Standard logical operations are "&" (and), "|" (or), and "!" (negation).
+
+```{r}
+u <- TRUE; v <- FALSE
+u & v          # u AND v
+u | v          # u OR v
+!u             # negation of u
+```
+
+---
+
+## Character
+
+A character object is used to represent string values in R. We convert objects into character values with the as.character() function:
+
+```{r}
+(x = as.character(3.14))
+class(x)
+```
+
+Two character values can be concatenated with the paste function.
+
+```{r}
+fname = "Joe"; lname ="Smith"
+paste(fname, lname)
+```
+
+---
+
+## Vectors
+
+The *fundamental* data structure in R.
+
+A vector is a data structure composed of multiple elements, all of the same *mode*.
+
+```{r}
+x <- c(88,5,12,13)
+x
+mode(x)
+```
+
+The function `c` combines the elements specified into a vector.
+
+Notice what happens when we try to change the data type of one of the elements:
+
+```{r}
+x[3] <- 'a'
+mode(x)
+```
+
+---
+
+### Exercise
+
+You now know about variable types: character, logical, numeric, integer, complex.  Try creating different combinations of these types (by creating vectors).  For instance, combining a numeric and integer will create a numeric-type vector.  This is because numeric types are less flexible than integer types.  Determine the order of flexibility for all five.
+
+```{r}
+mode(c(1, 1L)) # integer is more flexible than numeric
+```
+
+Reflect on the following:
+
+```{r}
+1 == "1"
+-1 < FALSE
+"10" < "3"
+"one" < 2
+```
+
+---
+
+### Presenter Notes
+
+The size of the vector is allocated to memory when it is created.
+
+---
+
+## Indexing
+
+The elements of a vector can be accessed via *indexing*, using square brackets.
+
+```{r}
+x <- c(88,5,12,13)
+x[2]
+x[1:3]
+x[c(4,1)]
+x[-2]
+x[x>10]
+big <- which(x>10)
+x[big]
+```
+
+Scalars are just one-element vectors:
+
+```{r}
+y <- 10
+y[1]
+y[2]
+```
+
+### Presenter Notes
+
+which() takes a Boolean vector and gives a vector of indices for the TRUE values; useful with tests
+
+---
+
+## Vector Arithmetic
+
+Operators apply to vectors "element-wise":
+
+```{r}
+y <- c(-7, -8, -10, -45)
+x+y
+```
+
+**Recycling**: elements in shorter vector are repeated when combined with a longer vector
+
+```{r}
+x + c(-7,-8)
+```
+
+---
+
+## Vector Comparisons
+
+Can also do pairwise comparisons, which returns a boolean vector:
+
+```{r}
+x > 9
+```
+
+Boolean operators work pairwise; but written double, combines individual values into a single Boolean:
+
+```{r}
+(x > 9) & (x < 20)
+(x > 9) && (x < 20)
+```
+
+To compare whole vectors, best to use `identical()` or `all.equal()`:
+
+```{r}
+x == y
+identical(c(0.5-0.3,0.3-0.1),c(0.3-0.1,0.5-0.3))
+all.equal(c(0.5-0.3,0.3-0.1),c(0.3-0.1,0.5-0.3))
+```
+
+---
+
+## Special Values
+
+In addition to the standard data types and data structures, there are four "special" values that you will encounter in R.
+
+* `NA`
+* `Inf`
+* `NaN`
+* `NULL`
+
+---
+
+NA
+==
+
+`NA` is used to represent missing values (*i.e.* not available). For example, if you expand the length of a vector beyond the indices where values were defined, `NA` values are inserted:
+
+```{r}
+v <- c(1,2,3)
+v
+length(v) <- 4
+v
+```
+
+---
+
+## Inf
+
+`Inf` represents infinity. It is most commonly encountered when a computation results in a number that is too big:
+
+```{r}
+2^1024
+-2^1024
+```
+
+This is also the value returned when you divide by 0:
+
+```{r}
+1/ 0
+```
+
+---
+
+## NaN
+
+`NaN` stands for "not a number", and it is returned when a computation is nonsensical:
+
+```{r}
+Inf - Inf
+0/0
+```
+
+---
+
+## NULL
+
+The `NULL` value indicates that there is no value assigned to a particular object. Note the difference between this and the notion of a missing value or a nonsensical value.
+
+---
+
+## Vectorized Functions
+
+Lots of functions take vectors as arguments:
+
+- `mean()`, `median()`, `sd()`, `var()`, `max()`, `min()`, `length()`, `sum()` yield single numbers
+- `sort()` returns a new vector
+- `hist()` takes a vector of numbers and produces a histogram and plots it
+- `summary()` gives a five-number summary of numerical vectors
+- `any()` and `all()` are useful on Boolean vectors
+
+For example:
+
+```{r}
+mean(x)
+sort(x)
+summary(x)
+any(x > 10)
+```
+
+### Presenter Notes
+
+Making a plot is a "side-effect"
+
+---
+
+## Named Elements
+
+You can give names to elements or components of vectors
+
+```{r}
+names(x) <- c("v1","v2","v3","foo")
+names(x)
+x[c("foo","v1")]
+```
+
+Labels are not actually part of the value;
+`names(x)` is just another vector (of characters):
+
+```{r}
+names(y) <- names(x)
+sort(names(x))
+which(names(x)=="foo")
+```
+
+You can also remove the names, temporarily or permanently:
+
+```{r}
+unname(x)
+x
+names(x) <- NULL
+x
+```
+
+---
+
+## Arrays
+
+Arrays add additional structure to vectors.
+
+```{r}
+x_arr <- array(x,dim=c(2,2))
+x_arr
+```
+
+Notice the array is filled column-wise. Arrays have several properties:
+
+```{r}
+dim(x_arr)
+is.vector(x_arr)
+is.array(x_arr)
+typeof(x_arr)
+str(x_arr)
+attributes(x_arr)
+```
+
+### Presenter Notes
+
+- arrays can be n-dimensional.
+- typeof() returns the type of the elements
+- str() gives the structure: here, a numeric array
+
+---
+
+## Array Indexing
+
+Can access a 2-D array either by pairs of indices or by the underlying vector:
+
+```{r}
+x_arr[1,2]
+x_arr[3]
+```
+
+Omitting an index means “all of it”:
+
+```{r}
+x_arr[c(1:2),2]
+x_arr[,2]
+```
+
+---
+
+## Operating on Arrays
+
+Some functions do not respect array structure, and operate on the underlying vector instead:
+
+```{r}
+which(x_arr > 9)
+```
+
+Other functions preserve array structure:
+
+```{r}
+y_arr <- array(y,dim=c(2,2))
+y_arr + x_arr
+```
+
+Others specifically act on each row or column of the array separately:
+
+```{r}
+rowSums(x_arr)
+```
+
+---
+
+## Matrices
+
+In R, a matrix is a specialization of a 2D array, with attributes for the numbers of columns and rows.
+
+```{r}
+dataset <- matrix(c(1,40,1,60),nrow=2)
+dataset
+is.array(dataset)
+is.matrix(dataset)
+(dataset2 <- matrix(c(1,40,1,60),nrow=2,byrow=T))
+```
+
+Matrices can be compared using functions like `identical` and `all.equal`:
+
+```{r}
+identical(dataset, dataset2)
+all.equal(dataset, dataset2)
+```
+
+### Presenter Notes
+
+Alternately, could specify `ncol`.
+Element-wise operations with the usual arithmetic and comparison operators.
+
+---
+
+## Matrix Multiplication
+
+Matrix multiplication has a special operator:
+
+```{r}
+(diag_3 <- diag(2)*3)
+dataset2 %*% diag_3
+```
+
+Multiplying by a vector:
+
+```{r}
+y <- c(10,20)
+dataset2 %*% y
+y %*% dataset2
+```
+
+### Presenter Notes
+
+R silently casts the vector as a row or column matrix.
+
+---
+
+## Matrix Operations
+
+Matrix transpose:
+
+```{r}
+t(dataset2)
+```
+
+Matrix determinant:
+
+```{r}
+det(dataset2)
+```
+
+Extracting or replacing the diagonal:
+
+```{r}
+diag(dataset2)
+diag(dataset2) <- c(4,12)
+dataset2
+```
+
+## Matrix Operations
+
+Creating a diagonal matrix or an identity matrix:
+
+```{r}
+diag(c(3,4))
+diag(2)
+```
+
+Accessing the lower and upper triangular part of a matrix:
+
+```{r}
+m2 <- matrix(1:9, 3, 3)
+upper.tri(m2)
+m2[lower.tri(m2)] <- NA
+m2
+```
+
+---
+
+## Matrix Operations
+
+Inverting a matrix:
+
+```{r}
+solve(dataset)
+solve(dataset) %*% dataset # Just to check!
+```
+
+Solving the linear system $\mathbf{A}\mathbf{x} = \mathbf{b}$ for unknown $\mathbf{x}$:
+
+```{r}
+dataset
+y
+solve(dataset, y)
+dataset %*% solve(dataset,y)
+```
+
+---
+
+## Naming Rows and Columns
+
+We can name either rows or columns or both, with rownames() and colnames():
+
+```{r}
+rownames(dataset2) <- c("subject1", "subject2")
+colnames(dataset2) <- c("intercept", "dose")
+dataset2
+```
+
+### Presenter Notes
+
+These are just character vectors, and we use the same function to get and to set their values
+Names help us understand what we’re working with
+
+---
+
+## Lists
+
+Lists allow for the storage of a sequence of values, not necessarily of the same type:
+
+```{r}
+my_distribution <- list("exponential",7,FALSE)
+my_distribution
+```
+
+Most of things which you can do with vectors you can also do with lists!
+
+---
+
+## Indexing Lists
+
+Use single square brackets (*i.e.* `[]`) to index a sub-list and double square brackets (*i.e.* `[[]]`) to access the list element.
+
+```{r}
+class(my_distribution)
+class(my_distribution[1])
+class(my_distribution[[1]])
+```
+
+What happens when you index a vector with double brackets?
+
+---
+
+## List Manipulation
+
+Add to lists with `c()` (also works with vectors):
+
+```{r}
+my_distribution <- c(my_distribution,7)
+my_distribution
+```
+
+Chop off the end of a list by setting length to something smaller:
+
+```{r}
+length(my_distribution)
+length(my_distribution) <- 3
+my_distribution
+```
+
+---
+
+## Named List Elements
+
+Lists are most effective when the list items are named:
+
+```{r}
+another_distribution <- list(family="gaussian",mean=7,sd=1,is.symmetric=TRUE)
+another_distribution
+```
+
+This allows access by name:
+
+```{r}
+another_distribution$family
+another_distribution["family"]
+```
+
+### Presenter Notes
+
+Lists give us a way to store and look data up by name rather than number (key-value pairs, dictionary, associative array, hash)
+
+---
+
+## Named List Elements
+
+Similarly, list elements can be added by name:
+
+```{r}
+another_distribution$was_estimated <- FALSE
+another_distribution
+```
+
+Remove an entry in the list by assigning it the value NULL.
+
+```{r}
+another_distribution$was.estimated <- NULL
+```
+
+---
+
+## Data Frames
+
+The `data.frame` is an analog of a spreadsheet data table, with `n` rows, representing observations or cases, and `p` columns, representing variables.
+
+`data.frame` generalizes both the `matrix` and `list`
+
+- columns are named
+- columns can be of different types
+- many matrix functions work: `rowSums()`, `summary()`
+- no matrix operations (*e.g.* multiply, transpose)
+
+The "default" data strucuture for statistical operations in R.
+
+---
+
+## Data Frames
+
+First, consider a `matrix` object, which is another sort of tabular structure we have seen.
+
+```{r}
+(data_matrix <- matrix(c(55.5,69.5,1,41,81.5,1,53.5,86,1), ncol=3, byrow=T))
+colnames(data_matrix) <- c("test1","test2","disease")
+data_matrix
+```
+
+---
+
+## Data Frames
+
+We can *cast* the matrix to a `data.frame` as follows:
+
+```{r}
+df <- data.frame(data_matrix)
+df
+```
+
+and easily manipulate the columns/rows:
+
+```{r}
+df$disease <- as.logical(df$disease)
+df
+df['test2']
+df[2,]
+```
+
+---
+
+## Manipulating Data Frames
+
+We can add rows or columns to an array or data-frame with `rbind()` and `cbind()`.
+
+```{r}
+rbind(df, list(test1=55.1, test2=80.4, disease=FALSE))
+rbind(df, c(55.1, 80.4, 2))
+cbind(df, list(sex=c('M','F','F')))
+```
+
+### Presenter Notes
+
+be careful about forced type conversions
+
+---
+
+## Structures of Structures
+
+Arbitrarily-complex data structures can be constructed from basic ones.
+
+- lists of lists
+- lists of vectors
+- lists of lists of lists of vectors
+
+Recursion allows us to build them.
+
+---
+
+## Example: eigenstructure
+
+`eigen()` calculates eigenvalues and eigenvectors of a matrix, and places them in a list:
+
+```{r}
+eigen(dataset2)
+class(eigen(dataset2))
+str(eigen(dataset2))
+dataset2 %*% eigen(dataset2)$vectors[,2]
+eigen(dataset2)[[1]][[2]]
+```
