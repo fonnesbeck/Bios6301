@@ -25,7 +25,7 @@ This schedule is *tentative* and subject to change at any time.
 * Introduction to R (Chapters 2-5)
     - [R basics](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture4_rbasics.html)
     - [data](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture4_numbers.html)
-    - [data types and data structures](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture4_data_structures.html)
+    - [data types and data structures](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture4_data_structures.pdf)
 * R Programming (Chapter 7)
     - [Control structures](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture5_control_structures.html)
     - [Writing and calling functions](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture5_functions.html)
