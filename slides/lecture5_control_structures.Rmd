@@ -1,6 +1,6 @@
 ---
 title: "Control Structures"
-output: html_document
+output: pdf_document
 ---
 
 ## Control Structures
@@ -19,17 +19,21 @@ Conditionals specify which calculation to execute, based on conditions:
 
 ###Examples:###
 
-$$|x| = \begin{array}{rl} x & \text{if } x \ge 0 \cr
--x & \text{if } x < 0 \end{array} .$$
+$$|x| = \left\{
+  \begin{array}{rl}
+    x & \text{if } x \ge 0 \\
+    -x & \text{if } x < 0
+  \end{array}
+\right.
+$$
 
-$$\phi(x) = \begin{array}{rl} x^2 & \text{if } |x| \le 1 \cr
-2|x|-1 & \text{if } |x| > 0 \end{array} .$$
-
-$$|x| = \left\\{  \begin{array}{rl} x & \text{if } x \ge 0 \cr
--x & \text{if } x < 0 \end{array} \right.$$
-
-$$\phi(x) = \left\\{  \begin{array}{rl} x^2 & \text{if } |x| \le 1 \cr
-2|x|-1 & \text{if } |x| > 0 \end{array} \right.$$
+$$\phi(x) = \left\{
+  \begin{array}{rl}
+    x^2 & \text{if } |x| \le 1 \\
+    2|x|-1 & \text{if } |x| > 0
+  \end{array}
+\right.
+$$
 
 assign:
 
@@ -475,12 +479,6 @@ $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
 
 ---
 
-## Newton-Raphson
-
-![Newton-Raphson](images/newton-raphson.png)
-
----
-
 ## Convergence of Newton-Raphson
 
 The Newton-Raphson algorithm converges quickly if:
@@ -531,3 +529,7 @@ Convergence checking, maximum iterations
 ## Exercise
 
 ### Implement the Newton-Raphson algorithm in R
+
+Find root for $f(x) = x^3 + x^2 - 3x - 3$.  $f'(x) = 3x^2 + 2x - 3$.
+
+### Generate a vector of the first 25 prime numbers

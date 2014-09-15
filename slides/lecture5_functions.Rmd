@@ -1,6 +1,6 @@
 ---
 title: "Writing and Using Functions"
-output: html_document
+output: pdf_document
 ---
 
 ## Functions
