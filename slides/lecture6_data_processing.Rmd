@@ -1,10 +1,12 @@
-# Data Processing in R
-
-## Presenter Notes
-
-This will be a *hands-on* lecture!
-
 ---
+title: "Data Processing in R"
+output: html_document
+---
+
+```{r, echo=FALSE, results='hide'}
+# increase number of characters to display
+options(width=140)
+```
 
 ## Data Frames
 
@@ -24,20 +26,17 @@ Our sample database is some de-identified data for Highly Active Antiretroviral 
 
 Here is what are first 4 lines (header + 3 data rows) of the table:
 
-    !r
-    "male","age","aids","cd4baseline","logvl","weight","hemoglobin","init.reg",
-        "init.date","last.visit","death","date.death","event","followup","lfup","pid"
+    "male","age","aids","cd4baseline","logvl","weight","hemoglobin","init.reg","init.date","last.visit","death","date.death","event","followup","lfup","pid"
     1,25,0,NA,NA,NA,NA,"3TC,AZT,EFV","2003-07-01","2007-02-26",0,NA,0,365,0,1
-    1,49,0,143,NA,58.0608,11,"3TC,AZT,EFV","2004-11-23","2008-02-22",0,NA,0,365,
-        0,2
-    1,42,1,102,NA,48.0816,1,"3TC,AZT,EFV","2003-04-30","2005-11-21",1,"2006-01-11",
-        0,365,0,3
+    1,49,0,143,NA,58.0608,11,"3TC,AZT,EFV","2004-11-23","2008-02-22",0,NA,0,365,0,2
+    1,42,1,102,NA,48.0816,1,"3TC,AZT,EFV","2003-04-30","2005-11-21",1,"2006-01-11",0,365,0,3
 
 Since this data is in csv format, it can be easily imported to R with `read.csv`:
 
-    !r
-    > haart <- read.csv("haart.csv")
-
+```{r}
+setwd(file.path('..','datasets'))
+haart <- read.csv("haart.csv")
+```
 
 ---
 
@@ -45,22 +44,9 @@ Since this data is in csv format, it can be easily imported to R with `read.csv`
 
 You can examine the first few lines of a large data frame using the `head` function:
 
-    !r
-    > head(haart)
-      male age aids cd4baseline logvl  weight hemoglobin    init.reg  init.date
-    1    1  25    0          NA    NA      NA         NA 3TC,AZT,EFV 2003-07-01
-    2    1  49    0         143    NA 58.0608         11 3TC,AZT,EFV 2004-11-23
-    3    1  42    1         102    NA 48.0816          1 3TC,AZT,EFV 2003-04-30
-    4    0  33    0         107    NA 46.0000         NA 3TC,AZT,NVP 2006-03-25
-    5    1  27    0          52     4      NA         NA 3TC,D4T,EFV 2004-09-01
-    6    0  34    0         157    NA 54.8856         NA 3TC,AZT,NVP 2003-12-02
-      last.visit death date.death event followup lfup pid
-    1 2007-02-26     0       <NA>     0      365    0   1
-    2 2008-02-22     0       <NA>     0      365    0   2
-    3 2005-11-21     1 2006-01-11     0      365    0   3
-    4 2006-05-05     1 2006-05-07     1       43    0   4
-    5 2007-11-13     0       <NA>     0      365    0   5
-    6 2008-02-28     0       <NA>     0      365    0   6
+```{r}
+head(haart)
+```
 
 Similarly, `tail` gives the last several lines of the data frame.
 
@@ -70,21 +56,9 @@ Similarly, `tail` gives the last several lines of the data frame.
 
 The function `str` reveals the structure of the data frame, including the number of variables (columns) and observations (rows), as well as the data types of each column:
 
-    !r
-    > str(haart)
-    'data.frame':	1000 obs. of  12 variables:
-     $ male       : int  1 1 1 0 1 0 0 1 1 1 ...
-     $ age        : num  25 49 42 33 27 34 39 31 52 23 ...
-     $ aids       : int  0 0 1 0 0 0 0 0 0 1 ...
-     $ cd4baseline: int  NA 143 102 107 52 157 65 NA NA 3 ...
-     $ logvl      : num  NA NA NA NA 4 ...
-     $ weight     : num  NA 58.1 48.1 46 NA ...
-     $ hemoglobin : num  NA 11 1 NA NA NA 11 NA NA NA ...
-     $ init.reg    : Factor w/ 47 levels "3TC,ABC,AZT",..: 10 10 10 17 19 17 17 10 1 27 ...
-     $ init.date   : Factor w/ 681 levels "1/1/02","1/1/03",..: 508 150 384 319 635 188 278 675 581 484 ...
-     $ last.visit  : Factor w/ 509 levels "","1/10/05","1/10/08",..: 195 189 103 352 90 201 220 167 86 468 ...
-     $ death      : int  0 0 1 1 0 0 0 0 0 1 ...
-     $ date.death  : Factor w/ 113 levels "","1/11/06","1/22/04",..: 1 1 2 70 1 1 1 1 1 107 ...
+```{r}
+str(haart)
+```
 
 Several columns were imported as a `Factor` type by default.
 
@@ -95,12 +69,10 @@ Several columns were imported as a `Factor` type by default.
 If you do not wish to prefix each variable by the name of the data frame, it is
 possible to `attach` the data frame to the current environment.
 
-    !r
-    > attach(haart)
-    > weight[1:20]
-     [1]      NA 58.0608 48.0816 46.0000      NA 54.8856 55.3392      NA      NA
-    [10]      NA 57.0000 48.0000 55.3392 53.0000      NA      NA      NA 64.0000
-    [19] 61.2360 73.0000
+```{r}
+attach(haart)
+weight[1:20]
+```
 
 This function should be used carefully: it is easy to cause namespace conflicts,
 that is, variables that already exist in one environment are silently overwritten
@@ -109,10 +81,10 @@ by other variables that are attached.
 If you do choose to use `attach`, it is good practice to detach the workspace at
 the end of any script that attaches it:
 
-    !r
-    > detach(haart)
-    > weight
-    Error: object 'weight' not found
+```{r}
+detach(haart)
+tryCatch(weight, error=function(e) e)
+```
 
 ## Presenter Notes
 
@@ -132,9 +104,9 @@ The `factor` type represents variables that are categorical, or nominal. That is
 
 For example, let's look at the `init.reg` variable in the HAART dataset, which shows the initial drug regimen for each patient:
 
-    !r
-    > str(haart$init.reg)
-     Factor w/ 47 levels "3TC,ABC,AZT",..: 10 10 10 17 19 17 17 10 1 27 ...
+```{r}
+str(haart[,'init.reg'])
+```
 
 This shows each drug combination has a label and a unique number for each combination. These numbers, however, have no intrinsic order.
 
@@ -144,27 +116,22 @@ This shows each drug combination has a label and a unique number for each combin
 
 Levels may be defined that may not actually be present in the data. For example, let's generate some random data between 0 and 4, and turn it into a factor:
 
-    !r
-    > (x <- factor(rbinom(20, 4, 0.5)))
-     [1] 3 1 2 2 1 1 2 4 1 4 2 2 3 0 2 2 2 0 1 3
-    Levels: 0 1 2 3 4
+```{r}
+(x <- factor(rbinom(20, 4, 0.5)))
+```
 
 We can redefine the levels to contain the value 5, even though it is not present:
 
-    !r
-    > levels(x) <- 0:5
-    > table(x)
-    x
-    0 1 2 3 4 5
-    2 5 8 3 2 0
+```{r}
+levels(x) <- 0:5
+table(x)
+```
 
 However, we cannot assign values to a factor variable that is not already among the levels:
 
-    !r
-    > x[4] <- 17
-    Warning message:
-    In `[<-.factor`(`*tmp*`, 4, value = 17) :
-      invalid factor level, NAs generated
+```{r}
+x[4] <- 17
+```
 
 ---
 
@@ -172,24 +139,22 @@ However, we cannot assign values to a factor variable that is not already among 
 
 As an example, lets convert the `male` variable into a factor. By default, since it is an indicator variable that equals 1 for male patients and 0 for females, `read.table` assumes it is an integer-valued variable and imports it as such. But, there is no intrinsic ordering to gender, so it is more useful treating it as a factor.
 
-    !r
-    > (haart$gender <- factor(haart$male))
-     [1] 1 1 1 0 1 0 0 1 1 1 1 1 0 0 0 0 1 1 0 1 0 1 0 0 0 0 1 0 1 0 0 0 1 1 1 1 0
-     ...
-     [963] 1 1 1 1 1 0 1 0 1 1 1 1 1 1 0 1 0 0 1 1 1 1 1 0 0 1 1 1 1 1 1 0 1 1 0 0 0
-     [1000] 0
-    Levels: 0 1
+```{r}
+haart$gender <- factor(haart$male)
+```
 
 We may also want to add readable labels to the levels, for use in output and plotting:
 
-    !r
-    > levels(haart$gender) <- c("female","male")
+```{r}
+levels(haart$gender) <- c("female","male")
+```
 
 These steps can be combined into a single call:
 
-    !r
-    > haart$gender <- factor(haart$male, labels=c("female","male"))
-
+```{r}
+haart$gender <- factor(haart$male, labels=c("female","male"))
+str(haart$gender)
+```
 
 ---
 
@@ -197,27 +162,21 @@ These steps can be combined into a single call:
 
 If you recall from the data structures lecture, we can *index* values from a data frame in a variety of ways. For example, if we want the ages of the first 50 observations:
 
-    !r
-    > haart$age[1:50]
-     [1] 25.00000 49.00000 42.00000 33.00000 27.00000 34.00000 39.00000 31.00000
-     [9] 52.00000 23.00000 49.40726 43.00000 42.00000 30.82272 37.00000 43.00000
-    [17] 35.00000 33.85079 38.00000 41.00000 35.00000 39.60575 32.00000 57.00000
-    [25] 29.00000 41.00000 27.00000 54.00000 42.00000 49.79877 38.00000 22.00000
-    [33] 32.00000 36.00000 52.00000 31.01164 32.00000 37.00000 23.88501 32.00000
-    [41] 28.00000 19.00000 29.00000 32.00000 47.52361 61.44559 50.00000 42.00000
-    [49] 48.00000 24.00000
-    # or equivalently ...
-    > haart[[2]][1:50]
+```{r}
+haart[1:20,'age']
+# or equivalently ...
+haart[[2]][1:20]
+```
 
 Multiple columns can be indexed using a vector of column names:
 
-    !r
-    > (x <- haart[c("male", "age", "death")])
-        male      age death
-    1      1 25.00000     0
-    2      1 49.00000     0
-    ...
-    1000   0 40.00000     0
+```{r}
+x <- haart[,c("male", "age", "death")]
+head(x)
+# comma not required
+x1 <- haart[c("male", "age", "death")]
+identical(x, x1)
+```
 
 ---
 
@@ -225,25 +184,18 @@ Multiple columns can be indexed using a vector of column names:
 
 We can also extract particular rows according to the value of one or more variables. For example, if we are interested in the above columns for males:
 
-    !r
-    > (y <- x[x$male==1,])
-        male      age death
-    1      1 25.00000     0
-    2      1 49.00000     0
-    ...
-    996    1 42.00000     0
+```{r}
+y <- x[x$male==1,]
+head(y)
+```
 
-We could have combined the previous two  operations into a single call that subsets
+We could have combined the previous two operations into a single call that subsets
 the specified columns that correspond to male :
 
-    !r
-    > (y <- haart[haart$male==1, c("male", "age", "death")])
-        male      age death
-    1      1 25.00000     0
-    2      1 49.00000     0
-    ...
-    996    1 42.00000     0
-
+```{r}
+y <- haart[haart$male==1, c("male", "age", "death")]
+head(y)
+```
 
 ---
 
