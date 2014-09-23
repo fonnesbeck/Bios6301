@@ -93,9 +93,11 @@ bday_in_secs <- function(bday, age = 10^9, format = "%Y-%m-%d %H:%M:%S") {
     x <- as.POSIXct(bday, format = format) + age
     togo <- round(difftime(x, Sys.time(), units = "days"))
     if (togo > 0) {
-        msg <- sprintf("You will be %s seconds old on %s, which is %s days from now.", age, format(x, "%Y-%m-%d"), togo)
+        msg <- sprintf("You will be %s seconds old on %s, which is %s days from now.",
+                       age, format(x, "%Y-%m-%d"), togo)
     } else {
-        msg <- sprintf("You turned %s seconds old on %s, which was %s days ago.", age, format(x, "%Y-%m-%d"), -1 * togo)
+        msg <- sprintf("You turned %s seconds old on %s, which was %s days ago.",
+                       age, format(x, "%Y-%m-%d"), -1 * togo)
     }
     if (age > 125 * 365.25 * 86400)
         msg <- paste(msg, "Good luck with that.")
@@ -117,7 +119,7 @@ dts <- data.frame(day = c("20081101", "20081101", "20081101", "20081101", "20081
         "20081102", "20081102", "20081102", "20081102", "20081103"),
     time = c("01:20:00", "06:00:00", "12:20:00", "17:30:00", "21:45:00", "01:15:00",
         "06:30:00", "12:50:00", "20:00:00", "01:05:00"),
-    value = c("5", "5", "6", "6", "5", "5", "6", "7", "5", "5"))
+    value = c(5, 5, 6, 6, 5, 5, 6, 7, 5, 5))
 dts1 <- paste(dts$day, dts$time)
 dts2 <- as.POSIXct(dts1, format = "%Y%m%d %H:%M:%S")
 dts3 <- as.POSIXlt(dts1, format = "%Y%m%d %H:%M:%S")
@@ -271,43 +273,29 @@ mydata_filled
 
 ---
 
-## Example
-
-You will notice that the values 5,6,7 have been replaced by 1,2,3. This is because in the original table, `value` was a factor:
-
-```{r}
-str(mydata_lt)
-```
-
-Recall that the levels of a factor are just labels, and that the underlying data are a series of integers, with a unique value for each label.
-
-If we want to restore the original labels, we must first cast the `value` column to a factor:
-
-```{r}
-mydata_filled$value <- as.factor(mydata_filled$value)
-levels(mydata_filled$value) <- c(5,6,7)
-head(mydata_filled)
-```
-
----
-
 ## Lubridate
 
 A more modern approach to handling dates and times is provided by the third-party package `lubridate`. It attempts to solve some of the inconsistencies and lack of robustness inherent in the built-in classes and associated functions.
 
 `lubridate` has a robust set of parsing functions that automatically handles a wide variety of string representations. For most formats, the parsing function name is the same as that of the order of the date elements:
 
-    !r
-    > ymd("20110604"); mdy("06-04-2011"); dmy("04/06/2011")
-    [1] "2011-06-04 UTC"
-    [1] "2011-06-04 UTC"
-    [1] "2011-06-04 UTC"
+```{r}
+hasPackage <- tryCatch(find.package('lubridate'), error=function(e) e)
+if(inherits(hasPackage, "error")) install.packages('lubridate')
+library(lubridate)
+```
+
+```{r}
+ymd("20110604")
+mdy("06-04-2011")
+dmy("04/06/2011")
+```
 
 Data with time information as well as dates can similarly be accomodated:
 
-    !r
-    > ymd_hms("2012-09-29 12:00:00", tz="America/Chicago")
-    [1] "2012-09-29 12:00:00 CDT"
+```{r}
+ymd_hms("2012-09-29 12:00:00", tz="America/Chicago")
+```
 
 ---
 
@@ -315,28 +303,22 @@ Data with time information as well as dates can similarly be accomodated:
 
 `lubridate` allows for the specification of particular durations or intervals that can then be added or subtracted from dates or times.
 
-    !r
-    > (ldate <- mdy_hms("12/31/2012 23:59:59"))
-    [1] "2012-12-31 23:59:59 UTC"
-    > ldate + seconds(1)
-    [1] "2013-01-01 UTC"
-    > month(ldate) <- 8
-    > ldate
-    [1] "2012-08-31 23:59:59 UTC"
+```{r}
+(ldate <- mdy_hms("12/31/2012 23:59:59"))
+ldate + dseconds(1)
+month(ldate) <- 8
+ldate
+```
 
 It is easy to extract information from `lubridate`'s classes using the appropriate helper function:
 
-    !r
-    > second(ldate)
-    [1] 59
-    > tz(ldate)
-    [1] "UTC"
-    > yday(ldate)
-    [1] 244
-    > wday(ldate)
-    [1] 6
-    > wday(ldate, label=TRUE)
-    [1] Fri
+```{r}
+second(ldate)
+tz(ldate)
+yday(ldate)
+wday(ldate)
+wday(ldate, label=TRUE)
+```
 
 ---
 
@@ -344,28 +326,22 @@ It is easy to extract information from `lubridate`'s classes using the appropria
 
 There are two time span classes, periods and durations:
 
-    !r
-    > minutes(5)
-    [1] 5 minutes
-    > dminutes(5)
-    [1] 300s (~5 minutes)
+```{r}
+minutes(5)
+dminutes(5)
+```
 
 There are two classes because durations are always expected to be precise (measured exactly, to the second), while periods change according to a timeline:
 
-    !r
-    > leap_year(2011)
-    [1] FALSE
-    > ymd(20110101) + dyears(1)
-    [1] "2012-01-01 UTC"
-    > ymd(20110101) + years(1)
-    [1] "2012-01-01 UTC"
+```{r}
+leap_year(2011)
+ymd(20110101) + dyears(1)
+ymd(20110101) + years(1)
 
-    > leap_year(2012)
-    [1] TRUE
-    > ymd(20120101) + dyears(1)
-    [1] "2012-12-31 UTC"
-    > ymd(20120101) + years(1)
-    [1] "2013-01-01 UTC"
+leap_year(2012)
+ymd(20120101) + dyears(1)
+ymd(20120101) + years(1)
+```
 
 ---
 
@@ -373,16 +349,13 @@ There are two classes because durations are always expected to be precise (measu
 
 `lubridate` makes it easy to generate dates at regular intervals:
 
-    !r
-    > (meetings <- now() + weeks(0:5))
-    [1] "2012-09-29 17:31:29 CDT" "2012-10-06 17:31:29 CDT"
-    [3] "2012-10-13 17:31:29 CDT" "2012-10-20 17:31:29 CDT"
-    [5] "2012-10-27 17:31:29 CDT" "2012-11-03 17:31:29 CDT"
+```{r}
+(meetings <- now() + weeks(0:5))
+```
 
 The custom operator `%within%` tests whether two intervals overlap:
 
-    !r
-    > holiday <- interval(ymd("2012/10/11"), ymd("2012/10/17"))
-    > meetings %within% holiday
-    [1] FALSE FALSE  TRUE FALSE FALSE FALSE
-
+```{r}
+holiday <- interval(ymd("2012/10/11"), ymd("2012/10/17"))
+meetings %within% holiday
+```

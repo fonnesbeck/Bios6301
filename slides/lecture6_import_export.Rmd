@@ -223,7 +223,8 @@ It's also worth noting that the `file` argument can be given a URL.
 
 ```{r}
 # play intramural softball so I can track your stats
-tryCatch(read.csv('http://data.vanderbilt.edu/~graywh/intramurals/softball/batting_stats_career.txt', row.names=1, strip.white=TRUE)["Cole",], error=function(e) e)
+tryCatch(read.csv('http://data.vanderbilt.edu/~graywh/intramurals/softball/batting_stats_career.txt',
+                  row.names=1, strip.white=TRUE)["Cole",], error=function(e) e)
 ```
 
 ---
@@ -271,6 +272,15 @@ You may wish to redirect output from functions or other R code to a file, rather
      [8,]    8   16   24   32   40   48   56   64   72    80
      [9,]    9   18   27   36   45   54   63   72   81    90
     [10,]   10   20   30   40   50   60   70   80   90   100
+
+Another, more explicit, function for handling this is `capture.output`:
+
+```{r}
+counts <- c(18,17,15,20,10,20,25,13,12)
+outcome <- gl(3,1,9)
+treatment <- gl(3,3)
+capture.output(glm(counts ~ outcome + treatment, family = poisson()), file=NULL)
+```
 
 ---
 
