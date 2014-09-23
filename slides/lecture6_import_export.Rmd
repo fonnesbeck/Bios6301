@@ -223,7 +223,7 @@ It's also worth noting that the `file` argument can be given a URL.
 
 ```{r}
 # play intramural softball so I can track your stats
-read.csv('http://data.vanderbilt.edu/~graywh/intramurals/softball/batting_stats_career.txt', row.names=1, strip.white=TRUE)["Cole",]
+tryCatch(read.csv('http://data.vanderbilt.edu/~graywh/intramurals/softball/batting_stats_career.txt', row.names=1, strip.white=TRUE)["Cole",], error=function(e) e)
 ```
 
 ---
