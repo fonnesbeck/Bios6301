@@ -1,6 +1,6 @@
 ---
 title: "Data Processing in R"
-output: html_document
+output: pdf_document
 ---
 
 ```{r, echo=FALSE, results='hide'}
