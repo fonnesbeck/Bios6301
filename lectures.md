@@ -32,11 +32,10 @@ This schedule is *tentative* and subject to change at any time.
 * [Data import and export](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture6_import_export.pdf)
     (Chapter 10)
 * [Working with dates and times](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture6_datetime.pdf)
-* [Data processing](https://dl.dropbox.com/u/233041/Bios301/lecture5_data_processing.html)
+* [Data processing](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture6_data_processing.pdf)
     (Chapter 5)
-* [Random variables](https://dl.dropbox.com/u/233041/Bios301/lecture6_random_variables.html)
-* [Simulation](https://dl.dropbox.com/u/233041/Bios301/lecture6_simulation.html) (Chapter 8)
 * [Optimization](https://dl.dropbox.com/u/233041/Bios301/lecture7_optimization.html)
+* [Simulation](https://dl.dropbox.com/u/233041/Bios301/lecture6_simulation.html) (Chapter 8)
 * [Debugging](https://dl.dropbox.com/u/233041/Bios301/lecture8_debugging.html) (Chapter 13)
 * [Basic plotting](https://dl.dropbox.com/u/233041/Bios301/lecture8_plotting.html) (Chapter 12)
 * Plotting and Graphics
