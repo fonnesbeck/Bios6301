@@ -1,6 +1,6 @@
-Optimization
-============
-
+---
+title: "Optimization"
+output: html_document
 ---
 
 Optimization
@@ -11,20 +11,18 @@ The process of finding the minima or maxima of a function. Consider a function:
 $$f: \mathbf{R} \rightarrow \mathbf{R}$$
 $$f',f'' \text{ continuous}$$
 
-A point $x^\*$ is a *global* maximum if:
+A point $x^*$ is a *global* maximum if:
 
-$$f(x) \le f(x^\*) \, \forall \, x$$
+$$f(x) \le f(x^*) \, \forall \, x$$
 
 or a *local* maximum if:
 
-$$f(x) \le f(x^\*) \, \forall \, x:|x-x^\*| \lt \epsilon$$
+$$f(x) \le f(x^*) \, \forall \, x:|x-x^*| \lt \epsilon$$
 
 Necessary conditions:
 
-1. $f'(x^\*) = 0$
-2. $f''(x^\*) \le 0$ (sufficient if $f''(x^\*) \lt 0$)
-
-
+1. $f'(x^*) = 0$
+2. $f''(x^*) \le 0$ (sufficient if $f''(x^*) \lt 0$)
 
 ---
 
@@ -33,17 +31,17 @@ Local Search
 
 We will consider *local* search methods that generate a series of values that converge to the maximum:
 
-$$x\_0, x\_1, x\_2, \ldots \rightarrow \text{argmax}(f)$$
+$$x_0, x_1, x_2, \ldots \rightarrow \text{argmax}(f)$$
 
 As with the root-finding methods, we must identify stopping conditions:
 
-$$|x\_i - x^\*| \le \epsilon$$
+$$|x_i - x^*| \le \epsilon$$
 
-Since we do not know $x^\*$, we must use an alternative criterion:
+Since we do not know $x^*$, we must use an alternative criterion:
 
-* $|x\_i - x\_{i-1}| \le \epsilon$
-* $|f(x\_i) - f(x\_{i-1})| \le \epsilon$
-* $|f'(x\_i)| \le \epsilon$
+* $|x_i - x_{i-1}| \le \epsilon$
+* $|f(x_i) - f(x_{i-1})| \le \epsilon$
+* $|f'(x_i)| \le \epsilon$
 
 ---
 
@@ -52,11 +50,11 @@ Newton's Method
 
 Apply Newton-Raphson method for root-finding to $f'$:
 
-$$x\_{i+1} = x\_i - \frac{f'(x\_i)}{f''(x\_i)}$$
+$$x_{i+1} = x_i - \frac{f'(x_i)}{f''(x_i)}$$
 
 called ***Newton's method***.
 
-Since we are searching for $x^∗$ such that $f′(x^∗) = 0$, we will use $|f′(x\_i)| ≤ \epsilon$ as our stopping criterion.
+Since we are searching for $x^∗$ such that $f′(x^∗) = 0$, we will use $|f′(x_i)| ≤ \epsilon$ as our stopping criterion.
 
 This finds points for which $f'(x)=0$.
 
@@ -65,28 +63,27 @@ This finds points for which $f'(x)=0$.
 R Code
 ======
 
-    !r
-    newton <- function(f, x0, tol = 1e-9, n_max = 100) {
-
-        x <- x0
+```{r}
+newton <- function(f, x0, tol = 1e-9, n_max = 100) {
+    x <- x0
+    f_x <- f(x)
+    n <- 0
+    while ((abs(f_x[2]) > tol) & (n < n_max)) {
+        # Newton's update
+        x <- x - f_x[2]/f_x[3]
         f_x <- f(x)
-        n <- 0
-        while ((abs(f_x[2]) > tol) & (n < n_max)) {
-            # Newton's update
-            x <- x - f_x[2]/f_x[3]
-            f_x <- f(x)
-            # Increment counter
-            n <- n + 1
-        }
-        if (n == n_max) {
-            cat('newton failed to converge\n')
-        } else {
-            return(x)
-        }
+        # Increment counter
+        n <- n + 1
     }
+    if (n == n_max) {
+        cat('newton failed to converge\n')
+    } else {
+        return(x)
+    }
+}
+```
 
 To use `newton`, we need a function $f$ that contains a vector $(f(x), f'(x), f''(x))$.
-
 
 ---
 
@@ -95,28 +92,26 @@ R Code
 
 Let's try to find the maximum of a Gamma(3,2) distribution:
 
-    !r
-    gamma32 <- function(x) {
-        # Error checking
-        if (x < 0) return(c(0, 0, 0))
-        if (x == 0) return(c(0, 0, NaN))
-        y <- exp(-2*x)
-        return(c(4*x^2*y, 8*x*(1-x)*y, 8*(1-2*x^2)*y))
-    }
+```{r}
+gamma32 <- function(x) {
+    # Error checking
+    if (x < 0) return(c(0, 0, 0))
+    if (x == 0) return(c(0, 0, NaN))
+    y <- exp(-2*x)
+    return(c(4*x^2*y, 8*x*(1-x)*y, 8*(1-2*x^2)*y))
+}
 
-    > newton(gamma32, 4)
-    [1] 1
-    > newton(gamma32, 0.1)
-    [1] 1.846855e-17
-    > newton(gamma32, 20)
-    [1] 20
+newton(gamma32, 4)
+newton(gamma32, 0.1)
+newton(gamma32, 20)
+```
 
 ---
 
 Convergence
 ===========
 
-Using Newton's algorithm, $x\_i \rightarrow x^*$ quickly, provided:
+Using Newton's algorithm, $x_i \rightarrow x^*$ quickly, provided:
 
 1. $f'(x^*)=0$
 2. $f''(x^*)<0$
@@ -152,38 +147,38 @@ this implies that there must be a local maximum in $[a,b]$.
 Algorithm
 =========
 
-Choose $x\_a, x\_b, x\_c$ such that:
+Choose $x_a, x_b, x_c$ such that:
 
-$$x\_a \lt x\_c \lt x\_b$$
+$$x_a \lt x_c \lt x_b$$
 
-While $x\_b - x\_a \gt \epsilon$:
+While $x_b - x_a \gt \epsilon$:
 
-* if $x\_b - x\_c \gt x\_c - x\_a$, choose $y \in (x\_c, x\_b)$:
+* if $x_b - x_c \gt x_c - x_a$, choose $y \in (x_c, x_b)$:
 
-    - if $f(y) \ge f(x\_c)$:
+    - if $f(y) \ge f(x_c)$:
 
-        + $x\_a = x\_c$
-        + $x\_c = y$
+        + $x_a = x_c$
+        + $x_c = y$
 
     - else:
 
-        + $x\_b = y$
+        + $x_b = y$
 
 ---
 
 Algorithm
 =========
 
-* else if $x\_b - x\_c \lt x\_c - x\_a$, choose $y \in (x\_a, x\_c)$:
+* else if $x_b - x_c \lt x_c - x_a$, choose $y \in (x_a, x_c)$:
 
-    - if $f(y) \ge f(x\_c)$:
+    - if $f(y) \ge f(x_c)$:
 
-        + $x\_b = x\_c$
-        + $x\_c = y$
+        + $x_b = x_c$
+        + $x_c = y$
 
     - else:
 
-        + $x\_a = y$
+        + $x_a = y$
 
 So, $y$ stays in the larger of the two intervals.
 
@@ -195,9 +190,9 @@ Golden Section Method
 The Golden Section Method chooses $y$ such that the ratio of lengths of the larger to the smaller interval stays the same at each iteration:
 
 $$\begin{align}
-\text{let } a &= x\_c -x\_a \cr
-b &= x\_b - x\_c \cr
-c &= y - x\_c
+\text{let } a &= x_c -x_a \cr
+b &= x_b - x_c \cr
+c &= y - x_c
 \end{align}$$
 
 this implies: $\frac{a}{c} = \frac{b}{a}$ or $\frac{b-c}{a} = \frac{b}{a}$
@@ -232,8 +227,8 @@ $$\begin{align}a &= b - c \cr
 
 Therefore, $y$ can be calculated by:
 
-$$\begin{align}y &= x\_c + c \cr
-&= x\_c + \frac{x\_b - x\_c}{1 + \phi}
+$$\begin{align}y &= x_c + c \cr
+&= x_c + \frac{x_b - x_c}{1 + \phi}
 \end{align}$$
 
 At each itration, the width of the bracketing interval is reduced by a factor of $\phi/(1+\phi)$
@@ -243,7 +238,7 @@ This is *optimal*
 Presenter Notes
 ===============
 
-The initial choice of $x\_c$ is not critical; ratio will be restored a first iteration.
+The initial choice of $x_c$ is not critical; ratio will be restored a first iteration.
 
 ---
 
@@ -671,22 +666,3 @@ $$H(\mathbf{\theta}) = \frac{1}{n} \sum\_i \left[ \mathbf{x}\_i'f(\mathbf{x}\_i)
 Update rule:
 
 $$\mathbf{\theta}\_{i+1} = \mathbf{\theta}\_i - H^{-1} \nabla J$$
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { availableFonts: ["TeX"] }
-  });
-</script>
-<!--<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>-->
-<script type="text/javascript"
-    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>

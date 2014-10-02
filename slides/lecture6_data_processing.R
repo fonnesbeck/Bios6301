@@ -1,7 +1,7 @@
 
 ## ----, echo=FALSE, results='hide'----------------------------------------
 # increase number of characters to display
-options(width=140)
+options(width=80)
 
 
 ## ------------------------------------------------------------------------
