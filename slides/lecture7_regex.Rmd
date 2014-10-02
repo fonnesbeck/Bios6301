@@ -548,19 +548,21 @@ gsub("^.","O",text)
 
 ---
 
-## Substituting with Placeholders
+## Substitution with Placeholders
 
-The replacement argument can utilize placeholders, such as \\1 or \\2 for as many placeholders are created in the pattern.  To create a placeholder, surround a section of the pattern with parantheses.
+The replacement argument for `sub` can utilize placeholders, such as `\\1` or `\\2` for as many placeholders are created in the pattern.  To create a placeholder, surround a section of the pattern with parantheses.
 
 ```{r}
-gsub("(time).*", "\\1 flies", "time to go")
+set.seed(11)
+(x <- rnorm(5))
+gsub("^[^.]*[.]([0-9]{2})([0-9]).*$", "\\2 \\1/100", x)
 ```
 
 --
 
 ## Exercise
 
-Set all dates to a valid format (YYYY-MM-DD), then change the format to MM/DD/YYYY:
+Set all dates to a valid format, YYYY-MM-DD, then change the format to MM/DD/YYYY:
 
 ```{r}
 electionDay
