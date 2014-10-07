@@ -178,6 +178,7 @@ $$\text{(estimate)}$$
 ## Presenter Notes
 
 make assumptions about pop. structure
+
 use assumptions to derive sampling distribution for T
 
 ---
@@ -232,6 +233,7 @@ sample(x, 10, replace=TRUE)
 ## Presenter Notes
 
 We regard S as an "estimate" of population P
+
 population : sample :: sample : bootstrap sample
 
 ---
@@ -256,8 +258,6 @@ s <- numeric(1000)
 for(i in seq_along(s)) s[i] <- mean(sample(x, 10, replace=TRUE))
 hist(s, xlab="Bootstrap means", main="")
 ```
-
-![bootstrap means](http://d.pr/i/LAVF+)
 
 ---
 
@@ -318,54 +318,6 @@ Square brackets indicate rounding to nearest integer.
 
 ---
 
-## Bias-corrected Interval
-
-Though they do not assume normality, percentile intervals do not generally perform well.
-
-### Bias-corrected, Accelerated Percentile Intervals
-
-**Step 1**:
-
-Calculate standard normal quantile at the adjusted proportion of bootstrap replicates below the original sample estimate:
-
-$$z = \Phi^{-1}\left[\frac{\sum_{i=1}^R I(T_i^* \le T)}{R+1}\right]$$
-
-* if sampling distribution is symmetric, and $T$ is unbiased, this proportion will be close to 0.5 (z close to zero).
-
----
-
-## Bias-corrected Interval
-
-**Step 2**:
-
-Let $T_{(-j)^*}$ be the value of $T$ with the *j*th observation held out, and $\bar{T}$ be the average of these holdout estimates. Then,
-
-$$a = \frac{\sum_{j=1}^n(T_{(-j)}^* - \bar{T})^3}{6[\sum_{j=1}^n(T_{(-j)}^* - \bar{T}^2)]^{3/2}}$$
-
-We now have two correction factors, $z$ and $a$.
-
----
-
-## Bias-corrected Interval
-
-**Step 3**:
-
-Now, calculate adjusted indices to extract endpoints of the interval:
-
-$$a_1 = \Phi\left[z + \frac{z - z_{1-\alpha/2}}{1-a(z - z_{1-\alpha/2})}\right]$$
-$$a_2 = \Phi\left[z + \frac{z + z_{1-\alpha/2}}{1-a(z + z_{1-\alpha/2})}\right]$$
-
-The corrected interval is:
-
-$$T_{[R \cdot a_1]}^* < \theta < T_{[R \cdot a_2]}^*$$
-
-## Presenter Notes
-
-- when z and a are both zero, corresponds to uncorrected percentile interval
-- R should be on the order of 1000 or more for accuracy
-
----
-
 ## Package `boot`
 
 `boot` provides functions for bootstrapping and related resampling methods.
@@ -382,7 +334,10 @@ boot.ci(bmed)
 
 ## Example: Anorexia data
 
-![Anorexia data](http://d.pr/i/oCsq+)
+```{r}
+data(anorexia, package="MASS")
+hist(anorexia[,'Prewt'], breaks=ceiling(diff(range(anorexia[,'Prewt']))), main='', xlab='Weight')
+```
 
 ## Presenter Notes
 
@@ -843,3 +798,51 @@ Algorithm:
 ### Exercise ###
 
 Write a function to generate $n$ variables distributed $N(\mu,\sigma^2)$, using the Box-Muller algorithm.
+
+---
+
+## Bias-corrected Interval
+
+Though they do not assume normality, percentile intervals do not generally perform well.
+
+### Bias-corrected, Accelerated Percentile Intervals
+
+**Step 1**:
+
+Calculate standard normal quantile at the adjusted proportion of bootstrap replicates below the original sample estimate:
+
+$$z = \Phi^{-1}\left[\frac{\sum_{i=1}^R I(T_i^* \le T)}{R+1}\right]$$
+
+* if sampling distribution is symmetric, and $T$ is unbiased, this proportion will be close to 0.5 (z close to zero).
+
+---
+
+## Bias-corrected Interval
+
+**Step 2**:
+
+Let $T_{(-j)^*}$ be the value of $T$ with the *j*th observation held out, and $\bar{T}$ be the average of these holdout estimates. Then,
+
+$$a = \frac{\sum_{j=1}^n(T_{(-j)}^* - \bar{T})^3}{6[\sum_{j=1}^n(T_{(-j)}^* - \bar{T}^2)]^{3/2}}$$
+
+We now have two correction factors, $z$ and $a$.
+
+---
+
+## Bias-corrected Interval
+
+**Step 3**:
+
+Now, calculate adjusted indices to extract endpoints of the interval:
+
+$$a_1 = \Phi\left[z + \frac{z - z_{1-\alpha/2}}{1-a(z - z_{1-\alpha/2})}\right]$$
+$$a_2 = \Phi\left[z + \frac{z + z_{1-\alpha/2}}{1-a(z + z_{1-\alpha/2})}\right]$$
+
+The corrected interval is:
+
+$$T_{[R \cdot a_1]}^* < \theta < T_{[R \cdot a_2]}^*$$
+
+## Presenter Notes
+
+- when z and a are both zero, corresponds to uncorrected percentile interval
+- R should be on the order of 1000 or more for accuracy

@@ -1,6 +1,6 @@
 ---
 title: "String Manipulation"
-output: pdf_document
+output: html_document
 ---
 
 ## String Manipulation
@@ -119,8 +119,8 @@ A good reference: http://en.wikipedia.org/wiki/Regular_expression#Syntax
 
 ## Presenter Notes
 
-1 There is a caveat when using regular expressions in R, but that will appear later on in this talk.
-1 If you use regular expressions in a language and find that it doesn't behave as you expect, it may be because the language doesn't support certain features.
+1. There is a caveat when using regular expressions in R, but that will appear later on in this talk.
+1. If you use regular expressions in a language and find that it doesn't behave as you expect, it may be because the language doesn't support certain features.
 
 ---
 
