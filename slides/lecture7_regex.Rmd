@@ -1,6 +1,6 @@
 ---
 title: "String Manipulation"
-output: html_document
+output: pdf_document
 ---
 
 ## String Manipulation

@@ -1,6 +1,6 @@
 ---
 title: "Simulation"
-output: html_document
+output: pdf_document
 ---
 
 ## Stochastic Simulation
@@ -74,10 +74,14 @@ We calculate the CMF of the binomial distribution by summing over the PMF:
 binom_cdf <- function(x, n, p) {
     Fx <- 0
     for (i in 0:x) {
-        Fx <- Fx + choose(n, i) * p^i * (1-p)^{n-i}
+        Fx <- Fx + choose(n, i) * p^i * (1-p)^(n-i)
     }
     return(Fx)
 }
+
+# same thing, different way
+binom_pmf <- function(x, n, p) choose(n, x) * p^x * (1-p)^(n-x)
+binom_cdf <- function(x, n, p) sum(sapply(seq(0,x), binom_pmf, n, p))
 ```
 
 Now, we can use this code to generate binomial variates from a uniform draw:
@@ -106,18 +110,6 @@ lines(0:10, dbinom(0:10,10,0.25))
 
 ---
 
-## Exercise
-
-Can you come up with a simple, vectorized function for generating samples from a binomial distribution?
-
-*Hint*: take advantage of the fact that a binomial variable is the sum of *n* Bernoulli random variables.
-
-## Presenter Notes
-
-sum(runif(n) < p)
-
----
-
 ## Built-in Random Number Generators
 
 R includes random number generators for the most common distributions: `runif`, `rnorm`, `rbinom`, `rpois`, `rexp`, etc.  See ?Distributions
@@ -133,11 +125,35 @@ rbinom(n=5, 10, 0.3)
 
 ---
 
-## Practical Simulation Example?
+## Example: Power
 
-Correlation, Error
+Write a simulation to obtain the power from a one-sample t-test.
 
-Storing Results
+```{r}
+getpower = function(delta, delta.sd, siglevel, n, nsim) {
+  pvals = numeric(nsim)
+  set.seed(1)
+  for(i in seq_along(pvals)) {
+    x = rnorm(n, mean=delta, sd=delta.sd)
+    pvals[i] = t.test(x, alternative="two.sided", mu=0)$p.value 
+  }
+  mean(pvals < siglevel)
+}
+getpower(delta=0.5, delta.sd=2, siglevel=0.05, n=25, nsim=1000)
+getpower(delta=0.5, delta.sd=2, siglevel=0.05, n=25, nsim=10000)
+# note there is a function to do this
+power.t.test(n=25, delta=0.5, sd=2, sig.level=0.05, type='one.sample')$power
+```
+
+---
+
+## Exercise
+
+How could you use `getpower` to determine the sample size needed to have a power of 90%?
+
+```{r}
+power.t.test(power=0.9, delta=0.5, sd=2, sig.level=0.05, type='one.sample')$n
+```
 
 ---
 
@@ -334,6 +350,8 @@ boot.ci(bmed)
 
 ## Example: Anorexia data
 
+Normal distribution?
+
 ```{r}
 data(anorexia, package="MASS")
 hist(anorexia[,'Prewt'], breaks=ceiling(diff(range(anorexia[,'Prewt']))), main='', xlab='Weight')
@@ -345,32 +363,20 @@ Pre-treatment weights for anorexia patients
 
 ---
 
-## Normal?
-
-![qqplot](http://d.pr/i/yMkp+)
-
----
-
 ## Example: Anorexia data
 
 Let's calculate a bootstrapped confidence interval for pre-treatment weights:
 
 ```{r}
-data(anorexia, package='MASS')
-weight <- anorexia$Prewt
-bmeans <- numeric(999)
-for (i in 1:999) {
-  s <- sample(weight, replace=T)
-  bmeans[i] <- mean(s)
-}
+weight <- anorexia[,'Prewt']
+bmeans <- replicate(999, mean(sample(weight, replace=TRUE)))
 quantile(bmeans, c(0.025, 0.975))
 ```
 
 Compare to parametric CI, and `boot`:
 
 ```{r}
-mean(weight, na.rm=T) - 1.96*sd(weight, na.rm=T)/sqrt(length(weight))
-mean(weight, na.rm=T) + 1.96*sd(weight, na.rm=T)/sqrt(length(weight))
+mean(weight, na.rm=T) + c(-1.96, 1.96)*sd(weight, na.rm=TRUE)/sqrt(length(weight))
 weight_boot <- boot(weight, function(x,i) mean(x[i]), R=999)
 quantile(weight_boot$t, c(0.025, 0.975))
 ```
@@ -437,15 +443,10 @@ mean(lower < true_mu & upper > true_mu)
 
 ---
 
-## Exercise
-
-Find the coverage probability for bootstrap percentile intervals of the following model:
-
-$$y \sim \text{Gamma}(7,5)$$
-
-
 Additional Reading
 ------------------------------
+
+---
 
 ## Random Numbers
 
@@ -581,6 +582,18 @@ Requires an internet connection!
     [3,] "bBF8oin409"
     [4,] "QSJJCnp2Uo"
     [5,] "ltWlBUFTKQ"
+
+---
+
+## Exercise
+
+Can you come up with a simple, vectorized function for generating samples from a binomial distribution?
+
+*Hint*: take advantage of the fact that a binomial variable is the sum of *n* Bernoulli random variables.
+
+## Presenter Notes
+
+sum(runif(n) < p)
 
 ---
 
@@ -846,3 +859,11 @@ $$T_{[R \cdot a_1]}^* < \theta < T_{[R \cdot a_2]}^*$$
 
 - when z and a are both zero, corresponds to uncorrected percentile interval
 - R should be on the order of 1000 or more for accuracy
+
+---
+
+## Exercise
+
+Find the coverage probability for bootstrap percentile intervals of the following model:
+
+$$y \sim \text{Gamma}(7,5)$$
