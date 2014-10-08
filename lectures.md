@@ -35,7 +35,7 @@ This schedule is *tentative* and subject to change at any time.
 * [Data processing](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture6_data_processing.pdf)
     (Chapter 5)
 * [String manipulation and regular expressions](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture7_regex.pdf) (Chapters 11)
-* [Simulation](https://dl.dropbox.com/u/233041/Bios301/lecture6_simulation.html) (Chapter 8)
+* [Simulation](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture7_simulation.pdf) (Chapter 8)
 * [Optimization](https://dl.dropbox.com/u/233041/Bios301/lecture7_optimization.html)
 * [Debugging](https://dl.dropbox.com/u/233041/Bios301/lecture8_debugging.html) (Chapter 13)
 * [Basic plotting](https://dl.dropbox.com/u/233041/Bios301/lecture8_plotting.html) (Chapter 12)
