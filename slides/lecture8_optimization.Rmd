@@ -1,10 +1,7 @@
 ---
 title: "Optimization"
-output: html_document
+output: pdf_document
 ---
-
-Optimization
-============
 
 The process of finding the minima or maxima of a function. Consider a function:
 
@@ -17,12 +14,12 @@ $$f(x) \le f(x^*) \, \forall \, x$$
 
 or a *local* maximum if:
 
-$$f(x) \le f(x^*) \, \forall \, x:|x-x^*| \lt \epsilon$$
+$$f(x) \le f(x^*) \, \forall \, x:|x-x^*| < \epsilon$$
 
 Necessary conditions:
 
 1. $f'(x^*) = 0$
-2. $f''(x^*) \le 0$ (sufficient if $f''(x^*) \lt 0$)
+2. $f''(x^*) \le 0$ (sufficient if $f''(x^*) < 0$)
 
 ---
 
@@ -54,7 +51,7 @@ $$x_{i+1} = x_i - \frac{f'(x_i)}{f''(x_i)}$$
 
 called ***Newton's method***.
 
-Since we are searching for $x^∗$ such that $f′(x^∗) = 0$, we will use $|f′(x_i)| ≤ \epsilon$ as our stopping criterion.
+Since we are searching for $x^*$ such that $f'(x^*) = 0$, we will use $|f'(x_i)| \le \epsilon$ as our stopping criterion.
 
 This finds points for which $f'(x)=0$.
 
@@ -101,6 +98,9 @@ gamma32 <- function(x) {
     return(c(4*x^2*y, 8*x*(1-x)*y, 8*(1-2*x^2)*y))
 }
 
+x <- seq(0, 5, by=0.01)
+plot(x, sapply(x, gamma32)[1,], ylab='y', main='Gamma(3,2)', type='l')
+
 newton(gamma32, 4)
 newton(gamma32, 0.1)
 newton(gamma32, 20)
@@ -133,7 +133,7 @@ Golden Section Method
 
 The Golden Section method does not require the use of derivatives.
 
-Let $f:\textbf{R} \rightarrow \textbf{R}$. Consider 3 points $a \lt c \lt b$ such that:
+Let $f:\textbf{R} \rightarrow \textbf{R}$. Consider 3 points $a < c < b$ such that:
 
 $$f(a) \le f(c)$$
 $$f(b) \le f(c)$$
@@ -149,11 +149,11 @@ Algorithm
 
 Choose $x_a, x_b, x_c$ such that:
 
-$$x_a \lt x_c \lt x_b$$
+$$x_a < x_c < x_b$$
 
-While $x_b - x_a \gt \epsilon$:
+While $x_b - x_a > \epsilon$:
 
-* if $x_b - x_c \gt x_c - x_a$, choose $y \in (x_c, x_b)$:
+* if $x_b - x_c > x_c - x_a$, choose $y \in (x_c, x_b)$:
 
     - if $f(y) \ge f(x_c)$:
 
@@ -164,12 +164,7 @@ While $x_b - x_a \gt \epsilon$:
 
         + $x_b = y$
 
----
-
-Algorithm
-=========
-
-* else if $x_b - x_c \lt x_c - x_a$, choose $y \in (x_a, x_c)$:
+* else if $x_b - x_c < x_c - x_a$, choose $y \in (x_a, x_c)$:
 
     - if $f(y) \ge f(x_c)$:
 
@@ -189,13 +184,13 @@ Golden Section Method
 
 The Golden Section Method chooses $y$ such that the ratio of lengths of the larger to the smaller interval stays the same at each iteration:
 
-$$\begin{align}
+$$\begin{aligned}
 \text{let } a &= x_c -x_a \cr
 b &= x_b - x_c \cr
 c &= y - x_c
-\end{align}$$
+\end{aligned}$$
 
-this implies: $\frac{a}{c} = \frac{b}{a}$ or $\frac{b-c}{a} = \frac{b}{a}$
+this implies: $\frac{c}{b} = \frac{b}{a}$ or $\frac{c}{a-c} = \frac{b}{a}$
 
 ![GS line](images/gsline.png)
 
@@ -204,11 +199,11 @@ this implies: $\frac{a}{c} = \frac{b}{a}$ or $\frac{b-c}{a} = \frac{b}{a}$
 Golden Ratio
 ============
 
-Let $\phi$ be the ratio $b/a$. Solve for $c$:
+Let $\phi$ be the ratio $a/b$. Solve for $c$:
 
-$$\begin{align} &\Rightarrow \phi^2 - \phi - 1 = 0 \cr
+$$\begin{aligned} &\Rightarrow \phi^2 - \phi - 1 = 0 \cr
 &\Rightarrow \phi = \frac{1 + \sqrt{5}}{2} = 1.61680339 \ldots
-\end{align}$$
+\end{aligned}$$
 
 This is the ***Golden Ratio***.
 
@@ -221,17 +216,17 @@ Choosing $y$
 
 Note that:
 
-$$\begin{align}a &= b - c \cr
+$$\begin{aligned}a &= b + c \cr
 \Rightarrow c &= b/(1+\phi)
-\end{align}$$
+\end{aligned}$$
 
 Therefore, $y$ can be calculated by:
 
-$$\begin{align}y &= x_c + c \cr
+$$\begin{aligned}y &= x_c + c \cr
 &= x_c + \frac{x_b - x_c}{1 + \phi}
-\end{align}$$
+\end{aligned}$$
 
-At each itration, the width of the bracketing interval is reduced by a factor of $\phi/(1+\phi)$
+At each iteration, the width of the bracketing interval is reduced by a factor of $\phi/(1+\phi)$
 
 This is *optimal*
 
@@ -253,31 +248,31 @@ Assume:
 
 * first- and second-order partial derivatives exist, and are everywhere continuous.
 
-$$\begin{align}
-\mathbf{x} &= (x\_1, x\_2, \ldots, x\_k) \cr
-&= x\_1 \mathbf{e}\_1 + x\_2 \mathbf{e}_2, + \ldots + x\_k \mathbf{e}\_k
-\end{align}$$
+$$\begin{aligned}
+\mathbf{x} &= (x_1, x_2, \ldots, x_k) \cr
+&= x_1 \mathbf{e}_1 + x_2 \mathbf{e}_2, + \ldots + x_k \mathbf{e}_k
+\end{aligned}$$
 
-where $\mathbf{e}\_i$ is the coordinate vector of element $i$.
+where $\mathbf{e}_i$ is the coordinate vector of element $i$.
 
 ---
 
 Partial Derivatives
 ===================
 
-Denote the $i$th partial derivative with respect to $x\_i$ as $f\_i(x)=\frac{\partial f(\mathbf{x})}{\partial x\_i}$.
+Denote the $i$th partial derivative with respect to $x_i$ as $f_i(x)=\frac{\partial f(\mathbf{x})}{\partial x_i}$.
 
 And we define the *gradient*:
 
-$$\nabla f(\mathbf{x}) = (f\_1(\mathbf{x}), \ldots, f\_k(\mathbf{x}))'$$
+$$\nabla f(\mathbf{x}) = (f_1(\mathbf{x}), \ldots, f_k(\mathbf{x}))'$$
 
 And the *hessian*:
 
-$$H(\mathbf{x})  = \left(
-\begin{array}{c}
-  \frac{\partial^2 f(\mathbf{x})}{\partial x\_1 \partial x\_1} & \cdots & \frac{\partial^2 f(\mathbf{x})}{\partial x\_1 \partial x\_k}  \cr
-  \vdots & \ddots & \vdots \cr
-  \frac{\partial^2 f(\mathbf{x})}{\partial x\_k \partial x\_1} & \cdots & \frac{\partial^2 f(\mathbf{x})}{\partial x\_k \partial x\_k}
+$$H(\mathbf{x}) = \left(
+\begin{array}{ccc}
+\frac{\partial^2 f(\mathbf{x})}{\partial x_1 \partial x_1} & \cdots & \frac{\partial^2 f(\mathbf{x})}{\partial x_1 \partial x_k} \\
+\vdots & \ddots & \vdots \\
+\frac{\partial^2 f(\mathbf{x})}{\partial x_k \partial x_1} & \cdots & \frac{\partial^2 f(\mathbf{x})}{\partial x_k \partial x_k}
 \end{array}\right)$$
 
 ---
@@ -291,7 +286,7 @@ $$\frac{\mathbf{v}' \nabla f(\mathbf{x})}{||\mathbf{v}||}$$
 
 where $||\mathbf{v}||$ is the *euclidean norm* of $\mathbf{v}$.
 
-$$||\mathbf{v}|| = \sqrt{v\_1^2 + \ldots + v\_k^2} = \sqrt{\mathbf{v} \cdot \mathbf{v}}$$
+$$||\mathbf{v}|| = \sqrt{v_1^2 + \ldots + v_k^2} = \sqrt{\mathbf{v} \cdot \mathbf{v}}$$
 
 The *curvature* at point $\mathbf{x}$ is:
 
@@ -304,7 +299,7 @@ Conditions for Maximum
 
 $f$ has a local maximum if, for all $i=1,\ldots,k$ and sufficiently small $\epsilon$:
 
-$$f(\mathbf{x} + \epsilon \mathbf{e}\_i) \le f(\mathbf{x})$$
+$$f(\mathbf{x} + \epsilon \mathbf{e}_i) \le f(\mathbf{x})$$
 
 provided that:
 
@@ -312,7 +307,7 @@ $$\nabla f(\mathbf{x}) = \mathbf{0} = (0,\ldots,0)'$$
 
 and the slope at $x$ in direction $v$ is $\le 0$ (*necessary* condition). This implies that the Hessian is negative semi-definite.
 
-A *sufficient* condition is that the slope $v$ is $\lt 0$ (negative definite Hessian).
+A *sufficient* condition is that the slope $v$ is $< 0$ (negative definite Hessian).
 
 ### How do we find the maximum?
 
@@ -321,16 +316,16 @@ A *sufficient* condition is that the slope $v$ is $\lt 0$ (negative definite Hes
 Steepest Ascent
 ===============
 
-The steepest ascent method is a iterative search algorithm. For a function $f:\mathbf{R}^k \rightarrow \mathbf{R}$ with continuous partial derivatives, we iterate via:
+The steepest ascent method is an iterative search algorithm. For a function $f:\mathbf{R}^k \rightarrow \mathbf{R}$ with continuous partial derivatives, we iterate via:
 
-$$\mathbf{x}\_{i+1} = \mathbf{x}\_i + \alpha \mathbf{v}\_{i}^\*$$
+$$\mathbf{x}_{i+1} = \mathbf{x}_i + \alpha \mathbf{v}_{i}^*$$
 
 where:
 
 * $\alpha$ = positive scalar step size
-* $\mathbf{v}\_{i}^\*$ = direction of largest slope at position $i$
+* $\mathbf{v}_{i}^*$ = direction of largest slope at position $i$
 
-$$\mathbf{v}\_{i}^\* = \text{argmax}\_{\mathbf{v}} \frac{\mathbf{v}' \nabla f(\mathbf{x}\_i)}{||\mathbf{v}||}$$
+$$\mathbf{v}_{i}^* = \text{argmax}_{\mathbf{v}} \frac{\mathbf{v}' \nabla f(\mathbf{x}_i)}{||\mathbf{v}||}$$
 
 ### How do we find this direction?
 
@@ -341,17 +336,17 @@ $$\mathbf{v}\_{i}^\* = \text{argmax}\_{\mathbf{v}} \frac{\mathbf{v}' \nabla f(\m
 Maximum Slope
 =============
 
-We need to maximize the slope, so consider the partial derivative with respect to $v\_i$:
+We need to maximize the slope, so consider the partial derivative with respect to $v_i$:
 
-$$\frac{\partial}{\partial v\_j} \frac{\mathbf{v}' \nabla f(\mathbf{x})}{||\mathbf{v}||} = \frac{f\_j(\mathbf{x})}{||\mathbf{v}||} - \frac{(\mathbf{v}' \nabla f(\mathbf{x}))v\_j}{||\mathbf{v}||^3}$$
+$$\frac{\partial}{\partial v_j} \frac{\mathbf{v}' \nabla f(\mathbf{x})}{||\mathbf{v}||} = \frac{f_j(\mathbf{x})}{||\mathbf{v}||} - \frac{(\mathbf{v}' \nabla f(\mathbf{x}))v_j}{||\mathbf{v}||^3}$$
 
 Setting this equal to zero, we end up with:
 
-$$v\_j \propto f\_j(\mathbf{x})$$
+$$v_j \propto f_j(\mathbf{x})$$
 
 which implies that at point $\mathbf{x}$, the direction with the largest slope is $\nabla f(\mathbf{x})$. So, steepest ascent is:
 
-$$\mathbf{x}\_{x+1} = \mathbf{x}\_i + \alpha \nabla f(\mathbf{x}\_i)$$
+$$\mathbf{x}_{x+1} = \mathbf{x}_i + \alpha \nabla f(\mathbf{x}_i)$$
 
 ---
 
@@ -365,7 +360,7 @@ What is the appropriate step size $\alpha$?
 
 We want to choose $\alpha$ to maximize:
 
-$$g(\alpha) = f(\mathbf{x}\_i + \alpha \nabla f(\mathbf{x}\_i))$$
+$$g(\alpha) = f(\mathbf{x}_i + \alpha \nabla f(\mathbf{x}_i))$$
 
 We already know how to optimize univariate functions!
 
@@ -378,9 +373,9 @@ Stopping Conditions
 
 Stopping conditions may include:
 
-* $||\mathbf{x}\_i - \mathbf{x}\_{i-1}|| \le \epsilon$
-* $|f(\mathbf{x}\_i) - f(\mathbf{x}\_{i-1})| \le \epsilon$
-* $||\nabla f(\mathbf{x}\_i)|| \le \epsilon$
+* $||\mathbf{x}_i - \mathbf{x}_{i-1}|| \le \epsilon$
+* $|f(\mathbf{x}_i) - f(\mathbf{x}_{i-1})| \le \epsilon$
+* $||\nabla f(\mathbf{x}_i)|| \le \epsilon$
 
 for some small tolerance value $\epsilon$.
 
@@ -391,13 +386,13 @@ Steepest Ascent Pseudocode
 
 Putting it all together, our steepest ascent algorithm should look something like this:
 
-1. Initialize $\mathbf{x}\_0$ and $\mathbf{x}\_1$
+1. Initialize $\mathbf{x}_0$ and $\mathbf{x}_1$
 2. Initialize counter $i=1$
-3. While $f(\mathbf{x}\_i - \mathbf{x}\_{i-1}) \gt \epsilon$:
+3. While $f(\mathbf{x}_i) - f(\mathbf{x}_{i-1}) > \epsilon$:
 
-    * $\mathbf{x}\_{i-1} \leftarrow \mathbf{x}\_i$
+    * $\mathbf{x}_{i-1} \leftarrow \mathbf{x}_i$
     * Find optimal step size
-    * Calculate new $\mathbf{x}\_i = \mathbf{x}\_{i-1} + \alpha \nabla f(\mathbf{x}\_{i-1})$
+    * Calculate new $\mathbf{x}_i = \mathbf{x}_{i-1} + \alpha \nabla f(\mathbf{x}_{i-1})$
     * Increment $i$
 
 ---
@@ -407,56 +402,51 @@ R Code
 
 Assume that we have a working golden section algorithm. Doing a line search for $\alpha$ involves finding suitable "bracketing values" with which to initialize the search.
 
-There is no guarantee of a suitable $\alpha$ because the function $g$ may be increasing over $[0,\infty)$. So, we specify a maximum step size $\alpha\_{\max}$ that we will use if there is no $\alpha \le \alpha\_{\max}$ such that $g(\alpha) \le g(\alpha\_{\max})$.
+There is no guarantee of a suitable $\alpha$ because the function $g$ may be increasing over $[0,\infty)$. So, we specify a maximum step size $\alpha_{\max}$ that we will use if there is no $\alpha \le \alpha_{\max}$ such that $g(\alpha) \le g(\alpha_{\max})$.
 
-    !r
-    line_search <- function(f, x, y, eps=1e-9, amax=2^5) {
+```{r}
+line_search <- function(f, x, y, eps=1e-9, amax=2^5) {
 
-        # specify function g(alpha) to optimize
-        g <- function(a) f(x + a*y)
+    # specify function g(alpha) to optimize
+    g <- function(a) f(x + a*y)
 
-        # get left point
-        a_l <- 0
-        g_l <- g(a_l)
+    # get left point
+    a_l <- 0
+    g_l <- g(a_l)
 
-        # get mid point
-        a_m <- 1
+    # get mid point
+    a_m <- 1
+    g_m <- g(a_m)
+    # make a_m smaller until g(a_m) > g(a_l)
+    while ((g_m < g_l) & (a_m > eps)) {
+        a_m <- a_m/2
         g_m <- g(a_m)
-        # make a_m smaller until g(a_m) > g(a_l)
-        while ((g_m < g_l) & (a_m > eps)) {
-            a_m <- a_m/2
-            g_m <- g(a_m)
-        }
+    }
 
----
+    # use 0 for a if we cannot get a suitable mid-point
+    if ((a_m <= eps) & (g_m < g_l)) return(0)
 
-R Code
-======
-
-    !r
-        # use 0 for a if we cannot get a suitable mid-point
-        if ((a_m <= eps) & (g_m < g_l)) return(0)
-
-        # get right point
+    # get right point
+    a_r <- 2*a_m
+    g_r <- g(a_r)
+    # make a_r larger until g(a_m) > g(a_r)
+    while ((g_m < g_r) & (a_r < a_max)) {
+        a_m <- a_r
+        g_m <- g_r
         a_r <- 2*a_m
         g_r <- g(a_r)
-        # make a_r larger until g(a_m) > g(a_r)
-        while ((g_m < g_r) & (a_r < a_max)) {
-            a_m <- a_r
-            g_m <- g_r
-            a_r <- 2*a_m
-            g_r <- g(a_r)
-        }
+    }
 
-        # use a_max for a if we cannot get a suitable right point
-        if ((a_r >= a_max) & (g_m < g_r)) return(a_max)
+    # use a_max for a if we cannot get a suitable right point
+    if ((a_r >= a_max) & (g_m < g_r)) return(a_max)
 
-        # apply golden-section algorithm to g to find a
-        a <- gsection(g, a_l, a_r, a_m)
+    # apply golden-section algorithm to g to find a
+    a <- gsection(g, a_l, a_r, a_m)
 
-        return(a)
+    return(a)
 
-    } # end of function
+} # end of function
+```
 
 ---
 
@@ -465,26 +455,27 @@ R Code
 
 Now, we can call this line search function from the steepest ascent code:
 
-    !r
-    ascent <- function(f, grad_f, x0, eps = 1e-9, max_iter = 100) {
+```{r}
+ascent <- function(f, grad_f, x0, eps = 1e-9, max_iter = 100) {
 
-        # Initialize x values
-        x_old <- x0
-        gx <- grad.f(x0)
-        a <- line_search(f, x0, gx)
+    # Initialize x values
+    x_old <- x0
+    gx <- grad_f(x0)
+    a <- line_search(f, x0, gx)
+    x <- x + a*gx
+    # Initialize counter
+    i <- 1
+    while ((abs(f(x) - f(x_old)) > eps) & (i < max_iter)) {
+        x_old <- x
+        gx <- grad_f(x)
+        a <- line_search(f, x, gx)
         x <- x + a*gx
-        # Initialize counter
-        i <- 1
-        while ((f(x) - f(x_old) > eps) & (i < max_iter)) {
-            x_old <- x
-            gx <- grad_f(x)
-            a <- line_search(f, x, gx)
-            x <- x + a*gx
-            # Increment counter
-            i <- i + 1
-        }
-        return(x)
+        # Increment counter
+        i <- i + 1
     }
+    return(x)
+}
+```
 
 Notice that rather than coding a single function with multiple embedded loops, we broke the algorithm up into a main function (`ascent`) and two sub-functions (`line_search`, `gsection`).
 
@@ -499,6 +490,7 @@ Presenter Notes
 ===============
 
 Notice zig-zag pattern: direction of steepest ascent changes at each x
+
 Inefficient! How can we speed convergence?
 
 ---
@@ -508,15 +500,15 @@ Newton's Method
 
 Recall that Newton's method uses second derivative information (Hessian, in multivariate terms). Adding second-order information about the function might speed convergence!
 
-Again, we seek $\mathbf{x}^\*$ such that $\nabla f(\mathbf{x}^\*)=\mathbf{0}$.
+Again, we seek $\mathbf{x}^*$ such that $\nabla f(\mathbf{x}^*)=\mathbf{0}$.
 
-Recall (hopefully), the Taylor expansion of $f$ about some point $\mathbf{x}\_0$:
+Recall (hopefully), the Taylor expansion of $f$ about some point $\mathbf{x}_0$:
 
-$f(\mathbf{x}) = f(\mathbf{x}\_0) + (\mathbf{x} - \mathbf{x}\_0)' \nabla f(\mathbf{x}) + \frac{1}{2}(\mathbf{x} - \mathbf{x}\_0)'H(\mathbf{x})(\mathbf{x} - \mathbf{x}\_0) + \ldots$
+$f(\mathbf{x}) = f(\mathbf{x}_0) + (\mathbf{x} - \mathbf{x}_0)' \nabla f(\mathbf{x}) + \frac{1}{2}(\mathbf{x} - \mathbf{x}_0)'H(\mathbf{x})(\mathbf{x} - \mathbf{x}_0) + \ldots$
 
 After some substitution and math, this becomes:
 
-$f(\mathbf{x}) \approx f(\mathbf{x}\_0) + \alpha \mathbf{v}' \nabla f(\mathbf{x}\_0) + \frac{1}{2}\alpha^2 \mathbf{v}' H(\mathbf{x}\_0)\mathbf{v}$
+$f(\mathbf{x}) \approx f(\mathbf{x}_0) + \alpha \mathbf{v}' \nabla f(\mathbf{x}_0) + \frac{1}{2}\alpha^2 \mathbf{v}' H(\mathbf{x}_0)\mathbf{v}$
 
 Presenter Notes
 ===============
@@ -530,17 +522,17 @@ Newton's Method
 
 Take first-order partial derivatives on both sides, and set equal to $\mathbf{0}$:
 
-$$\nabla f(\mathbf{x}) \approx \nabla f(\mathbf{x}\_0) + H(\mathbf{x}\_0)(\mathbf{x}-\mathbf{x}\_0) = 0$$
+$$\nabla f(\mathbf{x}) \approx \nabla f(\mathbf{x}_0) + H(\mathbf{x}_0)(\mathbf{x}-\mathbf{x}_0) = 0$$
 
 Solving for $\mathbf{x}$ gives:
 
-$$\mathbf{x} = \mathbf{x}\_0 - H(\mathbf{x}\_0)^{-1} \nabla f(\mathbf{x}\_0)$$
+$$\mathbf{x} = \mathbf{x}_0 - H(\mathbf{x}_0)^{-1} \nabla f(\mathbf{x}_0)$$
 
 So, Newton's method is:
 
-$$\mathbf{x}\_{i+1} = \mathbf{x}\_i - H(\mathbf{x}\_i)^{-1} \nabla f(\mathbf{x}\_i)$$
+$$\mathbf{x}_{i+1} = \mathbf{x}_i - H(\mathbf{x}_i)^{-1} \nabla f(\mathbf{x}_i)$$
 
-If $f$ has local maximum at $\mathbf{x}^\*$, is "well-behaved" near $\mathbf{x}^\*$, and initial point $\mathbf{x}\_0$ is "close enough" to $\mathbf{x}^\*$, *Newton's method will converge*.
+If $f$ has local maximum at $\mathbf{x}^*$, is "well-behaved" near $\mathbf{x}^*$, and initial point $\mathbf{x}_0$ is "close enough" to $\mathbf{x}^*$, *Newton's method will converge*.
 
 Presenter Notes
 ===============
@@ -568,32 +560,33 @@ R Code
 
 Here is an implementation of Newton's method in R:
 
-    !r
-    newton <- function(H, grad, x0, eps = 1e-9, max_iter = 100) {
+```{r}
+newton <- function(H, grad, x0, eps = 1e-9, max_iter = 100) {
 
-        x <- x0
+    x <- x0
+    gradx <- grad(x)
+    Hx <- H(x)
+    i <- 0
+    while ((max(abs(gradx)) > eps) && (i < max_iter)) {
+        x <- x - solve(Hx, gradx)
         gradx <- grad(x)
         Hx <- H(x)
-        i <- 0
-        while ((max(abs(gradx)) > eps) && (i < max_iter)) {
-            x <- x - solve(Hx, gradx)
-            gradx <- grad(x)
-            Hx <- H(x)
-            i <- i + 1
-        }
-        if (i == max_iter) {
-            cat('newton failed to converge\n')
-        } else {
-            return(x)
-        }
+        i <- i + 1
     }
+    if (i == max_iter) {
+        cat('newton failed to converge\n')
+    } else {
+        return(x)
+    }
+}
+```
 
 ---
 
 Newton's Method
 ===============
 
-![newton](http://cl.ly/S5YB/Screenshot%202012-10-14%20at%2015.09.48.png
+![newton](http://cl.ly/S5YB/Screenshot%202012-10-14%20at%2015.09.48.png)
 
 ---
 
@@ -602,13 +595,13 @@ Context: Logistic Regression
 
 Logistic regression models binary outcomes as a function of zero or more covariates.
 
-$$y\_i \in \{0,1\}$$
+$$y_i \in \{0,1\}$$
 
-$$\begin{align}f(\mathbf{x}) &= g(\mathbf{\theta}'\mathbf{x}) = g(\theta\_0 + \theta\_1 x\_1 + \ldots + \theta\_k x\_k) \cr
+$$\begin{aligned}f(\mathbf{x}) &= g(\mathbf{\theta}'\mathbf{x}) = g(\theta_0 + \theta_1 x_1 + \ldots + \theta_k x_k) \cr
 &= \text{logit}(\mathbf{\theta}'\mathbf{x}) \cr
 &= \frac{1}{1+e^{-\mathbf{\theta}'\mathbf{x}}} \cr
 &= Pr(y=1 | \mathbf{x}, \mathbf{\theta}) = p
-\end{align}$$
+\end{aligned}$$
 
 Hence,
 
@@ -642,27 +635,25 @@ Maximizing the Likelihood
 
 It is often simpler to work with the likelihood function on the logarithmic scale:
 
-$$\log L(\theta) = \sum\_i y\_i \log p\_i + (1-y\_i) \log(1-p\_i)$$
+$$\log L(\theta) = \sum_i y_i \log p_i + (1-y_i) \log(1-p_i)$$
 
-To maximize, we take the (partial) derivative with respect to $\theta\_j$:
+To maximize, we take the (partial) derivative with respect to $\theta_j$:
 
-$$\begin{align}\frac{\partial}{\partial \theta\_j} \log L(\mathbf{\theta}) &= \frac{1}{n} \sum\_i (f(\mathbf{x}\_i) - y\_i) \mathbf{x}\_i \cr
+$$\begin{aligned}\frac{\partial}{\partial \theta_j} \log L(\mathbf{\theta}) &= \frac{1}{n} \sum_i (f(\mathbf{x}_i) - y_i) \mathbf{x}_i \cr
 &= \frac{1}{n} \mathbf{x}'(\mathbf{p} - \mathbf{y}) = \nabla J
-\end{align}$$
+\end{aligned}$$
 
-We could use this to search for $\theta^\*$ using gradient ascent, but we learned that this may be inefficient.
+We could use this to search for $\theta^*$ using gradient ascent, but we learned that this may be inefficient.
 
 ---
 
 Newton's method
 ===============
 
-
-
 Now, the Hessian:
 
-$$H(\mathbf{\theta}) = \frac{1}{n} \sum\_i \left[ \mathbf{x}\_i'f(\mathbf{x}\_i)(1-f(\mathbf{x}\_i)) \mathbf{x}\_i \right]$$
+$$H(\mathbf{\theta}) = \frac{1}{n} \sum_i \left[ \mathbf{x}_i'f(\mathbf{x}_i)(1-f(\mathbf{x}_i)) \mathbf{x}_i \right]$$
 
 Update rule:
 
-$$\mathbf{\theta}\_{i+1} = \mathbf{\theta}\_i - H^{-1} \nabla J$$
+$$\mathbf{\theta}_{i+1} = \mathbf{\theta}_i - H^{-1} \nabla J$$

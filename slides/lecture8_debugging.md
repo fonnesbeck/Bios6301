@@ -106,6 +106,74 @@ Be careful about over-using this approach. If the code would fail on its own, th
 
 ---
 
+## Suppressing Warnings
+
+Occasionally your code may generate warnings that you expect and would prefer not to see.
+Warnings for an expression can be suppressed with `supressWarnings(expr)`.
+
+    !r
+    > as.numeric(c(pi, "3.14", "pi", 4*(4*atan(1/5)-atan(1/239))))
+    [1] 3.141593 3.140000       NA 3.141593
+    Warning message:
+    NAs introduced by coercion
+    > suppressWarnings(as.numeric(c(pi, "3.14", "pi", 4*(4*atan(1/5)-atan(1/239)))))
+    [1] 3.141593 3.140000       NA 3.141593
+
+All warnings for a session can be ignored by setting the `warn` option to a negative number (but you don't really want to do that).
+
+    !r
+    > options(warn = -1)
+    > as.numeric(c(pi, "3.14", "pi", 4*(4*atan(1/5)-atan(1/239))))
+    [1] 3.141593 3.140000       NA 3.141593
+
+---
+
+## Bypassing Errors
+
+It may be helpful to check for and handle certain errors.
+This can be done with the `tryCatch` function.
+One example is preventing an Rmd file from stopping during the knitting process.
+Another would be running alternative methods for a failed algorithm.
+Here's an example of handling a singular matrix.
+
+    !r
+    library(MASS)
+    set.seed(10)
+    ans <- matrix(NA, nrow=10, ncol=6)
+    for(i in seq(nrow(ans))) {
+      x <- matrix(sample(2, 36, replace=TRUE), ncol=6)
+      y <- tryCatch(solve(x), error=function(e) {
+        # return NULL if singular
+        if(grepl("singular", e$message)) return(NULL)
+        # otherwise, fail as normal
+        stop(e)
+      })
+      if(is.null(y)) {
+        warning("The Moore-Penrose pseudoinverse was used for singular matrix.")
+        y <- ginv(x)
+      }
+      ans[i,] <- diag(y)
+    }
+    round(ans, 4)
+
+---
+
+## Exercise
+
+Newton-Raphson can fail to converge if the initial guess is bad.
+
+Update your N-R algorithm to generate an error if it fails to converge.
+
+Then use `tryCatch` to make guesses until a root is found.
+
+    !r
+    not.a.good.guess <- -10
+    f <- function(x) cos(x)-x
+    fp <- function(x) -sin(x)-1
+    ans <- newton(not.a.good.guess, f, fp)
+
+---
+
 ## Locating the Problem
 
 
@@ -232,7 +300,7 @@ Frequently, we might want to step through a function line-by-line to locate a bu
 ## `debug`
 
 
-Typing `n` executes the current line and moves to the next line; `c` executes the rest of the function without stopping; `Q` exits the debugger; and `where` shows you your current location, incase you get lost:
+Typing `n` executes the current line and moves to the next line; `c` executes the rest of the function without stopping; `Q` exits the debugger; and `where` shows you your current location, in case you get lost:
 
     !r
     Browse[2]> n
