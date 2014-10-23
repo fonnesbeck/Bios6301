@@ -1,0 +1,59 @@
+---
+title: 'Bios 301: Assignment 3'
+output: pdf_document
+---
+
+*Due Tuesday, 11 November, 1:00 PM*
+
+$5^{n=day}$ points taken off for each day late.
+
+50 points total.
+
+Submit a single knitr file (named `homework3.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
+
+### Question 1 ###
+
+**15 points**
+
+**20 points**
+
+The game of craps is played as follows. First, you roll two six-sided dice; let x be the sum of the dice on the first roll. If x = 7 or 11 you win, otherwise you keep rolling until either you get x again, in which case you also win, or until you get a 7 or 11, in which case you lose.
+
+Write a program to simulate a game of craps. You can use the following snippet of code to simulate the roll of two (fair) dice:
+
+```{r}
+    x <- sum(ceiling(6*runif(2)))
+```
+
+1. The instructor should be able to easily import and run your program (function), and obtain output that clearly shows how the game progressed.  Set the RNG seed with `set.seed(100)` and show the output of three games. (15 points)
+
+1. Find a seed that will win ten straight games.  Consider adding an argument to your function that disables output. Show the output of the ten games. (5 points)
+
+### Question 2 ###
+
+**20 points**
+
+Code a function that does golden section search, and use this function to find all of the global maxima on the following function:
+
+$$f(x) = \left\{
+  \begin{array}{ll}0 & \text{if } x=0 \\
+  |x| \log\left(\frac{|x|}{2}\right)e^{-|x|} & \text{otherwise}
+  \end{array}
+\right.
+$$
+
+on the interval [-10, 10].
+
+To get an idea of what the function looks like, it might be helpful to plot it.
+
+### Question 3 ###
+
+**10 points**
+
+Obtain the code for using Newton's Method to estimate logistic regression parameters (`logtistic.r`) and modify it to predict `death` from `weight`, `hemoglobin` and `cd4baseline` in the HAART dataset. Use complete cases only. Report the estimates for each parameter, including the intercept.
+
+### Question 4 ###
+
+**5 bonus points**
+
+Something with regular expressions.
