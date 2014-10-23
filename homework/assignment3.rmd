@@ -50,7 +50,13 @@ To get an idea of what the function looks like, it might be helpful to plot it.
 
 **10 points**
 
-Obtain the code for using Newton's Method to estimate logistic regression parameters (`logtistic.r`) and modify it to predict `death` from `weight`, `hemoglobin` and `cd4baseline` in the HAART dataset. Use complete cases only. Report the estimates for each parameter, including the intercept.
+Obtain the code for using Newton's Method to estimate logistic regression parameters (`logistic.r`) and modify it to predict `death` from `weight`, `hemoglobin` and `cd4baseline` in the HAART dataset. Use complete cases only. Report the estimates for each parameter, including the intercept.
+
+Note: The original script `logistic_debug.r` is in the exercises folder.  It needs modification, specifically, the logistic function should be defined:
+
+```{r}
+logistic <- function(x) 1 / (1 + exp(-x))
+```
 
 ### Question 4 ###
 
