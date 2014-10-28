@@ -40,7 +40,7 @@ This schedule is *tentative* and subject to change at any time.
 * [Debugging](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture8_debugging.html) (Chapter 13)
 * [Basic plotting](https://dl.dropbox.com/u/233041/Bios301/lecture8_plotting.html) (Chapter 12)
 * Plotting and Graphics
-    - [Plotting with `ggplot2`](https://dl.dropbox.com/u/233041/Bios301/lecture9_ggplot2.html)
+    - [Plotting with `ggplot2`](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture9_ggplot2.pdf)
     - [Scientific graphics](https://dl.dropbox.com/u/233041/Bios301/lecture9_viz.html)
 * [Estimation](https://dl.dropbox.com/u/233041/Bios301/lecture10_estimation.html)
     ([Chapter 17 of Jones et al.](https://dl.dropboxusercontent.com/u/233041/Bios301/Jones%202009%20%28Ch.17%29.pdf))
