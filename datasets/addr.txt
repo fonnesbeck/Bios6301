@@ -1,0 +1,42 @@
+Bania   Thomas M.       725 Commonwealth Ave.   Boston  MA      O2215 
+Barnaby         David   373 W. Geneva St.       Wms. Bay        WI      53191
+Bausch  Judy    373 W. Geneva St.       Wms. Bay        WI      53191
+Bolatto         Alberto         725 Commonwealth Ave.   Boston  MA      O2215 
+Carlstrom       John    933 E. 56th St.         Chicago         IL      60637
+Chamberlin      Richard A.      111 Nowelo St.  Hilo    HI      96720
+Chuss   Dave    2145 Sheridan Rd        Evanston        IL      60208-3112 
+Davis   E. J.   933 E. 56th St.         Chicago         IL      60637
+Depoy   Darren  174 W. 18th Ave.        Columbus        OH      43210
+Griffin         Greg    5000 Forbes Ave.        Pittsburgh      PA      15213
+Halvorsen       Nils    933 E. 56th St.         Chicago         IL      60637
+Harper  Al      373 W. Geneva St.       Wms. Bay        WI      53191
+Huang   Maohai  725 W. Commonwealth Ave.        Boston  MA      O2215 
+Ingalls         James G.        725 W. Commonwealth Ave.        Boston  MA      O2215 
+Jackson         James M.        725 W. Commonwealth Ave.        Boston  MA      O2215 
+Knudsen         Scott   373 W. Geneva St.       Wms. Bay        WI      53191
+Kovac   John    5640 S. Ellis Ave.      Chicago         IL      60637
+Landsberg       Randy   5640 S. Ellis Ave.      Chicago         IL      60637
+Lo      Kwok-Yung       1002 W. Green St.       Urbana  IL      61801
+Loewenstein     Robert F.       373 W. Geneva St.       Wms. Bay        WI      53191
+Lynch   John    4201 Wilson Blvd        Arlington       VA      22230
+Martini         Paul    174 W. 18th Ave.        Columbus        OH      43210
+Meyer   Stephan         933 E. 56th St.         Chicago         IL      60637
+Mrozek  Fred    373 W. Geneva St.       Wms. Bay        WI      53191
+Newcomb         Matt    5000 Forbes Ave.        Pittsburgh      PA      15213
+Novak   Giles   2145 Sheridan Rd        Evanston        IL      60208-3112 
+Odalen  Nancy   373 W. Geneva St.       Wms. Bay        WI      53191
+Pernic  Dave    373 W. Geneva St.       Wms. Bay        WI      53191
+Pernic  Bob     373 W. Geneva St.       Wms. Bay        WI      53191
+Peterson        Jeffrey         5000 Forbes Ave.        Pittsburgh      PA      15213
+Pryke   Clem    933 E. 56th St.         Chicago         IL      60637
+Rebull  Luisa   5640 S. Ellis Ave.      Chicago         IL      60637
+Renbarger       Thomas  2145 Sheridan Rd        Evanston        IL      60208-3112 
+Rottman         Joe     8730 W. Mountain View Ln        Littleton       CO      80125
+Schartman       Ethan   933 E. 56th St.         Chicago         IL      60637
+Spotz   Bob     373 W. Geneva St.       Wms. Bay        WI      53191
+Thoma   Mark    373 W. Geneva St.       Wms. Bay        WI      53191
+Walker  Chris   933 N. Cherry St.       Tucson  AZ      85721
+Wehrer  Cheryl  5000 Forbes Ave.        Pittsburgh      PA      15213
+Wirth   Jesse   373 W. Geneva St.       Wms. Bay        WI      53191
+Wright  Greg    791 Holmdel-Keyport Rd.         Holmdel         NY      O7733-1988 
+Zingale         Michael         5640 S. Ellis Ave.      Chicago         IL      60637

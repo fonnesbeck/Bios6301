@@ -62,4 +62,4 @@ logistic <- function(x) 1 / (1 + exp(-x))
 
 **5 bonus points**
 
-Something with regular expressions.
+Import the `addr.txt` file from the GitHub repository.  This file contains a listing of names and addresses (thanks google).  Parse each line to create a data.frame with the following columns: lastname, firstname, streetno, streetname, city, state, zip.  Keep middle initials or abbreviated names in the firstname column.  Print out the entire data.frame.
