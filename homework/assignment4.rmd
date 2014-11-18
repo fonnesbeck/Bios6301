@@ -11,6 +11,8 @@ $5^{n=day}$ points taken off for each day late.
 
 Submit a single knitr file (named `homework4.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
 
+Failure to name file `homework4.rmd` or include author name may result in 5 points taken off.
+
 ### Question 1 ###
 
 **15 points**
