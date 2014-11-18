@@ -94,3 +94,37 @@ print.polyreg <- function(fits) {
 
 dg <- 15
 lmo <- polyfit(y, x, dg)
+
+setClass("fun", representation(f="function", x="numeric", y="numeric"))
+f <- function(x) sin((3*pi/2)*x) + x^2 + rnorm(length(x), mean=0, sd=0.5)
+f1 <- new("fun", f=f, x=seq(0,10,by=0.1))
+f1@y <- f1@f(f1@x)
+plot(f1@x, f1@y, type='l', xlab='x', ylab='y', 
+     main=sprintf("f(x) = %s", capture.output(body(f1@f))))
+setMethod("initialize", "fun", 
+          function(.Object, f=expression, x=numeric(0), y=numeric(0), seed=1) {
+            .Object@f <- f
+            if(length(x) == 0) x<-seq(0,10)
+            .Object@x <- x
+            set.seed(seed)
+            .Object@y <- f(x)
+            .Object
+          })
+f2 <- new("fun", f=f)
+fun <- function(...) {
+  new("fun", ...)
+}
+f3 <- fun(f=f, x=seq(0,10,by=0.1))
+setMethod("plot", signature(x="fun", y="missing"), function(x,...) {
+  plot(x@x, x@y, type='l', xlab='x', ylab='y', 
+       main=sprintf("f(x) = %s", capture.output(body(f1@f))), ...)  
+})
+
+Tired <- setRefClass("Tired",
+                     fields = list(speech='character'),
+                     methods = list(show=function() {
+                       zs <- paste(rep('z', sample(10, 1)), collapse='')
+                       print(sprintf("%s... %s", speech, zs))
+                     })
+)
+t <- Tired$new(speech="We're talking about practice")
