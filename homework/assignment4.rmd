@@ -36,7 +36,7 @@ next_gen <- function(pop) {
 }
 ```
 
-Use the function `next_gen` to generate nine generations (you already have the first), then use the function `histogram` to plot the distribution of male heights in each generation (this will require multiple calls to `histogram`). The phenomenon you see is called regression to the mean.  Provide (at least) minimal decorations such as title and x-axis labels.
+Use the function `next_gen` to generate nine generations (you already have the first), then use the function `hist` to plot the distribution of male heights in each generation (this will require multiple calls to `hist`). The phenomenon you see is called regression to the mean.  Provide (at least) minimal decorations such as title and x-axis labels.
 
 ### Question 2 ###
 
