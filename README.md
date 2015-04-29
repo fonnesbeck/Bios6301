@@ -1,6 +1,6 @@
-# BIOS 301: Introduction to Statistical Computing
+# BIOS 6301: Introduction to Statistical Computing
 
-This repository contains course materials in support of Bios301 in the Department of Biostatistics at Vanderbilt. This repo is updated continually with new documents, particularly when class is in session.
+This repository contains course materials in support of Bios6301 in the Department of Biostatistics at Vanderbilt. This repo is updated continually with new documents, particularly when class is in session.
 
 Materials are sorted into the following directory structure:
 

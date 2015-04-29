@@ -8,7 +8,7 @@ Projects are portable, so they work on different operating systems without a pro
 
 We can move to a directory using the menu item, or via the `cd` command:
 
-    cd "/Users/fonnescj/Bios301/STATA"
+    cd "/Users/fonnescj/Bios6301/STATA"
 
 The working directory is shown in the status bar at the bottom of the application.
 
@@ -20,7 +20,7 @@ Log files can be created to record everything that appears in the results window
 . log using "startup"
 
       name:  <unnamed>
-       log:  /Users/fonnescj/Bios301/STATA/startup.smcl
+       log:  /Users/fonnescj/Bios6301/STATA/startup.smcl
   log type:  smcl
  opened on:  28 Nov 2012, 10:08:24
 ```   
@@ -356,7 +356,7 @@ To illustrate how to use Stata to clean up a dataset, load the `haart_stata.csv`
 We can import spreadsheet-type data using `insheet`, passing the separator type (comma) and an indicator for a names header as options:
 
 ```bash
-. insheet using "/Users/fonnescj/Bios301/datasets/haart.csv", comma names
+. insheet using "/Users/fonnescj/Bios6301/datasets/haart.csv", comma names
 (12 vars, 1000 obs)
 
 ```

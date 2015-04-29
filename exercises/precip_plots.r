@@ -1,4 +1,4 @@
-precip <- read.table("~/Bios301/datasets/nashville_precip.txt", header=T, row.names=1)
+precip <- read.table("~/Bios6301/datasets/nashville_precip.txt", header=T, row.names=1)
 annual_precip <- rowSums(precip)
 
 dev.new(width = 15, height = 5)

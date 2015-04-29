@@ -534,7 +534,7 @@ Aggregation occurs when the combination of variables in the cast formula does no
 Consider the Nashville precipitation data on the GitHub repo:
 
     !r
-    > precip <- read.table("~/Bios301/datasets/nashville_precip.txt", head=T)
+    > precip <- read.table("~/Bios6301/datasets/nashville_precip.txt", head=T)
     > mprecip <- melt(precip, id=1)
     > head(mprecip)
       Year variable value

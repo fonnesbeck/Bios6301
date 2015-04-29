@@ -30,7 +30,7 @@ In R, the use of `apply` can be unintuitive:
 
     !r
     > library(RSQLite)
-    > setwd("~/Bios301/baseball-databank")
+    > setwd("~/Bios6301/baseball-databank")
     > con <- dbConnect(dbDriver('SQLite'), dbname='baseball-archive-2011.sqlite')
     > batting <- dbReadTable(con, "Batting")
     > getData <- function(y) batting[batting$yearID==y,]

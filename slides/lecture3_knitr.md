@@ -350,7 +350,7 @@ Presenter Notes
 Exercise
 ========
 
-Grab the files `binomial.tex` and `binomial.R` in the exercises folder of the Bios301 GitHub repo.
+Grab the files `binomial.tex` and `binomial.R` in the exercises folder of the Bios6301 GitHub repo.
 
 1. Integrate the R code into the LaTeX file to produce a working `rnw` report. Verify that it works.
 2. Change the options on the R code so that it shows shows the plot, but not the code itself.

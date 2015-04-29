@@ -897,7 +897,7 @@ DVI (device independent) files are not intended to be human-readable; they consi
 Exercise: Compile a LaTeX Document
 ==================================
 
-In the `exercises` folder on github.com/Bios301, there is a sample LaTeX document, `binomial.tex`. Try compiling this file into a PDF document.
+In the `exercises` folder on github.com/Bios6301, there is a sample LaTeX document, `binomial.tex`. Try compiling this file into a PDF document.
 
 Presenter Notes
 ===============
@@ -971,7 +971,7 @@ Not So Short Introduction to LaTeX (`reference` folder)
 Example: LaTeX from Word
 ========================
 
-In the `exercises` folder on github.com/Bios301, there is a short Word (.docx) document. See if you can create the same document using LaTeX.
+In the `exercises` folder on github.com/Bios6301, there is a short Word (.docx) document. See if you can create the same document using LaTeX.
 
 
 <script type="text/x-mathjax-config">

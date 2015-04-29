@@ -688,9 +688,9 @@ try installing it ...
 Exercise
 ========
 
-### Clone the Bios301 course repository at
+### Clone the Bios6301 course repository at
 
-    http://github.com/fonnesbeck/Bios301
+    http://github.com/fonnesbeck/Bios6301
 
 Presenter Notes
 ===============
@@ -1052,12 +1052,12 @@ Remotes
 
 Remote repositories are project repositories that are hosted on a network. Collaborating with others involves managing these remote repositories and pushing and pulling data to and from them when you need to share work.
 
-Go to the `Bios301` repo that you cloned in the earlier exercise, and check out the remote repositories.
+Go to the `Bios6301` repo that you cloned in the earlier exercise, and check out the remote repositories.
 
     !bash
     $ git remote -v
-    origin  git@github.com:fonnesbeck/Bios301.git (fetch)
-    origin  git@github.com:fonnesbeck/Bios301.git (push)
+    origin  git@github.com:fonnesbeck/Bios6301.git (fetch)
+    origin  git@github.com:fonnesbeck/Bios6301.git (push)
 
 This shows the name of the remote (origin), the corresponding URL for the remote, and what each URL is used for (fetching and pushing).
 
@@ -1226,9 +1226,9 @@ Pull Before You Push
 If you are collaborating on a remote repository, its usually a good idea to `git pull` before you push, incase others have committed content since you last pulled.
 
     $ git push
-    To git@github.com:fonnesbeck/Bios301.git
+    To git@github.com:fonnesbeck/Bios6301.git
      ! [rejected]        master -> master (non-fast-forward)
-    error: failed to push some refs to 'git@github.com:fonnesbeck/Bios301.git'
+    error: failed to push some refs to 'git@github.com:fonnesbeck/Bios6301.git'
     hint: Updates were rejected because a pushed branch tip is behind its remote
     hint: counterpart. If you did not intend to push that branch, you may want to
     hint: specify branches to push or set the 'push.default' configuration
