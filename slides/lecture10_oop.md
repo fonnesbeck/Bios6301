@@ -168,21 +168,21 @@ Asterisks denote *non-visible* functions, meaning ones that are not in the defau
 The `aspell` function itself does a spellcheck on the file specified in its argument.
 
     !r
-    > aspell("~/Bios301/slides/lecture10_oop.md")
+    > aspell("~/Bios6301/slides/lecture10_oop.md")
     acf
-      ~/Bios301/slides/lecture10_oop.md:164:17
+      ~/Bios6301/slides/lecture10_oop.md:164:17
 
     anova
-      ~/Bios301/slides/lecture10_oop.md:164:61
+      ~/Bios6301/slides/lecture10_oop.md:164:61
 
     aov
-      ~/Bios301/slides/lecture10_oop.md:165:17
+      ~/Bios6301/slides/lecture10_oop.md:165:17
     ...
 
 The `aspell` function returns an object of class `aspell`, which has its own generic print function, `print.aspell`. However:
 
     !r
-    > aspout <- aspell("~/Bios301/slides/lecture10_oop.md")
+    > aspout <- aspell("~/Bios6301/slides/lecture10_oop.md")
     > print.aspell(aspout)
     Error: could not find function "print.aspell"
 
@@ -211,12 +211,12 @@ You can access non-visible functions via `getAnywhere`.
 
     !r
     !r
-    > utils::print.aspell("~/Bios301/slides/lecture10_oop.md")
+    > utils::print.aspell("~/Bios6301/slides/lecture10_oop.md")
     acf
-      ~/Bios301/slides/lecture10_oop.md:164:17
+      ~/Bios6301/slides/lecture10_oop.md:164:17
 
     anova
-      ~/Bios301/slides/lecture10_oop.md:164:61
+      ~/Bios6301/slides/lecture10_oop.md:164:61
     ...
 
 ---

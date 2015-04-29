@@ -39,7 +39,7 @@ The dataset `nashville_precip.txt` contains NOAA precipitation data for Nashvill
 We can import the rainfall data into R, and use `apply` to get means and variances by month:
 
     !r
-    > precip <- read.table("~/Bios301/datasets/nashville_precip.txt", header=T)
+    > precip <- read.table("~/Bios6301/datasets/nashville_precip.txt", header=T)
     > precip_mean <- apply(precip[-1], 2, mean)
     > precip_var <- apply(precip[-1], 2, var)
 

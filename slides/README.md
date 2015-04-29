@@ -1,6 +1,6 @@
-# Bios301 Lectures
+# Bios6301 Lectures
 
-The slide decks for Bios301 lectures are composed in Markdown, and compiled into HTML5 slides using [Landslide](https://github.com/adamzap/landslide). Slides are built using the following syntax:
+The slide decks for Bios6301 lectures are composed in Markdown, and compiled into HTML5 slides using [Landslide](https://github.com/adamzap/landslide). Slides are built using the following syntax:
 
     landslide --theme=tango_new lecture1_intro.md
 

@@ -1,4 +1,4 @@
-# Bios301: Introduction to Statistical Computing
+# Bios6301: Introduction to Statistical Computing
 
 ---
 
@@ -259,8 +259,8 @@ Each lecture will consist of 30-40 minutes of lecturing, followed by a hands-on 
 
 # Course Website
 
-### fonnesbeck.github.io/Bios301
+### fonnesbeck.github.io/Bios6301
 
-![Bios301 Website](images/website.png)
+![Bios6301 Website](images/website.png)
 
 [gentleman_lang]: http://biostats.bepress.com/bioconductor/paper2/

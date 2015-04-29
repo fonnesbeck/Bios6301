@@ -1036,7 +1036,7 @@ For access to SQLite, we require the `RSQLite` DBI device driver:
 To connect to our SQLite database via DBI, we use the functions `dbDriver` and `dbConnect`:
 
     !r
-    > setwd("~/Bios301/baseball-databank")
+    > setwd("~/Bios6301/baseball-databank")
     > library(RSQLite)
     Loading required package: DBI
     > drv <- dbDriver('SQLite')
