@@ -29,22 +29,18 @@ Many modern problems/data require a computational approach
 
 ---
 
-Bios 301
+Bios 6301
 ========
 
 * **Week 1**: Course introduction
-* **Week 2**: Data, data types and data structures (Chapters 2-5); Version control using Git
-* **Week 3**: Document preparation using LaTeX, Markdown and `knitr`
-* **Week 4**: Control structures; Writing and calling functions (Chapter 7)
-* **Week 5**: Simulation; optimization (Chapter 8)
-* **Week 6**: Debugging and testing (Chapter 13)
-* **Week 7**: Top-down design and scoping
-* **Week 8**: Programming paradigms (Chapter 9)
-* **Week 9**: Regular expressions; High performance computing (Chapters 11, 14)
-* **Week 10**: Split, apply and combine
-* **Week 11**: Scientific graphics; `ggplot2` (Chapter 12)
-* **Week 12**: Overview of STATA
-* **Week 13**: R package development
+* **Weeks 2-3**: Data, data types and data structures (Chapters 2-5)
+* **Weeks 4-5**: Control structures (Chapter 7); Simulation (Chapter 8)
+* **Weeks 6-7**: Version control using Git; Document preparation using LaTeX, Markdown and `knitr`
+* **Weeks 8-9**: Writing and calling functions; Input-output (Chapter 10)
+* **Week 10**: Data processing; Regular expressions (Chapter 11)
+* **Weeks 11-12**: Scientific graphics; `ggplot2` (Chapter 12)
+* **Week 13**: Programming paradigms (Chapter 9)
+* **Week 14**: Debugging (Chapter 13); R package development
 
 Presenter Notes
 ===============
@@ -84,8 +80,8 @@ Content later in the course builds on what was presented earlier -- keep up!
 
 A final course grade will be calculated based on:
 
-- four (4) equally-weighted homework assignments (50%)
-- a final exam (50%)
+- six (6) equally-weighted homework assignments (60%)
+- a final exam (40%)
 
 ---
 

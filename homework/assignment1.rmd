@@ -1,85 +1,219 @@
 ---
-title: 'Bios 301: Assignment 1'
-output: pdf_document
+title: 'Bios 6301: Assignment 1'
+output: html_document
 ---
 
-*Due Tuesday, 23 September, 1:00 PM*
+*(informally) Due Thursday, 10 September, 1:00 PM*
 
 50 points total.
 
-Submit a single knitr file (named `homework1.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
+This assignment won't be submitted until we've covered Rmarkdown.
+Place your R code in between the appropriate chunks for each question.
+Check your output by using the `Knit HTML` button in RStudio.
 
-1. **Working with data** In the `datasets` folder on the course GitHub repo, you will find a file called `cancer.csv`, which is a dataset in comma-separated values (csv) format. This is a large cancer incidence dataset that summarizes the incidence of different cancers for various subgroups. (18 points)
+### Create a Data Set
 
-    1. Load the data set into R and make it a data frame called `cancer.df`. (2 points)
+A data set in R is called a data.frame.  This particular data set is
+made of three categorical variables, or factors: `gender`, `smoker`,
+and `exercise`.  In addition `exercise` is an ordered factor.  `age`
+and `los` (length of stay) are continuous variables.
 
-    2. Determine the number of rows and columns in the data frame. (2)
+```{r}
+gender <- c('M','M','F','M','F','F','M','F','M')
+age <- c(34, 64, 38, 63, 40, 73, 27, 51, 47)
+smoker <- c('no','yes','no','no','yes','no','no','no','yes')
+exercise <- factor(c('moderate','frequent','some','some','moderate','none','none','moderate','moderate'),
+                    levels=c('none','some','moderate','frequent'), ordered=TRUE
+)
+los <- c(4,8,1,10,6,3,9,4,8)
+x <- data.frame(gender, age, smoker, exercise, los)
+x
+```
 
-    3. Extract the names of the columns in `cancer.df`. (2)
+### Create a Model
 
-    4. Report the value of the 3000th row in column 6. (2)
+We can create a model using our data set.  In this case I’d like to
+estimate the association between `los` and all remaining variables.
+This means `los` is our dependent variable. The other columns will be
+terms in our model.
 
-    5. Report the contents of the 172nd row. (2)
+The `lm` function will take two arguments, a formula and a data set.
+The formula is split into two parts, where the vector to the left of
+`~` is the dependent variable, and items on the right are terms.
 
-    6. Create a new column that is the incidence *rate* (per 100,000) for each row.(3)
+```{r}
+lm(los ~ gender + age + smoker + exercise, dat=x)
+```
 
-    7. How many subgroups (rows) have a zero incidence rate? (2)
+1. Looking at the output, which coefficient seems to have the highest
+effect on `los`? (2 points)
 
-    8. Find the subgroup with the highest incidence rate.(3)
+```
+```
 
+This can be tough because it also depends on the scale of the
+variable.  If all the variables are standardized, then this is not
+the case.
 
+Given that we only have nine observations, it's not really a good idea
+to include all of our variables in the model.  In this case we'd be
+"over-fitting" our data.  Let's only include one term, `gender`.
 
-2. **Data types** (10 points)
+#### Warning
 
-    1. Create the following vector: `x <- c("5","12","7")`. Which of the following commands will produce an error message? For each command, Either explain why they should be errors, or explain the non-erroneous result. (4 points)
+When choosing terms for a model, use prior research, don't just
+select the variable with the highest coefficient.
 
-            max(x)
-            sort(x)
-            sum(x)
+2. Create a model using `los` and `gender` and assign it to the
+variable `mod`.  Run the `summary` function with `mod` as its
+argument. (5 points)
 
-    2. For the next two commands, either explain their results, or why they should produce errors. (3 points)
+```{r}
+```
 
-            y <- c("5",7,12)
-            y[2] + y[3]
+The summary of our model reports the parameter estimates along with
+standard errors, test statistics, and p-values.  This table of
+estimates can be extracted with the `coef` function.
 
-    3. For the next two commands, either explain their results, or why they should produce errors. (3 points)
+### Estimates
 
-            z <- data.frame(z1="5",z2=7,z3=12)
-            z[1,2] + z[1,3]
+3. What is the estimate for the intercept?  What is the estimate for
+gender?  Use the `coef` function. (3 points)
 
-3. **Data structures** Give R expressions that return the following matrices and vectors (*i.e.* do not construct them manually). (3 points each, 12 total)
+```{r}
+```
 
-    1. $(1,2,3,4,5,6,7,8,7,6,5,4,3,2,1)$
-    
-    2. $(1,2,2,3,3,3,4,4,4,4,5,5,5,5,5)$
+4. The second column of `coef` are standard errors.  These can be
+calculated by taking the `sqrt` of the `diag` of the `vcov` of the
+`summary` of `mod`.  Calculate the standard errors. (3 points)
 
-    3. $\begin{pmatrix}
-      0 & 1 & 1  \\
-      1 & 0 & 1  \\
-      1 & 1 & 0  \\
-    \end{pmatrix}$
+```{r}
+```
 
-    4. $\begin{pmatrix}
-      1 & 2 & 3 & 4 \\
-      1 & 4 & 9 & 16 \\
-      1 & 8 & 27 & 64  \\
-      1 & 16 & 81 & 256 \\
-      1 & 32 & 243 & 1024  \\
-    \end{pmatrix}$
+The third column of `coef` are test statistics.  These can be
+calculated by dividing the first column by the second column.
 
-4. **Basic programming** (10 points)
+```{r}
+mod <- lm(los ~ gender, dat=x)
+mod.c <- coef(summary(mod))
+mod.c[,1]/mod.c[,2]
+```
 
-    1. Let $h(x,n)=1+x+x^2+\ldots+x^n = \sum_{i=0}^n x^i$. Write an R program to calculate $h(x,n)$ using a `for` loop. (5 points)
+The fourth column of `coef` are p values.  This captures the
+probability of observing a more extreme test statistic.  These can be
+calculated with the `pt` function, but you will need the
+degrees-of-freedom.  For this model, there are 7 degrees-of-freedom.
 
-    1. If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Write an R program to perform the following calculations. (5 points)
+5. Use the `pt` function to calculate the p value for gender.  The first
+argument should be the test statistic for gender.  The second argument
+is the degrees-of-freedom.  Also, set the `lower.tail` argument to
+TRUE.  Finally multiple this result by two. (4 points)
 
-        1. Find the sum of all the multiples of 3 or 5 below 1,000. (3, [euler1])
+```{r}
+```
 
-        1. Find the sum of all the multiples of 4 or 7 below 1,000,000. (2)
+### Predicted Values
 
-    1. Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be $(1, 2, 3, 5, 8, 13, 21, 34, 55, 89)$. Write an R program to calculate the sum of the first 15 even-valued terms. (5 bonus points, [euler2])
+The estimates can be used to create predicted values.
 
-Some problems taken or inspired by projecteuler.
+```{r}
+3.5+(x$gender=='M')*4.3
+```
 
-[euler1]:https://projecteuler.net/problem=1
-[euler2]: https://projecteuler.net/problem=2
+6. It is even easier to see the predicted values by passing the model
+`mod` to the `predict` or `fitted` functions.  Try it out. (2 points)
+
+```{r}
+```
+
+7. `predict` can also use a new data set.  Pass `newdat` as the second
+argument to `predict`. (3 points)
+
+```{r}
+newdat <- data.frame(gender=c('F','M','F'))
+```
+
+### Residuals
+
+The difference between predicted values and observed values are
+residuals.
+
+8. Use one of the methods to generate predicted values.  Subtract the
+predicted value from the `x$los` column. (5 points)
+
+```{r}
+```
+
+9. Try passing `mod` to the `residuals` function. (2 points)
+
+```{r}
+```
+
+10. Square the residuals, and then sum these values.  Compare this to the
+result of passing `mod` to the `deviance` function. (6 points)
+
+```{r}
+```
+
+Remember that our model object has two items in the formula, `los`
+and `gender`.  The residual degrees-of-freedom is the number of
+observations minus the number of items to account for in the model
+formula.
+
+This can be seen by passing `mod` to the function `df.residual`.
+
+```{r}
+df.residual(mod)
+```
+
+11. Calculate standard error by dividing the deviance by the
+degrees-of-freedom, and then taking the square root.  Verify that this
+matches the output labeled "Residual standard error" from
+`summary(mod)`. (5 points)
+
+```{r}
+```
+
+Note it will also match this output:
+
+```{r}
+predict(mod, se.fit=TRUE)$residual.scale
+```
+
+### T-test
+
+Let's compare the results of our model to a two-sample t-test.  We
+will compare `los` by men and women.
+
+12. Create a subset of `x` by taking all records where gender is 'M'
+and assigning it to the variable `men`.  Do the same for the variable
+`women`. (4 points)
+
+```{r}
+```
+
+13. By default a two-sampled t-test assumes that the two groups have
+unequal variances.  You can calculate variance with the `var`
+function.  Calculate variance for `los` for the `men` and `women` data
+sets. (3 points)
+
+```{r}
+```
+
+14. Call the `t.test` function, where the first argument is `los` for
+women and the second argument is `los` for men.  Call it a second time
+by adding the argument `var.equal` and setting it to TRUE.  Does
+either produce output that matches the p value for gender from the
+model summary? (3 points)
+
+```{r}
+```
+
+An alternative way to call `t.test` is to use a formula.
+
+```{r}
+t.test(los ~ gender, dat=x, var.equal=TRUE)
+# compare p-values
+t.test(los ~ gender, dat=x, var.equal=TRUE)$p.value
+coef(summary(lm(los ~ gender, dat=x)))[2,4]
+```

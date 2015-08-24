@@ -1,6 +1,6 @@
-# Machine Representation of Numbers
-
-
+---
+title: "Machine Representation of Numbers"
+output: pdf_document
 ---
 
 ## Positional Numeral Systems
@@ -9,19 +9,23 @@ Several possible bases for a counting system:
 
 **Hexadecimal**
 
-    0123456789ABCDEF
+```
+0123456789ABCDEF
+```
 
 **Decimal**
 
-    0123456789
+```
+0123456789
+```
 
 **Binary**
 
-    01
+```
+01
+```
 
 Computers store information (including numbers) using a binary system.
-
-### Presenter Notes
 
 Everybody learned to represent numbers using a base-10 system, meaning that there are 10 digits, zero through nine, which are concatenated together as needed to represent any number. We could just as easily have chosen another number as the basis for a counting system, such as 16 for the hexadecimal numeral system. Computers store information, including numbers, using a binary system that is comprised only of zero and one. Yet, we can represent any number we wish using binary, just as we can using decimal numerals.
 
@@ -31,32 +35,30 @@ Everybody learned to represent numbers using a base-10 system, meaning that ther
 
 Think about what happens when we reach nine in the decimal system, and we wish to keep counting.
 
-    ...
-    8
-    9
-    10
-    11
-    12
-    ...
+```
+...
+8
+9
+10
+11
+12
+...
+```
 
 Using the binary system:
 
-    0       0
-    1       1
-    2       10
-    3       11
-    4       100
-    5       101
-    6       110
-    7       111
-    8       1000
-    ...
-
-
-
-### Presenter Notes
-
-Analogous to how an odometer works.
+```
+0       0
+1       1
+2       10
+3       11
+4       100
+5       101
+6       110
+7       111
+8       1000
+...
+```
 
 ---
 
@@ -76,8 +78,6 @@ $$ 32 \text{ bit} \Rightarrow 2^{32} - 1 = 4294967295$$
 
 If your computer was purchased in the last few years, and it is running a relatively current version of its operating system, then it is likely a 64-bit system.
 
-### Presenter Notes
-
 Computer memory is essentially limited to binary storage, where "bits" (single binary digits) are switched on or off to represent a one and zero, respectively. Every piece of information stored on your computer is made up of bits. You may have heard descriptions of computer systems as *8-bit*, *32-bit*, *64-bit*, and such. This simply refers to the size of the units of data that can be stored.
 
 ---
@@ -86,15 +86,13 @@ Computer memory is essentially limited to binary storage, where "bits" (single b
 
 In R, you can check the value of the largest integer via
 
-    !r
-    > .Machine$integer.max
-    [1] 2147483647
+```{r}
+.Machine$integer.max
+```
 
-What is this value on your system?
+What is this value on your system?  Probably $2^{31}-1$ = `r sprintf('%s', 2^31-1)`.
 
-### Presenter Notes
-
-This is just under half of what you would expect!
+What happened to 64-bit?  Even with a 64-bit architecture, R will only store integers with 32-bits.  Packages such as `int64` make full use 64-bits.
 
 ---
 
@@ -106,13 +104,12 @@ So far, we have only considered the binary representation of *positive* integers
 
 The most straightforward way of representing signed numbers is to "steal" a bit to indicate the sign a number. But, one less bit implies half the range!
 
+```
 > 8 bits = 1 sign bit + 7 integer bits
+```
 
 So, rather than representing 0 through 255, a signed 8-bit integer covers -128 through 127.
 
-### Presenter Notes
-
-We must encode negative values in binary somehow
 Note that the range is still 256 values, it is just shifted left 128 places.
 
 ---
@@ -130,10 +127,6 @@ $$ 0000 \hspace{0.2cm} 0101 \rightarrow 1111 \hspace{0.2cm} 1010 $$
 
 2. Add one to the binary result:
 $$ 1111 \hspace{0.2cm} 1011 = -5 $$
-
-
-
-### Presenter Notes
 
 In the unsigned space, this would have corresponded to 251 (so its important to specify when you are using signed or unsigned numbers!).
 Notice that it is fully reversible. Try a few on your own to convince yourself.
@@ -162,8 +155,6 @@ Using leftmost bit as a negative sign:
 
 It might make it easier if the binary digits were used directly by humans, but the two's complement approach makes things easier for the computer.
 
-### Presenter Notes
-
 Under the latter scheme, the computer would have to examine two parts of the number in order to change its value. Notice that under two's complement, one simply needs to increment the current value to count, no matter where on the line you are located. So, using a "negative sign" bit is more expensive for basic calculations.
 
 ---
@@ -172,15 +163,13 @@ Under the latter scheme, the computer would have to examine two parts of the num
 
 How can fractional numbers be represented with a binary system? How do we represent a decimal point?
 
+Fractional numbers are referred in computer science as *floating point* numbers, because the decimal point can "float" around the number.
+
 Just as with signed integers, we must sacrifice some bits in order to deal with this additional information. Floating point representation involves a tradeoff: size vs. precision
 
 * How much precision is lost depends entirely on how many bits are set aside to represent them.
 
 In current computer systems we have either 32- or 64-bit floating point numbers.
-
-### Presenter Notes
-
-Fractional numbers are referred in computer science as *floating point* numbers, because the decimal point can "float" around the number
 
 ---
 
@@ -200,10 +189,6 @@ $$ 4294967295 = 4.294967295 x 10^9 $$
 * 1 bit to sign
 
 Since number of bits are limited, infinite precision is impossible!
-
-### Presenter Notes
-
-multiplying by powers of 10 is simply a matter of moving the decimal an appropriate number of places left or right
 
 ---
 
@@ -225,16 +210,17 @@ Anything outside this range is subject to *roundoff error*.
 
 To see rounding error in action, try entering the following command into R:
 
-    !r
-    > 0.1 == 0.3/3
+```{r}
+0.1 == 0.3/3
+```
 
 If precision were infinite, this would return true, but it is not.
 
-
 If this does not disturb you, the following might:
 
-    !r
-    > unique(c(0.3, 0.4-0.1, 0.5-0.2, 0.6-0.3, 0.7-0.4))
+```{r}
+unique(c(0.3, 0.4-0.1, 0.5-0.2, 0.6-0.3, 0.7-0.4))
+```
 
 This is all due to numerical error resulting from the finite representation of numbers.
 
@@ -248,7 +234,6 @@ Notice also, since the number has been split up into two pieces, the simple odom
 
 Some computers have *floating point units*, which are hardware math co-processors that are specifically designed to help speed up floating point calculations.
 
-
 ---
 
 ## Overflow and Underflow
@@ -261,13 +246,13 @@ Some computers have *floating point units*, which are hardware math co-processor
 
 Examples:
 
-    !r
-    > 1e-100 * 1e-100
-    [1] 1e-200
-    > 1e-200 * 1e-200
-    [1] 0
-    > 1e200 * 1e200
-    [1] Inf
+```{r}
+1e-100 * 1e-100
+1e-200 * 1e-200
+1e200 * 1e200
+```
+
+NHL 2K8 example of integer overflow.
 
 ---
 
@@ -275,18 +260,15 @@ Examples:
 
 Even for numbers that are not very large or very small, most floating point operations will result in some loss of precision. So, two quantities that are equal in paper may not be in silicon:
 
-    !r
-    > x <- 10
-    > y <- sqrt(x)
-    > x == y**2
-    [1] FALSE
+```{r}
+x <- 10
+y <- sqrt(x)
+x == y**2
+```
 
-The preferred approach is to test if the difference between two quantities is smaller than some (very small) tolerance:
+### Exercise
 
-    !r
-    > tol <- 1e-8
-    > abs(x - y**2) < tol
-    [1] TRUE
+What approach could be used to test for equality instead?
 
 ---
 
@@ -298,21 +280,10 @@ Subtracting values that are equal to *n* bits can result in the loss of *n* bits
 
 $$ \frac{f(x+h) - f(x)}{h} $$
 
-    !r
-    > for (h in 5:15) print((sin(1 + 10^-h) - sin(1)) / (10^-h))
-    [1] 0.5402981
-    [1] 0.5403019
-    [1] 0.5403023
-    [1] 0.5403023
-    [1] 0.5403024
-    [1] 0.5403022
-    [1] 0.5403011
-    [1] 0.5403455
-    [1] 0.5395684
-    [1] 0.5329071
-    [1] 0.5551115
-    > cos(1) # True value
-    [1] 0.5403023
+```{r}
+for (h in 5:15) print((sin(1 + 10^-h) - sin(1)) / (10^-h))
+cos(1) # True value
+```
 
 ---
 
@@ -326,12 +297,9 @@ Frequently, this results in having to compute a moderate-sized number as the rat
 
 $${200 \choose 10} = \frac{200!}{10!190!} = 2.2451 \times 10^{16}$$
 
-    !r
-    > factorial(200)/(factorial(190)*factorial(10))
-    [1] NaN
-    Warning messages:
-    1: In factorial(200) : value out of range in 'gammafn'
-    2: In factorial(190) : value out of range in 'gammafn'
+```{r}
+factorial(200)/(factorial(190)*factorial(10))
+```
 
 ---
 
@@ -339,41 +307,29 @@ $${200 \choose 10} = \frac{200!}{10!190!} = 2.2451 \times 10^{16}$$
 
 We can use the R function `lfactorial` to take the log-factorial of each number, then adding/subtracting instead of multiplying/dividing, then taking the antilog of the result:
 
-    !r
-    > x <- lfactorial(200) - lfactorial(190) - lfactorial(10)
-    > exp(x)
-    [1] 2.2451e+16
+```{r}
+x <- lfactorial(200) - lfactorial(190) - lfactorial(10)
+exp(x)
+```
 
 In this particular case, we can also take advantage of the fact that much of the large factorials cancel out, and avoid having to use logarithms:
 
 $$\frac{200!}{190!10!} = \frac{200 \cdot 199 \cdot \ldots \cdot 2 \cdot 1}{(190 \cdot 189 \cdot \ldots \cdot 2 \cdot 1)(10 \cdot 9 \cdot \ldots \cdot 2 \cdot 1)} = \frac{200 \cdot \ldots \cdot 191}{10!}$$
 
-    !r
-    > prod(191:200)/factorial(10)
-    [1] 2.2451e+16
+```{r}
+prod(191:200)/factorial(10)
+```
 
 ---
 
-## Exercise
+### Exercise
 
 The function $f(x) = e^x/(1 + e^x)$ is called the "inverse logit function". It serves to transform variables whose support is in the real line $(-\infty, \infty)$ to the unit interval $[0,1]$.
 
-    !r
-    exp(x)/(1 + exp(x))
+```
+exp(x)/(1 + exp(x))
+```
 
 What happens if you set the value of *x* to 10? What about 1000, or 1 million?
 
 What is a simple way to expand this function to deal with large values of *x*?
-
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-<script type="text/javascript" src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>

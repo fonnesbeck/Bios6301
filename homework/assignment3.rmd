@@ -1,63 +1,85 @@
 ---
-title: 'Bios 301: Assignment 3'
+title: 'Bios 301: Assignment 1'
 output: pdf_document
 ---
 
-*Due Tuesday, 11 November, 1:00 PM*
-
-$5^{n=day}$ points taken off for each day late.
+*Due Tuesday, 23 September, 1:00 PM*
 
 50 points total.
 
-Submit a single knitr file (named `homework3.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
+Submit a single knitr file (named `homework1.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
 
-### Question 1 ###
+1. **Working with data** In the `datasets` folder on the course GitHub repo, you will find a file called `cancer.csv`, which is a dataset in comma-separated values (csv) format. This is a large cancer incidence dataset that summarizes the incidence of different cancers for various subgroups. (18 points)
 
-**20 points**
+    1. Load the data set into R and make it a data frame called `cancer.df`. (2 points)
 
-The game of craps is played as follows. First, you roll two six-sided dice; let x be the sum of the dice on the first roll. If x = 7 or 11 you win, otherwise you keep rolling until either you get x again, in which case you also win, or until you get a 7 or 11, in which case you lose.
+    2. Determine the number of rows and columns in the data frame. (2)
 
-Write a program to simulate a game of craps. You can use the following snippet of code to simulate the roll of two (fair) dice:
+    3. Extract the names of the columns in `cancer.df`. (2)
 
-```{r}
-    x <- sum(ceiling(6*runif(2)))
-```
+    4. Report the value of the 3000th row in column 6. (2)
 
-1. The instructor should be able to easily import and run your program (function), and obtain output that clearly shows how the game progressed.  Set the RNG seed with `set.seed(100)` and show the output of three games. (15 points)
+    5. Report the contents of the 172nd row. (2)
 
-1. Find a seed that will win ten straight games.  Consider adding an argument to your function that disables output. Show the output of the ten games. (5 points)
+    6. Create a new column that is the incidence *rate* (per 100,000) for each row.(3)
 
-### Question 2 ###
+    7. How many subgroups (rows) have a zero incidence rate? (2)
 
-**20 points**
+    8. Find the subgroup with the highest incidence rate.(3)
 
-Code a function that does golden section search, and use this function to find all of the global maxima on the following function:
 
-$$f(x) = \left\{
-  \begin{array}{ll}0 & \text{if } x=0 \\
-  |x| \log\left(\frac{|x|}{2}\right)e^{-|x|} & \text{otherwise}
-  \end{array}
-\right.
-$$
 
-on the interval [-10, 10].
+2. **Data types** (10 points)
 
-To get an idea of what the function looks like, it might be helpful to plot it.
+    1. Create the following vector: `x <- c("5","12","7")`. Which of the following commands will produce an error message? For each command, Either explain why they should be errors, or explain the non-erroneous result. (4 points)
 
-### Question 3 ###
+            max(x)
+            sort(x)
+            sum(x)
 
-**10 points**
+    2. For the next two commands, either explain their results, or why they should produce errors. (3 points)
 
-Obtain the code for using Newton's Method to estimate logistic regression parameters (`logistic.r`) and modify it to predict `death` from `weight`, `hemoglobin` and `cd4baseline` in the HAART dataset. Use complete cases only. Report the estimates for each parameter, including the intercept.
+            y <- c("5",7,12)
+            y[2] + y[3]
 
-Note: The original script `logistic_debug.r` is in the exercises folder.  It needs modification, specifically, the logistic function should be defined:
+    3. For the next two commands, either explain their results, or why they should produce errors. (3 points)
 
-```{r}
-logistic <- function(x) 1 / (1 + exp(-x))
-```
+            z <- data.frame(z1="5",z2=7,z3=12)
+            z[1,2] + z[1,3]
 
-### Question 4 ###
+3. **Data structures** Give R expressions that return the following matrices and vectors (*i.e.* do not construct them manually). (3 points each, 12 total)
 
-**5 bonus points**
+    1. $(1,2,3,4,5,6,7,8,7,6,5,4,3,2,1)$
+    
+    2. $(1,2,2,3,3,3,4,4,4,4,5,5,5,5,5)$
 
-Import the `addr.txt` file from the GitHub repository.  This file contains a listing of names and addresses (thanks google).  Parse each line to create a data.frame with the following columns: lastname, firstname, streetno, streetname, city, state, zip.  Keep middle initials or abbreviated names in the firstname column.  Print out the entire data.frame.
+    3. $\begin{pmatrix}
+      0 & 1 & 1  \\
+      1 & 0 & 1  \\
+      1 & 1 & 0  \\
+    \end{pmatrix}$
+
+    4. $\begin{pmatrix}
+      1 & 2 & 3 & 4 \\
+      1 & 4 & 9 & 16 \\
+      1 & 8 & 27 & 64  \\
+      1 & 16 & 81 & 256 \\
+      1 & 32 & 243 & 1024  \\
+    \end{pmatrix}$
+
+4. **Basic programming** (10 points)
+
+    1. Let $h(x,n)=1+x+x^2+\ldots+x^n = \sum_{i=0}^n x^i$. Write an R program to calculate $h(x,n)$ using a `for` loop. (5 points)
+
+    1. If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Write an R program to perform the following calculations. (5 points)
+
+        1. Find the sum of all the multiples of 3 or 5 below 1,000. (3, [euler1])
+
+        1. Find the sum of all the multiples of 4 or 7 below 1,000,000. (2)
+
+    1. Each new term in the Fibonacci sequence is generated by adding the previous two terms. By starting with 1 and 2, the first 10 terms will be $(1, 2, 3, 5, 8, 13, 21, 34, 55, 89)$. Write an R program to calculate the sum of the first 15 even-valued terms. (5 bonus points, [euler2])
+
+Some problems taken or inspired by projecteuler.
+
+[euler1]:https://projecteuler.net/problem=1
+[euler2]: https://projecteuler.net/problem=2

@@ -258,8 +258,7 @@ In addition to the standard data types and data structures, there are four "spec
 
 ---
 
-NA
-==
+## NA
 
 `NA` is used to represent missing values (*i.e.* not available). For example, if you expand the length of a vector beyond the indices where values were defined, `NA` values are inserted:
 
@@ -398,7 +397,7 @@ x_arr[1,2]
 x_arr[3]
 ```
 
-Omitting an index means “all of it”:
+Omitting an index means "all of it":
 
 ```{r}
 x_arr[c(1:2),2]
@@ -728,4 +727,34 @@ class(eigen(dataset2))
 str(eigen(dataset2))
 dataset2 %*% eigen(dataset2)$vectors[,2]
 eigen(dataset2)[[1]][[2]]
+```
+
+### Exercise
+
+Create a list with the following named items, and assign it to `x`:
+
+* data = 1:20
+* nrow = 5
+* byrow = TRUE
+
+```{r}
+x <- list()
+```
+
+Run the following, while making the requested modifications.
+
+```{r}
+do.call(matrix, x)
+```
+
+Modify the data element to contain `sample(20)`.  Remove the `byrow` element.
+
+```{r}
+do.call(matrix, x)
+```
+
+Remove the `nrow` element and add an element called `ncol` with a value of 2.
+
+```{r}
+do.call(matrix, x)
 ```
