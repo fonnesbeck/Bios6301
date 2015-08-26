@@ -19,15 +19,15 @@ version control using Git, and basic SQL programming.
 **Prerequisites**: Some introductory undergraduate statistics or
 permission of instructor.
 
-# Instructor
+# Instructors
 
 [Cole Beck](cole.beck@vanderbilt.edu), BSc, Computer Systems Analyst III
 
 [Chris Fonnesbeck](chris.fonnesbeck@vanderbilt.edu), PhD, Assistant Professor of Biostatistics
 
-Room 11105, 11th floor, 2525 West End Avenue
+# Lecture hall
 
-***Teaching Assistant***:
+Room 11105, 11th floor, 2525 West End Avenue
 
 
 # Resources
