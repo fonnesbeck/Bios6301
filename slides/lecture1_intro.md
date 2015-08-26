@@ -11,10 +11,10 @@
 
 ## Teaching Assistant
 
-**Svetlana Eden**
+**Christina Tripp**
 
 * Office: 2525 WEA
-* Email: svetlana.eden@vanderbilt.edu
+* Email: christina.m.tripp@vanderbilt.edu
 
 ---
 
@@ -48,7 +48,7 @@ Presenter Notes
 
 ---
 
-Bios 366
+Bios 8366
 ========
 
 ## Advanced Statistical Computing ##
@@ -142,11 +142,11 @@ Git is a software tool for source code management and revision control.
 
 # No Word Processors
 
-Assignments may be submitted in **LaTeX**, **Sweave**, **knitr**, or any markup format that allows for easy conversion to LaTeX (e.g. **Markdown**, **reStructuredText**).
+Assignments should be submitted in **knitr**, or any markup format that allows for easy conversion to LaTeX (e.g. **Markdown**, **reStructuredText**).
 
 Assignments submitted in word processor file formats, including Microsoft Word, will not be accepted.
 
-Hand-written assignments (including scanned documents) are also not permitted
+Hand-written assignments (including scanned documents) are also not permitted.
 
 ---
 

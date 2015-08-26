@@ -1,31 +1,30 @@
 ---
-title: 'Bios 301: Assignment 3'
+title: 'Bios 6301: Assignment 5'
 output: pdf_document
 ---
 
-*Due Tuesday, 11 November, 1:00 PM*
+*Due Tuesday, 10 November, 1:00 PM*
 
 $5^{n=day}$ points taken off for each day late.
 
 50 points total.
 
-Submit a single knitr file (named `homework3.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
+Submit a single knitr file (named `homework5.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
+
+Failure to name file `homework5.rmd` or include author name may result in 5 points taken off.
 
 ### Question 1 ###
 
 **20 points**
 
-The game of craps is played as follows. First, you roll two six-sided dice; let x be the sum of the dice on the first roll. If x = 7 or 11 you win, otherwise you keep rolling until either you get x again, in which case you also win, or until you get a 7 or 11, in which case you lose.
+Import the HAART dataset (`haart.csv`) from the GitHub repository into R, and perform the following manipulations:
 
-Write a program to simulate a game of craps. You can use the following snippet of code to simulate the roll of two (fair) dice:
-
-```{r}
-    x <- sum(ceiling(6*runif(2)))
-```
-
-1. The instructor should be able to easily import and run your program (function), and obtain output that clearly shows how the game progressed.  Set the RNG seed with `set.seed(100)` and show the output of three games. (15 points)
-
-1. Find a seed that will win ten straight games.  Consider adding an argument to your function that disables output. Show the output of the ten games. (5 points)
+1. Convert date columns into a usable (for analysis) format.
+2. Create an indicator variable (one which takes the values 0 or 1 only) to represent death within 1 year of the initial visit.
+3. Use the `init.date`, `last visit` and `death.date` to calculate a followup time, which is the difference between the first and either the last visit or a death event (whichever comes first). If these times are longer than 1 year, censor them.
+4. Create another indicator variable representing loss to followup; that is, if their status 1 year after the first visit was unknown.
+5. Recall our work in class, which separated the `init.reg` field into a set of indicator variables, one for each unique drug. Create these fields and append them to the database as new columns.
+6. The dataset `haart2.csv` contains a few additional observations for the same study. Import these and append them to your master dataset (if you were smart about how you coded the previous steps, cleaning the additional observations should be easy!).
 
 ### Question 2 ###
 
