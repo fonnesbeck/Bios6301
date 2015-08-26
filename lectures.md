@@ -16,7 +16,7 @@ title: Introduction to Statistical Computing
 
 This schedule is *tentative* and subject to change at any time.
 
-* Course introduction and first example
+* [Course introduction](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture1_intro.html) and first example
 * Introduction to R (Chapters 2-5)
     - [R basics](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture4_rbasics.html)
     - [data](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture4_numbers.html)
