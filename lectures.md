@@ -12,7 +12,7 @@ title: Introduction to Statistical Computing
 **Office hours**
 
 * Cole: after class, or by appointment
-* Assistant TBA: Wednesdays, TBA, 11102, 2525 WEA
+* Assistant Christina: TBA, 11102, 2525 WEA
 
 This schedule is *tentative* and subject to change at any time.
 
