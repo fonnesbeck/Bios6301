@@ -107,7 +107,7 @@ degrees-of-freedom.  For this model, there are 7 degrees-of-freedom.
 5. Use the `pt` function to calculate the p value for gender.  The first
 argument should be the test statistic for gender.  The second argument
 is the degrees-of-freedom.  Also, set the `lower.tail` argument to
-TRUE.  Finally multiple this result by two. (4 points)
+FALSE.  Finally multiple this result by two. (4 points)
 
 ```{r}
 ```
