@@ -22,24 +22,65 @@ Failure to properly name files or include author name may result in 5 points tak
 
 **10 points**
 
-1. Use GitHub to turn in the first three homework assignments. Make sure the teacher (couthcommander) and TA are collaborators. (5 points)
+1. Use GitHub to turn in the first three homework assignments. Make sure the teacher (couthcommander) and TA (trippcm) are collaborators. (5 points)
 
 1. Commit each assignment individually.  This means your repository should have at least three commits. (5 points)
 
 ### Question 2 ###
 
-**20 points**
+**15 points**
 
-simulation 1
+Write a simulation to calculate the power for the following study
+design.  The study has two variables, treatment group and outcome.
+There are two treatment groups (0, 1) and they should be assigned
+randomly with equal probability.  The outcome should be a random normal
+variable with a mean of 60 and standard deviation of 20.  If a patient
+is in the treatment group, add 5 to the outcome.  5 is the true
+treatment effect.  Create a linear of model for the outcome by the
+treatment group, and extract the p-value (hint: see assigment1).
+Test if the p-value is less than or equal to the alpha level, which
+should be set to 0.05.
+
+Repeat this procedure 1000 times. The power is calculated by finding
+the percentage of times the p-value is less than or equal to the alpha
+level.  Use the `set.seed` command so that the professor can reproduce
+your results.
+
+1. Find the power when the sample size is 100 patients. (10 points)
+
+1. Find the power when the sample size is 1000 patients. (5 points)
 
 ### Question 3 ###
 
 **15 points**
 
-simulation 2
+Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).
+Save the `2015/proj_rb15.csv` file in your working directory.  Read
+in the data set and remove the first two columns.
+
+1. Show the correlation matrix of this data set. (3 points)
+
+1. Generate a data set with 30 rows that has a similar correlation
+structure.  Repeat the procedure 10,000 times and return the mean
+correlation matrix. (10 points)
+
+1. Generate a data set with 30 rows that has the exact correlation
+structure as the original data set. (2 points)
 
 ### Question 4 ###
 
 **10 points**
 
-Use LaTeX to create the following expressions.
+Use \LaTeX to create the following expressions.
+
+1. Hint: `\Rightarrow` (4 points)
+
+    ![equation1](eq1.png)
+
+1. Hint: `\zeta` (3 points)
+
+    ![equation2](eq2.png)
+
+1. Hint: `\partial` (3 points)
+
+    ![equation3](eq3.png)
