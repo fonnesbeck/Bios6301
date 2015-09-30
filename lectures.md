@@ -28,7 +28,7 @@ This schedule is *tentative* and subject to change at any time.
 * [Version control using Git](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture2_git.html)
 * Document preparation:
     - [LaTeX](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture3_latex.html)
-    - beamer
+    - [beamer](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture9_beamer.html)
     - [knitr](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture3_knitr.html)
     - [Markdown](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture3_markdown.html)
 * [Data import and export](https://dl.dropboxusercontent.com/u/5044136/Bios301/lecture6_import_export.pdf) (Chapter 10)
