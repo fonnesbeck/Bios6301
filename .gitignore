@@ -1,3 +1,4 @@
+.gitignore
 .Rdata
 .DS_Store
 .Rhistory
@@ -29,3 +30,4 @@ roster*
 CCASAnet*
 *_2012
 exercises_hidden
+lecture_demo
