@@ -15,7 +15,7 @@ Failure to name file `homework4.rmd` or include author name may result in 5 poin
 
 ### Question 1 ###
 
-**18 points**
+**15 points**
 
 A problem with the Newton-Raphson algorithm is that it needs the derivative $f'$. If the derivative is hard to compute or does not exist, then we can use the *secant method*, which only requires that the function $f$ is continuous.
 
@@ -33,7 +33,7 @@ Notice that we no longer need to know $f'$ but in return we have to provide *two
 
 ### Question 2 ###
 
-**20 points**
+**18 points**
 
 The game of craps is played as follows. First, you roll two six-sided dice; let x be the sum of the dice on the first roll. If x = 7 or 11 you win, otherwise you keep rolling until either you get x again, in which case you also win, or until you get a 7 or 11, in which case you lose.
 
@@ -43,7 +43,7 @@ Write a program to simulate a game of craps. You can use the following snippet o
     x <- sum(ceiling(6*runif(2)))
 ```
 
-1. The instructor should be able to easily import and run your program (function), and obtain output that clearly shows how the game progressed.  Set the RNG seed with `set.seed(100)` and show the output of three games. (15 points)
+1. The instructor should be able to easily import and run your program (function), and obtain output that clearly shows how the game progressed.  Set the RNG seed with `set.seed(100)` and show the output of three games. (lucky 13 points)
 
 1. Find a seed that will win ten straight games.  Consider adding an argument to your function that disables output. Show the output of the ten games. (5 points)
 
@@ -51,7 +51,7 @@ Write a program to simulate a game of craps. You can use the following snippet o
 
 **12 points**
 
-Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).  Save the five CSV files in your working directory.
+Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).  Save the five 2015 CSV files in your working directory.
 
 Modify the code to create a function.  This function will create dollar values given information (as arguments) about a league setup.  It will return a data.frame and write this data.frame to a CSV file.  The final data.frame should contain the columns 'PlayerName', 'pos', 'points', 'value' and be orderd by value descendingly.  Do not round dollar values.
 
@@ -102,7 +102,7 @@ ffvalues <- function(path, file='outfile.csv', nTeams=12, cap=200, posReq=c(qb=1
 
 ### Question 4 ###
 
-**5 bonus points**
+**5 points**
 
 This code makes a list of all functions in the base package:
 
