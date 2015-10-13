@@ -12,3 +12,9 @@ Materials are sorted into the following directory structure:
 - **slides**: slide decks used for lectures, in Markdown format, designed to be converted to HTML5 using [Landslide](https://github.com/adamzap/landslide).
 
 For more information about the course, [please visit the course website](http://fonnesbeck.github.com/Bios6301).
+
+Homework solutions:
+
+- [Assignment 1](https://dl.dropboxusercontent.com/u/5044136/Bios301/homework1.rmd)
+- [Assignment 2](https://dl.dropboxusercontent.com/u/5044136/Bios301/homework2.rmd)
+- [Assignment 3](https://dl.dropboxusercontent.com/u/5044136/Bios301/homework3.rmd)
