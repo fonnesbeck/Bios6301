@@ -1,4 +1,4 @@
-data <- read.table("~/Bios6301/datasets/logistic.csv", sep=",", head=T)
+data <- read.table("../datasets/logistic.csv", sep=",", head=T)
 
 # Logistic function
 logistic <- function(x) 1 / (1 - exp(-x))
