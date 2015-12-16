@@ -20,3 +20,4 @@ Homework solutions:
 - [Assignment 3](https://dl.dropboxusercontent.com/u/5044136/Bios301/homework3.rmd)
 - [Assignment 4](https://dl.dropboxusercontent.com/u/5044136/Bios301/homework4.rmd)
 - [Assignment 5](https://dl.dropboxusercontent.com/u/5044136/Bios301/homework5.rmd)
+- [Assignment 6](https://dl.dropboxusercontent.com/u/5044136/Bios301/homework6.rmd)
