@@ -12,7 +12,7 @@ title: Introduction to Statistical Computing
 **Office hours**
 
 * Cole: after class, or by appointment
-* Assistant Christina: TBA, 8th floor break room, 2525 WEA
+* Assistant Jonathan: TBA, 2525 WEA
 
 This schedule is *tentative* and subject to change at any time.
 
