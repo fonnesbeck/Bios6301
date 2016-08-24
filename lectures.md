@@ -12,7 +12,7 @@ title: Introduction to Statistical Computing
 **Office hours**
 
 * Cole: after class, or by appointment
-* Assistant Jonathan: TBA, 2525 WEA
+* Assistant Jonathan: Tue/Thur, 2:30-3:00
 
 This schedule is *tentative* and subject to change at any time.
 
