@@ -11,10 +11,10 @@
 
 ## Teaching Assistant
 
-**Christina Tripp**
+**Jonathan Chipman**
 
 * Office: 2525 WEA
-* Email: christina.m.tripp@vanderbilt.edu
+* Email: jonathan.chipman@vanderbilt.edu
 
 ---
 
