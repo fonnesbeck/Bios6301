@@ -3,7 +3,7 @@ title: 'Bios 6301: Assignment 1'
 output: html_document
 ---
 
-*(informally) Due Tuesday, 08 September, 1:00 PM*
+*(informally) Due Thursday, 08 September, 1:00 PM*
 
 50 points total.
 
