@@ -36,7 +36,7 @@ There are two treatment groups (0, 1) and they should be assigned
 randomly with equal probability.  The outcome should be a random normal
 variable with a mean of 60 and standard deviation of 20.  If a patient
 is in the treatment group, add 5 to the outcome.  5 is the true
-treatment effect.  Create a linear of model for the outcome by the
+treatment effect.  Create a linear model for the outcome by the
 treatment group, and extract the p-value (hint: see assigment1).
 Test if the p-value is less than or equal to the alpha level, which
 should be set to 0.05.
@@ -55,7 +55,7 @@ your results.
 **15 points**
 
 Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).
-Save the `2015/proj_rb15.csv` file in your working directory.  Read
+Save the `2016/proj_wr16.csv` file in your working directory.  Read
 in the data set and remove the first two columns.
 
 1. Show the correlation matrix of this data set. (3 points)
