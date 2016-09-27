@@ -3,7 +3,7 @@ title: 'Bios 6301: Assignment 3'
 output: pdf_document
 ---
 
-*Due Thursday, 08 October, 1:00 PM*
+*Due Tuesday, 11 October, 1:00 PM*
 
 50 points total.
 
