@@ -22,7 +22,7 @@ Failure to properly name files or include author name may result in 5 points tak
 
 **10 points**
 
-1. Use GitHub to turn in the first three homework assignments. Make sure the teacher (couthcommander) and TA (trippcm) are collaborators. (5 points)
+1. Use GitHub to turn in the first three homework assignments. Make sure the teacher (couthcommander) and TA (chipmanj) are collaborators. (5 points)
 
 1. Commit each assignment individually.  This means your repository should have at least three commits. (5 points)
 
