@@ -3,7 +3,7 @@ title: 'Bios 6301: Assignment 4'
 output: pdf_document
 ---
 
-*Due Tuesday, 27 October, 1:00 PM*
+*Due Tuesday, 25 October, 1:00 PM*
 
 $5^{n=day}$ points taken off for each day late.
 
@@ -51,7 +51,7 @@ Write a program to simulate a game of craps. You can use the following snippet o
 
 **12 points**
 
-Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).  Save the five 2015 CSV files in your working directory.
+Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).  Save the five 2016 CSV files in your working directory.
 
 Modify the code to create a function.  This function will create dollar values given information (as arguments) about a league setup.  It will return a data.frame and write this data.frame to a CSV file.  The final data.frame should contain the columns 'PlayerName', 'pos', 'points', 'value' and be orderd by value descendingly.  Do not round dollar values.
 
