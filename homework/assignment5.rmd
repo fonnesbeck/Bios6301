@@ -3,7 +3,7 @@ title: 'Bios 6301: Assignment 5'
 output: pdf_document
 ---
 
-*Due Tuesday, 10 November, 1:00 PM*
+*Due Tuesday, 15 November, 1:00 PM*
 
 $5^{n=day}$ points taken off for each day late.
 
@@ -28,19 +28,43 @@ Import the HAART dataset (`haart.csv`) from the GitHub repository into R, and pe
 
 ### Question 2 ###
 
-**10 points**
+**14 points**
 
-Obtain the code for using Newton's Method to estimate logistic regression parameters (`logistic.r`) and modify it to predict `death` from `weight`, `hemoglobin` and `cd4baseline` in the HAART dataset. Use complete cases only. Report the estimates for each parameter, including the intercept.
-
-Note: The original script `logistic_debug.r` is in the exercises folder.  It needs modification, specifically, the logistic function should be defined:
+Use the following code to generate data for patients with repeated measures of A1C (a test for levels of blood glucose).
 
 ```{r}
-logistic <- function(x) 1 / (1 + exp(-x))
+genData <- function(n) {
+    if(exists(".Random.seed", envir = .GlobalEnv)) {
+        save.seed <- get(".Random.seed", envir= .GlobalEnv)
+        on.exit(assign(".Random.seed", save.seed, envir = .GlobalEnv))
+    } else {
+        on.exit(rm(".Random.seed", envir = .GlobalEnv))
+    }
+    set.seed(n)
+    subj <- ceiling(n / 10)
+    id <- sample(subj, n, replace=TRUE)
+    times <- as.integer(difftime(as.POSIXct("2005-01-01"), as.POSIXct("2000-01-01"), units='secs'))
+    dt <- as.POSIXct(sample(times, n), origin='2000-01-01')
+    mu <- runif(subj, 4, 10)
+    a1c <- unsplit(mapply(rnorm, tabulate(id), mu, SIMPLIFY=FALSE), id)
+    data.frame(id, dt, a1c)
+}
+x <- genData(500)
 ```
+
+Perform the following manipulations: (2 points each)
+
+1. Order the data set by `id` and `dt`.
+2. For each `id`, determine if there is more than a one year gap in between observations.  Add a new row at the one year mark, with the `a1c` value set to missing.  A two year gap would require two new rows, and so forth.
+3. Create a new column `visit`.  For each `id`, add the visit number.  This should be 1 to `n` where `n` is the number of observations for an individual.  This should include the observations created with missing a1c values.
+4. For each `id`, replace missing values with the mean `a1c` value for that individual.
+5. Print mean `a1c` for each `id`.
+6. Print total number of visits for each `id`.
+7. Print the observations for `id = 15`.
 
 ### Question 3 ###
 
-**14 points**
+**10 points**
 
 Import the `addr.txt` file from the GitHub repository.  This file contains a listing of names and addresses (thanks google).  Parse each line to create a data.frame with the following columns: lastname, firstname, streetno, streetname, city, state, zip.  Keep middle 
 initials or abbreviated names in the firstname column.  Print out the entire data.frame.
