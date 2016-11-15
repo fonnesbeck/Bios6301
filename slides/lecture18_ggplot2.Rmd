@@ -82,11 +82,10 @@ Data on 671 infants with very low (<1600 grams) birth weight from 1981-87 were c
 Of interest is the relationship between the outcome intra-ventricular hemorrhage and the predictors birth weight, gestational age, presence of pneumothorax, mode of delivery, single vs. multiple birth, and whether the birth occurred at Duke or at another hospital with later transfer to Duke.
 
 ```{r}
-library(RCurl)
-url <- getURL("https://raw.githubusercontent.com/fonnesbeck/Bios366/master/data/vlbw.csv")
-vlbw <- read.csv(text=url, row.names=1)
+vlbw <- read.csv('https://raw.githubusercontent.com/fonnesbeck/Bios366/master/data/vlbw.csv', row.names=1)
 head(vlbw, 3)
 ```
+
 
 Metadata available at http://bit.ly/vlbw_data
 
