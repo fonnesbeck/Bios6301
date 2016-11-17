@@ -6,6 +6,8 @@ class(lmout)
 unclass(lmout)
 lmout
 methods(print)
+print.lm
+stats:::print.lm
 getAnywhere(print.lm)
 methods(,lm)
 plot(lmout)
@@ -15,6 +17,7 @@ coef(lmoutsum)
 methods(coef)
 getAnywhere(coef.default)
 
+# make a new class
 j <- list(name="Joe", salary=55000, union=TRUE)
 class(j) <- 'employee'
 attributes(j)
@@ -24,12 +27,16 @@ print.employee <- function(wrkr) {
               wrkr$name, wrkr$salary, wrkr$union), "\n")
 }
 methods(class='employee')
+j
+print.default(j)
 
+# class with inheritance
 k <- list(name="Kate", salary=NA, union=FALSE, rate=10.50, hrs_this_month=2)
 class(k) <- c('hourly_employee', 'employee')
 inherits(k, 'employee')
+k
 
-
+# make a new method
 pvalue <- function(x) {
   UseMethod("pvalue")
 }
@@ -48,14 +55,17 @@ pvalue(lmoutsum)
 pvalue(t.test(rnorm(100)))
 pvalue(1:10)
 
+# complete example with attributes
 set.seed(1)
 n <- 60
-x <- (1:n)/n
+x <- seq(n)/n
 y <- sin((3*pi/2)*x) + x^2 + rnorm(n, mean=0, sd=0.5)
+# fit polynomial of degree D to these points
 
 polyfit <- function(y, x, maxdeg) {
   pwrs <- outer(x, seq(maxdeg), "^")
   lmout <- vector('list', maxdeg)
+  attributes(lmout) <- list(degrees=maxdeg)
   class(lmout) <- 'polyreg'
   for(i in seq(maxdeg)) {
     lmo <- lm(y ~ pwrs[,seq(i)])
@@ -79,9 +89,10 @@ leave_one_out <- function(y, xmat) {
 }
 
 print.polyreg <- function(fits) {
-  maxdeg <- length(fits)-2
+  maxdeg <- attr(fits, 'degrees')
   n <- length(fits$y)
   tbl <- matrix(nrow=maxdeg, ncol=1)
+  # mean squared prediction error
   colnames(tbl) <- "MSPE"
   for(i in seq(maxdeg)) {
     fi <- fits[[i]]
@@ -94,6 +105,20 @@ print.polyreg <- function(fits) {
 
 dg <- 15
 lmo <- polyfit(y, x, dg)
+lmo
+
+plot.polyreg <- function(fits) {
+  maxdeg <- attr(fits, 'degrees')
+  cf <- coef(fits[[maxdeg]])
+  cf[is.na(cf)] <- 0
+  f <- function(x) sum(cf*x^seq(0,maxdeg))
+  x1 <- seq(min(fits$x), max(fits$x), length.out=500)
+  y1 <- sapply(x1, f)
+  plot(fits$x, fits$y)
+  par(new=TRUE)
+  plot(x1, y1, new=TRUE, type='l', axes=FALSE, xlab='', ylab='')
+}
+plot(lmo)
 
 setClass("fun", representation(f="function", x="numeric", y="numeric"))
 f <- function(x) sin((3*pi/2)*x) + x^2 + rnorm(length(x), mean=0, sd=0.5)
