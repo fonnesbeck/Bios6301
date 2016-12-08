@@ -1,0 +1,305 @@
+\documentclass{beamer}
+% preamble
+\usetheme{Boadilla}
+\definecolor{VandyGold}{RGB}{212,179,125}
+\usecolortheme[named=VandyGold]{structure}
+\setbeamercolor*{palette primary}{bg=VandyGold,fg=black}
+\setbeamercolor*{palette secondary}{fg=VandyGold,bg=black}
+\setbeamercolor*{palette tertiary}{bg=VandyGold,fg=black}
+\title{From Big to Lite Data with R/SQLite}
+\subtitle{Utilizing the SQLite database within R}
+\author{Cole Beck}
+\institute{Dept of Biostatistics}
+\date{\today}
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Introduction}
+
+\begin{frame}
+\frametitle{The Problem}
+    A CSV file with one million rows and one thousand columns is a big file.
+
+    $$(1,000,000 * 1,000 * 2) / (2^{30}) = 1.86$$
+
+    Almost 2gb - much bigger than that, and your computer won't be very happy if you create a data.frame by reading it into R.
+
+    \begin{table}
+    \begin{tabular}{r|c|c|c|c}
+    Row Number & Variable 1 & Variable 2 & ... & Variable 999 \\
+    \hline
+    1 & 0 & 0 & ... & 1 \\
+    2 & 0 & 1 & ... & 0 \\
+    3 & 0 & 1 & ... & 1 \\
+    4 & 1 & 0 & ... & 0 \\
+    5 & 1 & 0 & ... & 1 \\
+    \hline
+    \hline
+    999,999 & 1 & 1 & ... & 1 \\
+    \end{tabular}
+    \end{table}
+\end{frame}
+
+\begin{frame}
+\frametitle{Assumptions for Today}
+    \begin{itemize}
+    \item You have a properly formatted CSV file
+    \item You can install SQLite
+    \item You have disk space
+    \item You only need a subset of the full data
+    \item You can identify requested rows by some ID
+    \item You want to use R
+    \end{itemize}
+\end{frame}
+
+\section{Exploration}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Creating Example Files}
+\begin{verbatim}
+nc <- 1e3 # one thousand
+nr <- 5e6 # five million
+header <- paste(c('"id"', sprintf('"x%s"', seq(nc))),
+                collapse=",")
+for(fid in c('A','B','C')) {
+    fh <- file(sprintf("bigfile%s.csv", fid), "w")
+    writeLines(header, fh)
+    ids <- sample(nr)
+    for(id in ids) {
+        line <- paste(c(sprintf('"%s%s"', id, fid), 
+                        sample(0:1, nc, replace=TRUE)),
+                    collapse=",")
+        writeLines(line, fh)
+    }
+    close(fh)
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{~90 minutes later}
+\begin{verbatim}
+biostat:~/projects/r_workshops/rsqlite$ du -h bigfile*
+9.4G    bigfileA.csv
+9.4G    bigfileB.csv
+9.4G    bigfileC.csv
+\end{verbatim}
+
+Just checking the line count takes two minutes
+
+\begin{verbatim}
+biostat:~/projects/r_workshops/rsqlite$ wc -l bigfileA.csv
+5000001 bigfileA.csv
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Reading Into R}
+
+smallfileA.csv has a more manageable 500,000 rows
+
+\begin{verbatim}
+> system.time(x <- read.csv('smallfileA.csv'))
+   user  system elapsed 
+127.572   3.992 138.254 
+> dim(x)
+[1] 500000   1001
+\end{verbatim}
+
+\begin{verbatim}
+> library(data.table)
+> system.time(dx <- fread('smallfileA.csv'))
+Read 500000 rows and 1001 (of 1001) columns
+from 0.936 GB file in 00:00:17
+   user  system elapsed 
+ 15.428   0.868  26.217
+\end{verbatim}
+\end{frame}
+
+\section{An Alternative}
+
+\begin{frame}
+\frametitle{Sequential Read}
+The \textbf{readLines} function provides a way to read the full dataset and keep what we want.\\~\\
+
+One option to consider would be creating a row lookup for IDs in each file.\\~\\
+
+How does having the row number help?
+    \begin{itemize}
+    \item We can utilize \textbf{sed}
+    \end{itemize}
+
+This process ties nicely into understanding a database table.
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Row Lookup}
+\begin{verbatim}
+> system.time({
+    nr <- 5e6
+    fh <- file('bigfileC.csv', "r")
+    readLines(fh, 1)
+    idsInFile <- character(nr)
+    buffsize <- 10000
+    for(i in seq(ceiling(nr/buffsize))) {
+        line <- readLines(fh, buffsize)
+        a <- (i-1)*buffsize + 1
+        b <- min(i*buffsize, nr)
+        idsInFile[seq(a,b)] <- sub("[\"](.*)[\"].*", "\\1",
+                                    substr(line, 1, 10))
+    }
+    close(fh)
+})
+   user  system elapsed 
+379.844   3.728 391.45
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Row Lookup}
+\begin{verbatim}
+> system.time(save(idsInFile, file='idLookup.RData'))
+   user  system elapsed 
+  4.544   0.012   4.550
+> system.time(ix<-match('4321C', idsInFile)); ix
+   user  system elapsed 
+  1.524   0.348   1.871 
+[1] 566498
+> cmd <- 'sed "566497p;566498p;566499q;d" bigfileC.csv'
+> system.time(system(cmd))
+"1321178C",1,0,1,1,0,0,0,1,0,1,1,...
+"4192938C",1,1,0,0,1,1,1,1,0,0,1,...
+"4321C",0,0,0,0,1,1,1,1,0,1,0,...
+   user  system elapsed 
+  0.500   0.624  11.381 
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Row Lookup}
+sed is sequential - how long would it take to select a line near the end?
+\begin{verbatim}
+> system.time(system('sed "5000000q;d" bigfileC.csv'))                     
+"417927C",0,1,0,1,0,1,0,0,1,1,0,...
+   user  system elapsed 
+  3.684   5.352  89.814
+\end{verbatim}
+About 90 seconds - faster than data.table and kinder to your RAM.
+\end{frame}
+
+\section{SQLite}
+
+\begin{frame}
+\frametitle{Why SQLite?}
+    \begin{block}{https://www.sqlite.org/}
+    SQLite is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine.
+    \end{block}
+
+One of my favourite words is \textbf{zero-configuration}.
+
+    \begin{alertblock}{What could go wrong?}
+    2,000 is the maximum number of columns unless you compile it yourself.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Loading Into SQLite}
+Convert CSV files into a SQLite table.  A 10gb file takes about 20 minutes.
+\begin{verbatim}
+biostat:~/projects/r_workshops/rsqlite$ sqlite3 mydata.db
+sqlite> .mode csv
+sqlite> .import bigfileA.csv mytblA
+sqlite> .import bigfileB.csv mytblB
+sqlite> .import bigfileC.csv mytblC
+sqlite> CREATE INDEX ixidA ON mytblA (id);
+sqlite> CREATE INDEX ixidB ON mytblB (id);
+sqlite> CREATE INDEX ixidC ON mytblC (id);
+sqlite> .tables
+mytblA  mytblB  mytblC
+sqlite> .indices mytblA
+ixidA
+sqlite> .quit
+biostat:~/projects/r_workshops/rsqlite$ du -h mydata.db 
+31G     mydata.db
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Key}
+Creating the index is extremely important.\\~\\
+It deserves its own slide.\\~\\
+You can create more than one index per table.\\~\\
+It's similar to the row lookup by ID example, except that the search is optimized.
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{One Table to Rule Them All}
+Optionally collapse the tables into one, if the files are similar.
+    \begin{itemize}
+    \item It takes longer to create
+    \item It won't make the queries run faster
+    \item It won't save hard drive space
+    \end{itemize}
+I wouldn't without a reason
+    \begin{itemize}
+    \item Unable to differentiate which file a record originates from
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Connecting From R}
+Install the \textbf{RSQLite} package
+\begin{verbatim}
+> library(RSQLite)
+> con <- dbConnect(RSQLite::SQLite(), "mydata.db")
+> dbListTables(con)
+[1] "mytbl"
+> dbDisconnect(con)
+[1] TRUE
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile=singleslide]
+\frametitle{Running a Query}
+What did we gain?
+\begin{verbatim}
+> system.time({
+    a <- dbGetQuery(con, "SELECT id,x1,x2,x1000
+            FROM mytbl WHERE id IN 
+            ('1234B','4321A','3388C')" )
+    })
+   user  system elapsed 
+  0.004   0.000   0.069 
+> a
+     id x1 x2 x1000
+1 1234B  0  0     1
+2 3388C  0  1     0
+3 4321A  1  0     1
+\end{verbatim}
+\end{frame}
+
+\section{A Shiny Ending}
+\begin{frame}
+\frametitle{A Practical Extension}
+This talk has been about extracting a subset a records from a large dataset as quickly as possible.\\~\\
+This may only be important in cases where this should be done repeatedly.\\~\\
+One practical usage would be an R Shiny app.
+\end{frame}
+
+\begin{frame}
+\frametitle{Thanks}
+Thanks to Nate Mercaldo for sharing the motivating example.
+    \begin{block}{This presentation is available on GitHub}
+    https://github.com/couthcommander/rsqlite-talk
+    \end{block}
+\end{frame}
+
+\end{document}
