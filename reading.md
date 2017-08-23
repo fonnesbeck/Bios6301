@@ -16,3 +16,5 @@ Programming](http://nostarch.com/sites/default/files/imagecache/product_main_pag
 Matloff
 
 [Advanced R](http://adv-r.had.co.nz/): Hadley Wickham
+
+[R for Data Science](http://r4ds.had.co.nz/): Wickham and Garrett Grolemund
