@@ -3,7 +3,7 @@ title: 'Bios 6301: Assignment 3'
 output: pdf_document
 ---
 
-*Due Tuesday, 11 October, 1:00 PM*
+*Due Tuesday, 10 October, 1:00 PM*
 
 50 points total.
 
@@ -22,7 +22,7 @@ Failure to properly name files or include author name may result in 5 points tak
 
 **10 points**
 
-1. Use GitHub to turn in the first three homework assignments. Make sure the teacher (couthcommander) and TA (chipmanj) are collaborators. (5 points)
+1. Use GitHub to turn in the first three homework assignments. Make sure the teacher (couthcommander) and TA (nstrayer) are collaborators. (5 points)
 
 1. Commit each assignment individually.  This means your repository should have at least three commits. (5 points)
 
@@ -55,7 +55,7 @@ your results.
 **15 points**
 
 Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).
-Save the `2016/proj_wr16.csv` file in your working directory.  Read
+Save the `2017/proj_wr17.csv` file in your working directory.  Read
 in the data set and remove the first two columns.
 
 1. Show the correlation matrix of this data set. (3 points)
