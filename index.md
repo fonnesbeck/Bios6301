@@ -25,6 +25,8 @@ permission of instructor.
 
 [Chris Fonnesbeck](chris.fonnesbeck@vanderbilt.edu), PhD, Assistant Professor of Biostatistics
 
+TA: [Nick Strayer](n.strayer@vanderbilt.edu), PhD Student, Biostatistics
+
 # Lecture hall
 
 Room 11105, 11th floor, 2525 West End Avenue
