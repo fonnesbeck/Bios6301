@@ -30,3 +30,7 @@ TA: [Nick Strayer](n.strayer@vanderbilt.edu), PhD Student, Biostatistics
 # Lecture hall
 
 Room 11105, 11th floor, 2525 West End Avenue
+
+# Student Resources 
+
+Free [DataCamp](https://www.datacamp.com/) access available for students of course thanks to DataCamp's education initiatives. 
