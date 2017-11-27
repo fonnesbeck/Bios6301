@@ -1,0 +1,83 @@
+---
+title: "Bonus Problem"
+author: "Nick Strayer"
+date: "11/30/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Data Analysis, the tidy way
+
+__Motivation__
+
+You live in Nashville, you know that every single sidewalk you want to walk on is blocked off for construction and you know the city animal is the Crane. Conveniently Nashville puts every building permit that is submitted into an online open access database. 
+
+One skill that is underappreciated and taught but will do you wonders in your research or future job is the ability to take data from the real world and manipulate it in R. This bonus problem is an attempt to help you do just that and introduce you to the 'tidyverse' way of doing this. Personally, my productivity with R skyrocketed after I started learning these techniques, so even if they are esoteric at first, stick with them. 
+
+
+__Setup__
+
+Below is code to load in and tidy up some Nashville building permit code data. Download the data from [here](https://data.nashville.gov/api/views/3h5w-q8b7/rows.csv?accessType=DOWNLOAD) and put it in the same directory as your markdown file. This data comes from the [Nashville Open Data Portal](https://data.nashville.gov/) and contains ~36k entries on building permits recently issued in the city. 
+
+Your job is to download the dataset from the link above, read it into R using the code provided, and find out something interesting from it. There is one rule though: you can't use any loops! 
+
+```{r, warning=FALSE}
+library(dplyr)
+library(readr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+
+data <- read_csv('Building_Permits_Issued.csv') %>% 
+  select(
+    type = `Permit Type`,
+    description = `Permit Type Description`,
+    issued = `Date Issued`,
+    cost = `Const. Cost`,
+    zip = Zip
+  ) %>% 
+  mutate(cost = as.numeric(str_replace(cost, "\\$", "") ))
+  # What do you think this ^ line is doing?
+
+head(data)
+```
+
+## Question 1:
+__Which zip code has the highest average building permit cost?__ 
+
+Below is some base R code that calculates the zip code with the highest average permit cost. Rewrite the code snippet to replicate the dataframe `cost_by_zip` but without using any `for` loops. 
+
+The way I did it used the functions `group_by`, `summarise`, and `arrange`. A simple `?group_by, ...` should give you enough info to do what you need to. If you want extra help try the new ['Intro To The Tidyverse' course](https://www.datacamp.com/courses/introduction-to-the-tidyverse) on DataCamp. Extra points if you also return the number of permits for each zip code and somehow show why they are important. 
+
+```{r}
+# Array to hold our calculated averages
+average_costs <- c()
+zip_codes <- unique(data$zip)
+# loop over all zip codes to find their average costs
+for (zip in zip_codes){
+  zip_data <- data[data$zip == zip, ]
+  average_cost <- mean(zip_data$cost, na.rm = TRUE)
+  average_costs <- c(average_costs, average_cost)
+}
+
+# put results into a dataframe
+cost_by_zip <- data.frame(zip = zip_codes, average_cost = average_costs)
+
+# find max value and display it
+cost_by_zip[cost_by_zip$average_cost == max(cost_by_zip$average_cost),]
+```
+
+## Question 2
+
+__Make a plot that explores patterns in costs over permit type.__
+
+A good place to look for code would be my visualization lecture's [boxplot](http://nickstrayer.me/visualization_in_r/#box-plots) and [information overload](http://nickstrayer.me/visualization_in_r/#information-overload) sections.
+
+If you wanted to make a dot-plot of something like the average cost by permit type you could do this using almost identical code to above (my method involved just changing `zip` to `type` in my code). 
+
+There are no hard requirements for this question, just make a plot that tells the viewer something about the dynamics of cost of building permits by type in Nashville. 
+
+
