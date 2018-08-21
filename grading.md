@@ -7,7 +7,7 @@ title: Introduction to Statistical Computing
 
 # Grading
 
-Students will be assessed on 6 assignments (60% of grade) and a final
+Students will be assessed on 9 assignments (60% of grade) and a final
 exam (40% of grade).
 
 Assignments may be submitted as an knitr, LaTeX, Markdown or MultiMarkdown
@@ -24,4 +24,4 @@ will be provided.
 
 ## Final exam
 
-Information about the final exam will be released later.
+Information about the final exam will be released mid-November.
