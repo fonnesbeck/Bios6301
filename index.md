@@ -21,11 +21,11 @@ permission of instructor.
 
 # Instructors
 
-[Cole Beck](cole.beck@vanderbilt.edu), BSc, Senior Application Developer
+[Cole Beck](cole.beck@vumc.org), BSc, Senior Application Developer
 
 [Chris Fonnesbeck](chris.fonnesbeck@vanderbilt.edu), PhD, Assistant Professor of Biostatistics
 
-TA: [Nick Strayer](n.strayer@vanderbilt.edu), PhD Student, Biostatistics
+TA: [Cole Harris](coleman.r.harris@vanderbilt.edu), PhD Student, Biostatistics
 
 # Lecture hall
 
