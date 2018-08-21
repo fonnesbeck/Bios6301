@@ -31,6 +31,10 @@ TA: [Cole Harris](coleman.r.harris@vanderbilt.edu), PhD Student, Biostatistics
 
 Room 11105, 11th floor, 2525 West End Avenue
 
+# Slack
+
+All class communication will take place using [Slack](https://slack.com), a messaging system that replaces email. Students should join the [Bios 6301 Slack channel](https://biostat6301.slack.com).
+
 # Student Resources 
 
 Free [DataCamp](https://www.datacamp.com/) access available for students of course thanks to DataCamp's education initiatives. 
