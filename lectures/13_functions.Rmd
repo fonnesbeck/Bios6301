@@ -1,0 +1,208 @@
+---
+title: "Functions"
+output: html_notebook
+---
+
+Define a function (DRY)
+
+```{r}
+my_function <- function(first_argument, second_argument, ...) {
+  # do some stuff
+  return(return_value)
+}
+```
+
+Using `return` is optional.
+
+```{r}
+absval <- function(value) {
+    if (value < 0) {
+        -value
+    } else {
+        value
+    }
+}
+absval(-5)
+```
+
+## Operators are functions too
+
+```{r}
+'+'(4,5)
+```
+
+Users can write custom operators.
+
+```{r}
+"%!%" = function(x,y) x/sqrt(y)
+6 %!% 7
+```
+
+## Exercise
+
+Remember the `%in%` function?  Write a `%nin%` function.
+
+## Default Argument Values
+
+```{r}
+psi <- function(x, c=1) {
+  if(x^2 > c^2) {
+    c * abs(x)
+  } else {
+    x^2
+  }
+}
+z <- 0.5
+psi(z)
+```
+
+```{r}
+identical(psi(z, c=1), psi(z))
+identical(psi(x=z, c=2), psi(c=2, x=z))
+```
+
+## Validating Input
+
+Function to compute percentile of the Pareto distribution with location and scale parameters
+
+```{r}
+qpareto <- function(p, scale, location) {
+  location * (1 - p) ^ (-1 / scale)
+}
+qpareto(0.5, 4.5, 10)
+qpareto(0.9, 4.5, 10)
+qpareto(0.9, 6, -1)
+```
+
+```{r}
+qpareto <- function(p, scale, loc) {
+  if((scale<=0) || (loc<=0)) {
+      stop("'qpareto' parameters must be greater than zero.")
+  }
+  location * (1 - p) ^ (-1 / scale)
+}
+tryCatch(qpareto(0.4, 5, -1), error=function(e) e)
+```
+
+```{r}
+qpareto <- function(p, scale, loc) {
+  stopifnot(p >= 0, p <= 1, scale > 0, loc > 0)
+  location * (1 - p) ^ (-1 / scale)
+}
+tryCatch(qpareto(-0.1, 4, 5), error=function(e) e)
+tryCatch(qpareto(0.5, 0, 12), error=function(e) e)
+```
+
+## Functions creating functions
+
+```{r}
+nd <- function(m = 0, sd = 1) function(n) rnorm(n, m, sd)
+nd()(5)
+distr <- nd(m = 100, sd = 10)
+distr(5); distr(10)
+```
+
+## Scoping
+
+```{r}
+w <- 12
+f <- function(y) {
+   d <- 8
+   h <- function() d*(w+y)
+   return(h())
+}
+f(2)
+w <- 13
+f(2)
+d <- 4
+f(2)
+```
+
+```{r}
+ctr <- 5
+counter <- function() {
+  ctr <- 0
+  f <- function() {
+    ctr <<- ctr + 1
+    cat("value of counter is", ctr, "\n")
+  }
+}
+c1 <- counter()
+c2 <- c3 <- counter()
+c1()
+c2()
+c2()
+c2()
+c3()
+ctr
+```
+
+## Example: Fixed-point Iteration
+
+Solve the root of `f(x) = log(x) - exp(-x)`
+
+```{r}
+f <- function(x) log(x) - exp(-x)
+plot(f, xlim = c(0, 15))
+```
+
+We can do this with fixed-point iteration:
+
+```{r}
+# Initialize value
+x <- 10
+x_old <- x + 1e6
+# Set tolerance
+tol <- 1e-9
+# Specify maximum number of iterations
+max_iter <- 100
+# Keep track of number of interations
+iter <- 0
+# Loop
+while((abs(x-x_old) > tol) && (iter < max_iter)) {
+    # Replace old value with current
+    x_old <- x
+    # Calculate new value
+    x <- exp(exp(-x))
+    # Increment counter
+    iter <- iter + 1
+}
+x
+```
+
+## Exercise
+
+Write a robust function for fixed point iteration.
+
+## Functions for functions
+
+There are a few additional techniques useful in the scope of writing functions.
+
+* Global assignment: `assign()`, `"<<-"`
+* The dots `...` argument
+* `match.call()`
+* `match.arg()`
+* `missing()`
+
+```{r}
+resample <- function(x, ...) {
+  xx <- sample(x, replace = TRUE)
+  print(quantile(xx, ...))
+  xx
+}
+resample(seq(100))
+resample(seq(100), probs = 0.5)
+```
+
+```{r}
+center <- function(x, type=c('mean','median')) {
+  type <- match.arg(type)
+  do.call(type, list(x))
+}
+set.seed(35)
+x <- rnorm(10000)
+center(x)
+center(x, 'median')
+center(x, 'med')
+tryCatch(center(x, 'midpoint'), error=function(e) e)
+```

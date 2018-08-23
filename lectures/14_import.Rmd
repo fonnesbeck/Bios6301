@@ -1,0 +1,219 @@
+---
+title: "Data Import and Export in R"
+output: html_notebook
+---
+
+```{r}
+cat("Happy Tuesday!", "\n")
+iterations <- 10
+for (j in 1:iterations) {
+  cat(j, "...")
+  if (j==iterations) cat("Done!", "\n")
+}
+```
+
+```{r}
+some_file <- tempfile()
+cat(file=some_file, "foo", "bar", seq(1:10), sep="\n")
+some_file
+```
+
+## Exporting a matrix
+
+```{r}
+my_mat <- outer(c(1,4,6),c(8,-1,4))
+# write(my_mat, "my_mat.dat", ncolumn=3)
+write(my_mat, stdout(), ncolumn=3)
+MASS::write.matrix(my_mat, stdout())
+```
+
+```{r}
+write.table(my_mat, stdout())
+```
+
+## Exporting Data Frames
+
+Read documentation on `write.table` - many arguments
+
+```{r}
+x <- data.frame(id=seq(10), height=round(rnorm(10,70,4)), weight=round(rnorm(10,180,20)*2)/2)
+write.table(x, file = "foo.csv", sep = ",", col.names = NA)
+write.table(x, file = stdout(), sep = ",", col.names = NA)
+```
+
+Note that `write.table` is inefficient for very large matrices; `MASS::write.matrix` is more memory-efficient.
+
+## Importing two-dimensional data
+
+See the function arguments for `read.table`
+
+* Header line `header = FALSE`
+* Column separator `sep = ""`
+* Quoting strings `quote = "\"'"`
+* Missing values `na.strings = "NA"`
+* Unfilled lines `fill = !blank.lines.skip`
+* White space in character fields `strip.white = FALSE`
+* Blank lines `blank.lines.skip = TRUE`
+* Classes for the variables `colClasses = NA`
+* Comments `comment.char = "#"`
+* Rows to read `skip = 0` and `nrows = -1`
+* Character VS factor `stringsAsFactors = default.stringsAsFactors()`
+
+```{r}
+read.table("foo.csv", header = TRUE, sep = ",", row.names=1)
+```
+
+## `read.table` helper functions
+
+    !r
+    read.csv(file, header = TRUE, sep = ',', quote='\"', dec='.', fill = TRUE, ...)
+
+    read.delim(file, header = TRUE, sep = '\t', quote='\"', dec='.', fill = TRUE, ...)
+
+## Fixed-width format
+
+```{r}
+fixed_data <- tempfile()
+cat(file=fixed_data, "1 -14  23", "1   7 -10", sep="\n")
+read.fwf(fixed_data, width=c(1,4,4))
+```
+
+---
+
+## scan
+
+Everything uses `scan`, which can be called directly.
+
+```{r}
+cat("2 3 5 7", "11 13 17 19", file="ex.dat", sep="\n")
+scan(file="ex.dat")
+scan(file="ex.dat", what=list(x=0, y="", z=0), flush=TRUE)
+```
+
+`scan` can also be used for rudimentary data entry - or utilize `stdin()`
+
+```{r, eval = FALSE}
+x <- scan()
+y <- read.csv(stdin(), header = FALSE)
+```
+
+`file` can also be a URL
+
+```{r}
+# play intramural softball
+tryCatch(read.csv('http://data.vanderbilt.edu/~graywh/intramurals/softball/batting_stats_career.txt',
+                  row.names=1, strip.white=TRUE)["Cole",], error=function(e) e)
+```
+
+## Importing Source Code
+
+```{r, eval = FALSE}
+source("my_script.R")
+source("useful_functions.R")
+```
+
+```{r}
+source("https://github.com/couthcommander/misc/raw/master/R/print.R")
+prettyprint(my_mat)
+```
+
+## Redirecting Output
+
+* `sink`
+* `capture.output`
+
+```{r}
+sink("sink-examp.txt")
+i <- 1:10
+outer(i, i, "*")
+sink() # stops redirection
+system("cat sink-examp.txt")
+```
+
+```{r}
+counts <- c(18,17,15,20,10,20,25,13,12)
+outcome <- gl(3,1,9)
+treatment <- gl(3,3)
+capture.output(glm(counts ~ outcome + treatment, family = poisson()), file=NULL)
+```
+
+## Storing Data
+
+Compressed and efficient
+
+```{r}
+x <- 1:4
+save(x, file="x.RData") # encode
+rm(x)
+load("x.RData") # decode
+x
+```
+
+## Importing from Other Systems
+
+The package `foreign` provides import facilities for files produced by:
+
+* **Minitab** read.mtp
+* **S-PLUS** read.S
+* **SAS** read.xport,read.ssd
+* **SPSS** read.spss
+* **Stata** read.dta
+
+Many other R packages can be useful for different types of files
+
+* database packages: RODBC, DBI, sqlite
+* SPSS/Stata/SAS: haven
+* Excel: readxl
+* Python: feather
+* GIS: rgdal
+* large CSVs: `data.table::fread`
+* memory-mapped: mmap, ff
+* HTML: XML
+
+Or, check out [rio](https://github.com/leeper/rio)
+
+## Functions for Files and Paths
+
+```{r}
+getwd()
+file <- file.path("~", "Documents", "junk091814.txt")
+file
+file.create(file)
+dirname(file)
+basename(file)
+file.remove(file)
+setwd("~")
+head(list.files())
+```
+
+```{r echo=FALSE, results='hide'}
+# clean-up files created during session
+file.remove('foo.csv', 'ex.dat', 'sink-examp.txt', 'x.RData')
+```
+
+## Example
+
+```{r}
+cat(file="file1.dat", 5, 12, 13, sep=',')
+cat(file="file2.dat", 7, 6, 1, sep=',')
+cat(file="file3.dat", 14, 5, 5, sep=',')
+list.files(pattern = "\\.dat$")
+```
+
+Can we write code to sum the contents of all three files?
+
+```{r}
+sumfiles <- function(dname = '.') {
+  tot <- 0
+  for(f in list.files(dname, pattern = "\\.dat$")) {
+    tot <- tot + sum(scan(f, sep=',', quiet=TRUE))
+  }
+  tot
+}
+sumfiles()
+```
+
+```{r echo=FALSE, results='hide'}
+# clean-up files created during session
+file.remove('file1.dat', 'file2.dat', 'file3.dat')
+```

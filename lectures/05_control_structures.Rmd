@@ -1,0 +1,230 @@
+---
+title: "Control Structures"
+output: html_notebook
+---
+
+# Conditional code execution
+
+## `if` statements
+
+```{r}
+x <- -10
+if (x >= 0) {
+    x
+} else {
+    -x
+}
+```
+
+How is truth evaluated?
+
+```{r}
+if(1) {"Truth!"} else {"Falsehood!"}
+if(-1) {"Truth!"} else {"Falsehood!"}
+if(0) {"Truth!"} else {"Falsehood!"}
+if("TRUE") {"Truth!"} else {"Falsehood!"}
+tryCatch(if("TRUTH") {"Truth!"} else {"Falsehood!"}, error=function(e) e)
+tryCatch(if("c") {"Truth!"} else {"Falsehood!"}, error=function(e) e)
+tryCatch(if(NULL) {"Truth!"} else {"Falsehood!"}, error=function(e) e)
+tryCatch(if(NA) {"Truth!"} else {"Falsehood!"}, error=function(e) e)
+tryCatch(if(NaN) {"Truth!"} else {"Falsehood!"}, error=function(e) e)
+```
+
+## Adding `else if` and `else`
+
+```{r}
+age <- 10
+if (age < 2) {
+    group <- 'infant'
+} else if (age < 12) {
+    group <- 'child'
+} else if (age < 18) {
+    group <- 'adolescent'
+} else {
+    group <- 'adult'
+}
+group
+```
+
+## Nested conditionals
+
+```{r}
+if (x^2 < 1) {
+    x^2
+} else {
+    if (x >= 0) {
+        x
+    } else {
+        -x
+    }
+}
+```
+
+In the above, `x` is 10.  What would happen if x where a vector?
+
+## `switch` statement
+
+```{r}
+centre <- function(x, type) {
+   switch(type,
+          mean = mean(x),
+          median = median(x),
+          trimmed = mean(x, trim = .1))
+ }
+x <- rnorm(10)
+centre(x, "mean")
+centre(x, "median")
+centre(x, "trimmed")
+```
+
+# Code Iteration
+
+## `for` loop
+
+```{r}
+x <- c(5,12,13)
+for(n in x) print(n^2)
+```
+
+```{r}
+n <- 10
+logs <- numeric(n)
+for(i in 1:n) {
+  logs[i] <- log(i)
+}
+logs
+```
+
+```{r}
+x <- c(-5,7,-8,0)
+y <- rep(NULL, length(x))
+for (i in 1:length(x)) {
+    if (x[i] >= 0) {
+        y[i] <- x[i]
+    } else {
+        y[i] <- -x[i]
+    }
+}
+y
+```
+
+## `while` loop
+
+```{r}
+i <- 0
+while(i < 2) i <- i + rnorm(1)
+i
+```
+
+```{r}
+i <- 0
+while(TRUE) {
+  i <- i+1
+  if (i > 10) break
+}
+i
+```
+
+```{r}
+x <- 0
+repeat {
+    x <- x + log(i)
+    if (x > 20) break
+}
+x
+```
+
+```{r}
+a <- rnorm(15)
+b <- rnorm(15)
+c <- numeric(length(a))
+for (i in seq_along(a)) {
+    c[i] <- a[i] + b[i]
+}
+c
+# vectorized
+a + b
+# not vectorized
+pmin(a,b)
+```
+
+```{r}
+x <- rnorm(5, 0, 25)
+abs(x)
+log(x)
+ifelse(x < 0, -x, x)
+ifelse(x^2 > 1, abs(x), x^2)
+```
+
+# Exercise
+
+Generate a vector of the first 25 prime numbers
+
+```{r}
+
+```
+
+## `expand.grid`
+
+```{r}
+expand.grid(intervention=c("control", "treatment"), gender=c("M","F"))
+```
+
+## `outer`
+
+```{r}
+outer(c(1,3,5),c(2,3,7),'*')
+```
+
+## `replicate`
+
+```{r}
+mean(replicate(1000, sd(rnorm(1000))))
+```
+
+## Using `apply`s
+
+```{r}
+x <- expand.grid(intervention=c("control", "treatment"), gender=c("M","F"))
+x[,'los'] <- rpois(4, 5)
+x[,'smoker'] <- rbinom(4, 1, 0.5)
+x
+split(x, x[,'intervention'])
+```
+
+```{r}
+apply(x[,c('los','smoker')], MARGIN = 2, FUN = sd)
+```
+
+In the above, why is MARGIN = 2?
+
+```{r}
+lapply(split(x[,'los'], x[,'intervention']), mean)
+```
+
+```{r}
+sapply(split(x[,'los'], x[,'intervention']), mean)
+```
+
+```{r}
+tapply(x[,'los'], x[,'intervention'], mean)
+```
+
+```{r}
+vapply(split(x[,'los'], x[,'intervention']), mean, numeric(1))
+```
+
+```{r}
+mapply(min, a, b)
+# pmin(a, b)
+```
+
+# Exercise
+
+Implement the Newton-Raphson algorithm in R
+
+## Find root for $f(x) = x^3 + x^2 - 3x - 3$. $f'(x) = 3x^2 + 2x - 3$.
+
+```{r}
+
+```

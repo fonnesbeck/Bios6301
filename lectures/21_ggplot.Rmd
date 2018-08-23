@@ -1,0 +1,243 @@
+---
+title: "ggplot"
+output: html_notebook
+---
+
+Data on 671 infants with very low (<1600 grams) birth weight from 1981-87 were collected at Duke University Medical Center.
+
+Of interest is the relationship between the outcome intra-ventricular hemorrhage and the predictors birth weight, gestational age, presence of pneumothorax, mode of delivery, single vs. multiple birth, and whether the birth occurred at Duke or at another hospital with later transfer to Duke.
+
+```{r}
+vlbw <- read.csv('https://raw.githubusercontent.com/fonnesbeck/Bios366/master/data/vlbw.csv', row.names=1)
+head(vlbw)
+library(ggplot2)
+```
+
+# Key to ggplot
+
+Set up data.frame - every row is a point
+
+## Components of ggplot
+
+[ggplot2 cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
+
+* Geoms
+* Aesthetics
+* Stats
+* Scales
+* Faceting
+* Themes
+
+## Major functions
+
+* qplot - quick plot, more defaults
+* ggplot
+
+### geom
+
+scatterplot
+
+```{r}
+qplot(gest, bwt, data=vlbw)
+```
+
+```{r}
+ggplot(data=vlbw) + geom_point(mapping = aes(x=sex, y=bwt))
+```
+
+```{r}
+qplot(sex, bwt, data=vlbw, geom='jitter')
+```
+
+boxplot
+
+```{r}
+qplot(sex, bwt, data=vlbw, geom='boxplot')
+```
+
+overlapping
+
+```{r}
+qplot(sex, bwt, data=vlbw, geom=c('jitter','boxplot'))
+```
+
+```{r}
+qplot(sex, bwt, data=vlbw, geom=c('boxplot','jitter'))
+```
+
+### aesthetics
+
+* color
+* size
+* shape
+* alpha
+
+controlled by value being discrete/continuous
+
+```{r}
+qplot(gest, bwt, color=ivh, data=vlbw)
+```
+
+```{r}
+qplot(gest, bwt, color=sex, shape=sex, data=vlbw)
+```
+
+```{r}
+ggplot(data=vlbw) + geom_point(mapping = aes(x=gest, y=bwt, size=lol))
+```
+
+```{r}
+ggplot(data=vlbw) + geom_point(mapping = aes(x=gest, y=bwt), color="gold")
+```
+
+### facet
+
+* facet_wrap
+* facet_grid
+
+```{r}
+bestRows <- complete.cases(vlbw[,c('gest','bwt','sex')])
+p <- ggplot(data=vlbw[bestRows,]) + geom_point(mapping = aes(x=gest, y=bwt))
+p
+```
+
+```{r}
+p + facet_wrap(~ race)
+```
+
+```{r}
+p + facet_wrap(~ race + sex)
+```
+
+```{r}
+p + facet_grid(sex ~ race)
+```
+
+facet into columns
+
+```{r}
+p + facet_grid(. ~ race)
+```
+
+facet into rows
+
+```{r}
+p + facet_grid(race ~ .)
+```
+
+## Exercise
+
+Try re-creating the following plot:
+
+![hands-on](https://github.com/fonnesbeck/Bios6301/blob/master/slides/images/ggplot_handson.png?raw=true)
+
+What are the advantages to using faceting instead of the colour aesthetic?
+
+When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?
+
+# create gest/bwt with point+smooth
+
+```{r}
+qplot(gest, bwt, data=vlbw[bestRows,], geom=c('point','smooth'))
+```
+
+```{r}
+ggplot(data=vlbw[bestRows,]) + geom_point(mapping = aes(x=gest, y=bwt)) + geom_smooth(mapping = aes(x=gest, y=bwt))
+```
+
+```{r}
+ggplot(data=vlbw[bestRows,], mapping = aes(x=gest, y=bwt)) + geom_point() + geom_smooth(method='loess')
+```
+
+```{r}
+qplot(gest, bwt, data=vlbw[bestRows,], geom=c('point','smooth'), linetype=sex)
+```
+
+### stat
+
+Every geom has a default stat; and every stat has a default geom
+
+```{r}
+qplot(bwt, data=vlbw, geom='histogram', binwidth=25)
+```
+
+```{r}
+qplot(bwt, data=vlbw, geom='density')
+```
+
+```{r}
+qplot(race, data=vlbw, geom='bar')
+```
+
+```{r}
+ggplot(data=vlbw) + geom_bar(mapping = aes(x=race, y=..prop.., group=1))
+```
+
+```{r}
+ggplot(data=vlbw) + stat_count(mapping = aes(x=race, y=..prop.., group=1))
+```
+
+```{r}
+ggplot(vlbw, aes(apg1, bwt)) + geom_point() + stat_summary(fun.data = "mean_sdl", geom=c("errorbar"), color="red")
+```
+
+```{r}
+iqr <- function(x, ...) {
+  qs <- quantile(as.numeric(x), c(0.25, 0.75), na.rm = T)
+  names(qs) <- c("ymin", "ymax")
+  qs
+}
+ggplot(vlbw, aes(apg1, bwt)) + geom_point() + stat_summary(fun.data = "iqr", geom=c("ribbon"), alpha=0.4)
+```
+
+### position
+
+```{r}
+ggplot(data=vlbw) + geom_bar(mapping = aes(x=race, fill=sex))
+```
+
+```{r}
+ggplot(data=vlbw) + geom_bar(mapping = aes(x=race, fill=sex), position="dodge")
+```
+
+jitter was a position! position_jitter
+
+### theme
+
+```{r}
+qplot(bwt, pltct, data=vlbw) + labs(title="Platelet count as function of birth weight") +
+      theme(axis.title.x = element_text(face = "bold", colour="red"),
+            axis.title.y = element_text(size = 20, angle = 0))
+```
+
+```{r}
+qplot(bwt, pltct, data=vlbw, main="Platelet count as function of birth weight")
+```
+
+```{r}
+qplot(bwt, pltct, data=vlbw) +
+      theme(axis.title.x = element_blank(), axis.text.x = element_blank(),
+            axis.title.y = element_blank(), axis.text.y = element_blank())
+```
+
+```{r}
+p <- ggplot(data=vlbw) + geom_point(mapping = aes(x=gest, y=bwt))
+p + aes(shape=sex)
+```
+
+```{r}
+p + aes(shape=race)
+```
+
+```{r}
+str(p)
+```
+
+```{r}
+p$layers
+```
+
+## Two more functions
+
+* last_plot
+* ggsave

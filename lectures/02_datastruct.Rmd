@@ -1,0 +1,137 @@
+---
+title: "R data structures"
+output: html_notebook
+---
+
+# R data types
+* logical
+* integer
+* numeric
+* complex
+* character
+
+Reflect on the following:
+
+```{r}
+1 == "1"
+-1 < FALSE
+"10" < "3"
+"one" < 2
+```
+
+# Special values
+* `NA`
+* `Inf`
+* `NaN`
+* `NULL`
+
+```{r}
+2 ^ 1024
+(-2) ^ 1024
+-2 ^ 1024
+1 / 0
+Inf - Inf
+0 / 0
+is.infinite(1 / 0)
+```
+
+# R data structures (containers)
+* vector
+* matrix
+* array
+* data.frame
+* list
+
+# Creating a Vector
+
+```{r}
+numeric(10)
+rep(1, 10)
+rep(1:4, times = 1:4)
+rep(seq(4), each=4)
+(x <- seq(10, 100, by = 10))
+x[15] <- 150
+x
+```
+
+# Vector Functions
+
+Some include: head, rev, match, %in%, sort, order, table, unique, duplicated, union, intersect, setdiff, `[`
+
+```{r}
+x <- c(88, 5, 12, 13)
+x[2]
+x[1:3]
+x[c(4,1)]
+x[-2]
+x[x > 10]
+big <- which(x > 10)
+x[big]
+table(sample(x, 100, replace=TRUE))
+```
+
+```{r}
+y <- c(12, 20, 88)
+# find first element of y in x
+which(y[1] == x)
+# find all of y in x: BAD
+which(y == x)
+# find all of y in x: GOOD
+match(y, x)
+# match finds first occurrence only
+match(y, c(x, x))
+y %in% x
+intersect(x, y)
+setdiff(x, y)
+setdiff(y, x)
+duplicated(c(x, y))
+```
+
+The `names` attribute
+
+```{r}
+names(x)
+names(x) <- c("v1", "v2", "v3", "foo")
+x
+x[c("foo", "v1")]
+sort(names(x))
+which(names(x) == "foo")
+unname(x)
+x
+names(x) <- NULL
+x
+```
+
+# Creating a Matrix
+
+```{r}
+x <- seq(16)
+matrix(x)
+matrix(x, nrow = 4)
+# matrix(x, 4)
+matrix(x, ncol = 8, byrow = TRUE)
+diag(4)
+```
+
+# Matrix Functions
+
+Some include: colSums, colMeans, cbind, t, diag, upper.tri, lower.tri, solve, cor, `[`, `%*%`
+
+```{r}
+x <- seq(16)
+y <- rep(1:4, each=4)
+x * y
+x %*% y
+matrix(x) %*% y
+x %*% matrix(y)
+matrix(x) %*% matrix(y)
+```
+
+```{r}
+mx <- matrix(x, 4)
+my <- matrix(y, 4)
+mx * my
+mx %*% my
+my %*% mx
+```
+

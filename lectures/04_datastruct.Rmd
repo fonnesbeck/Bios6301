@@ -1,0 +1,136 @@
+---
+title: "R data structures"
+output: html_notebook
+---
+
+```{r}
+dataset <- matrix(c(1,40,1,60), nrow=2)
+rownames(dataset) <- c('intercept', 'dose')
+colnames(dataset) <- c('subject1', 'subject2')
+dataset
+t(dataset)
+solve(dataset)
+solve(dataset) %*% dataset
+y <- c(10, 20)
+solve(dataset, y)
+dataset %*% solve(dataset, y)
+```
+
+# Creating a data.frame
+
+```{r}
+y <- data.frame(id=1:3, animal=c('cat','dog','rabbit'), 
+                speed=c('faster','fast','fastest'), stringsAsFactors=FALSE)
+y[,'speed.factor'] <- factor(y[,'speed'])
+y
+```
+
+# Extracting a column
+
+```{r}
+y[,3]
+y[,'speed']
+y$speed
+y[['speed']]
+y[,'speed', drop=FALSE]
+y['speed']
+```
+
+# Adding/removing a column
+
+```{r}
+y[,'new'] <- NA
+y <- cbind(y, newer=0)
+y
+y[,'new'] <- NULL
+y <- y[,-1]
+y <- y[,-match('newer', names(y))]
+y
+```
+
+# Data.frame functions
+
+Some include: merge, with, within, & many of the matrix functions (cbind, colSums)
+
+```{r}
+x <- data.frame(id = seq(4, 24, 4), gender = rbinom(6, 1, 0.5))
+y <- data.frame(id = seq(6, 24, 6), gender = rbinom(4, 1, 0.25))
+merge(x, y)
+merge(x, y, by=0)
+merge(x, y, by.x='id', by.y='id', all.x=TRUE, all.y=FALSE)
+merge(x, y, all=TRUE)
+```
+
+```{r}
+x <- within(x, {
+  weight <- round(rnorm(nrow(x), 120 + gender * 60, 10))
+  age <- sample(15:25, nrow(x), replace = TRUE)
+})
+x[order(x[,'gender'], x[,'age']),]
+x[with(x, order(gender, age)),]
+```
+
+### Exercise
+
+1. Create a 5x5 matrix with the first 25 odd numbers.
+2. If a number is divisible by 3, replace it with NA.
+3. Use the `colMeans` function to determine the mean of each column (hint: use `na.rm` argument).
+4. Replace missing values with mean of the value from the column in which they are found.
+5. Use `as.data.frame` to convert your matrix into a data.frame
+
+```{r}
+```
+
+# Creating a list
+
+```{r}
+my_dist <- list("exponential", 7, FALSE)
+my_dist
+my_dist[1]
+my_dist[[1]]
+```
+
+```{r}
+my_dist <- c(my_dist, 7)
+my_dist[[6]] <- list("apple", "banana")
+my_dist
+```
+
+```{r}
+another_dist <- list(family = "gaussian", mean = 7, sd = 1, is.symmetric = TRUE)
+another_dist
+another_dist$family
+another_dist[['family']]
+another_dist$was_estimated <- FALSE
+another_dist$was_estimated <- NULL
+```
+
+### Exercise
+
+Create a list with the following named items, and assign it to `x`:
+
+* data = 1:20
+* nrow = 5
+* byrow = TRUE
+
+```{r}
+x <- list()
+```
+
+Run the following, while making the requested modifications.
+
+```{r}
+do.call(matrix, x)
+```
+
+Modify the `data` element to contain `sample(20)`.  Remove the `byrow` element.
+
+```{r}
+do.call(matrix, x)
+```
+
+Remove the `nrow` element and add an element called `ncol` with a value of 2.
+
+```{r}
+do.call(matrix, x)
+```

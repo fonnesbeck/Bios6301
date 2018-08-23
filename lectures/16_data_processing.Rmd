@@ -1,0 +1,318 @@
+---
+title: "Data Processing in R"
+output: html_notebook
+---
+
+## Sample Dataset: HAART
+
+Our sample database is some de-identified data for Highly Active Antiretroviral Therapy (HAART) patients. The data file, `haart.csv` is located in the `datasets` folder on the GitHub repository.
+
+Here is what are first 4 lines (header + 3 data rows) of the table:
+
+    "male","age","aids","cd4baseline","logvl","weight","hemoglobin","init.reg","init.date","last.visit","death","date.death","event","followup","lfup","pid"
+    1,25,0,NA,NA,NA,NA,"3TC,AZT,EFV","2003-07-01","2007-02-26",0,NA,0,365,0,1
+    1,49,0,143,NA,58.0608,11,"3TC,AZT,EFV","2004-11-23","2008-02-22",0,NA,0,365,0,2
+    1,42,1,102,NA,48.0816,1,"3TC,AZT,EFV","2003-04-30","2005-11-21",1,"2006-01-11",0,365,0,3
+
+```{r}
+haart <- read.csv(file.path('..', 'datasets', 'haart.csv'))
+```
+
+## Data Frame Structure
+
+The function `str` reveals the structure of the data frame, including the number of variables (columns) and observations (rows), as well as the data types of each column:
+
+```{r}
+str(haart)
+```
+
+## Attaching Data Frames
+
+```{r}
+attach(haart)
+weight[1:20]
+```
+
+```{r}
+detach(haart)
+tryCatch(weight, error=function(e) e)
+```
+
+## Factors
+
+The `factor` type represents variables that are categorical, or nominal.
+
+For example, let's look at the `init.reg` variable in the HAART dataset, which shows the initial drug regimen for each patient:
+
+```{r}
+str(haart[,'init.reg'])
+```
+
+This shows each drug combination has a label and a unique number for each combination. These numbers, however, have no intrinsic order.
+
+```{r}
+(x <- factor(rbinom(20, 4, 0.5)))
+levels(x) <- 0:5
+table(x)
+x[4] <- 17
+```
+
+## Generating Factor Variables
+
+In this data set, `male` is an indicator variable that equals 1 for male patients and 0 for females.
+
+```{r}
+haart[,'gender'] <- factor(haart[,'male'], labels=c("female","male"))
+str(haart[,'gender'])
+```
+
+## Indexing
+
+```{r}
+haart[1:20,'age']
+# or equivalently ...
+haart[[2]][1:20]
+```
+
+```{r}
+x <- haart[,c("male", "age", "death")]
+# comma not required
+x1 <- haart[c("male", "age", "death")]
+identical(x, x1)
+```
+
+```{r}
+y <- x[x[,'male'] == 1,]
+head(y)
+```
+
+## Modifying and Creating Variables
+
+```{r}
+haart[,'last.visit'] <- as.POSIXct(haart[,'last.visit'], format="%m/%d/%y")
+haart[,'init.date'] <- as.POSIXct(haart[,'init.date'], format="%m/%d/%y")
+haart[,'date.death'] <- as.POSIXct(haart[,'date.death'], format="%m/%d/%y")
+(haart[,'last.visit'] - haart[,'init.date'])[1:50]
+```
+
+```{r}
+(haart$time.diff <- as.Date(haart[,'last.visit']) - as.Date(haart[,'init.date']))[seq(20)]
+```
+
+## Binning Data
+
+The built-in function `cut` discretizes variables based on boundary values of the implied groups:
+
+```{r}
+haart[,'age_group'] <- cut(haart[,'age'], c(min(haart[,'age']), 30, 50, max(haart[,'age'])))
+table(haart[,'age_group'])
+table(cut(haart[,'age'], c(min(haart[,'age']), 30, 50, max(haart[,'age'])), right=FALSE))
+```
+
+## Text Processing
+
+Even though R considers text to be a vector of characters, indexing and other functions do not work the same way with characters
+
+```{r}
+word <- 'processing'
+word[1]
+nchar(word)
+substr(word, 1, 3)
+substr(word, 3, 5)
+```
+
+```{r}
+sentence <- "R provides a separate set of functions to process text"
+(words <- strsplit(sentence, " "))
+paste(unlist(words), collapse=" ") # reverse the split operation
+```
+
+## Changing Case
+
+```{r}
+toupper(word)
+```
+
+```{r}
+titlecase <- function(str) {
+    str <- tolower(str)
+    substr(str,1,1) <- toupper(substr(str,1,1))
+    str
+}
+titlecase(word)
+```
+
+The `chartr` function translates characters to their corresponding pair in a text string:
+
+```{r}
+(rna <- chartr('atcg', 'uagc', 'aagcgtctac'))
+chartr(paste(letters, collapse=""), paste(LETTERS, collapse=""), word)
+```
+
+## String Matching
+
+The function `charmatch` looks for unique matches for the elements of its first argument among those of its second
+
+```{r}
+unlist(words)
+charmatch('fun', unlist(words))
+charmatch('foo', unlist(words))
+charmatch('pr', unlist(words))
+```
+
+## Text Processing in Action
+
+In the HAART database, the field `init.reg` describes the initial drug regimens of each individual, and is imported to R by default as a `factor`.
+
+```{r}
+head(haart[,'init.reg'])
+table(haart[,'init.reg'])
+```
+
+## Creating a List Variable
+
+In order to save a list variable into a data.frame, use must assign with `$<-` or `[[<-`.
+
+```{r}
+init.reg <- as.character(haart[,'init.reg'])
+(haart[['init.reg_list2']] <- strsplit(init.reg, ","))[1:3]
+```
+
+## The `apply` Functions
+
+```{r}
+tapply(haart[,'weight'], haart[,'male'], mean, na.rm=TRUE)
+```
+
+* first argument is the target vector to which the function will be applied
+* second argument is the index variable that dictates by what factor the application of the function will be grouped
+* third argument is the function that will be used
+* subsequent arguments are passed as arguments to the function referenced in the third argument, here `mean`
+
+## Cross-tabulation with `tapply`
+
+```{r}
+tapply(haart[,'weight'], haart[,c("male", "aids")], mean, na.rm=TRUE)
+```
+
+```{r}
+tapply(haart[,'weight'], haart[,c("male", "aids", "death")], mean, na.rm=TRUE)
+```
+
+## `lapply`
+
+The `lapply` function, after applying the specified function, attempts to coerce output into a list.
+
+```{r}
+(haart_means <- lapply(haart[,4:6], mean, na.rm=TRUE))
+haart_means$weight
+```
+
+## `sapply`
+
+`sapply` tries to return a simpler data structure, generally a vector.
+
+```{r}
+sapply(haart, is.factor)
+```
+
+```{r}
+sapply(haart[,c("cd4baseline", "weight", "hemoglobin")], scale)[1:5,]
+```
+
+## `mclapply`
+
+An easy way to speed up apply functions is to take advantage of the fact that your machine will have multiple cores. **Parallel computing** is a general term that refers to the practice of breaking up tasks that are executed serially on a single CPU into multiple components, each of which is calculated simultaneously, by assigning them to multiple available CPUs. The degree to which this improves performance depends upon the nature of the task.
+
+The `parallel` package includes a function `mclapply` that is a multicore implementation of `lapply`.  `mclapply` can be used exactly as `lapply` would be.
+
+```{r}
+library(parallel)
+detectCores()
+(haart_means <- mclapply(haart[,4:6], mean, na.rm=TRUE))
+```
+
+There are several packages available that implement parallel computing in R: `doMC`, `multicore`, `snow`
+
+## Querying List Variables
+
+```{r}
+d4t_index <- sapply(haart$init.reg_list, function(x) 'D4T' %in% x)
+haart_D4T <- haart[d4t_index, ]
+head(haart_D4T)
+```
+
+## Creating Indicator Variables
+
+```{r}
+unlist(haart$init.reg_list)[seq(50)]
+(all_drugs <- unique(unlist(haart$init.reg_list)))
+```
+
+```{r}
+reg_drugs <- matrix(FALSE, nrow=nrow(haart), ncol=length(all_drugs))
+for(i in seq_along(all_drugs)) {
+  reg_drugs[,i] <- sapply(haart$init.reg_list, function(x) all_drugs[i] %in% x)
+}
+reg_drugs <- data.frame(reg_drugs)
+names(reg_drugs) <- all_drugs
+head(reg_drugs)
+```
+
+```{r}
+haart_merged <- cbind(haart, reg_drugs)
+head(haart_merged)
+```
+
+## Subsetting
+
+```{r}
+haart_m30 <- subset(haart, gender=="male" & age > 30, select=c(death, weight, hemoglobin))
+head(haart_m30)
+```
+
+## Missing Values
+
+```{r}
+!is.na(haart[1:50,'weight'])
+head(haart[!is.na(haart[,'weight']),])
+```
+
+```{r}
+complete.cases(haart[,1:12])[seq(50)]
+haart[complete.cases(haart[,1:12]),]
+```
+
+## Sorting
+
+```{r}
+order(haart[,'init.date'], haart[,'last.visit'])[seq(50)]
+haart_sorted <- haart[order(haart[,'init.date'], haart[,'last.visit']),]
+head(haart_sorted)
+```
+
+## Merging Data Frames
+
+```{r}
+dim(rbind(haart[1:500,], haart[501:1000,]))
+```
+
+This works, provided that the number of columns match:
+
+```{r}
+tryCatch(dim(rbind(haart[1:500,], haart[501:1000,1:10])), error=function(e) e)
+```
+
+To combine data frames based on the values of common variables, we can use the built-in `merge` function. By default, `merge` joins rows of the data frames based on the values of the columns that the data frames have in common.
+
+```{r}
+df1 <- data.frame(a=c(1,2,4,5,6),x=c(9,12,14,21,8))
+df2 <- data.frame(a=c(1,3,4,6),y=c(8,14,19,2))
+merge(df1, df2)
+```
+
+```{r}
+merge(df1, df2, all=TRUE)
+merge(df1, df2, all.x=TRUE)
+merge(df1, df2, all.y=TRUE)
+```

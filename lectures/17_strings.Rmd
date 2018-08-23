@@ -1,0 +1,103 @@
+---
+title: "String Manipulation"
+output: html_notebook
+---
+
+We've previously discussed
+
+* nchar
+* toupper
+* substr
+* strsplit
+* chartr
+* charmatch
+
+## `paste`
+
+```{r}
+i <- 4; paste("the square of", i, "is", i^2)
+i <- 8; paste("the square of ", i, " is ", i^2, sep = "")
+i <- 16; paste0("the square of ", i, " is ", i^2)
+i <- 32; paste(c("the square of", i, "is", i^2), collapse = " ")
+```
+
+The optional argument sep can be used to put something other than a space between the pieces being spliced together.
+
+## Exercise
+
+* Create a data frame with `ID|SITE|VALUE`
+  * ID - randomly generated numeric value
+  * SITE - randomly generated character string with length 4
+  * VALUE - random numeric value
+* Create a column `key` by pasting together ID and SITE
+* What if you had many columns and needed to paste them all together?
+
+## `sprintf`
+
+```{r}
+sprintf("the square of %d is %d", i, i^2)
+```
+
+There are a variety of format options:
+
+```{r}
+sprintf("%.3f", pi)
+sprintf("%1.0f", pi)
+sprintf("%10f", pi)
+sprintf("%010f", pi)
+sprintf("%-10f", pi)
+sprintf("%E", pi)
+sprintf("%+f", pi)
+```
+
+## Exercise
+
+Use `strsplit`, etc to reorder the following format `LAST, FIRST, POSITION` to `F. LAST (POSITION)`:
+
+```{r}
+lineup <- c(
+"Springer, George, CF",
+"Bregman, Alex, 3B",
+"Altuve, Jose, 2B",
+"Correa, Carlos, SS",
+"Gurriel, Yuli, 1B",
+"McCann, Brian, C",
+"Gonzalez, Marwin, LF",
+"Reddick, Josh, RF",
+"Verlander, Justin, P"
+)
+```
+
+## Finding string matches
+
+```{r}
+grep("test", c("foo", "bar", "test"))
+grep("test", c("foo", "bar", "test"), value=TRUE)
+grepl("test", c("foo", "bar", "test"))
+```
+
+## POSIX Character Classes
+
+* [:alnum:] : any alphanumeric character 0 to 9 or A to Z or a to z.
+* [:word:] : alphanumeric characters plus `_`
+* [:alpha:] : any alpha character A to Z or a to z.
+* [:digit:] : only the digits 0 to 9
+* [:blank:] : space and tab characters only.
+* [:graph:] : exclude whitespace (SPACE, TAB).
+* [:lower:] : any alpha character a to z.
+* [:print:] : any visible characters and the space character
+* [:punct:] : any punctuation characters.
+* [:upper:] : any alpha character A to Z.
+
+```{r}
+grep("[[:alpha:]]", c("----x----","--------","5456655"))
+grep("[[:blank:]]", c("foo","bar","foo bar","foobar"))
+```
+
+## Substituting Text
+
+```{r}
+text <- c("arm", "leg", "head", "foot", "hand", "hindleg", "elbow")
+sub("o", "O", text)
+gsub("o", "O", text)
+```
