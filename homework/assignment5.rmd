@@ -3,7 +3,7 @@ title: 'Bios 6301: Assignment 5'
 output: pdf_document
 ---
 
-*Due Tuesday, 14 November, 1:00 PM*
+*Due Thursday, 18 October, 1:00 PM*
 
 $5^{n=day}$ points taken off for each day late.
 
@@ -15,89 +15,34 @@ Failure to name file `homework5.rmd` or include author name may result in 5 poin
 
 ### Question 1 ###
 
-**24 points**
+**15 points**
 
-Import the HAART dataset (`haart.csv`) from the GitHub repository into R, and perform the following manipulations: (4 points each)
+A problem with the Newton-Raphson algorithm is that it needs the derivative $f'$. If the derivative is hard to compute or does not exist, then we can use the *secant method*, which only requires that the function $f$ is continuous.
 
-1. Convert date columns into a usable (for analysis) format.  Use the `table` command to display the counts of the year from `init.date`.
-2. Create an indicator variable (one which takes the values 0 or 1 only) to represent death within 1 year of the initial visit.  How many observations died in year 1?
-3. Use the `init.date`, `last.visit` and `death.date` columns to calculate a followup time (in days), which is the difference between the first and either the last visit or a death event (whichever comes first). If these times are longer than 1 year, censor them (this means if the value is above 365, set followup to 365).  Print the quantile for this new variable.
-4. Create another indicator variable representing loss to followup; this means the observation is not known to be dead but does not have any followup visits after the first year.  How many records are lost-to-followup?
-5. Recall our work in class, which separated the `init.reg` field into a set of indicator variables, one for each unique drug. Create these fields and append them to the database as new columns.  Which drug regimen are found over 100 times?
-6. The dataset `haart2.csv` contains a few additional observations for the same study. Import these and append them to your master dataset (if you were smart about how you coded the previous steps, cleaning the additional observations should be easy!).  Show the first five records and the last five records of the complete (and clean) data set.
+Like the Newton-Raphson method, the **secant method** is based on a linear approximation to the function $f$. Suppose that $f$ has a root at $a$. For this method we assume that we have *two* current guesses, $x_0$ and $x_1$, for the value of $a$. We will think of $x_0$ as an older guess and we want to replace the pair $x_0$, $x_1$ by the pair $x_1$, $x_2$, where $x_2$ is a new guess.
+
+To find a good new guess x2 we first draw the straight line from $(x_0,f(x_0))$ to $(x_1,f(x_1))$, which is called a secant of the curve $y = f(x)$. Like the tangent, the secant is a linear approximation of the behavior of $y = f(x)$, in the region of the points $x_0$ and $x_1$. As the new guess we will use the x-coordinate $x_2$ of the point at which the secant crosses the x-axis.
+
+The general form of the recurrence equation for the secant method is:
+
+$$x_{i+1} = x_i - f(x_i)\frac{x_i - x_{i-1}}{f(x_i) - f(x_{i-1})}$$
+
+Notice that we no longer need to know $f'$ but in return we have to provide *two* initial points, $x_0$ and $x_1$.
+
+**Write a function that implements the secant algorithm.** Validate your program by finding the root of the function $f(x) = \cos(x) - x$. Compare its performance with the Newton-Raphson method -- which is faster, and by how much?  For this example $f'(x) = -\sin(x) - 1$.
 
 ### Question 2 ###
 
-**14 points**
+**18 points**
 
-Use the following code to generate data for patients with repeated measures of A1C (a test for levels of blood glucose).
+The game of craps is played as follows. First, you roll two six-sided dice; let x be the sum of the dice on the first roll. If x = 7 or 11 you win, otherwise you keep rolling until either you get x again, in which case you also win, or until you get a 7 or 11, in which case you lose.
 
-```{r}
-genData <- function(n) {
-    if(exists(".Random.seed", envir = .GlobalEnv)) {
-        save.seed <- get(".Random.seed", envir= .GlobalEnv)
-        on.exit(assign(".Random.seed", save.seed, envir = .GlobalEnv))
-    } else {
-        on.exit(rm(".Random.seed", envir = .GlobalEnv))
-    }
-    set.seed(n)
-    subj <- ceiling(n / 10)
-    id <- sample(subj, n, replace=TRUE)
-    times <- as.integer(difftime(as.POSIXct("2005-01-01"), as.POSIXct("2000-01-01"), units='secs'))
-    dt <- as.POSIXct(sample(times, n), origin='2000-01-01')
-    mu <- runif(subj, 4, 10)
-    a1c <- unsplit(mapply(rnorm, tabulate(id), mu, SIMPLIFY=FALSE), id)
-    data.frame(id, dt, a1c)
-}
-x <- genData(500)
-```
-
-Perform the following manipulations: (2 points each)
-
-1. Order the data set by `id` and `dt`.
-2. For each `id`, determine if there is more than a one year gap in between observations.  Add a new row at the one year mark, with the `a1c` value set to missing.  A two year gap would require two new rows, and so forth.
-3. Create a new column `visit`.  For each `id`, add the visit number.  This should be 1 to `n` where `n` is the number of observations for an individual.  This should include the observations created with missing a1c values.
-4. For each `id`, replace missing values with the mean `a1c` value for that individual.
-5. Print mean `a1c` for each `id`.
-6. Print total number of visits for each `id`.
-7. Print the observations for `id = 15`.
-
-### Question 3 ###
-
-**10 points**
-
-Import the `addr.txt` file from the GitHub repository.  This file contains a listing of names and addresses (thanks google).  Parse each line to create a data.frame with the following columns: lastname, firstname, streetno, streetname, city, state, zip.  Keep middle 
-initials or abbreviated names in the firstname column.  Print out the entire data.frame.
-
-### Question 4 ###
-
-**2 points**
-
-The first argument to most functions that fit linear models are formulas.  The following example defines the response variable `death` and allows the model to incorporate all other variables as terms. `.` is used to mean all columns not otherwise in the formula.
+Write a program to simulate a game of craps. You can use the following snippet of code to simulate the roll of two (fair) dice:
 
 ```{r}
-url <- "https://github.com/fonnesbeck/Bios6301/raw/master/datasets/haart.csv"
-haart_df <- read.csv(url)[,c('death','weight','hemoglobin','cd4baseline')]
-coef(summary(glm(death ~ ., data=haart_df, family=binomial(logit))))
+    x <- sum(ceiling(6*runif(2)))
 ```
 
-Now imagine running the above several times, but with a different response and data set each time.  Here's a function:
+1. The instructor should be able to easily import and run your program (function), and obtain output that clearly shows how the game progressed.  Set the RNG seed with `set.seed(100)` and show the output of three games. (lucky 13 points)
 
-```{r}
-myfun <- function(dat, response) {
-  form <- as.formula(response ~ .)
-  coef(summary(glm(form, data=dat, family=binomial(logit))))
-}
-```
-
-Unfortunately, it doesn't work. `tryCatch` is "catching" the error so that this file can be knit to PDF.
-
-```{r}
-tryCatch(myfun(haart_df, death), error = function(e) e)
-```
-
-What do you think is going on?  Consider using `debug` to trace the problem.
-
-**5 bonus points**
-
-Create a working function.
+1. Find a seed that will win ten straight games.  Consider adding an argument to your function that disables output. Show the output of the ten games. (5 points)

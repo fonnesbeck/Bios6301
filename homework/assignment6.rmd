@@ -3,7 +3,7 @@ title: 'Bios 6301: Assignment 6'
 output: pdf_document
 ---
 
-*Due Thursday, 30 November, 1:00 PM*
+*Due Tuesday, 30 October, 1:00 PM*
 
 $5^{n=day}$ points taken off for each day late.
 
@@ -15,103 +15,85 @@ Failure to name file `homework6.rmd` or include author name may result in 5 poin
 
 ### Question 1 ###
 
-**15 points**
+**12 points**
 
-Consider the following very simple genetic model (*very* simple -- don't worry if you're not a geneticist!). A population consists of equal numbers of two sexes: male and female. At each generation men and women are paired at random, and each pair produces exactly two offspring, one male and one female. We are interested in the distribution of height from one generation to the next. Suppose that the height of both children is just the average of the height of their parents, how will the distribution of height change across generations?
+Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).  Save the five 2018 CSV files in your working directory.
 
-Represent the heights of the current generation as a dataframe with two variables, m and f, for the two sexes. We can use `rnorm` to randomly generate the population at generation 1:
+Modify the code to create a function.  This function will create dollar values given information (as arguments) about a league setup.  It will return a data.frame and write this data.frame to a CSV file.  The final data.frame should contain the columns 'PlayerName', 'pos', 'points', 'value' and be orderd by value descendingly.  Do not round dollar values.
 
-```{r}
-pop <- data.frame(m = rnorm(100, 160, 20), f = rnorm(100, 160, 20))
-```
+Note that the returned data.frame should have `sum(posReq)*nTeams` rows.
 
-The following function takes the data frame `pop` and randomly permutes the ordering of the men. Men and women are then paired according to rows, and heights for the next generation are calculated by taking the mean of each row. The function returns a data frame with the same structure, giving the heights of the next generation.
+Define the function as such (6 points):
 
-```{r}
-next_gen <- function(pop) {
-    pop$m <- sample(pop$m)
-    pop$m <- rowMeans(pop)
-    pop$f <- pop$m
-    pop
+```{r eval=FALSE}
+# path: directory path to input files
+# file: name of the output file; it should be written to path
+# nTeams: number of teams in league
+# cap: money available to each team
+# posReq: number of starters for each position
+# points: point allocation for each category
+ffvalues <- function(path, file='outfile.csv', nTeams=12, cap=200, posReq=c(qb=1, rb=2, wr=3, te=1, k=1),
+                     points=c(fg=4, xpt=1, pass_yds=1/25, pass_tds=4, pass_ints=-2,
+                              rush_yds=1/10, rush_tds=6, fumbles=-2, rec_yds=1/20, rec_tds=6)) {
+  ## read in CSV files
+  ## calculate dollar values
+  ## save dollar values as CSV file
+  ## return data.frame with dollar values
 }
 ```
 
-Use the function `next_gen` to generate nine generations (you already have the first), then use the function `hist` to plot the distribution of male heights in each generation (this will require multiple calls to `hist`). The phenomenon you see is called regression to the mean.  Provide (at least) minimal decorations such as title and x-axis labels.
+1. Call `x1 <- ffvalues('.')`
+
+    1.  How many players are worth more than $20? (1 point)
+    
+    1.  Who is 15th most valuable running back (rb)? (1 point)
+
+1. Call `x2 <- ffvalues(getwd(), '16team.csv', nTeams=16, cap=150)`
+
+    1.  How many players are worth more than $20? (1 point)
+    
+    1.  How many wide receivers (wr) are in the top 40? (1 point)
+
+1. Call:
+
+    ```{r eval=FALSE}
+    x3 <- ffvalues('.', 'qbheavy.csv', posReq=c(qb=2, rb=2, wr=3, te=1, k=0),
+            points=c(fg=0, xpt=0, pass_yds=1/25, pass_tds=6, pass_ints=-2,
+                    rush_yds=1/10, rush_tds=6, fumbles=-2, rec_yds=1/20, rec_tds=6))
+    ```
+
+    1.  How many players are worth more than $20? (1 point)
+    
+    1.  How many quarterbacks (qb) are in the top 30? (1 point)
 
 ### Question 2 ###
 
-**10 points**
+**5 points**
 
-Use the simulated results from question 1 to reproduce (as closely as possible) the following plot in ggplot2.
+This code makes a list of all functions in the base package:
 
-![generations plot](http://d.pr/i/Xh0d+)
+```{r eval=FALSE}
+objs <- mget(ls("package:base"), inherits = TRUE)
+funs <- Filter(is.function, objs)
+```
+
+Using this list, write code to answer these questions.
+
+1. Which function has the most arguments? (3 points)
+
+1. How many functions have no arguments? (2 points)
+
+Hint: find a function that returns the arguments for a given function.
 
 ### Question 3 ###
 
-**10 points**
+**24 points**
 
-You calculated the power of a study design in question #2 of assignment 3. The study has two variables, treatment group and outcome. There are two treatment groups (0, 1) and they should be assigned randomly with equal probability. The outcome should be a random normal variable with a mean of 60 and standard deviation of 20. If a patient is in the treatment group, add 5 to the outcome.
+Import the HAART dataset (`haart.csv`) from the GitHub repository into R, and perform the following manipulations: (4 points each)
 
-Starting with a sample size of 250, create a 95% bootstrap percentile interval for the mean of each group. Then create a new bootstrap interval by increasing the sample size by 250 until the sample is 2500. Thus you will create a total of 10 bootstrap intervals.  Each bootstrap should create 1000 bootstrap samples. (4 points)
-
-Produce a line chart that includes the bootstrapped mean and lower and upper percentile intervals for each group.  Add appropriate labels and a legend. (6 points)
-
-You may use base graphics or ggplot2.  It should look similar to this (in base).
-
-![bp interval plot](bpi.jpg)
-
-Here's an example of how you could create transparent shaded areas.
-
-```{r}
-makeTransparent = function(..., alpha=0.5) {
-  if(alpha<0 | alpha>1) stop("alpha must be between 0 and 1")
-  alpha = floor(255*alpha)  
-  newColor = col2rgb(col=unlist(list(...)), alpha=FALSE)
-  .makeTransparent = function(col, alpha) {
-    rgb(red=col[1], green=col[2], blue=col[3], alpha=alpha, maxColorValue=255)
-  }
-  newColor = apply(newColor, 2, .makeTransparent, alpha=alpha)
-  return(newColor)
-}
-
-par(new=FALSE)
-plot(NULL,
-  xlim=c(-1, 1),
-  ylim=c(-1, 1),
-  xlab="",
-  ylab=""
-)
-
-polygon(x=c(seq(-0.75, 0.25, length.out=100), seq(0.25, -0.75, length.out=100)),
-        y=c(rep(-0.25, 100), rep(0.75, 100)), border=NA, col=makeTransparent('blue',alpha=0.5))
-polygon(x=c(seq(-0.25, 0.75, length.out=100), seq(0.75, -0.25, length.out=100)),
-        y=c(rep(-0.75, 100), rep(0.25, 100)), border=NA, col=makeTransparent('red',alpha=0.5))
-```
-
-### Question 4 ###
-
-**15 points**
-
-Programming with classes.  The following function will generate random patient information.
-
-```{r}
-makePatient <- function() {
-  vowel <- grep("[aeiou]", letters)
-  cons <- grep("[^aeiou]", letters)
-  name <- paste(sample(LETTERS[cons], 1), sample(letters[vowel], 1), sample(letters[cons], 1), sep='')
-  gender <- factor(sample(0:1, 1), levels=0:1, labels=c('female','male'))
-  dob <- as.Date(sample(7500, 1), origin="1970-01-01")
-  n <- sample(6, 1)
-  doa <- as.Date(sample(1500, n), origin="2010-01-01")
-  pulse <- round(rnorm(n, 80, 10))
-  temp <- round(rnorm(n, 98.4, 0.3), 2)
-  fluid <- round(runif(n), 2)
-  list(name, gender, dob, doa, pulse, temp, fluid)
-}
-```
-
-1. Create an S3 class `medicalRecord` for objects that are a list with the named elements `name`, `gender`, `date_of_birth`, `date_of_admission`, `pulse`, `temperature`, `fluid_intake`. Note that an individual patient may have multiple measurements for some measurements.  Set the RNG seed to `8` and create a medical record by taking the output of `makePatient`.  Print the medical record, and print the class of the medical record. (5 points)
-
-2. Write a `medicalRecord` method for the generic function `mean`, which returns averages for pulse, temperature and fluids. Also write a `medicalRecord` method for `print`, which employs some nice formatting, perhaps arranging measurements by date, and `plot`, that generates a composite plot of measurements over time.  Call each function for the medical record created in part 1. (5 points)
-
-3. Create a further class for a cohort (group) of patients, and write methods for `mean` and `print` which, when applied to a cohort, apply mean or print to each patient contained in the cohort. Hint: think of this as a "container" for patients.  Reset the RNG seed to 8 and create a cohort of ten patients, then show the output for `mean` and `print`. (5 points)
+1. Convert date columns into a usable (for analysis) format.  Use the `table` command to display the counts of the year from `init.date`.
+2. Create an indicator variable (one which takes the values 0 or 1 only) to represent death within 1 year of the initial visit.  How many observations died in year 1?
+3. Use the `init.date`, `last.visit` and `death.date` columns to calculate a followup time (in days), which is the difference between the first and either the last visit or a death event (whichever comes first). If these times are longer than 1 year, censor them (this means if the value is above 365, set followup to 365).  Print the quantile for this new variable.
+4. Create another indicator variable representing loss to followup; this means the observation is not known to be dead but does not have any followup visits after the first year.  How many records are lost-to-followup?
+5. Recall our work in class, which separated the `init.reg` field into a set of indicator variables, one for each unique drug. Create these fields and append them to the database as new columns.  Which drug regimen are found over 100 times?
+6. The dataset `haart2.csv` contains a few additional observations for the same study. Import these and append them to your master dataset (if you were smart about how you coded the previous steps, cleaning the additional observations should be easy!).  Show the first five records and the last five records of the complete (and clean) data set.

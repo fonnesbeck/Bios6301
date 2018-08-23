@@ -3,30 +3,13 @@ title: 'Bios 6301: Assignment 3'
 output: pdf_document
 ---
 
-*Due Tuesday, 10 October, 1:00 PM*
+*Due Thursday, 27 September, 1:00 PM*
 
 50 points total.
 
 $5^{n=day}$ points taken off for each day late.
 
-This assigment includes turning in the first two assignments. All three should
-include knitr files (named `homework1.rmd`, `homework2.rmd`, `homework3.rmd`)
-along with valid PDF output files. Inside each file, clearly indicate which
-parts of your responses go with which problems (you may use the original homework
-document as a template). Add your name as `author` to the file's metadata section.
-Raw R code/output or word processor files are not acceptable.
-
-Failure to properly name files or include author name may result in 5 points taken off.
-
 ### Question 1 ###
-
-**10 points**
-
-1. Use GitHub to turn in the first three homework assignments. Make sure the teacher (couthcommander) and TA (nstrayer) are collaborators. (5 points)
-
-1. Commit each assignment individually.  This means your repository should have at least three commits. (5 points)
-
-### Question 2 ###
 
 **15 points**
 
@@ -50,12 +33,12 @@ your results.
 
 1. Find the power when the sample size is 1000 patients. (5 points)
 
-### Question 3 ###
+### Question 2 ###
 
 **15 points**
 
 Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).
-Save the `2017/proj_wr17.csv` file in your working directory.  Read
+Save the `2018/proj_wr18.csv` file in your working directory.  Read
 in the data set and remove the first two columns.
 
 1. Show the correlation matrix of this data set. (3 points)
@@ -66,21 +49,3 @@ correlation matrix. (10 points)
 
 1. Generate a data set with 30 rows that has the exact correlation
 structure as the original data set. (2 points)
-
-### Question 4 ###
-
-**10 points**
-
-Use \LaTeX to create the following expressions.
-
-1. Hint: `\Rightarrow` (4 points)
-
-    ![equation1](eq1.png)
-
-1. Hint: `\zeta` (3 points)
-
-    ![equation2](eq2.png)
-
-1. Hint: `\partial` (3 points)
-
-    ![equation3](eq3.png)
