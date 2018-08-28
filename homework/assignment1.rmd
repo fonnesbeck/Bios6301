@@ -3,11 +3,11 @@ title: 'Bios 6301: Assignment 1'
 output: html_document
 ---
 
-*(informally) Due Tuesday, 04 September, 1:00 PM*
+*Due Tuesday, 04 September, 1:00 PM*
 
 50 points total.
 
-This assignment won't be submitted until we've covered Rmarkdown.
+Submit a single knitr file (named `homework1.rmd`) by email to coleman.r.harris@vanderbilt.edu.
 Place your R code in between the appropriate chunks for each question.
 Check your output by using the `Knit HTML` button in RStudio.
 
