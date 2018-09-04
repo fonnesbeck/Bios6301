@@ -3,19 +3,6 @@ title: "R data structures"
 output: html_notebook
 ---
 
-```{r}
-dataset <- matrix(c(1,40,1,60), nrow=2)
-rownames(dataset) <- c('intercept', 'dose')
-colnames(dataset) <- c('subject1', 'subject2')
-dataset
-t(dataset)
-solve(dataset)
-solve(dataset) %*% dataset
-y <- c(10, 20)
-solve(dataset, y)
-dataset %*% solve(dataset, y)
-```
-
 # Creating a data.frame
 
 ```{r}

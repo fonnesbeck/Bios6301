@@ -1,15 +1,15 @@
 ---
 title: 'Bios 6301: Assignment 2'
-output: pdf_document
+output: html_document
 ---
 
-*(informally) Due Tuesday, 18 September, 1:00 PM*
+*Due Tuesday, 18 September, 1:00 PM*
 
 50 points total.
 
-This assignment won't be submitted until we've covered Rmarkdown.
-Create R chunks for each question and insert your R code appropriately.
-Check your output by using the `Knit PDF` button in RStudio.
+Submit a single knitr file (named `homework2.rmd`) by email to coleman.r.harris@vanderbilt.edu.
+Place your R code in between the appropriate chunks for each question.
+Check your output by using the `Knit HTML` button in RStudio.
 
 1. **Working with data** In the `datasets` folder on the course GitHub repo, you will find a file called `cancer.csv`, which is a dataset in comma-separated values (csv) format. This is a large cancer incidence dataset that summarizes the incidence of different cancers for various subgroups. (18 points)
 
@@ -81,5 +81,5 @@ Check your output by using the `Knit PDF` button in RStudio.
 
 Some problems taken or inspired by projecteuler.
 
-[euler1]:https://projecteuler.net/problem=1
+[euler1]: https://projecteuler.net/problem=1
 [euler2]: https://projecteuler.net/problem=2

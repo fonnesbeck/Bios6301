@@ -128,10 +128,67 @@ matrix(x) %*% matrix(y)
 ```
 
 ```{r}
-mx <- matrix(x, 4)
-my <- matrix(y, 4)
+dataset <- matrix(c(1,40,1,60), nrow=2)
+rownames(dataset) <- c('intercept', 'dose')
+colnames(dataset) <- c('subject1', 'subject2')
+dataset
+t(dataset)
+solve(dataset)
+solve(dataset) %*% dataset
+y <- c(10, 20)
+solve(dataset, y)
+dataset %*% solve(dataset, y)
+```
+
+`mx` and `my` and 2x2
+
+```{r}
+mx <- matrix(x, nrow=4)
+my <- matrix(y, nrow=4)
 mx * my
 mx %*% my
 my %*% mx
 ```
 
+`mx1` is 8x2 and `my1` and 2x8
+
+```{r}
+mx1 <- matrix(x, ncol=2)
+my1 <- matrix(y, nrow=2)
+mx1 %*% my1
+my1 %*% mx1
+```
+
+`mx2` is 2x8 and `my2` and 8x2
+
+```{r}
+mx2 <- matrix(x, ncol=8, byrow=TRUE)
+my2 <- matrix(y, nrow=8)
+mx2 %*% my2
+my2 %*% mx2
+t(mx2) %*% t(my2)
+mx2 %*% t(my1)
+```
+
+```{r}
+mx2 %*% diag(8)
+mx * upper.tri(mx)
+mx * lower.tri(mx, diag=TRUE)
+```
+
+Explain the following
+
+```{r}
+(x <- matrix(seq(25), 5, 5))
+x[x %% 2 == 0] <- NA
+x[upper.tri(x, diag=TRUE)] <- NA
+x[,1] <- x[5,] <- NA
+x
+which(!is.na(x), arr.ind=TRUE)
+```
+
+The complicated one-liner
+
+```{r}
+which(!(x %% 2 == 0 | upper.tri(x, diag=TRUE) | (x-1) %/% 5 == 0 | x %% 5 == 0), arr.ind=TRUE)
+```
