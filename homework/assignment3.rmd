@@ -1,11 +1,15 @@
 ---
 title: 'Bios 6301: Assignment 3'
-output: pdf_document
+output: html_document
 ---
 
 *Due Thursday, 27 September, 1:00 PM*
 
 50 points total.
+
+Submit a single knitr file (named `homework3.rmd`) by email to coleman.r.harris@vanderbilt.edu.
+Place your R code in between the appropriate chunks for each question.
+Check your output by using the `Knit HTML` button in RStudio.
 
 $5^{n=day}$ points taken off for each day late.
 
@@ -35,17 +39,90 @@ your results.
 
 ### Question 2 ###
 
-**15 points**
+**14 points**
 
 Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).
 Save the `2018/proj_wr18.csv` file in your working directory.  Read
 in the data set and remove the first two columns.
 
-1. Show the correlation matrix of this data set. (3 points)
+1. Show the correlation matrix of this data set. (4 points)
 
 1. Generate a data set with 30 rows that has a similar correlation
 structure.  Repeat the procedure 10,000 times and return the mean
 correlation matrix. (10 points)
 
-1. Generate a data set with 30 rows that has the exact correlation
-structure as the original data set. (2 points)
+### Question 3 ###
+
+**21 points**
+
+Here's some code:
+
+```{r}
+nDist <- function(n = 100) {
+    df <- 10
+    prob <- 1/3
+    shape <- 1
+    size <- 16
+    list(
+        beta = rbeta(n, shape1 = 5, shape2 = 45),
+        binomial = rbinom(n, size, prob),
+        chisquared = rchisq(n, df),
+        exponential = rexp(n),
+        f = rf(n, df1 = 11, df2 = 17),
+        gamma = rgamma(n, shape),
+        geometric = rgeom(n, prob),
+        hypergeometric = rhyper(n, m = 50, n = 100, k = 8),
+        lognormal = rlnorm(n),
+        negbinomial = rnbinom(n, size, prob),
+        normal = rnorm(n),
+        poisson = rpois(n, lambda = 25),
+        t = rt(n, df),
+        uniform = runif(n),
+        weibull = rweibull(n, shape)
+    )
+}
+```
+
+1. What does this do? (3 points)
+
+    ```{r}
+    round(sapply(nDist(500), mean), 2)
+    ```
+    
+    ```
+    answer here
+    ```
+
+1. What about this? (3 points)
+
+    ```{r}
+    sort(apply(replicate(20, round(sapply(nDist(10000), mean), 2)), 1, sd))
+    ```
+    
+    ```
+    answer here
+    ```
+
+    In the output above, a small value would indicate that `N=10,000` would provide a sufficent sample size as to estimate the mean of the distribution. Let's say that a value *less than 0.02* is "close enough".
+
+1. For each distribution, estimate the sample size required to simulate the distribution's mean. (15 points)
+
+Don't worry about being exact. It should already be clear that N < 10,000 for many of the distributions. You don't have to show your work. Put your answer to the right of the vertical bars (`|`) below.
+
+distribution|N
+---|---
+beta|?
+binomial|?
+chisquared|?
+exponential|?
+f|?
+gamma|?
+geometric|?
+hypergeometric|?
+lognormal|?
+negbinomial|?
+normal|?
+poisson|?
+t|?
+uniform|?
+weibull|?
