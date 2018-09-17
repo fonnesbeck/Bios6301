@@ -5,7 +5,7 @@ output: pdf_document
 
 *Due Tuesday, 09 October, 1:00 PM*
 
-50 points total.
+20 points total.
 
 $5^{n=day}$ points taken off for each day late.
 
