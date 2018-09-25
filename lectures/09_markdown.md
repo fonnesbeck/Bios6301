@@ -425,10 +425,10 @@ before each line of the block quote.
 Images look an awful lot like Markdown links, they just have an extra 
 `!` (exclamation mark) in front of them. 
 
-    ![A Histogram](images/histogram.png 
+    ![A Histogram](../slides/images/histogram.png 
         "Weight by gender")
 
-![A Histogram](images/histogram.png "Weight by gender")
+![A Histogram](../slides/images/histogram.png "Weight by gender")
 
 Presenter Notes
 ===============
@@ -465,10 +465,12 @@ MathJax allows easy integration of LaTeX (and MathML) equations into HTML and Ma
 
 ### Example
 
-\\[f(x|\mu,\lambda,\nu) = \frac{\Gamma(\frac{\nu +
+$$
+f(x|\mu,\lambda,\nu) = \frac{\Gamma(\frac{\nu +
         1}{2})}{\Gamma(\frac{\nu}{2})}
         \left(\frac{\lambda}{\pi\nu}\right)^{\frac{1}{2}}
-        \left[1+\frac{\lambda(x-\mu)^2}{\nu}\right]^{-\frac{\nu+1}{2}}\\]
+        \left[1+\frac{\lambda(x-\mu)^2}{\nu}\right]^{-\frac{\nu+1}{2}}
+$$
 
 <p align='center'><i>The non-central t-distribution, rendered in MathJax</i></p>
 
@@ -523,7 +525,7 @@ Linking to MathJax is simply a matter of adding some JavaScript to your document
       });
     </script>
     <script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script> 
 
 Presenter Notes
@@ -556,7 +558,7 @@ It adds multiple syntax features:
 
 It's an R package (rmarkdown), with integrated support in RStudio.
 
-![RMDNEW](images/new_rmd.png)
+![RMDNEW](../slides/images/new_rmd.png)
 
 ---
 
@@ -578,7 +580,7 @@ R Code Chunks
     The Z-score for the 97.5 percentile point of a
     standard normal distribution is `r qt(0.975, Inf)`.
 
-![RMDCODE](images/code_rmd.png)
+![RMDCODE](../slides/images/code_rmd.png)
 
 ---
 
@@ -596,7 +598,7 @@ By default data frames and matrixes are output as they would be in the R termina
     x
     ```
 
-![RMDTAB](images/table_rmd.png)
+![RMDTAB](../slides/images/table_rmd.png)
 
 
 ---
@@ -611,15 +613,15 @@ However, data can be displayed with additional formatting, such as HTML.
     knitr::kable(x)
     ```
 
-![RMDKAB](images/kable_rmd.png)
+![RMDKAB](../slides/images/kable_rmd.png)
 
 ---
 
 Embedding Equations
 ===============
 
-- \$equation\$ for inline equations
-- \$\$ equation \$\$ for display equations
+- `$equation$` for inline equations
+- `$$ equation $$` for display equations
 - &lt;math ...>&lt;/math> for MathML equations
 
 <!-- -->
@@ -652,17 +654,3 @@ The metadata must be placed at the top of the document in *key: value* format (Y
 Create a new R markdown file in RStudio and compile it as a PDF and HTML document.
 
 To get some practice using Markdown, complete the Markdown tutorial (`markdown_tutorial.md`) located in the *exercises* folder on the course GitHub repository.
-
-<!-- Mathjax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>

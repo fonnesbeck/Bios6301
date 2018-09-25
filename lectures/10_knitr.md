@@ -109,11 +109,11 @@ Sweave source ﬁles are regular noweb ﬁles (Ramsey, 1998) with some additiona
 
 Sweave allows either for the integration of R code and output into a LaTeX file
 
-![sweave](images/weave.png)
+![sweave](../slides/images/weave.png)
 
 ... or the extraction of the source code from the report file
 
-![sweave](images/tangle.png)
+![sweave](../slides/images/tangle.png)
 
 
 Presenter Notes
@@ -338,8 +338,8 @@ The markup for code chunks is different:
 
 Output is to Markdown:
 
-\\[\text{.rnw} \rightarrow \text{.tex}\\]
-\\[\text{.rmd} \rightarrow \text{.md} (\rightarrow \text{.html})\\]
+$$ \text{.rnw} \rightarrow \text{.tex} $$
+$$ \text{.rmd} \rightarrow \text{.md} (\rightarrow \text{.html}) $$
 
 Presenter Notes
 ===============
@@ -358,17 +358,3 @@ Grab the files `binomial.tex` and `binomial.R` in the exercises folder of the Bi
 
 [knitr]: http://yihui.name/knitr/
 [noweb]: http://www.cs.tufts.edu/~nr/noweb/
-
-<!-- Mathjax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-<script type="text/javascript"
-    src="../MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
