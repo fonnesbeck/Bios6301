@@ -100,9 +100,30 @@ y <- read.csv(stdin(), header = FALSE)
 `file` can also be a URL
 
 ```{r}
-# play intramural softball
-tryCatch(read.csv('http://data.vanderbilt.edu/~graywh/intramurals/softball/batting_stats_career.txt',
-                  row.names=1, strip.white=TRUE)["Cole",], error=function(e) e)
+tryCatch(read.csv('https://raw.githubusercontent.com/couthcommander/football-values/master/2018/proj_qb18.csv',
+                  row.names=1, strip.white=TRUE)["Drew Brees",], error=function(e) e)
+```
+
+## HTML/XML
+
+It's a bit harder to read web pages, as HTML must be parsed.
+
+```{r}
+tryCatch({
+url <- 'https://www.baseball-reference.com/leagues/MLB/2018-standard-batting.shtml'
+zz <- scan(url, sep = '\n', what = '')
+
+library(XML)
+x <- htmlTreeParse(paste(zz, collapse = '\n'), useInternalNodes = TRUE)
+cols <- xpathSApply(x, "//table[contains(@id, 'teams_standard_batting')]//thead//th", xmlValue)
+rows <- xpathSApply(x, "//table[contains(@id, 'teams_standard_batting')]//tbody//th", xmlValue)
+vals <- xpathSApply(x, "//table[contains(@id, 'teams_standard_batting')]//tbody//td", xmlValue)
+y <- matrix(vals, ncol = length(cols) - 1, byrow = TRUE)
+mode(y) <- 'numeric'
+z <- cbind(rows, as.data.frame(y))
+names(z) <- cols
+head(z)
+}, error = function(e) e)
 ```
 
 ## Importing Source Code
@@ -191,7 +212,7 @@ head(list.files())
 file.remove('foo.csv', 'ex.dat', 'sink-examp.txt', 'x.RData')
 ```
 
-## Example
+## Exercise
 
 ```{r}
 cat(file="file1.dat", 5, 12, 13, sep=',')
@@ -200,18 +221,7 @@ cat(file="file3.dat", 14, 5, 5, sep=',')
 list.files(pattern = "\\.dat$")
 ```
 
-Can we write code to sum the contents of all three files?
-
-```{r}
-sumfiles <- function(dname = '.') {
-  tot <- 0
-  for(f in list.files(dname, pattern = "\\.dat$")) {
-    tot <- tot + sum(scan(f, sep=',', quiet=TRUE))
-  }
-  tot
-}
-sumfiles()
-```
+Write code to sum the contents of all three files.
 
 ```{r echo=FALSE, results='hide'}
 # clean-up files created during session
