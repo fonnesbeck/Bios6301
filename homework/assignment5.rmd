@@ -7,7 +7,7 @@ output: pdf_document
 
 $5^{n=day}$ points taken off for each day late.
 
-50 points total.
+40 points total.
 
 Submit a single knitr file (named `homework5.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
 
@@ -33,7 +33,7 @@ Notice that we no longer need to know $f'$ but in return we have to provide *two
 
 ### Question 2 ###
 
-**18 points**
+**20 points**
 
 The game of craps is played as follows. First, you roll two six-sided dice; let x be the sum of the dice on the first roll. If x = 7 or 11 you win, otherwise you keep rolling until either you get x again, in which case you also win, or until you get a 7 or 11, in which case you lose.
 
@@ -45,4 +45,23 @@ Write a program to simulate a game of craps. You can use the following snippet o
 
 1. The instructor should be able to easily import and run your program (function), and obtain output that clearly shows how the game progressed.  Set the RNG seed with `set.seed(100)` and show the output of three games. (lucky 13 points)
 
-1. Find a seed that will win ten straight games.  Consider adding an argument to your function that disables output. Show the output of the ten games. (5 points)
+1. Find a seed that will win ten straight games.  Consider adding an argument to your function that disables output. Show the output of the ten games. (7 points)
+
+### Question 3 ###
+
+**5 points**
+
+This code makes a list of all functions in the base package:
+
+```{r eval=FALSE}
+objs <- mget(ls("package:base"), inherits = TRUE)
+funs <- Filter(is.function, objs)
+```
+
+Using this list, write code to answer these questions.
+
+1. Which function has the most arguments? (3 points)
+
+1. How many functions have no arguments? (2 points)
+
+Hint: find a function that returns the arguments for a given function.

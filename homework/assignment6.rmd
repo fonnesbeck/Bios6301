@@ -7,7 +7,7 @@ output: pdf_document
 
 $5^{n=day}$ points taken off for each day late.
 
-50 points total.
+40 points total.
 
 Submit a single knitr file (named `homework6.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
 
@@ -15,7 +15,7 @@ Failure to name file `homework6.rmd` or include author name may result in 5 poin
 
 ### Question 1 ###
 
-**12 points**
+**16 points**
 
 Obtain a copy of the [football-values lecture](https://github.com/couthcommander/football-values).  Save the five 2018 CSV files in your working directory.
 
@@ -23,7 +23,7 @@ Modify the code to create a function.  This function will create dollar values g
 
 Note that the returned data.frame should have `sum(posReq)*nTeams` rows.
 
-Define the function as such (6 points):
+Define the function as such (10 points):
 
 ```{r eval=FALSE}
 # path: directory path to input files
@@ -67,25 +67,6 @@ ffvalues <- function(path, file='outfile.csv', nTeams=12, cap=200, posReq=c(qb=1
     1.  How many quarterbacks (qb) are in the top 30? (1 point)
 
 ### Question 2 ###
-
-**5 points**
-
-This code makes a list of all functions in the base package:
-
-```{r eval=FALSE}
-objs <- mget(ls("package:base"), inherits = TRUE)
-funs <- Filter(is.function, objs)
-```
-
-Using this list, write code to answer these questions.
-
-1. Which function has the most arguments? (3 points)
-
-1. How many functions have no arguments? (2 points)
-
-Hint: find a function that returns the arguments for a given function.
-
-### Question 3 ###
 
 **24 points**
 
