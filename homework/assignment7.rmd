@@ -7,7 +7,7 @@ output: pdf_document
 
 $5^{n=day}$ points taken off for each day late.
 
-50 points total.
+40 points total.
 
 Submit a single knitr file (named `homework7.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
 
@@ -15,7 +15,7 @@ Failure to name file `homework7.rmd` or include author name may result in 5 poin
 
 ### Question 1 ###
 
-**14 points**
+**21 points**
 
 Use the following code to generate data for patients with repeated measures of A1C (a test for levels of blood glucose).
 
@@ -39,7 +39,7 @@ genData <- function(n) {
 x <- genData(500)
 ```
 
-Perform the following manipulations: (2 points each)
+Perform the following manipulations: (3 points each)
 
 1. Order the data set by `id` and `dt`.
 2. For each `id`, determine if there is more than a one year gap in between observations.  Add a new row at the one year mark, with the `a1c` value set to missing.  A two year gap would require two new rows, and so forth.
@@ -51,14 +51,13 @@ Perform the following manipulations: (2 points each)
 
 ### Question 2 ###
 
-**10 points**
+**16 points**
 
-Import the `addr.txt` file from the GitHub repository.  This file contains a listing of names and addresses (thanks google).  Parse each line to create a data.frame with the following columns: lastname, firstname, streetno, streetname, city, state, zip.  Keep middle 
-initials or abbreviated names in the firstname column.  Print out the entire data.frame.
+Import the `addr.txt` file from the GitHub repository.  This file contains a listing of names and addresses (thanks google).  Parse each line to create a data.frame with the following columns: lastname, firstname, streetno, streetname, city, state, zip.  Keep middle initials or abbreviated names in the firstname column.  Print out the entire data.frame.
 
 ### Question 3 ###
 
-**2 points**
+**3 points**
 
 The first argument to most functions that fit linear models are formulas.  The following example defines the response variable `death` and allows the model to incorporate all other variables as terms. `.` is used to mean all columns not otherwise in the formula.
 
