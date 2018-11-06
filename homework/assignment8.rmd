@@ -7,13 +7,64 @@ output: pdf_document
 
 $5^{n=day}$ points taken off for each day late.
 
-50 points total.
+30 points total.
 
 Submit a single knitr file (named `homework8.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
 
 Failure to name file `homework8.rmd` or include author name may result in 5 points taken off.
 
 ### Question 1 ###
+
+**15 points**
+
+Install the `readxl` package and run the following
+
+```{r}
+fn <- 'icd10.xlsx'
+if(file.access(fn, mode = 4) == -1) {
+    url <- "https://www.cdc.gov/nhsn/xls/icd10-pcs-pcm-nhsn-opc.xlsx"
+    download.file(url, destfile = fn)
+}
+dat <- readxl::read_excel(fn, sheet = 2)
+```
+
+1. Show the class of `dat`. (1 point)
+
+2. Show the methods available for objects of the given class (if there are multiple classes, show methods for all classes). (3 points)
+
+3. If you call `print(dat)`, what print method is being dispatched? (1 point)
+
+4. Set the class of `dat` to be a data.frame. (1 point)
+
+5. If you call `print(dat)` again, what print method is being dispatched? (1 point)
+
+Define a new generic function `nUnique` with the code below.
+
+```{r}
+nUnique <- function(x) {
+    UseMethod('nUnique')
+}
+```
+
+6. Write a default method for `nUnique` to count the number of unique values in an element. (2 points)
+
+7. Check your function (2 points)
+
+```{r, eval = FALSE}
+nUnique(letters) # should return 26
+nUnique(sample(10, 100, replace = TRUE)) # should return 10 (probably)
+```
+
+8. Write a data.frame method for `nUnique` to operate on data.frame objects.
+This version should return counts for each column in a data.frame. (2 points)
+
+9. Check your function (2 points)
+
+```{r, eval = FALSE}
+nUnique(dat)
+```
+
+### Question 2 ###
 
 **15 points**
 

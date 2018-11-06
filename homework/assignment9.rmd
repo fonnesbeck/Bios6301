@@ -7,7 +7,7 @@ output: pdf_document
 
 $5^{n=day}$ points taken off for each day late.
 
-50 points total.
+40 points total.
 
 Submit a single knitr file (named `homework9.rmd`), along with a valid PDF output file. Inside the file, clearly indicate which parts of your responses go with which problems (you may use the original homework document as a template). Add your name as `author` to the file's metadata section. Raw R code/output or word processor files are not acceptable.
 
