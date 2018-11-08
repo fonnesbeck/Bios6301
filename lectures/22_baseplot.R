@@ -45,7 +45,7 @@ plot(sin, xlim=c(-10,10), ylim=c(-3,3), xaxs='i', yaxs='i')
 lines(c(-10,10), c(0,0), lty=2)
 segments(pi,-1,pi,1)
 arrows(pi, -1, y1=-1.2)
-arrows(pi, 1, y1=1, angle=90)
+arrows(pi, 1, y1=1.01, angle=90)
 text(pi, 0, expression(pi))
 
 ?layout
